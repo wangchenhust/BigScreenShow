@@ -30,22 +30,25 @@
             <section class="major">
 <!--                左侧-->
                 <div class="left part">
-<!--                    图表模块-->
+<!--                    柱状图模块-->
                     <div class="panel">
-                        <h2>近年3年工行资产构成</h2>
-<!--                        柱状图-->
+                        <h2>近年工行资产构成</h2>
+<!--                        柱状图组件-->
+                        <barChart />
                         <div class="panel-footer"></div>
                     </div>
-
+<!--                    饼图模块-->
                     <div class="panel">
-                        <h2>近年3年工行营业收入</h2>
-<!--                        饼图-->
+                        <h2>近年工行营业收入</h2>
+<!--                        饼图组件-->
+                        <pieChart />
                         <div class="panel-footer"></div>
                     </div>
-
+<!--                    仪表盘模块-->
                     <div class="panel">
-                        <h2>近年3年工行核心资本充足率</h2>
-<!--                        仪表盘-->
+                        <h2>近年工行核心资本充足率</h2>
+<!--                        仪表盘组件-->
+                        <dashboard />
                         <div class="panel-footer"></div>
                     </div>
                 </div>
@@ -55,11 +58,12 @@
                     <div class="resume">
                         <div class="resume-hd">
                             <ul>
-                                <li>100
+                                <li>
 <!--                                    水球图-->
+                                    <waterSphereChart />
                                 </li>
                                 <li>10</li>
-                                <li>6</li>
+                                <li>5</li>
                             </ul>
                         </div>
                         <div class="resume-bd">
@@ -76,29 +80,39 @@
                         <div class="map"></div>
 <!--                        地图详情-->
                         <div class="map_info"></div>
+<!--                        地图背景图片-->
+                        <div class="map1"></div>
+                        <div class="map2"></div>
+                        <div class="map3"></div>
                     </div>
-<!--                    中间下方-->
+<!--                    折线图模块-->
                     <div class="panel below">
                         <h2>2020年四大行资本充足率与成本收入比</h2>
-<!--                        折线图--->
+<!--                        折线图组件--->
+                        <lineChart />
                         <div class="panel-footer"></div>
                     </div>
                 </div>
 <!--                右侧-->
                 <div class="right part">
+<!--                    雷达图模块-->
                     <div class="panel">
-                        <h2>2020年四大行对比</h2>
-<!--                        雷达图-->
+                        <h2>近年四大行对比</h2>
+<!--                        雷达图组件-->
+                        <radarChart />
                         <div class="panel-footer"></div>
                     </div>
+<!--                    可配置模块-->
                     <div class="panel">
                         <h2>可配置</h2>
-<!--                        可配置-->
+<!--                        可配置组件-->
                         <div class="panel-footer"></div>
                     </div>
+<!--                    列表模块-->
                     <div class="panel">
                         <h2>17家全国性银行总资产规模</h2>
-<!--                        列表-->
+<!--                        列表组件-->
+                        <list />
                         <div class="panel-footer"></div>
                     </div>
                 </div>
@@ -122,7 +136,9 @@
                 //日期
                 nowDate:'',
                 //星期
-                nowDay:''
+                nowDay:'',
+                //
+                timer: null,
             }
         },
         computed: {
@@ -152,24 +168,23 @@
                 }).then(res => {
                     if (res.data) {
                         if (res.data.wea_img == 'xue') {
-                            this.imgSrc = require('../assets/img/brand/xue.png');
+                            this.imgSrc = require('../assets/img/screen_img/xue.png');
                         } else if (res.data.wea_img == 'yin') {
-                            this.imgSrc = require('../assets/img/brand/yin.png');
+                            this.imgSrc = require('../assets/img/screen_img/yin.png');
                         } else if (res.data.wea_img == 'yu' || res.data.wea_img == 'bingbao') {
-                            this.imgSrc = require('../assets/img/brand/yu.png');
+                            this.imgSrc = require('../assets/img/screen_img/yu.png');
                         } else if (res.data.wea_img == 'yun') {
-                            this.imgSrc = require('../assets/img/brand/yun.png');
+                            this.imgSrc = require('../assets/img/screen_img/yun.png');
                         } else if (res.data.wea_img == 'wu') {
-                            this.imgSrc = require('../assets/img/brand/wu.png');
+                            this.imgSrc = require('../assets/img/screen_img/wu.png');
                         } else if (res.data.wea_img == 'shachen') {
-                            this.imgSrc = require('../assets/img/brand/shachen.png');
+                            this.imgSrc = require('../assets/img/screen_img/shachen.png');
                         } else if (res.data.wea_img == 'lei') {
-                            this.imgSrc = require('../assets/img/brand/lei.png');
+                            this.imgSrc = require('../assets/img/screen_img/lei.png');
                         } else {
-                            this.imgSrc = require('../assets/img/brand/qing.png');
+                            this.imgSrc = require('../assets/img/screen_img/qing.png');
                         }
                         this.weatherData = res.data;
-                        console.log(this.weatherData.tem);
                     }
                 }).catch(err => {
                     console.log(err)
@@ -202,6 +217,9 @@
                 this.nowTime = hh + ':' + mm + ':' + ss;
             },
 
+        },
+        beforeDestroy() {
+            clearInterval(this.timer);
         }
     }
 </script>
@@ -216,7 +234,7 @@
  left: 0;
  height: 100%;
  width: 100%;
- background: url(../assets/img/brand/bg.jpg) no-repeat #000;
+ background: url(../assets/img/screen_img/1.jpg) no-repeat #000;
  background-size: cover;
  /*min-width: 1024px;*/
  /*min-height: 600px;*/
@@ -226,7 +244,7 @@ header{
     position: relative;
     height: 3.3rem;
     /*border: 1px solid #ffe400;*/
-    background: url(../assets/img/brand/head_bg.png) no-repeat top center;
+    background: url(../assets/img/screen_img/head_bg.png) no-repeat top center;
     background-size: 100% 100%;
 }
 header h2{
@@ -359,19 +377,51 @@ header h2{
                 }
             }
         }
-        .map{
-            position: relative;
-            height: 20rem;
-            /*border: 1px solid #ffe400;*/
-        }
         .below{
             height: 7.05rem;
+        }
+    }
+    %map-style {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: 19.475rem;
+        height: 19.475rem;
+        background: url(../assets/img/screen_img/map.png) no-repeat;
+        background-size: 100% 100%;
+        opacity: 0.7;
+    }
+    .map_part{
+        position: relative;
+        height: 20rem;
+        /*border: 1px solid #ffe400;*/
+        .map1 {
+            @extend %map-style;
+        }
+        .map2 {
+            @extend %map-style;
+            width: 22.0375rem;
+            height: 22.0375rem;
+            background-image: url(../assets/img/screen_img/lbx.png);
+            opacity: 0.7;
+            -webkit-animation: rotate 15s linear infinite;
+            animation: rotate 15s linear infinite;
+            z-index: -1;
+        }
+        .map3 {
+            @extend %map-style;
+            width: 21.075rem;
+            height: 21.075rem;
+            background-image: url(../assets/img/screen_img/jt.png);
+            -webkit-animation: rotate1 10s linear infinite;
+            animation: rotate1 10s linear infinite;
         }
     }
 }
 .panel{
     border: 1px solid rgba(25, 186, 139, 0.17);
-    background: rgba(255, 255, 255, 0.04) url(../assets/img/brand/line.png);
+    background: rgba(255, 255, 255, 0.04) url(../assets/img/screen_img/line.png);
     position: relative;
     height: 10rem;
     margin-bottom:0.35rem;
@@ -429,6 +479,50 @@ header h2{
         color: #fff;
         font-size: 0.7rem;
         font-weight: 400;
+    }
+}
+
+@-webkit-keyframes rotate {
+    from {
+        transform: translate(-50%, -50%) rotate(0deg);
+    }
+    to {
+        transform: translate(-50%, -50%) rotate(360deg);
+    }
+}
+@keyframes rotate {
+    from {
+        transform: translate(-50%, -50%) rotate(0deg);
+    }
+    to {
+        transform: translate(-50%, -50%) rotate(360deg);
+    }
+}
+@-webkit-keyframes rotate1 {
+    from {
+        transform: translate(-50%, -50%) rotate(0deg);
+    }
+    to {
+        transform: translate(-50%, -50%) rotate(-360deg);
+    }
+}
+@keyframes rotate1 {
+    from {
+        transform: translate(-50%, -50%) rotate(0deg);
+    }
+    to {
+        transform: translate(-50%, -50%) rotate(-360deg);
+    }
+}
+
+@media screen and (max-width: 1024px) {
+    html {
+        font-size: 42px !important;
+    }
+}
+@media screen and (min-width: 1920px) {
+    html {
+        font-size: 80px !important;
     }
 }
 </style>

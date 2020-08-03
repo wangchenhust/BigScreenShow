@@ -13,17 +13,17 @@ const routes = [
         }
     },
     {
-        path: '/home',
+        path: '/Home',
         name: 'Home',
         component: () => import('@/views/Home.vue'),
         meta: {
-            title: '数据大屏展示页'
+            title: '数据大屏demo展示页'
         }
     },
     {
         path: '/line',
-        name: 'seamless',
-        component: () => import('@/components/seamless/index.vue'),
+        name: 'dynamicLine',
+        component: () => import('@/components/Screen/model.vue'),
         meta: {
             title: '折线图'
         }

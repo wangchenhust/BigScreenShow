@@ -7,6 +7,7 @@ import 'element-ui/lib/theme-chalk/index.css'
 import axios from 'axios'
 import store from './store/index.js'
 import request from './assets/js/request.js'
+// import 'echarts-liquidfill';
 
 import Vcomp from './components/index'
 Vue.use(Vcomp)

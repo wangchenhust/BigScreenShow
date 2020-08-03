@@ -1,12 +1,19 @@
 import HelloWorld from './HelloWorld' // 首页
-import dynamicLine from './dynamicLine'
+import dynamicLine from './dynamicLine/dynamicLine'
 import leida from './leida'
 import ringPie from './ringPie'
 import colorfulRadar from './colorfulRadar'
 import gauge from './gauge'
 import seamless from './seamless'
 //    Screen
-
+import dynamicLine1 from './Screen/model'
+import barChart from './Screen/barChart'
+import lineChart from './Screen/lineChart'
+import pieChart from './Screen/pieChart'
+import dashboard from './Screen/dashboard'
+import radarChart from './Screen/radarChart'
+import list from  './Screen/list'
+import waterSphereChart from './Screen/waterSphereChart'
 const components = {
     HelloWorld,
     dynamicLine,
@@ -14,8 +21,16 @@ const components = {
     ringPie,
     colorfulRadar,
     gauge,
-    seamless
+    seamless,
 //    Screen
+    dynamicLine1,
+    barChart,
+    lineChart,
+    pieChart,
+    dashboard,
+    radarChart,
+    list,
+    waterSphereChart
 };
 
 const install = (Vue = {}) => {
