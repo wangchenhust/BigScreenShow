@@ -107,7 +107,7 @@ src
 
 <h2>界面展示</h2>
 
-<img src="./README_Image/1596495672626.png"></img>
+<img src="./README_Image/image.jpg"></img>
 
 <h2>Screen页面html结构说明</h2>
 

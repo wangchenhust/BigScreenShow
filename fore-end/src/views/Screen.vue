@@ -210,7 +210,7 @@
                 let mm = newDate.getMinutes() < 10 ? '0' + newDate.getMinutes() : newDate.getMinutes();
                 let ss = newDate.getSeconds() < 10 ? '0' + newDate.getSeconds() : newDate.getSeconds();
                 let week = newDate.getDay();
-                let weeks = ['Sun', 'Mon', 'Tus', 'Web', 'Thu', 'Fri', 'Sat'];
+                let weeks = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
                 let getWeek = weeks[week];
                 this.nowDay = getWeek;
                 this.nowDate = year + '.' + month + '.' + date;
