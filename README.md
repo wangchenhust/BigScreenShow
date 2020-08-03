@@ -107,11 +107,10 @@ src
 
 <h2>界面展示</h2>
 
-![1596495672626](C:\Users\Administrator\AppData\Roaming\Typora\typora-user-images\1596495672626.png)
+<img src="./README_Image/1596495672626.png"></img>
 
 <h2>Screen页面html结构说明</h2>
 
-![1596495460545](C:\Users\Administrator\AppData\Roaming\Typora\typora-user-images\1596495460545.png)
+<img src="./README_Image/1596495460545.png"></img>
 
-![1596495540204](C:\Users\Administrator\AppData\Roaming\Typora\typora-user-images\1596495540204.png)
-
+<img src="./README_Image/1596495540204.png"></img>
