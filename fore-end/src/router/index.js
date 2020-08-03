@@ -27,6 +27,14 @@ const routes = [
         meta: {
             title: '折线图'
         }
+    },
+    {
+        path: '/screen',
+        name: 'Screen',
+        component: () => import('@/views/Screen.vue'),
+        meta: {
+            title: '银行数据统计大屏'
+        }
     }
 ]
 const router = new Router({

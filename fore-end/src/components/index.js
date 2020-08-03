@@ -5,6 +5,8 @@ import ringPie from './ringPie'
 import colorfulRadar from './colorfulRadar'
 import gauge from './gauge'
 import seamless from './seamless'
+//    Screen
+
 const components = {
     HelloWorld,
     dynamicLine,
@@ -13,6 +15,7 @@ const components = {
     colorfulRadar,
     gauge,
     seamless
+//    Screen
 };
 
 const install = (Vue = {}) => {

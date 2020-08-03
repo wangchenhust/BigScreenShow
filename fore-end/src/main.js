@@ -13,6 +13,7 @@ Vue.use(Vcomp)
 
 // 显示基本样式
 import '@/assets/styles/base.scss'
+import '@/assets/styles/common.scss'
 
 //动态滚动
 import scroll from 'vue-seamless-scroll'
@@ -35,15 +36,6 @@ router.beforeEach((to, from, next) => {
   }
   next();
 })
-
-// new Vue({
-//   el: '#app',
-//   store,
-//   router,
-//   components: { App },
-//   template: '<App/>'
-// })
-//runtime
 
 new Vue({
   router,
