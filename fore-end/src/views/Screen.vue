@@ -106,6 +106,7 @@
                     <div class="panel">
                         <h2>可配置</h2>
 <!--                        可配置组件-->
+                        <configChart />
                         <div class="panel-footer"></div>
                     </div>
 <!--                    列表模块-->
