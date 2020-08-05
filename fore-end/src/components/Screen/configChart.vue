@@ -51,10 +51,6 @@
         },
         mounted(){
             this.option = {
-                title: {
-                    text: '折线图' ,
-                    textStyle:{fontsize:20}
-                },
                 tooltip: {},
                 xAxis: {
                     type:'category',
