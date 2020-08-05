@@ -77,9 +77,9 @@
 <!--                    地图-->
                     <div class="map_part">
 <!--                        地图-->
-                        <div class="map"></div>
+                        <mapChart />
 <!--                        地图详情-->
-                        <div class="map_info"></div>
+<!--                        <div class="chart" id="chart_map"></div>-->
 <!--                        地图背景图片-->
                         <div class="map1"></div>
                         <div class="map2"></div>
@@ -122,7 +122,7 @@
 </template>
 
 <script>
-    import axios from 'axios'
+    import axios from 'axios';
     export default {
         name: "Screen",
         data(){
@@ -153,7 +153,6 @@
             }, 1000 * 60 * 60)
             //时间日期
             this.getTimes();
-
         },
         methods: {
             //获取天气数据
@@ -215,8 +214,7 @@
                 this.nowDay = getWeek;
                 this.nowDate = year + '.' + month + '.' + date;
                 this.nowTime = hh + ':' + mm + ':' + ss;
-            },
-
+            }
         },
         beforeDestroy() {
             clearInterval(this.timer);
@@ -390,7 +388,7 @@ header h2{
         height: 19.475rem;
         background: url(../assets/img/screen_img/map.png) no-repeat;
         background-size: 100% 100%;
-        opacity: 0.7;
+        opacity: 0.5;
     }
     .map_part{
         position: relative;

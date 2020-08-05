@@ -14,6 +14,7 @@ import dashboard from './Screen/dashboard'
 import radarChart from './Screen/radarChart'
 import list from  './Screen/list'
 import waterSphereChart from './Screen/waterSphereChart'
+import mapChart from './Screen/mapChart'
 const components = {
     HelloWorld,
     dynamicLine,
@@ -30,7 +31,8 @@ const components = {
     dashboard,
     radarChart,
     list,
-    waterSphereChart
+    waterSphereChart,
+    mapChart
 };
 
 const install = (Vue = {}) => {

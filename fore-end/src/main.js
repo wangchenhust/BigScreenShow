@@ -7,7 +7,9 @@ import 'element-ui/lib/theme-chalk/index.css'
 import axios from 'axios'
 import store from './store/index.js'
 import request from './assets/js/request.js'
-// import 'echarts-liquidfill';
+//引入中国地图
+import china from 'echarts/map/json/china.json'
+echarts.registerMap('china', china)
 
 import Vcomp from './components/index'
 Vue.use(Vcomp)

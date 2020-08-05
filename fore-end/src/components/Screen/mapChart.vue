@@ -7,7 +7,7 @@
 <script>
     import echarts from "echarts";
     export default {
-        name: "map",
+        name: "mapChart",
         data(){
             return{
                 mapName : 'china',
@@ -71,9 +71,24 @@
             this.getChart();
         },
         methods: {
+            convertData(data) {
+                var res = [];
+                for (var i = 0; i < data.length; i++) {
+                    var geoCoord = this.geoCoordMap[data[i].name];
+                    if (geoCoord) {
+                        res.push({
+                            name: data[i].name,
+                            value: geoCoord.concat(data[i].value),
+                        });
+                    }
+                }
+                return res;
+            },
             getChart(){
-                var myChart = echarts.init(document.getElementById('chart_middel2'))
-                var option ={
+                var myChart = echarts.init(document.getElementById('chart_middel2'));
+
+                var option = {
+                    // backgroundColor: 'rgba(0, 10, 52, 1)',
                     tooltip: {//小浮框
                         padding: 0,
                         enterable: true,
@@ -94,12 +109,12 @@
                             }
                         },
                         //   放大我们的地图
-                        //   zoom: 1,
+                        zoom: 1.6,
                         itemStyle: {
                             normal: {
                                 areaColor: "rgba(43, 196, 243, 0.42)",
                                 borderColor: "rgba(43, 196, 243, 1)",
-                                borderWidth: 0.8
+                                borderWidth: 0.7
                             },
                             emphasis: {
                                 areaColor: "#2B91B7"
@@ -107,18 +122,16 @@
                         }
                     },
                     series: [{
-                        name: '散点',
+                        name: '散点值',
                         type: 'scatter',
                         coordinateSystem: 'geo',
-                        data: this.convertData(),
-                        symbolSize: function(val) {
-                            return val[2] / 10;
-                        },
+                        data: this.convertData(this.data),
+                        symbolSize: 5,
                         label:
                             {
                                 normal: {
                                     formatter: '{b}',
-                                    position: 'left',
+                                    position: 'right',
                                     show: true
                                 },
                                 emphasis: {
@@ -165,7 +178,7 @@
                             name: '黄点',
                             type: 'effectScatter',
                             coordinateSystem: 'geo',
-                            data: this.convertData(),
+                            data: this.convertData(this.data),
                             symbolSize: function(val) {
                                 return val[2] / 10;
                             },
@@ -195,37 +208,22 @@
                 }
                 myChart.setOption(option);
             },
-            convertData(){
-                var res = [];
-                for (var i = 0; i < this.data.length; i++) {
-                    var geoCoord = this.geoCoordMap[this.data[i].name];
-                    if (geoCoord) {
-                        res.push({
-                            name: this.data[i].name,
-                            value: geoCoord.concat(this.data[i].value),
-                        });
-                    }
-                }
-                return res;
-            }
+
         }
     }
 </script>
 
 <style lang="scss" scoped>
     .chart {
+        height: 20.125rem;
         width: 100%;
-        height: 100%;
     }
     .map-container {
         position: absolute;
-        overflow: hidden;
-        display: block;
-        cursor: default;
-        z-index: 0;
+        z-index: 8;
         left: 0px;
-        top: 10px;
-        width: 70%;
-        height: 70%;
+        top: 0px;
+        width: 100%;
+        height: 100%;
     }
 </style>
