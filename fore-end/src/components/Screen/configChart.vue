@@ -73,6 +73,7 @@
             }
         },
         mounted(){
+<<<<<<< HEAD
             this.option = {//折线图
                 calculable: true,
                 xAxis: [{
@@ -136,6 +137,17 @@
                         }
                     }
                 }],
+=======
+            this.option = {
+                tooltip: {},
+                xAxis: {
+                    type:'category',
+                    data: [2019,2018,2017,2016]
+                },
+                yAxis: {
+                    type:'value'
+                },
+>>>>>>> 5480cf94594c569991ffa5ef624aac07c991de19
                 series: [{
                     name: '指标',
                     type: 'line',
