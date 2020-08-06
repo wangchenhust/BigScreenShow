@@ -30,25 +30,26 @@
             <section class="major">
 <!--                左侧-->
                 <div class="left part">
+<!--                    仪表盘模块-->
+                    <div class="panel">
+                        <h2>近年工行核心指标</h2>
+<!--                        柱状图组件-->
+<!--                        <dashboard />-->
+                        <threeDashboards />
+                        <div class="panel-footer"></div>
+                    </div>
 <!--                    柱状图模块-->
                     <div class="panel">
-                        <h2>近年工行资产构成</h2>
-<!--                        柱状图组件-->
+                        <h2>工行重要风险指标</h2>
+<!--                        仪表盘组件-->
                         <barChart />
                         <div class="panel-footer"></div>
                     </div>
 <!--                    饼图模块-->
                     <div class="panel">
-                        <h2>近年工行营业收入</h2>
+                        <h2>工行营业收入</h2>
 <!--                        饼图组件-->
                         <pieChart />
-                        <div class="panel-footer"></div>
-                    </div>
-<!--                    仪表盘模块-->
-                    <div class="panel">
-                        <h2>近年工行核心资本充足率</h2>
-<!--                        仪表盘组件-->
-                        <dashboard />
                         <div class="panel-footer"></div>
                     </div>
                 </div>
@@ -87,7 +88,7 @@
                     </div>
 <!--                    折线图模块-->
                     <div class="panel below">
-                        <h2>2020年四大行资本充足率与成本收入比</h2>
+                        <h2>2020年工行核心指标变化</h2>
 <!--                        折线图组件--->
                         <lineChart />
                         <div class="panel-footer"></div>
@@ -97,14 +98,14 @@
                 <div class="right part">
 <!--                    雷达图模块-->
                     <div class="panel">
-                        <h2>近年四大行对比</h2>
+                        <h2>四大行对比</h2>
 <!--                        雷达图组件-->
                         <radarChart />
                         <div class="panel-footer"></div>
                     </div>
 <!--                    可配置模块-->
                     <div class="panel">
-                        <h2>可配置</h2>
+                        <h2>四大行指标</h2>
 <!--                        可配置组件-->
                         <configChart />
                         <div class="panel-footer"></div>

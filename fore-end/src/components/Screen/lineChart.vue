@@ -11,7 +11,7 @@
         data(){
             return{
                 values:[[ 0, 0.2, 0.3, 0.3, 0.5, 0.6, 0.5, 0.3, 0.6, 0.5, 0.5,0.8],[0.9, 0.5,0.7,0.8,0.6,0.7,0.8,0.7,0.7,0.6,0.8,0.3]],
-                legendData:['资本充足率', '成本收入比'],
+                legendData:['资本充足率', '核心资本充足率'],
                 datax:['1月', '2月', '3月','4月','5月','6月','7月','8月','9月','10月' ,'11月' ,'12月']
             }
         },
@@ -25,8 +25,15 @@
             getChart(){
                 var myChart = echarts.init(document.getElementById('chart_middel3'))
                 var option ={
-                    tooltip: {
-                        trigger: 'axis'
+                    tooltip: {//详情框
+                        trigger: 'axis',
+                        formatter: function(params) {
+                            return params[0].name + '<br/>' +
+                                "<span style='display:inline-block;margin-right:5px;border-radius:10px;width:9px;height:9px;background-color:rgba(36,207,233,0.9)'></span>" +
+                                params[0].seriesName + ' : ' + Number((params[0].value.toFixed(2) *100)).toLocaleString() + '%<br/>'+
+                                "<span style='display:inline-block;margin-right:5px;border-radius:10px;width:9px;height:9px;background-color:rgba(255,80,124,1)'></span>" +
+                                params[1].seriesName + ' : ' + Number((params[1].value.toFixed(2) *100)).toLocaleString() + '%<br/>'
+                        }
                     },
                     legend: {
                         data: this.legendData,
@@ -84,11 +91,11 @@
                                     fontFamily: '微软雅黑',
                                     fontSize: 10,
                                 },
-                                // formatter:function(params) {
-                                //     var newParamsName = "";
-                                //     newParamsName = params+" %";
-                                //     return newParamsName
-                                // }
+                                formatter:function(params) {
+                                    var newParamsName = "";
+                                    newParamsName = params*100+" %";
+                                    return newParamsName
+                                }
                             },
                             axisLine:{
                                 lineStyle:{

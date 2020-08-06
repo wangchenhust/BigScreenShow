@@ -11,7 +11,8 @@
         name: "pieChart",
         data(){
             return{
-                color:['#00ffff', '#00cfff', '#006ced', '#ffe000', '#ffa800', '#ff5b00', '#ff3000'],
+                color:['#00ffff', '#00cfff', '#006ced',
+                    '#ffe000', '#ffa800', '#ff5b00', '#ff3000'],
                 names:['利息','投资收益','公允价值变动损益','手续费佣金收入','其他业务收入','汇总收益'],
                 values:[5,10,10,10,5,5],
                 list :[]

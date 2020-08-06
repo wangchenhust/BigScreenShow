@@ -9,10 +9,10 @@
     export default {
         name: "barChart",
         data(){
-            return{
-                datay:['现金资产','贷款资产','证券资产','固定资产','汇差资产'],
-                datax:[50000000, 22000000, 10000000, 5000000, 10000000],
-                datax_max:[50000000,50000000,50000000,50000000,50000000]
+            return{//柱状图
+                datay:['资产利润率','资本利润率','不良贷款率','不良资产率','流动性比例'],
+                datax:[0.9, 0.8, 0.6, 0.4, 0.2],
+                datax_max:[1,1,1,1,1]
             }
         },
         computed: {
@@ -26,9 +26,9 @@
                 var myChart = echarts.init(document.getElementById('chart_left1'))
                 var option ={
                     grid: {//整个图表
-                        left: '3%',
+                        left: '2%',
                         right: '3%',
-                        bottom: '1%',
+                        bottom: '0%',
                         top: '15%',
                         containLabel: true
                     },
@@ -40,7 +40,7 @@
                         formatter: function(params) {
                             return params[0].name + '<br/>' +
                                 "<span style='display:inline-block;margin-right:5px;border-radius:10px;width:9px;height:9px;background-color:rgba(36,207,233,0.9)'></span>" +
-                                params[0].seriesName + ' : ' + Number((params[0].value.toFixed(4) / 10000).toFixed(2)).toLocaleString() + ' 万元<br/>'
+                                params[0].seriesName + ' : ' + Number((params[0].value.toFixed(2) *100)).toLocaleString() + '%<br/>'
                         }
                     },
                     xAxis: {
@@ -78,11 +78,7 @@
                                 fontSize: '12'
                             },
                             formatter: function(value) {
-                                if (value >= 10000) {
-                                    return (value / 10000).toLocaleString() + '万';
-                                } else {
-                                    return value.toLocaleString();
-                                }
+                                return (value *100).toLocaleString() + ' %';
                             },
                         },
                         data: this.datax
@@ -91,7 +87,7 @@
                         name: '金额',
                         type: 'bar',
                         zlevel: 1,
-                        barWidth: '8px',//宽度
+                        barWidth: '6px',//宽度
                         data: this.datax,
                         itemStyle: {
                             normal: {

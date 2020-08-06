@@ -30,13 +30,15 @@
                 var option ={
                     title: {
                         show: true,
-                        text: '优',
+                        text: '资本充足率',
                         x: '49%',
-                        y: '55%',
+                        y: '76%',
                         z: 8,//优先级
                         textAlign: 'center',
                         textStyle: {
-                            color: 'rgb(147,169,205)',
+                            color: 'rgba(69, 161, 255,0.9)',
+                            fontStyle: 'normal',
+                            fontFamily: '微软雅黑',
                             fontSize: 10,
                         },
                     },
@@ -45,9 +47,8 @@
                             name: "内部进度条",
                             type: "gauge",
                             // center: ['20%', '50%'],
-                            radius: '68%',
+                            radius: '68%',//大小
                             z: 0,
-
                             splitNumber: 10,//大刻度单位数量
                             axisLine: {
                                 lineStyle: {
@@ -55,7 +56,7 @@
                                         [this.data / 100, this.colorSet.color],
                                         [1, "#0f274f"]
                                     ],
-                                    width: 5//进度条宽度
+                                    width: 2//进度条宽度
                                 }
                             },
                             axisLabel: {
@@ -156,7 +157,7 @@
                             z: 8,
                             hoverAnimation: false,
                             data: [{
-                                name: '核心资本充足率',
+                                name: '资本充足率',
                                 value: this.dataChar,
                                 itemStyle: {
                                     normal: {
@@ -165,7 +166,7 @@
                                             color: '#4FADFD'
                                         }, {
                                             offset: 1,
-                                            color: '#28E8FA'
+                                            color: '#fff'//#28E8FA
                                         }])
                                     }
                                 },
