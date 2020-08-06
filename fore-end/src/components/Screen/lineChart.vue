@@ -250,7 +250,7 @@ export default {
         showEffectOn: "render",
         //涟漪特效相关配置
         rippleEffect: {
-          brushType: "stroke", //波纹绘制方式fill或stroke
+          brushType: "stroke", 
           scale: 4, //波纹的最大缩放比
           period: 1.5 //动画周期，秒数
         },
