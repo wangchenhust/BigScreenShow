@@ -14,13 +14,13 @@ import dashboard from './Screen/dashboard'
 import radarChart from './Screen/radarChart'
 import list from  './Screen/list'
 import waterSphereChart from './Screen/waterSphereChart'
-<<<<<<< HEAD
+// <<<<<<< HEAD
 import mapChart from './Screen/mapChart'
 import configChart from './Screen/configChart'
 import threeDashboards from "./Screen/threeDashboards";
-=======
-import configChart from './Screen/configChart'
->>>>>>> 5480cf94594c569991ffa5ef624aac07c991de19
+// =======
+// import configChart from './Screen/configChart'
+// >>>>>>> 5480cf94594c569991ffa5ef624aac07c991de19
 const components = {
     HelloWorld,
     dynamicLine,
@@ -38,13 +38,13 @@ const components = {
     radarChart,
     list,
     waterSphereChart,
-<<<<<<< HEAD
+// <<<<<<< HEAD
     mapChart,
     configChart,
-    threeDashboards
-=======
-    configChart
->>>>>>> 5480cf94594c569991ffa5ef624aac07c991de19
+    threeDashboards,
+// =======
+//     configChart
+// >>>>>>> 5480cf94594c569991ffa5ef624aac07c991de19
 };
 
 const install = (Vue = {}) => {

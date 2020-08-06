@@ -109,7 +109,7 @@ src
 
 <h2>界面展示</h2>
 
-<img src="./README_Image/image.jpg"></img>
+<img src="./README_Image/screen2.0.jpg"></img>
 
 <h2>Screen页面html结构说明</h2>
 
