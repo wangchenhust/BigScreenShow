@@ -271,11 +271,11 @@ export default {
         },
         zlevel: 1
       };
-      this.option.series.push(effectScatter1);
-      this.option.series.push(effectScatter2);
+      option.series.push(effectScatter1);
+      option.series.push(effectScatter2);
       myChart.setOption(option, true);
-      this.option.series.pop(effectScatter1);
-      this.option.series.pop(effectScatter2);
+      option.series.pop(effectScatter1);
+      option.series.pop(effectScatter2);
     }
   },
   watch: {
