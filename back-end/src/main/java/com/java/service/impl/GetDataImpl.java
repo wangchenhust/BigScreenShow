@@ -73,6 +73,13 @@ public class GetDataImpl implements GetData{
 		String jsonString=JSON.toJSONString(mapper.getMListData());
 		return jsonString;
 	}
+
+	@Override
+	@Cacheable(cacheNames = "MMap")
+	public String getMMapData() {
+		String jsonString=JSON.toJSONString(mapper.getMMapData());
+		return jsonString;
+	}
 	
 	
 

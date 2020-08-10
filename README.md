@@ -541,3 +541,54 @@ http://localhost:8088/GetData/{type}
 +----------+-------------+-------------------+-------------------+--------+
 ```
 
+> **MMap**地图
+>
+> 返回JSON数据：
+
+> [{"ckye":604675,"ckyetbzzl":8,"jylr":15635,"jylrtbzzl":9,"province":"安徽分行"},{"ckye":701586,"ckyetbzzl":7,"jylr":12058,"jylrtbzzl":8,"province":"北京分行"},{"ckye":586147,"ckyetbzzl":7,"jylr":10512,"jylrtbzzl":8,"province":"重庆分行"},{"ckye":562153,"ckyetbzzl":8,"jylr":9751,"jylrtbzzl":9,"province":"大连分行"},{"ckye":589982,"ckyetbzzl":8,"jylr":15874,"jylrtbzzl":11,"province":"福建分行"},{"ckye":562471,"ckyetbzzl":9,"jylr":16987,"jylrtbzzl":9,"province":"甘肃分行"},{"ckye":658976,"ckyetbzzl":6,"jylr":17886,"jylrtbzzl":8,"province":"广东分行"},{"ckye":548960,"ckyetbzzl":8,"jylr":15221,"jylrtbzzl":8,"province":"广西分行"},{"ckye":542896,"ckyetbzzl":7,"jylr":14287,"jylrtbzzl":8,"province":"贵州分行"},{"ckye":501896,"ckyetbzzl":7,"jylr":11587,"jylrtbzzl":7,"province":"海南分行"},{"ckye":608517,"ckyetbzzl":8,"jylr":14982,"jylrtbzzl":8,"province":"河北分行"},{"ckye":615823,"ckyetbzzl":9,"jylr":14269,"jylrtbzzl":8,"province":"河南分行"},{"ckye":574263,"ckyetbzzl":9,"jylr":13985,"jylrtbzzl":8,"province":"黑龙江分行"},{"ckye":638971,"ckyetbzzl":9,"jylr":15428,"jylrtbzzl":7,"province":"湖北分行"},{"ckye":645210,"ckyetbzzl":8,"jylr":15426,"jylrtbzzl":8,"province":"湖南分行"},{"ckye":561246,"ckyetbzzl":7,"jylr":13295,"jylrtbzzl":9,"province":"吉林分行"},{"ckye":725913,"ckyetbzzl":8,"jylr":16888,"jylrtbzzl":8,"province":"江苏分行"},{"ckye":621863,"ckyetbzzl":7,"jylr":13515,"jylrtbzzl":7,"province":"江西分行"},{"ckye":574261,"ckyetbzzl":6,"jylr":13562,"jylrtbzzl":7,"province":"辽宁分行"},{"ckye":506329,"ckyetbzzl":7,"jylr":12417,"jylrtbzzl":7,"province":"内蒙古分行"},{"ckye":512358,"ckyetbzzl":7,"jylr":7850,"jylrtbzzl":7,"province":"宁波分行"},{"ckye":536952,"ckyetbzzl":8,"jylr":12598,"jylrtbzzl":8,"province":"宁夏分行"},{"ckye":496521,"ckyetbzzl":8,"jylr":8951,"jylrtbzzl":7,"province":"青岛分行"},{"ckye":532610,"ckyetbzzl":9,"jylr":13587,"jylrtbzzl":7,"province":"青海分行"},{"ckye":625417,"ckyetbzzl":8,"jylr":14826,"jylrtbzzl":9,"province":"山东分行"},{"ckye":602043,"ckyetbzzl":7,"jylr":14375,"jylrtbzzl":8,"province":"山西分行"},{"ckye":578624,"ckyetbzzl":7,"jylr":15694,"jylrtbzzl":7,"province":"陕西分行"},{"ckye":725631,"ckyetbzzl":7,"jylr":12384,"jylrtbzzl":9,"province":"上海分行"},{"ckye":698210,"ckyetbzzl":9,"jylr":16018,"jylrtbzzl":10,"province":"深圳分行"},{"ckye":623427,"ckyetbzzl":7,"jylr":15403,"jylrtbzzl":9,"province":"四川分行"},{"ckye":587624,"ckyetbzzl":8,"jylr":10062,"jylrtbzzl":7,"province":"苏州分行"},{"ckye":503091,"ckyetbzzl":8,"jylr":9018,"jylrtbzzl":8,"province":"天津分行"},{"ckye":498624,"ckyetbzzl":6,"jylr":12351,"jylrtbzzl":5,"province":"西藏分行"},{"ckye":532689,"ckyetbzzl":8,"jylr":9541,"jylrtbzzl":7,"province":"厦门分行"},{"ckye":528410,"ckyetbzzl":6,"jylr":11876,"jylrtbzzl":6,"province":"新疆分行"},{"ckye":556129,"ckyetbzzl":8,"jylr":12409,"jylrtbzzl":7,"province":"云南分行"},{"ckye":678960,"ckyetbzzl":9,"jylr":16875,"jylrtbzzl":9,"province":"浙江分行"}]
+
+```
+可视化数据：
++------------+-------+-----------+--------+-----------+
+| province   | jylr  | jylrtbzzl | ckye   | ckyetbzzl |
++------------+-------+-----------+--------+-----------+
+| 安徽分行   | 15635 | 9         | 604675 | 8         |
+| 北京分行   | 12058 | 8         | 701586 | 7         |
+| 重庆分行   | 10512 | 8         | 586147 | 7         |
+| 大连分行   |  9751 | 9         | 562153 | 8         |
+| 福建分行   | 15874 | 11        | 589982 | 8         |
+| 甘肃分行   | 16987 | 9         | 562471 | 9         |
+| 广东分行   | 17886 | 8         | 658976 | 6         |
+| 广西分行   | 15221 | 8         | 548960 | 8         |
+| 贵州分行   | 14287 | 8         | 542896 | 7         |
+| 海南分行   | 11587 | 7         | 501896 | 7         |
+| 河北分行   | 14982 | 8         | 608517 | 8         |
+| 河南分行   | 14269 | 8         | 615823 | 9         |
+| 黑龙江分行 | 13985 | 8         | 574263 | 9         |
+| 湖北分行   | 15428 | 7         | 638971 | 9         |
+| 湖南分行   | 15426 | 8         | 645210 | 8         |
+| 吉林分行   | 13295 | 9         | 561246 | 7         |
+| 江苏分行   | 16888 | 8         | 725913 | 8         |
+| 江西分行   | 13515 | 7         | 621863 | 7         |
+| 辽宁分行   | 13562 | 7         | 574261 | 6         |
+| 内蒙古分行 | 12417 | 7         | 506329 | 7         |
+| 宁波分行   |  7850 | 7         | 512358 | 7         |
+| 宁夏分行   | 12598 | 8         | 536952 | 8         |
+| 青岛分行   |  8951 | 7         | 496521 | 8         |
+| 青海分行   | 13587 | 7         | 532610 | 9         |
+| 山东分行   | 14826 | 9         | 625417 | 8         |
+| 山西分行   | 14375 | 8         | 602043 | 7         |
+| 陕西分行   | 15694 | 7         | 578624 | 7         |
+| 上海分行   | 12384 | 9         | 725631 | 7         |
+| 深圳分行   | 16018 | 10        | 698210 | 9         |
+| 四川分行   | 15403 | 9         | 623427 | 7         |
+| 苏州分行   | 10062 | 7         | 587624 | 8         |
+| 天津分行   |  9018 | 8         | 503091 | 8         |
+| 西藏分行   | 12351 | 5         | 498624 | 6         |
+| 厦门分行   |  9541 | 7         | 532689 | 8         |
+| 新疆分行   | 11876 | 6         | 528410 | 6         |
+| 云南分行   | 12409 | 7         | 556129 | 8         |
+| 浙江分行   | 16875 | 9         | 678960 | 9         |
++------------+-------+-----------+--------+-----------+
+```
+
