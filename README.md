@@ -234,11 +234,9 @@ http://localhost:8088/GetData/{type}
 示例：http://localhost:8088/GetData/Plane
 
 <h4>其中{type}可选的值有：</h4>
-==Plane==仪表盘
-返回JSON数据示例：
-
-可视化数据：
-
+> **Plane**仪表盘
+> 返回JSON数据示例：
+>
 > [{"name":"核心资本充足率","value":14,"valuedate":"2020-01-01"},
 > {"name":"核心资本充足率","value":13,"valuedate":"2019-01-01"},
 > {"name":"核心资本充足率","value":13,"valuedate":"2018-01-01"},
@@ -250,6 +248,7 @@ http://localhost:8088/GetData/{type}
 > {"name":"核心一级资本充足率","value":13,"valuedate":"2018-01-01"}]
 
 ```
+可视化数据：
 +--------------------+-------+------------+
 | NAME               | VALUE | valuedate  |
 +--------------------+-------+------------+
@@ -265,32 +264,15 @@ http://localhost:8088/GetData/{type}
 +--------------------+-------+------------+
 ```
 
-==Bar==柱状图
-返回JSON数据示例：
-[{"name":"资产利润率","value":2},
-{"name":"资本利润率","value":13},
-{"name":"不良贷款率","value":1},
-{"name":"不良资产率","value":2},
-{"name":"流动性比例","value":35}]
+> **Bar**柱状图
+> 返回JSON数据示例：
+> [{"name":"资产利润率","value":2},
+> {"name":"资本利润率","value":13},
+> {"name":"不良贷款率","value":1},
+> {"name":"不良资产率","value":2},
+> {"name":"流动性比例","value":35}
 
-| 核心资本充足率     | 14    | 2020-01-01 |
-| 核心资本充足率     | 13    | 2019-01-01 |
-| 核心资本充足率     | 13    | 2018-01-01 |
-| 资本充足率         | 17    | 2020-01-01 |
-| 资本充足率         | 15    | 2019-01-01 |
-| 资本充足率         | 15    | 2018-01-01 |
-| 核心一级资本充足率 | 13    | 2020-01-01 |
-| 核心一级资本充足率 | 13    | 2019-01-01 |
-| 核心一级资本充足率 | 13    | 2018-01-01 |
-+--------------------+-------+------------+
-==Bar==柱状图
-返回JSON数据示例：
-[{"name":"资产利润率","value":2},
-{"name":"资本利润率","value":13},
-{"name":"不良贷款率","value":1},
-{"name":"不良资产率","value":2},
-{"name":"流动性比例","value":35}]
-
+```
 可视化数据：
 +------------+-------+
 | NAME       | VALUE |
@@ -301,26 +283,30 @@ http://localhost:8088/GetData/{type}
 | 不良资产率 | 2     |
 | 流动性比例 | 35    |
 +------------+-------+
-==Pie==饼图
-返回JSON数据示例：
-[{"name":"利息净收入","value":590260,"valuedate":"2020-01-01"},
-{"name":"利息净收入","value":570804,"valuedate":"2019-01-01"},
-{"name":"利息净收入","value":524616,"valuedate":"2018-01-01"},
-{"name":"投资收益","value":37772,"valuedate":"2020-01-01"},
-{"name":"投资收益","value":11324,"valuedate":"2019-01-01"},
-{"name":"投资收益","value":9492,"valuedate":"2018-01-01"},
-{"name":"公允价值变动收益","value":24828,"valuedate":"2020-01-01"},
-{"name":"公允价值变动收益","value":13372,"valuedate":"2019-01-01"},
-{"name":"公允价值变动收益","value":1308,"valuedate":"2018-01-01"},
-{"name":"汇兑及汇率产品净收益","value":13096,"valuedate":"2020-01-01"},
-{"name":"汇兑及汇率产品净收益","value":3520,"valuedate":"2019-01-01"},
-{"name":"汇兑及汇率产品净收益","value":8420,"valuedate":"2018-01-01"},
-{"name":"手续费及佣金收入","value":190752,"valuedate":"2020-01-01"},
-{"name":"手续费及佣金收入","value":194460,"valuedate":"2019-01-01"},
-{"name":"手续费及佣金收入","value":174252,"valuedate":"2018-01-01"},
-{"name":"其他业务收入","value":20160,"valuedate":"2020-01-01"},
-{"name":"其他业务收入","value":8508,"valuedate":"2019-01-01"},
-{"name":"其他业务收入","value":2540,"valuedate":"2018-01-01"}]
+```
+
+> **Pie**饼图
+> 返回JSON数据示例：
+> [{"name":"利息净收入","value":590260,"valuedate":"2020-01-01"},
+> {"name":"利息净收入","value":570804,"valuedate":"2019-01-01"},
+> {"name":"利息净收入","value":524616,"valuedate":"2018-01-01"},
+> {"name":"投资收益","value":37772,"valuedate":"2020-01-01"},
+> {"name":"投资收益","value":11324,"valuedate":"2019-01-01"},
+> {"name":"投资收益","value":9492,"valuedate":"2018-01-01"},
+> {"name":"公允价值变动收益","value":24828,"valuedate":"2020-01-01"},
+> {"name":"公允价值变动收益","value":13372,"valuedate":"2019-01-01"},
+> {"name":"公允价值变动收益","value":1308,"valuedate":"2018-01-01"},
+> {"name":"汇兑及汇率产品净收益","value":13096,"valuedate":"2020-01-01"},
+> {"name":"汇兑及汇率产品净收益","value":3520,"valuedate":"2019-01-01"},
+> {"name":"汇兑及汇率产品净收益","value":8420,"valuedate":"2018-01-01"},
+> {"name":"手续费及佣金收入","value":190752,"valuedate":"2020-01-01"},
+> {"name":"手续费及佣金收入","value":194460,"valuedate":"2019-01-01"},
+> {"name":"手续费及佣金收入","value":174252,"valuedate":"2018-01-01"},
+> {"name":"其他业务收入","value":20160,"valuedate":"2020-01-01"},
+> {"name":"其他业务收入","value":8508,"valuedate":"2019-01-01"},
+> {"name":"其他业务收入","value":2540,"valuedate":"2018-01-01"}]
+
+```
 可视化数据：
 +--------+----------------------+------------+
 | VALUE  | NAME                 | valuedate  |
@@ -344,26 +330,30 @@ http://localhost:8088/GetData/{type}
 |   8508 | 其他业务收入         | 2019-01-01 |
 |   2540 | 其他业务收入         | 2018-01-01 |
 +--------+----------------------+------------+
-==Line==折线图
-JSON数据：
-[{"name":"利息净收入","value":590260,"valuedate":"2020-01-01"},
-{"name":"利息净收入","value":570804,"valuedate":"2019-01-01"},
-{"name":"利息净收入","value":524616,"valuedate":"2018-01-01"},
-{"name":"投资收益","value":37772,"valuedate":"2020-01-01"},
-{"name":"投资收益","value":11324,"valuedate":"2019-01-01"},
-{"name":"投资收益","value":9492,"valuedate":"2018-01-01"},
-{"name":"公允价值变动收益","value":24828,"valuedate":"2020-01-01"},
-{"name":"公允价值变动收益","value":13372,"valuedate":"2019-01-01"},
-{"name":"公允价值变动收益","value":1308,"valuedate":"2018-01-01"},
-{"name":"汇兑及汇率产品净收益","value":13096,"valuedate":"2020-01-01"},
-{"name":"汇兑及汇率产品净收益","value":3520,"valuedate":"2019-01-01"},
-{"name":"汇兑及汇率产品净收益","value":8420,"valuedate":"2018-01-01"},
-{"name":"手续费及佣金收入","value":190752,"valuedate":"2020-01-01"},
-{"name":"手续费及佣金收入","value":194460,"valuedate":"2019-01-01"},
-{"name":"手续费及佣金收入","value":174252,"valuedate":"2018-01-01"},
-{"name":"其他业务收入","value":20160,"valuedate":"2020-01-01"},
-{"name":"其他业务收入","value":8508,"valuedate":"2019-01-01"},
-{"name":"其他业务收入","value":2540,"valuedate":"2018-01-01"}]
+```
+
+> **Line**折线图
+> JSON数据：
+> [{"name":"利息净收入","value":590260,"valuedate":"2020-01-01"},
+> {"name":"利息净收入","value":570804,"valuedate":"2019-01-01"},
+> {"name":"利息净收入","value":524616,"valuedate":"2018-01-01"},
+> {"name":"投资收益","value":37772,"valuedate":"2020-01-01"},
+> {"name":"投资收益","value":11324,"valuedate":"2019-01-01"},
+> {"name":"投资收益","value":9492,"valuedate":"2018-01-01"},
+> {"name":"公允价值变动收益","value":24828,"valuedate":"2020-01-01"},
+> {"name":"公允价值变动收益","value":13372,"valuedate":"2019-01-01"},
+> {"name":"公允价值变动收益","value":1308,"valuedate":"2018-01-01"},
+> {"name":"汇兑及汇率产品净收益","value":13096,"valuedate":"2020-01-01"},
+> {"name":"汇兑及汇率产品净收益","value":3520,"valuedate":"2019-01-01"},
+> {"name":"汇兑及汇率产品净收益","value":8420,"valuedate":"2018-01-01"},
+> {"name":"手续费及佣金收入","value":190752,"valuedate":"2020-01-01"},
+> {"name":"手续费及佣金收入","value":194460,"valuedate":"2019-01-01"},
+> {"name":"手续费及佣金收入","value":174252,"valuedate":"2018-01-01"},
+> {"name":"其他业务收入","value":20160,"valuedate":"2020-01-01"},
+> {"name":"其他业务收入","value":8508,"valuedate":"2019-01-01"},
+> {"name":"其他业务收入","value":2540,"valuedate":"2018-01-01"}]
+
+```
 可视化数据：
 +----------------+-------+------------+
 | NAME           | VALUE | valuedate  |
@@ -393,28 +383,32 @@ JSON数据：
 | 核心资本充足率 | 13    | 2020-11-01 |
 | 核心资本充足率 | 13    | 2020-12-01 |
 +----------------+-------+------------+
-==Rada==雷达图
-JSON数据：
-[{"bank":"工商银行","name":"资本充足率","value":17},
-{"bank":"农业银行","name":"资本充足率","value":16},
-{"bank":"建设银行","name":"资本充足率","value":18},
-{"bank":"中国银行","name":"资本充足率","value":16},
-{"bank":"工商银行","name":"核心一级资本充足率","value":13},
-{"bank":"农业银行","name":"核心一级资本充足率","value":11},
-{"bank":"建设银行","name":"核心一级资本充足率","value":14},
-{"bank":"中国银行","name":"核心一级资本充足率","value":11},
-{"bank":"工商银行","name":"不良贷款率","value":1},
-{"bank":"农业银行","name":"不良贷款率","value":1},
-{"bank":"建设银行","name":"不良贷款率","value":1},
-{"bank":"中国银行","name":"不良贷款率","value":1},
-{"bank":"工商银行","name":"净息差","value":2},
-{"bank":"农业银行","name":"净息差","value":2},
-{"bank":"建设银行","name":"净息差","value":2},
-{"bank":"中国银行","name":"净息差","value":2},
-{"bank":"工商银行","name":"资产利润率","value":2},
-{"bank":"农业银行","name":"资产利润率","value":2},
-{"bank":"建设银行","name":"资产利润率","value":2},
-{"bank":"中国银行","name":"资产利润率","value":2}]
+```
+
+> **Rada**雷达图
+> JSON数据：
+> [{"bank":"工商银行","name":"资本充足率","value":17},
+> {"bank":"农业银行","name":"资本充足率","value":16},
+> {"bank":"建设银行","name":"资本充足率","value":18},
+> {"bank":"中国银行","name":"资本充足率","value":16},
+> {"bank":"工商银行","name":"核心一级资本充足率","value":13},
+> {"bank":"农业银行","name":"核心一级资本充足率","value":11},
+> {"bank":"建设银行","name":"核心一级资本充足率","value":14},
+> {"bank":"中国银行","name":"核心一级资本充足率","value":11},
+> {"bank":"工商银行","name":"不良贷款率","value":1},
+> {"bank":"农业银行","name":"不良贷款率","value":1},
+> {"bank":"建设银行","name":"不良贷款率","value":1},
+> {"bank":"中国银行","name":"不良贷款率","value":1},
+> {"bank":"工商银行","name":"净息差","value":2},
+> {"bank":"农业银行","name":"净息差","value":2},
+> {"bank":"建设银行","name":"净息差","value":2},
+> {"bank":"中国银行","name":"净息差","value":2},
+> {"bank":"工商银行","name":"资产利润率","value":2},
+> {"bank":"农业银行","name":"资产利润率","value":2},
+> {"bank":"建设银行","name":"资产利润率","value":2},
+> {"bank":"中国银行","name":"资产利润率","value":2}]
+
+```
 可视化数据：
 +--------------------+-------+----------+
 | NAME               | VALUE | bank     |
@@ -440,21 +434,24 @@ JSON数据：
 | 资产利润率         | 2     | 建设银行 |
 | 资产利润率         | 2     | 中国银行 |
 +--------------------+-------+----------+
-==CLine==可配置折线图
-JSON数据：
-[{"bank":"中国银行","name":"核心资本充足率","value":13},
-{"bank":"中国银行","name":"资产利润率","value":2},
-{"bank":"中国银行","name":"资本充足率","value":15},
-{"bank":"农业银行","name":"核心资本充足率","value":13},
-{"bank":"农业银行","name":"资产利润率","value":2},
-{"bank":"农业银行","name":"资本充足率","value":16},
-{"bank":"工商银行","name":"核心资本充足率","value":13},
-{"bank":"工商银行","name":"资产利润率","value":2},
-{"bank":"工商银行","name":"资本充足率","value":15},
-{"bank":"建设银行","name":"核心资本充足率","value":13},
-{"bank":"建设银行","name":"资产利润率","value":2},
-{"bank":"建设银行","name":"资本充足率","value":15}]
+```
 
+> **CLine**可配置折线图
+> JSON数据：
+> [{"bank":"中国银行","name":"核心资本充足率","value":13},
+> {"bank":"中国银行","name":"资产利润率","value":2},
+> {"bank":"中国银行","name":"资本充足率","value":15},
+> {"bank":"农业银行","name":"核心资本充足率","value":13},
+> {"bank":"农业银行","name":"资产利润率","value":2},
+> {"bank":"农业银行","name":"资本充足率","value":16},
+> {"bank":"工商银行","name":"核心资本充足率","value":13},
+> {"bank":"工商银行","name":"资产利润率","value":2},
+> {"bank":"工商银行","name":"资本充足率","value":15},
+> {"bank":"建设银行","name":"核心资本充足率","value":13},
+> {"bank":"建设银行","name":"资产利润率","value":2},
+> {"bank":"建设银行","name":"资本充足率","value":15}]
+
+```
 可视化数据：
 +----------+----------------+-------+
 | bank     | NAME           | value |
@@ -472,12 +469,16 @@ JSON数据：
 | 建设银行 | 资产利润率     | 2     |
 | 建设银行 | 资本充足率     | 15    |
 +----------+----------------+-------+
-==CRada==可配置雷达图
-返回JSON数据示例：
-[{"name":"工商银行","value":2},
-{"name":"农业银行","value":1},
-{"name":"建设银行","value":2},
-{"name":"中国银行","value":1}]
+```
+
+> **CRada**可配置雷达图
+> 返回JSON数据示例：
+> [{"name":"工商银行","value":2},
+> {"name":"农业银行","value":1},
+> {"name":"建设银行","value":2},
+> {"name":"中国银行","value":1}]
+
+```
 可视化数据：
 +----------+-------+
 | NAME     | value |
@@ -487,25 +488,29 @@ JSON数据：
 | 建设银行 | 2     |
 | 中国银行 | 1     |
 +----------+-------+
-==MList==列表
-返回JSON数据：
-[{"bank":"工商银行","growth_rate":9,"total_assets_2019":27699540,"total_assets_2020":30109436,"type":"国有行"},
-{"bank":"农业银行","growth_rate":10,"total_assets_2019":22609471,"total_assets_2020":24878288,"type":"国有行"},
-{"bank":"建设银行","growth_rate":10,"total_assets_2019":23222693,"total_assets_2020":25436261,"type":"国有行"},
-{"bank":"中国银行","growth_rate":7,"total_assets_2019":21267275,"total_assets_2020":22769744,"type":"国有行"},
-{"bank":"交通银行","growth_rate":4,"total_assets_2019":9531171,"total_assets_2020":9905600,"type":"国有行"},
-{"bank":"邮储银行","growth_rate":7,"total_assets_2019":9516211,"total_assets_2020":10216706,"type":"国有行"},
-{"bank":"招商银行","growth_rate":10,"total_assets_2019":6745729,"total_assets_2020":7417240,"type":"股份行"},
-{"bank":"兴业银行","growth_rate":6,"total_assets_2019":6711657,"total_assets_2020":7145681,"type":"股份行"},
-{"bank":"浦发银行","growth_rate":11,"total_assets_2019":6289606,"total_assets_2020":7005929,"type":"股份行"},
-{"bank":"中信银行","growth_rate":11,"total_assets_2019":6066714,"total_assets_2020":6750433,"type":"股份行"},
-{"bank":"民生银行","growth_rate":11,"total_assets_2019":5994822,"total_assets_2020":6681841,"type":"股份行"},
-{"bank":"光大银行","growth_rate":9,"total_assets_2019":4357332,"total_assets_2020":4733431,"type":"股份行"},
-{"bank":"平安银行","growth_rate":15,"total_assets_2019":3418592,"total_assets_2020":3939070,"type":"股份行"},
-{"bank":"华夏银行","growth_rate":13,"total_assets_2019":2680580,"total_assets_2020":3020789,"type":"股份行"},
-{"bank":"广发银行","growth_rate":12,"total_assets_2019":2360850,"total_assets_2020":2632797,"type":"股份行"},
-{"bank":"浙商银行","growth_rate":9,"total_assets_2019":1646694,"total_assets_2020":1800785,"type":"股份行"},
-{"bank":"渤海银行","growth_rate":9,"total_assets_2019":1034451,"total_assets_2020":1113116,"type":"股份行"}]
+```
+
+> **MList**列表
+> 返回JSON数据：
+> [{"bank":"工商银行","growth_rate":9,"total_assets_2019":27699540,"total_assets_2020":30109436,"type":"国有行"},
+> {"bank":"农业银行","growth_rate":10,"total_assets_2019":22609471,"total_assets_2020":24878288,"type":"国有行"},
+> {"bank":"建设银行","growth_rate":10,"total_assets_2019":23222693,"total_assets_2020":25436261,"type":"国有行"},
+> {"bank":"中国银行","growth_rate":7,"total_assets_2019":21267275,"total_assets_2020":22769744,"type":"国有行"},
+> {"bank":"交通银行","growth_rate":4,"total_assets_2019":9531171,"total_assets_2020":9905600,"type":"国有行"},
+> {"bank":"邮储银行","growth_rate":7,"total_assets_2019":9516211,"total_assets_2020":10216706,"type":"国有行"},
+> {"bank":"招商银行","growth_rate":10,"total_assets_2019":6745729,"total_assets_2020":7417240,"type":"股份行"},
+> {"bank":"兴业银行","growth_rate":6,"total_assets_2019":6711657,"total_assets_2020":7145681,"type":"股份行"},
+> {"bank":"浦发银行","growth_rate":11,"total_assets_2019":6289606,"total_assets_2020":7005929,"type":"股份行"},
+> {"bank":"中信银行","growth_rate":11,"total_assets_2019":6066714,"total_assets_2020":6750433,"type":"股份行"},
+> {"bank":"民生银行","growth_rate":11,"total_assets_2019":5994822,"total_assets_2020":6681841,"type":"股份行"},
+> {"bank":"光大银行","growth_rate":9,"total_assets_2019":4357332,"total_assets_2020":4733431,"type":"股份行"},
+> {"bank":"平安银行","growth_rate":15,"total_assets_2019":3418592,"total_assets_2020":3939070,"type":"股份行"},
+> {"bank":"华夏银行","growth_rate":13,"total_assets_2019":2680580,"total_assets_2020":3020789,"type":"股份行"},
+> {"bank":"广发银行","growth_rate":12,"total_assets_2019":2360850,"total_assets_2020":2632797,"type":"股份行"},
+> {"bank":"浙商银行","growth_rate":9,"total_assets_2019":1646694,"total_assets_2020":1800785,"type":"股份行"},
+> {"bank":"渤海银行","growth_rate":9,"total_assets_2019":1034451,"total_assets_2020":1113116,"type":"股份行"}]
+
+```
 可视化数据：
 +----------+-------------+-------------------+-------------------+--------+
 | bank     | growth_rate | total_assets_2019 | total_assets_2020 | type   |
@@ -528,3 +533,5 @@ JSON数据：
 | 浙商银行 | 9           |           1646694 |           1800785 | 股份行 |
 | 渤海银行 | 9           |           1034451 |           1113116 | 股份行 |
 +----------+-------------+-------------------+-------------------+--------+
+```
+
