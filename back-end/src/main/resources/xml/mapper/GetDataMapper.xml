@@ -3,5 +3,124 @@
     PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.java.mapper.GetDataMapper">
-	
+	<!-- 仪表盘查询语句 -->
+	<select id="getPanelData" resultType="com.java.pojo.Panel">
+		select
+		dn.NAME,cast(pv.VALUE as DECIMAL(3.0)) VALUE,vd.valuedate
+		from
+		panelvalues pv,banks,datanames dn,valuedates vd
+		where
+		pv.did=dn.id and
+		pv.vid=vd.id and pv.bid=banks.id;
+	</select>
+
+	<!-- 柱状图查询语句 -->
+	<select id="getBarData" resultType="com.java.pojo.Bar">
+		select
+		dn.NAME,CAST(bv.VALUE
+		AS DECIMAL(3,0)) VALUE
+		from
+		barvalues bv,banks,datanames dn,valuedates
+		vd
+		where
+		bv.did=dn.id and bv.vid=vd.id and bv.bid=banks.id;
+	</select>
+
+	<!-- 饼图查询语句 -->
+	<select id="getPieData" resultType="com.java.pojo.Pie">
+		select
+		dn.NAME,pv.VALUE,vd.valuedate
+		from
+		pievalues pv,banks,datanames
+		dn,valuedates vd
+		where
+		pv.did=dn.id and pv.vid=vd.id and
+		pv.bid=banks.id;
+	</select>
+
+	<!-- 折线图查询语句（已优化） -->
+	<select id="getLineData" resultType="com.java.pojo.Line">
+		select
+		dn.NAME,CAST(lv.VALUE
+		AS DECIMAL(3.0)) VALUE,vd.valuedate
+		from
+		linevalues lv,
+		(select * from
+		banks where NAME="工商银行") banks,
+		(select * from datanames where id in
+		(1,18)) dn,
+		(select * from valuedates where valuedate REGEXP '2020') vd
+		where
+		lv.did=dn.id and lv.vid=vd.id and lv.bid=banks.id;
+	</select>
+
+	<!-- 雷达图查询语句(已优化) -->
+	<select id="getRadaData" resultType="com.java.pojo.Rada">
+		select
+		dn.NAME,CAST(rv.VALUE
+		AS DECIMAL(3,0))VALUE,b.NAME bank
+		from
+		(select
+		rv.VALUE,rv.did,rv.vid,rv.bid
+		from radarvalues rv
+		where
+		rv.did in
+		(1,2,4,5,20)) rv,
+		(select
+		*
+		from banks
+		where NAME in
+		("中国银行","工商银行","建设银行","农业银行")) b,
+		valuedates vd,datanames dn
+		where
+		rv.did=dn.id and rv.vid=vd.id and rv.bid=b.id;
+	</select>
+
+	<!-- 可配置折线图查询语句(已优化) -->
+	<select id="getCLineData" resultType="com.java.pojo.CLine">
+		select
+		b.NAME
+		bank,dn.NAME,cast(AVG(lv.VALUE) as DECIMAL(3,0)) value
+		from
+		linevalues
+		lv,
+		(select id,NAME from banks where NAME in
+		("工商银行","中国银行","建设银行","农业银行")) b,
+		(select * from datanames where id in
+		(1,18,20)) dn,
+		valuedates vd
+		where
+		lv.did=dn.id and lv.vid=vd.id and
+		lv.bid=b.id group by b.NAME,dn.NAME;
+	</select>
+
+	<!-- 可配置雷达图查询语句 -->
+	<select id="getCRadaData" resultType="com.java.pojo.CRada">
+		select
+		b.NAME,cast(rv.VALUE
+		as decimal(3,0)) value
+		from
+		(select VALUE,did,bid,vid from radarvalues
+		where did=25) rv,datanames
+		dn,banks
+		b,valuedates vd
+		where
+		rv.did=dn.id and
+		rv.bid=b.id and rv.vid=vd.id;
+	</select>
+
+	<!-- 列表查询语句（已优化） -->
+	<select id="getMListData" resultType="com.java.pojo.MList">
+		select 
+		banks.NAME bank,ev1.VALUE growth_rate,ev3.VALUE total_assets_2019,ev2.VALUE total_assets_2020,bt.NAME type 
+		from (select CAST(VALUE AS DECIMAL(3,0)) VALUE,bid from entryvalues where did=24) ev1,
+		(select ev.VALUE,ev.bid from entryvalues ev,valuedates vd where ev.did=19 and ev.vid=1 and vd.id=ev.vid) ev2,
+		(select ev.VALUE,ev.bid from entryvalues ev,valuedates vd where ev.did=19 and ev.vid=13 and vd.id=ev.vid) ev3,
+		banks,banktypes bt 
+		where 
+		banks.id=ev1.bid and banks.id=ev2.bid and banks.id=ev3.bid and banks.tid=bt.id;
+	</select>
+
+
+
 </mapper>

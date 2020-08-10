@@ -35,9 +35,9 @@ export default {
     getChart() {
       var myChart = echarts.init(document.getElementById("chart_left1"));
       let gradientColor = new this.$echarts.graphic.LinearGradient(0, 0, 1, 1, [
-        { offset: 0, color: "rgba(221,107,102,0.7)" },
+        { offset: 0, color: "rgb(186,39,38)" },
         { offset: 0.5, color: "rgb(238,64,61)" },
-        { offset: 1, color: "rgb(186,39,38)" }
+        { offset: 1, color: "rgba(221,107,102,0.7)" }
       ]);
       var option = {
         grid: {
@@ -141,6 +141,7 @@ export default {
                 barBorderRadius: 20,
                 borderColor: gradientColor,
                 borderWidth: 3,
+                lineWidth: 2,
                 twinkle: {
                   //闪烁
                   enabled: true, //启用
@@ -175,7 +176,25 @@ export default {
           seriesIndex: 0,
           dataIndex: curidx
         });
-        if (item > 0.5) {
+        if ((item < 0.11) & (curidx == 1)) {
+          myChart.dispatchAction({
+            type: "highlight",
+            dataIndex: curidx
+          });
+        }
+        if ((item > 0.05) & (curidx == 2)) {
+          myChart.dispatchAction({
+            type: "highlight",
+            dataIndex: curidx
+          });
+        }
+        if ((item > 0.04) & (curidx == 3)) {
+          myChart.dispatchAction({
+            type: "highlight",
+            dataIndex: curidx
+          });
+        }
+        if ((item < 0.25) & (curidx == 4)) {
           myChart.dispatchAction({
             type: "highlight",
             dataIndex: curidx
@@ -189,19 +208,19 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.chart {
-  width: 100%;
-  height: 100%;
-}
-.barChart-container {
-  position: absolute;
-  overflow: hidden;
-  display: block;
-  cursor: default;
-  z-index: 0;
-  left: 0;
-  top: 0;
-  width: 100%;
-  height: 100%;
-}
+  .chart {
+    width: 100%;
+    height: 100%;
+  }
+  .barChart-container {
+    position: absolute;
+    overflow: hidden;
+    display: block;
+    cursor: default;
+    z-index: 0;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+  }
 </style>

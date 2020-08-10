@@ -12,7 +12,7 @@ export default {
     return {
       values: [
         [0, 0.2, 0.3, 0.3, 0.5, 0.6, 0.5, 0.3, 0.6, 0.5, 0.5, 0.8],
-        [0.9, 0.5, 0.7, 0.8, 0.6, 0.7, 0.8, 0.7, 0.7, 0.6, 0.8, 0.3]
+        [0.9, 0.5, 0.7, 0.8, 0.6, 0.7, 0.8, 0.7, 0, 0.6, 0.8, 0.3]
       ],
       legendData: ["资本充足率", "核心资本充足率"],
       datax: [
@@ -203,10 +203,10 @@ export default {
       let data1 = this.values[0];
       let data2 = this.values[1];
       for (let i = 0; i < data1.length; i++) {
-        if (data1[i] > 0.5) {
+        if (data1[i] < 0.08) {
           effectScatterData1.push([this.datax[i], data1[i]]);
         }
-        if (data2[i] > 0.7) {
+        if (data2[i] < 0.04) {
           effectScatterData2.push([this.datax[i], data2[i]]);
         }
       }
@@ -228,16 +228,16 @@ export default {
         label: {
           // formatter: "{b}",
           position: "top",
-          show: true,
+          show: false,
           textStyle: {
             color: "white",
             fontSize: 14
           }
         },
         itemStyle: {
-          color: "rgb(199,84,80)",
+          color: "rgb(58,136,255)",
           shadowBlur: 8,
-          shadowColor: "rgb(199,84,80)"
+          shadowColor: "rgb(58,136,255)"
         },
         zlevel: 1
       };
@@ -265,9 +265,10 @@ export default {
           }
         },
         itemStyle: {
-          color: "rgb(58,136,255)",
+          color: "rgb(199,84,80)",
           shadowBlur: 8,
-          shadowColor: "rgb(58,136,255)"
+          shadowColor: "rgb(199,84,80)"
+
         },
         zlevel: 1
       };

@@ -8,6 +8,7 @@ import org.springframework.stereotype.Repository;
 
 @SpringBootApplication
 @MapperScan(basePackages = "com.java.mapper",annotationClass = Repository.class)
+@EnableCaching
 public class Application {
 
 	public static void main(String[] args) {
