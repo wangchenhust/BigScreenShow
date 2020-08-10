@@ -10,7 +10,7 @@
                     <span class="city">{{ weatherData.city }}</span>
                 </div>
 <!--                标题-->
-                <h2>全国银行近年数据统计大屏</h2>
+                <h2>银行数据统计和风险报警大屏</h2>
 <!--                时间日期-->
                 <div class="showTime">
 <!--                    北京时间-->
@@ -39,14 +39,14 @@
                         <div class="panel-footer"></div>
                     </div>
 <!--                    柱状图模块-->
-                    <div class="panel">
+                    <div class="panel small">
                         <h2>工行重要风险指标</h2>
 <!--                        仪表盘组件-->
                         <barChart />
                         <div class="panel-footer"></div>
                     </div>
 <!--                    饼图模块-->
-                    <div class="panel">
+                    <div class="panel small">
                         <h2>工行营业收入</h2>
 <!--                        饼图组件-->
                         <pieChart />
@@ -104,14 +104,14 @@
                         <div class="panel-footer"></div>
                     </div>
 <!--                    可配置模块-->
-                    <div class="panel">
+                    <div class="panel small">
                         <h2>四大行指标</h2>
 <!--                        可配置组件-->
                         <configChart />
                         <div class="panel-footer"></div>
                     </div>
 <!--                    列表模块-->
-                    <div class="panel">
+                    <div class="panel small">
                         <h2>17家全国性银行总资产规模</h2>
 <!--                        列表组件-->
                         <list />
@@ -243,13 +243,14 @@
 header{
     position: relative;
     height: 3.3rem;
+    /*width:1000px;*/
     /*border: 1px solid #ffe400;*/
     background: url(../assets/img/screen_img/head_bg.png) no-repeat top center;
     background-size: 100% 100%;
 }
 header h2{
     color: #7ef0ff;
-    font-size: 1.55rem;
+    font-size: 1.5rem;
     text-align: center;
     line-height: 2.55rem;
     letter-spacing: 1px;
@@ -264,7 +265,7 @@ header h2{
     /*display: flex;*/
     /*border: 1px solid #ffe400;*/
     .getTime{
-        font-size: 25px;
+        font-size: 20px;
         margin-right: 0.025rem;
     }
 }
@@ -274,13 +275,13 @@ header h2{
     top: 1rem;
     color: rgba(126, 240, 255, .7);
     .temperature{
-        font-size: 25px;
+        font-size: 20px;
     }
     span{
         /*border: 1px solid #ffe400;*/
     }
     img {
-        width: 1.5rem;
+        width: 1.3rem;
         /*border: 1px solid #ffe400;*/
     }
 }
@@ -293,16 +294,17 @@ header h2{
 .part{
     flex: 3;
     /*border: 1px solid #ffe400;*/
-    margin: 0 0.125rem 0.1rem;
+    margin: 0rem 0.125rem 0.1rem;
     &.middel{
         flex: 6;
-        margin: 0 0.125rem 0.1rem;
+        margin: 0px 0.125rem 0.1rem;
         overflow: hidden;
         .resume {
             /*border: 1px solid #ffe400;*/
+            /*visibility:hidden;*/
             background: rgba(101, 132, 226, 0.1);
             padding: 0.2rem 0.7rem;
-            margin:0rem 0.5rem;
+            margin:0.2rem 0.5rem;
             height: 4.5rem;
             .resume-hd{
                 position: relative;
@@ -377,8 +379,12 @@ header h2{
                 }
             }
         }
+
         .below{
-            height: 7.05rem;
+            height: 6.5rem;
+            width: 38rem;
+            margin-left: 6px;
+            /*margin:0px 5px 0px 5px;*/
         }
     }
     %map-style {
@@ -394,7 +400,7 @@ header h2{
     }
     .map_part{
         position: relative;
-        height: 20rem;
+        height: 19.45rem;
         /*border: 1px solid #ffe400;*/
         .map1 {
             @extend %map-style;
@@ -424,8 +430,8 @@ header h2{
     background: rgba(255, 255, 255, 0.04) url(../assets/img/screen_img/line.png);
     position: relative;
     height: 10rem;
-    margin-bottom:0.35rem;
     padding: 0.25rem;
+    margin-top: 8px;
     &:before {
         position: absolute;
         top: 0;
@@ -479,7 +485,37 @@ header h2{
         color: #fff;
         font-size: 0.7rem;
         font-weight: 400;
+        margin-top: 3px;
     }
+}
+
+/*.mapPanel{*/
+/*    color:#f7ffb4;*/
+/*    z-index:10;*/
+/*    position: fixed;*/
+/*    border: 2px solid rgba(15, 79, 153, 0.8);*/
+/*    !*background: rgba(255, 255, 255, 0.04) url(../assets/img/screen_img/line.png);*!*/
+/*    background-color: rgba(0, 20, 91, 0.8);*/
+
+/*    top:310px;*/
+/*    left:790px;*/
+/*    td{*/
+/*        !*border: 0.7px solid #FFC956;*!*/
+/*    }*/
+/*    .bank_name{*/
+/*        font-size: 18px;*/
+/*        text-align:center;*/
+/*        padding: 8px;*/
+/*    }*/
+/*    .title{*/
+/*        padding:5px 30px 0px 0px;*/
+/*        !*border: 0.7px solid #FFC956;*!*/
+/*        background-color: rgba(15, 79, 153, 0.8);*/
+/*    }*/
+/*}*/
+
+.small{
+    height: 9.5rem;
 }
 
 @-webkit-keyframes rotate {

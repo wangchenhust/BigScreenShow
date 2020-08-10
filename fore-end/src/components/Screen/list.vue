@@ -10,13 +10,13 @@
                     <td width="30%">
                         <span>2019年资产值（万亿）</span>
                     </td>
-                    <td width="30%">
+                    <td width="40%">
                         <span>2020年资产值（万亿）</span>
                     </td>
-                    <td width="12%">
-                        <span>增幅%</span>
-                    </td>
-                    <td width="12%">
+<!--                    <td width="12%">-->
+<!--                        <span>增幅%</span>-->
+<!--                    </td>-->
+                    <td width="14%">
                         <span>类型</span>
                     </td>
                 </tr>
@@ -30,16 +30,22 @@
                         <td width="100%" class="title">
                             <span>{{ item.title }}</span>
                         </td>
-                        <td width="28%">
+                        <td width="25%">
                             <span>{{ item.data2019 }}</span>
                         </td>
-                        <td width="28%">
+                        <td width="42%" class="data2020">
                             <span>{{ item.data2020 }}</span>
+                            <span class="incre" v-if="item.data2020>item.data2019" style="color: #FF4669"> {{ item.incre }}%</span>
+<!--                            <span class="incre" v-if="item.data2020==item.data2019" style="color: #FFC956"> {{ item.incre }}%</span>-->
+                            <span class="incre" v-if="item.data2020<item.data2019" style="color: #3acf3a"> {{ item.incre }}%</span>
+                            <img v-if="item.data2020>item.data2019" src="../../assets/img/screen_img/up.png" class="incrImg">
+                            <img v-if="item.data2020<item.data2019" src="../../assets/img/screen_img/down.png" class="downImg">
+                            <img v-if="item.data2020==item.data2019" src="../../assets/img/screen_img/noChange.png">
                         </td>
-                        <td width="12%" class="incre">
-                            <span>{{ item.incre }}</span>
-                        </td>
-                        <td width="12%">
+<!--                        <td width="12%" class="incre">-->
+<!--                            <span>{{ item.incre }}</span>-->
+<!--                        </td>-->
+                        <td width="14%">
                             <span>{{ item.type }}</span>
                         </td>
                     </tr>
@@ -59,110 +65,113 @@
                     title: '工商银行',
                     data2019:26.09,
                     data2020:27.70,
-                    incre:6.18,
-                    type: '国有'
+                     incre:6.18,
+                    type: '国有行'
                 }, {
                     title: '建设银行',
                     data2019:22.12,
                     data2020:23.22,
                     incre:4.96,
-                    type: '国有'
+                    type: '国有行'
                 }, {
                     title: '农业银行',
                     data2019:21.05,
-                    data2020:22.61,
-                    incre:7.39,
-                    type: '国有'
+                    data2020:21.05,
+                    incre:0,
+                    type: '国有行'
                 }, {
                     title: '中国银行',
                     data2019:26.09,
                     data2020:27.70,
                     incre:6.18,
-                    type: '国有'
+                    type: '国有行'
                 }, {
                     title: '交通银行',
                     data2019:26.09,
-                    data2020:27.70,
+                    data2020:25.70,
                     incre:6.18,
-                    type: '国有'
+                    type: '国有行'
                 }, {
                     title: '邮储银行',
                     data2019:26.09,
                     data2020:27.70,
                     incre:6.18,
-                    type: '国有'
+                    type: '国有行'
                 }, {
                     title: '招商银行',
                     data2019:26.09,
                     data2020:27.70,
                     incre:6.18,
-                    type: '股份'
+                    type: '股份行'
                 }, {
                     title: '兴业银行',
                     data2019:26.09,
                     data2020:27.70,
                     incre:6.18,
-                    type: '股份'
+                    type: '股份行'
                 }, {
                     title: '浦发银行',
                     data2019:26.09,
                     data2020:27.70,
                     incre:6.18,
-                    type: '股份'
+                    type: '股份行'
                 }, {
                     title: '中信银行',
                     data2019:26.09,
                     data2020:27.70,
                     incre:6.18,
-                    type: '股份'
+                    type: '股份行'
                 }, {
                     title: '民生银行',
                     data2019:26.09,
                     data2020:27.70,
                     incre:6.18,
-                    type: '股份'
+                    type: '股份行'
                 }, {
                     title: '光大银行',
                     data2019:26.09,
                     data2020:27.70,
                     incre:6.18,
-                    type: '股份'
+                    type: '股份行'
                 }, {
                     title: '平安银行',
                     data2019:26.09,
                     data2020:27.70,
                     incre:6.18,
-                    type: '股份'
+                    type: '股份行'
                 }, {
                     title: '华夏银行',
                     data2019:26.09,
                     data2020:27.70,
                     incre:6.18,
-                    type: '股份'
+                    type: '股份行'
                 },{
                     title: '广发银行',
                     data2019:26.09,
                     data2020:27.70,
                     incre:6.18,
-                    type: '股份'
+                    type: '股份行'
                 },{
                     title: '浙商银行',
                     data2019:26.09,
                     data2020:27.70,
                     incre:6.18,
-                    type: '股份'
+                    type: '股份行'
                 },{
                     title: '渤海银行',
                     data2019:26.09,
                     data2020:27.70,
                     incre:6.18,
-                    type: '股份'
+                    type: '股份行'
                 }]
             }
         },
         mounted() {
         },
         methods: {
+            getImg(){
+
+            }
         },
         computed: {
             optionSetting () {
@@ -212,6 +221,21 @@
                 }
                 .title{
                     color: #FFC956
+                }
+                .data2020{
+                    img{
+                        margin-top: -10px;
+                        width:10px;
+                        height: 20px;
+                    }
+                    .incrImg{
+                        width:15px;
+                        height: 20px;
+                    }
+                    .downImg{
+                        width:8px;
+                        height: 13px;
+                    }
                 }
             }
         }
