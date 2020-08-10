@@ -236,7 +236,7 @@ http://localhost:8088/GetData/{type}
 <h4>其中{type}可选的值有：</h4>
 > **Plane**仪表盘
 > 返回JSON数据示例：
->
+
 > [{"name":"核心资本充足率","value":14,"valuedate":"2020-01-01"},
 > {"name":"核心资本充足率","value":13,"valuedate":"2019-01-01"},
 > {"name":"核心资本充足率","value":13,"valuedate":"2018-01-01"},
@@ -287,6 +287,7 @@ http://localhost:8088/GetData/{type}
 
 > **Pie**饼图
 > 返回JSON数据示例：
+
 > [{"name":"利息净收入","value":590260,"valuedate":"2020-01-01"},
 > {"name":"利息净收入","value":570804,"valuedate":"2019-01-01"},
 > {"name":"利息净收入","value":524616,"valuedate":"2018-01-01"},
@@ -334,6 +335,7 @@ http://localhost:8088/GetData/{type}
 
 > **Line**折线图
 > JSON数据：
+
 > [{"name":"利息净收入","value":590260,"valuedate":"2020-01-01"},
 > {"name":"利息净收入","value":570804,"valuedate":"2019-01-01"},
 > {"name":"利息净收入","value":524616,"valuedate":"2018-01-01"},
@@ -387,6 +389,7 @@ http://localhost:8088/GetData/{type}
 
 > **Rada**雷达图
 > JSON数据：
+
 > [{"bank":"工商银行","name":"资本充足率","value":17},
 > {"bank":"农业银行","name":"资本充足率","value":16},
 > {"bank":"建设银行","name":"资本充足率","value":18},
@@ -438,6 +441,7 @@ http://localhost:8088/GetData/{type}
 
 > **CLine**可配置折线图
 > JSON数据：
+
 > [{"bank":"中国银行","name":"核心资本充足率","value":13},
 > {"bank":"中国银行","name":"资产利润率","value":2},
 > {"bank":"中国银行","name":"资本充足率","value":15},
@@ -473,6 +477,7 @@ http://localhost:8088/GetData/{type}
 
 > **CRada**可配置雷达图
 > 返回JSON数据示例：
+
 > [{"name":"工商银行","value":2},
 > {"name":"农业银行","value":1},
 > {"name":"建设银行","value":2},
@@ -492,6 +497,7 @@ http://localhost:8088/GetData/{type}
 
 > **MList**列表
 > 返回JSON数据：
+
 > [{"bank":"工商银行","growth_rate":9,"total_assets_2019":27699540,"total_assets_2020":30109436,"type":"国有行"},
 > {"bank":"农业银行","growth_rate":10,"total_assets_2019":22609471,"total_assets_2020":24878288,"type":"国有行"},
 > {"bank":"建设银行","growth_rate":10,"total_assets_2019":23222693,"total_assets_2020":25436261,"type":"国有行"},
