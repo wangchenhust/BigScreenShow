@@ -147,7 +147,7 @@ src
 
 轮播：2020年、2019年、2018年（未完成）
 
-<img src="./README_Image/threeDashboard.jpg"></img>
+<img src="./README_Image/info2.jpg"></img>
 
 **柱状图**
 

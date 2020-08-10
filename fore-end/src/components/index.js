@@ -18,6 +18,8 @@ import waterSphereChart from './Screen/waterSphereChart'
 import mapChart from './Screen/mapChart'
 import configChart from './Screen/configChart'
 import threeDashboards from "./Screen/threeDashboards";
+import threeDashboards1 from "./Screen/threeDashboards1";
+import threeDashboards2 from "./Screen/threeDashboards2";
 // =======
 // import configChart from './Screen/configChart'
 // >>>>>>> 5480cf94594c569991ffa5ef624aac07c991de19
@@ -42,6 +44,8 @@ const components = {
     mapChart,
     configChart,
     threeDashboards,
+    threeDashboards1,
+    threeDashboards2
 // =======
 //     configChart
 // >>>>>>> 5480cf94594c569991ffa5ef624aac07c991de19

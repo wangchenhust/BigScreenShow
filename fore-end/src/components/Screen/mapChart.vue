@@ -1,5 +1,29 @@
 <template>
     <div class="map-container">
+        <div class="mapPanel">
+            <table>
+                <tr>
+                    <td colspan="2" class="bank_name">工行广东省分行</td>
+                </tr>
+                <tr>
+                    <td class="title">经营利润</td>
+                    <td class="title">同比增长</td>
+                </tr>
+                <tr>
+                    <td>1000万</td>
+                    <td>8.60%</td>
+                </tr>
+                <tr>
+                    <td class="title">存款余额</td>
+                    <td class="title">同比增长</td>
+                </tr>
+                <tr>
+                    <td>10000万</td>
+                    <td>8.60%</td>
+                </tr>
+            </table>
+
+        </div>
         <div class="chart" id="chart_middel2"></div>
     </div>
 </template>
@@ -12,7 +36,7 @@
             return{
                 mapName : 'china',
                 data : [
-                    {name:"湖北",value:116},
+                    {name:"湖北",value:116,selected:true},
                     {name:"湖南",value:114},
                     {name:"重庆",value:91},
                     {name:"四川",value:125},
@@ -145,17 +169,19 @@
                         }
                     },
                         {
+                            name:'省份',
                             type: 'map',
                             map: this.mapName,
                             geoIndex: 0,
                             aspectScale: 0.75, //长宽比
                             showLegendSymbol: false, // 存在legend时显示
+                            // selectedMode : 'single',
                             label: {
                                 normal: {
                                     show: false
                                 },
                                 emphasis: {
-                                    show: false,
+                                    show: true,
                                     textStyle: {
                                         color: '#fff'
                                     }
@@ -168,7 +194,9 @@
                                     borderColor: '#3B5077',
                                 },
                                 emphasis: {
-                                    areaColor: '#2B91B7'
+                                    areaColor: '#2B91B7',
+                                    shadowBlur: 200,
+                                    shadowColor: 'rgba(0, 0, 0, 0.5)'
                                 }
                             },
                             animation: false,
@@ -205,8 +233,41 @@
                         },
 
                     ]
-                }
+                };
                 myChart.setOption(option);
+
+                myChart.dispatchAction({
+                    type: 'mapSelect',
+                    // 可选，系列 index，可以是一个数组指定多个系列
+                    // seriesIndex: 0,
+                    // 可选，系列名称，可以是一个数组指定多个系列
+                    // seriesName: string|Array,
+                    // 数据的 index，如果不指定也可以通过 name 属性根据名称指定数据
+                    // dataIndex: number,
+                    // 可选，数据名称，在有 dataIndex 的时候忽略
+                    seriesIndex: 0,//这行不能省
+                    data:this.data
+                });
+                // myChart.on('click', function(params) {
+                //     console.log(params);
+                // });
+                //
+                // setInterval(function(){
+                //     var op = myChart.getChart();
+                //     var data = op.series[1].data;
+                //
+                //     var length = data.length;
+                //
+                //     data.some(function(item, index){
+                //         if(item.selected){
+                //             item.selected = false;
+                //             var next = (index + 1)%length;
+                //             data[next].selected = true;
+                //             return true;
+                //         }
+                //     });
+                //     myChart.setOption(op);
+                // }, 5000);
             },
 
         }
@@ -226,4 +287,28 @@
         width: 100%;
         height: 100%;
     }
+    .mapPanel{
+        color:#ade3ff;
+        z-index:10;
+        position: fixed;
+        border: 2px solid rgba(15, 79, 153, 0.8);
+        /*background: rgba(255, 255, 255, 0.04) url(../assets/img/screen_img/line.png);*/
+        background-color: rgba(0, 20, 91, 0.8);
+
+        top:310px;
+        left:790px;
+        td{
+            /*border: 0.7px solid #FFC956;*/
+        }
+        .bank_name{
+            font-size: 18px;
+            padding: 8px;
+        }
+        .title{
+            padding:5px 30px 0px 0px;
+            /*border: 0.7px solid #FFC956;*/
+            background-color: rgba(15, 79, 153, 0.8);
+        }
+    }
+
 </style>
