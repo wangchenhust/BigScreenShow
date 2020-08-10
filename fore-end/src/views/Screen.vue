@@ -36,6 +36,7 @@
 <!--                        柱状图组件-->
 <!--                        <dashboard />-->
                         <threeDashboards />
+<!--                        <three-dashboards1 />-->
                         <div class="panel-footer"></div>
                     </div>
 <!--                    柱状图模块-->

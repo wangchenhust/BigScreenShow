@@ -7,23 +7,23 @@
 <script>
     import echarts from "echarts";
     export default {
-        name: "threeDashboards",
+        name: "threeDashboards2",
         data(){
             return{
                 option: null,
                 dataMap:{
                     //2018年
-                    2:[{ value: 7, name: "资本充足率" },
-                        { value: 66, name: "核心资本充足率" },
-                        { value: 89, name: "核心一级资本充足率" },],
+                    2:[{ value: 100,  name: '资本充足率' },
+                        { value: 60,  name: '核心资本充足率' },
+                        { value: 90,  name: '核心一级资本充足率' },],
                     //2019年
-                    1:[{ value: 40, name: "资本充足率" },
-                        { value: 3, name: "核心资本充足率" },
-                        { value: 79, name: "核心一级资本充足率" },],
+                    1:[{ value: 30,  name: '资本充足率' },
+                        { value: 40,  name: '核心资本充足率' },
+                        { value: 80,  name: '核心一级资本充足率' },],
                     //2020年
-                    0:[{ value: 6, name: "资本充足率" },
-                        { value: 46, name: "核心资本充足率" },
-                        { value: 4, name: "核心一级资本充足率" },],
+                    0:[{ value: 10,  name: '资本充足率' },
+                        { value: 20,  name: '核心资本充足率' },
+                        { value: 70,  name: '核心一级资本充足率' },],
                 }
             }
         },
@@ -36,39 +36,12 @@
         methods: {
             getChart(){
                 let myChart = echarts.init(document.getElementById('chart_xx'))
-                let color1 = new echarts.graphic.LinearGradient(0, 0, 1, 1, [
-                    {
-                        offset: 0,
-                        color: "#6afdb6"
-                    },
-                    {
-                        offset: 1,
-                        color: "#006ced"
-                    }
-                ]);
-                let color2 = new echarts.graphic.LinearGradient(0, 0, 1, 1, [
-                    {
-                        offset: 0,
-                        color: "#FF0066"
-                    },
-                    {
-                        offset: 1,
-                        color: "#990000"
-                    }
-                ]);
-                //资本充足率阈值
-                let threshold1 = 8;
-                //核心资本充足率阈值
-                let threshold2 = 4;
-                // //核心一级资本充足率阈值
-                let threshold3 = 5;
-
                 this.option ={
                     baseOption:{
                         timeline: {
                             axisType: 'category',
                             autoPlay: true,
-                            playInterval: 3000,//暂停时间3s
+                            playInterval: 4000,//暂停时间3s
                             data: ['2020', '2019', '2018'],
                             left: 80,
                             right: 80,
@@ -128,9 +101,33 @@
                                     lineStyle: {
                                         width: 10,
                                         color: [
-                                            [1, this.dataMap['0'][0].value >= threshold1 ? color1 : color2]
-                                        ]
-                                    }
+                                            [
+                                                this.dataMap['0'][0].value/100, new echarts.graphic.LinearGradient(
+                                                0, 1, 1, 0, [
+                                                    {
+                                                        offset: 0,
+                                                        color: 'rgba(255,0,0,1)',
+                                                    },
+                                                    {
+                                                        offset: 0.08,
+                                                        color: '#ffa800',
+                                                    },
+                                                    {
+                                                        offset: 0.1,
+                                                        color: 'rgba(239,232,17,1)',
+                                                    },
+                                                    {
+                                                        offset: 1,
+                                                        color: '#00ffff',
+                                                    }
+                                                ]
+                                            )
+                                            ],
+                                            [
+                                                1, 'rgba(255,255,255,.0)'
+                                            ]
+                                        ],
+                                    },
                                 },
                                 //分隔线样式。
                                 splitLine: {
@@ -163,8 +160,7 @@
                                     color: "#ffffff",
                                     textStyle: {
                                         fontSize:30,
-                                        // color: "#00ffff",
-                                        color: this.dataMap['0'][0].value >= threshold1 ? "#00ffff" : "red",
+                                        color: "#00ffff",
                                     },
                                     formatter: function(value) {
                                         return value + '{a|}';
@@ -237,11 +233,35 @@
                                 axisLine: {
                                     show: true,
                                     lineStyle: {
-                                        width: 10,
+                                        width: 8,
                                         color: [
-                                            [1, this.dataMap['0'][1].value >= threshold2 ? color1 : color2]
-                                        ]
-                                    }
+                                            [
+                                                this.dataMap['0'][1].value/100, new echarts.graphic.LinearGradient(
+                                                0, 1, 1, 0, [
+                                                    {
+                                                        offset: 0,
+                                                        color: 'rgba(255,0,0,1)',
+                                                    },
+                                                    {
+                                                        offset: 0.08,
+                                                        color: '#ffa800',
+                                                    },
+                                                    {
+                                                        offset: 0.1,
+                                                        color: 'rgba(239,232,17,1)',
+                                                    },
+                                                    {
+                                                        offset: 1,
+                                                        color: '#00ffff',
+                                                    }
+                                                ]
+                                            )
+                                            ],
+                                            [
+                                                1, 'rgba(255,255,255,.0)'
+                                            ]
+                                        ],
+                                    },
                                 },
                                 //分隔线样式。
                                 splitLine: {
@@ -274,7 +294,7 @@
                                     color: "#ffffff",
                                     textStyle: {
                                         fontSize:15,
-                                        color: this.dataMap['0'][1].value >= threshold2 ? "#00ffff" : "red"
+                                        color: "#00ffff"
                                     },
                                     formatter: function(value) {
                                         return value + '{a|}';
@@ -349,11 +369,35 @@
                                 axisLine: {
                                     show: true,
                                     lineStyle: {
-                                        width: 10,
+                                        width: 8,
                                         color: [
-                                            [1, this.dataMap['0'][2].value >= threshold3 ? color1 : color2]
-                                        ]
-                                    }
+                                            [
+                                                this.dataMap['0'][2].value/100, new echarts.graphic.LinearGradient(
+                                                0, 1, 1, 0, [
+                                                    {
+                                                        offset: 0,
+                                                        color: 'rgba(255,0,0,1)',
+                                                    },
+                                                    {
+                                                        offset: 0.1,
+                                                        color: '#ffa800',
+                                                    },
+                                                    {
+                                                        offset: 0.2,
+                                                        color: 'rgba(239,232,17,1)',
+                                                    },
+                                                    {
+                                                        offset: 1,
+                                                        color: '#00ffff',
+                                                    }
+                                                ]
+                                            )
+                                            ],
+                                            [
+                                                1, 'rgba(255,255,255,.0)'
+                                            ]
+                                        ],
+                                    },
                                 },
                                 //分隔线样式。
                                 splitLine: {
@@ -386,7 +430,7 @@
                                     color: "#ffffff",
                                     textStyle: {
                                         fontSize:15,
-                                        color: this.dataMap['0'][2].value >= threshold3 ? "#00ffff" : "red"
+                                        color: "#00ffff"
                                     },
                                     formatter: function(value) {
                                         return value + '{a|}';
@@ -402,68 +446,7 @@
                             },
                         ],
                     },
-                    options: [
-                        {//2020
-                        series: [
-                            {//中间进度条
-                                axisLine: {
-                                    show: true,
-                                    lineStyle: {
-                                        width: 10,
-                                        color: [
-                                            [1, this.dataMap['0'][0].value >= threshold1 ? color1 : color2]
-                                        ]
-                                    }
-                                },
-                                detail:{
-                                    textStyle: {
-                                        fontSize:30,
-                                        // color: "#00ffff",
-                                        color: this.dataMap['0'][0].value >= threshold1 ? "#00ffff" : "red",
-                                    },
-                                },
-                                data: [this.dataMap['0'][0]],
-                            }, {},
-                            {//左进度条
-                                axisLine: {
-                                    show: true,
-                                    lineStyle: {
-                                        width: 10,
-                                        color: [
-                                            [1, this.dataMap['0'][1].value >= threshold2 ? color1 : color2]
-                                        ]
-                                    }
-                                },
-                                detail:{
-                                    textStyle: {
-                                        fontSize:30,
-                                        // color: "#00ffff",
-                                        color: this.dataMap['0'][1].value >= threshold2 ? "#00ffff" : "red",
-                                    },
-                                },
-                                data: [this.dataMap['0'][1]],
-                            },{},
-                            {//右进度条
-                                axisLine: {
-                                    show: true,
-                                    lineStyle: {
-                                        width: 10,
-                                        color: [
-                                            [1, this.dataMap['0'][2].value >= threshold3 ? color1 : color2]
-                                        ]
-                                    }
-                                },
-                                detail:{
-                                    textStyle: {
-                                        fontSize:30,
-                                        // color: "#00ffff",
-                                        color: this.dataMap['0'][2].value >= threshold3? "#00ffff" : "red",
-                                    },
-                                },
-                                data: [this.dataMap['0'][2]],
-                            }
-                        ]
-                    },{//2019
+                    options: [{
                         series: [
                             {
                                 axisLine: {
@@ -471,15 +454,141 @@
                                     lineStyle: {
                                         width: 10,
                                         color: [
-                                            [1, this.dataMap['1'][0].value >= threshold1 ? color1 : color2]
-                                        ]
-                                    }
+                                            [
+                                                this.dataMap['0'][0].value/100, new echarts.graphic.LinearGradient(
+                                                0, 1, 1, 0, [
+                                                    {
+                                                        offset: 0,
+                                                        color: 'rgba(255,0,0,1)',
+                                                    },
+                                                    {
+                                                        offset: 0.08,
+                                                        color: '#ffa800',
+                                                    },
+                                                    {
+                                                        offset: 0.1,
+                                                        color: 'rgba(239,232,17,1)',
+                                                    },
+                                                    {
+                                                        offset: 1,
+                                                        color: '#00ffff',
+                                                    }
+                                                ]
+                                            )
+                                            ],
+                                            [
+                                                1, 'rgba(255,255,255,.0)'
+                                            ]
+                                        ],
+                                    },
                                 },
-                                detail:{
-                                    textStyle: {
-                                        fontSize:30,
-                                        // color: "#00ffff",
-                                        color: this.dataMap['1'][0].value >= threshold1 ? "#00ffff" : "red",
+                                data: [this.dataMap['0'][0]],
+                            },{},{
+                                axisLine: {
+                                    show: true,
+                                    lineStyle: {
+                                        width: 10,
+                                        color: [
+                                            [
+                                                this.dataMap['0'][1].value/100, new echarts.graphic.LinearGradient(
+                                                0, 1, 1, 0, [
+                                                    {
+                                                        offset: 0,
+                                                        color: 'rgba(255,0,0,1)',
+                                                    },
+                                                    {
+                                                        offset: 0.08,
+                                                        color: '#ffa800',
+                                                    },
+                                                    {
+                                                        offset: 0.1,
+                                                        color: 'rgba(239,232,17,1)',
+                                                    },
+                                                    {
+                                                        offset: 1,
+                                                        color: '#00ffff',
+                                                    }
+                                                ]
+                                            )
+                                            ],
+                                            [
+                                                1, 'rgba(255,255,255,.0)'
+                                            ]
+                                        ],
+                                    },
+                                },
+                                data: [this.dataMap['0'][1]],
+                            },{},{
+                                axisLine: {
+                                    show: true,
+                                    lineStyle: {
+                                        width: 10,
+                                        color: [
+                                            [
+                                                this.dataMap['0'][2].value/100, new echarts.graphic.LinearGradient(
+                                                0, 1, 1, 0, [
+                                                    {
+                                                        offset: 0,
+                                                        color: 'rgba(255,0,0,1)',
+                                                    },
+                                                    {
+                                                        offset: 0.08,
+                                                        color: '#ffa800',
+                                                    },
+                                                    {
+                                                        offset: 0.1,
+                                                        color: 'rgba(239,232,17,1)',
+                                                    },
+                                                    {
+                                                        offset: 1,
+                                                        color: '#00ffff',
+                                                    }
+                                                ]
+                                            )
+                                            ],
+                                            [
+                                                1, 'rgba(255,255,255,.0)'
+                                            ]
+                                        ],
+                                    },
+                                },
+                                data: [this.dataMap['0'][2]],
+                            }
+                        ]
+                    },{
+                        series: [
+                            {
+                                axisLine: {
+                                    show: true,
+                                    lineStyle: {
+                                        width: 10,
+                                        color: [
+                                            [
+                                                this.dataMap['1'][0].value/100, new echarts.graphic.LinearGradient(
+                                                0, 1, 1, 0, [
+                                                    {
+                                                        offset: 0,
+                                                        color: 'rgba(255,0,0,1)',
+                                                    },
+                                                    {
+                                                        offset: 0.08,
+                                                        color: '#ffa800',
+                                                    },
+                                                    {
+                                                        offset: 0.1,
+                                                        color: 'rgba(239,232,17,1)',
+                                                    },
+                                                    {
+                                                        offset: 1,
+                                                        color: '#00ffff',
+                                                    }
+                                                ]
+                                            )
+                                            ],
+                                            [
+                                                1, 'rgba(255,255,255,.0)'
+                                            ]
+                                        ],
                                     },
                                 },
                                 data: [this.dataMap['1'][0]],
@@ -489,15 +598,32 @@
                                     lineStyle: {
                                         width: 10,
                                         color: [
-                                            [1, this.dataMap['1'][1].value >= threshold2 ? color1 : color2]
-                                        ]
-                                    }
-                                },
-                                detail:{
-                                    textStyle: {
-                                        fontSize:30,
-                                        // color: "#00ffff",
-                                        color: this.dataMap['1'][1].value >= threshold2 ? "#00ffff" : "red",
+                                            [
+                                                this.dataMap['1'][1].value/100, new echarts.graphic.LinearGradient(
+                                                0, 1, 1, 0, [
+                                                    {
+                                                        offset: 0,
+                                                        color: 'rgba(255,0,0,1)',
+                                                    },
+                                                    {
+                                                        offset: 0.08,
+                                                        color: '#ffa800',
+                                                    },
+                                                    {
+                                                        offset: 0.1,
+                                                        color: 'rgba(239,232,17,1)',
+                                                    },
+                                                    {
+                                                        offset: 1,
+                                                        color: '#00ffff',
+                                                    }
+                                                ]
+                                            )
+                                            ],
+                                            [
+                                                1, 'rgba(255,255,255,.0)'
+                                            ]
+                                        ],
                                     },
                                 },
                                 data: [this.dataMap['1'][1]],
@@ -507,21 +633,38 @@
                                     lineStyle: {
                                         width: 10,
                                         color: [
-                                            [1, this.dataMap['1'][2].value >= threshold3 ? color1 : color2]
-                                        ]
-                                    }
-                                },
-                                detail:{
-                                    textStyle: {
-                                        fontSize:30,
-                                        // color: "#00ffff",
-                                        color: this.dataMap['1'][2].value >= threshold3 ? "#00ffff" : "red",
+                                            [
+                                                this.dataMap['1'][2].value/100, new echarts.graphic.LinearGradient(
+                                                0, 1, 1, 0, [
+                                                    {
+                                                        offset: 0,
+                                                        color: 'rgba(255,0,0,1)',
+                                                    },
+                                                    {
+                                                        offset: 0.08,
+                                                        color: '#ffa800',
+                                                    },
+                                                    {
+                                                        offset: 0.1,
+                                                        color: 'rgba(239,232,17,1)',
+                                                    },
+                                                    {
+                                                        offset: 1,
+                                                        color: '#00ffff',
+                                                    }
+                                                ]
+                                            )
+                                            ],
+                                            [
+                                                1, 'rgba(255,255,255,.0)'
+                                            ]
+                                        ],
                                     },
                                 },
                                 data: [this.dataMap['1'][2]],
                             }
                         ]
-                    },{//2018
+                    },{
                         series: [
                             {
                                 axisLine: {
@@ -529,15 +672,32 @@
                                     lineStyle: {
                                         width: 10,
                                         color: [
-                                            [1, this.dataMap['2'][0].value >= threshold1 ? color1 : color2]
-                                        ]
-                                    }
-                                },
-                                detail:{
-                                    textStyle: {
-                                        fontSize:30,
-                                        // color: "#00ffff",
-                                        color: this.dataMap['2'][0].value >= threshold1 ? "#00ffff" : "red",
+                                            [
+                                                this.dataMap['2'][0].value/100, new echarts.graphic.LinearGradient(
+                                                0, 1, 1, 0, [
+                                                    {
+                                                        offset: 0,
+                                                        color: 'rgba(255,0,0,1)',
+                                                    },
+                                                    {
+                                                        offset: 0.08,
+                                                        color: '#ffa800',
+                                                    },
+                                                    {
+                                                        offset: 0.1,
+                                                        color: 'rgba(239,232,17,1)',
+                                                    },
+                                                    {
+                                                        offset: 1,
+                                                        color: '#00ffff',
+                                                    }
+                                                ]
+                                            )
+                                            ],
+                                            [
+                                                1, 'rgba(255,255,255,.0)'
+                                            ]
+                                        ],
                                     },
                                 },
                                 data: [this.dataMap['2'][0]],
@@ -547,15 +707,32 @@
                                     lineStyle: {
                                         width: 10,
                                         color: [
-                                            [1, this.dataMap['2'][1].value >= threshold2 ? color1 : color2]
-                                        ]
-                                    }
-                                },
-                                detail:{
-                                    textStyle: {
-                                        fontSize:30,
-                                        // color: "#00ffff",
-                                        color: this.dataMap['2'][1].value >= threshold2 ? "#00ffff" : "red",
+                                            [
+                                                this.dataMap['2'][1].value/100, new echarts.graphic.LinearGradient(
+                                                0, 1, 1, 0, [
+                                                    {
+                                                        offset: 0,
+                                                        color: 'rgba(255,0,0,1)',
+                                                    },
+                                                    {
+                                                        offset: 0.08,
+                                                        color: '#ffa800',
+                                                    },
+                                                    {
+                                                        offset: 0.1,
+                                                        color: 'rgba(239,232,17,1)',
+                                                    },
+                                                    {
+                                                        offset: 1,
+                                                        color: '#00ffff',
+                                                    }
+                                                ]
+                                            )
+                                            ],
+                                            [
+                                                1, 'rgba(255,255,255,.0)'
+                                            ]
+                                        ],
                                     },
                                 },
                                 data: [this.dataMap['2'][1]],
@@ -565,15 +742,32 @@
                                     lineStyle: {
                                         width: 10,
                                         color: [
-                                            [1, this.dataMap['2'][2].value >= threshold3 ? color1 : color2]
-                                        ]
-                                    }
-                                },
-                                detail:{
-                                    textStyle: {
-                                        fontSize:30,
-                                        // color: "#00ffff",
-                                        color: this.dataMap['2'][2].value >= threshold3 ? "#00ffff" : "red",
+                                            [
+                                                this.dataMap['2'][2].value/100, new echarts.graphic.LinearGradient(
+                                                0, 1, 1, 0, [
+                                                    {
+                                                        offset: 0,
+                                                        color: 'rgba(255,0,0,1)',
+                                                    },
+                                                    {
+                                                        offset: 0.08,
+                                                        color: '#ffa800',
+                                                    },
+                                                    {
+                                                        offset: 0.1,
+                                                        color: 'rgba(239,232,17,1)',
+                                                    },
+                                                    {
+                                                        offset: 1,
+                                                        color: '#00ffff',
+                                                    }
+                                                ]
+                                            )
+                                            ],
+                                            [
+                                                1, 'rgba(255,255,255,.0)'
+                                            ]
+                                        ],
                                     },
                                 },
                                 data: [this.dataMap['2'][2]],
