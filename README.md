@@ -236,20 +236,18 @@ http://localhost:8088/GetData/{type}
 <h4>其中{type}可选的值有：</h4>
 ==Plane==仪表盘
 返回JSON数据示例：
-$$
-[{"name":"核心资本充足率","value":14,"valuedate":"2020-01-01"},
-{"name":"核心资本充足率","value":13,"valuedate":"2019-01-01"},
-{"name":"核心资本充足率","value":13,"valuedate":"2018-01-01"},
-{"name":"资本充足率","value":17,"valuedate":"2020-01-01"},
-{"name":"资本充足率","value":15,"valuedate":"2019-01-01"},
-{"name":"资本充足率","value":15,"valuedate":"2018-01-01"},
-{"name":"核心一级资本充足率","value":13,"valuedate":"2020-01-01"},
-{"name":"核心一级资本充足率","value":13,"valuedate":"2019-01-01"},
-{"name":"核心一级资本充足率","value":13,"valuedate":"2018-01-01"}]
-$$
-可视化数据：
 
 可视化数据：
+
+> [{"name":"核心资本充足率","value":14,"valuedate":"2020-01-01"},
+> {"name":"核心资本充足率","value":13,"valuedate":"2019-01-01"},
+> {"name":"核心资本充足率","value":13,"valuedate":"2018-01-01"},
+> {"name":"资本充足率","value":17,"valuedate":"2020-01-01"},
+> {"name":"资本充足率","value":15,"valuedate":"2019-01-01"},
+> {"name":"资本充足率","value":15,"valuedate":"2018-01-01"},
+> {"name":"核心一级资本充足率","value":13,"valuedate":"2020-01-01"},
+> {"name":"核心一级资本充足率","value":13,"valuedate":"2019-01-01"},
+> {"name":"核心一级资本充足率","value":13,"valuedate":"2018-01-01"}]
 
 ```
 +--------------------+-------+------------+
