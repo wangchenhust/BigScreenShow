@@ -5,7 +5,7 @@ import router from './router'
 import ElementUI from 'element-ui'
 import 'element-ui/lib/theme-chalk/index.css'
 import axios from 'axios'
-import store from './store/index.js'
+import store from './store'
 import request from './assets/js/request.js'
 //引入中国地图
 import china from 'echarts/map/json/china.json'
@@ -29,7 +29,7 @@ Vue.use(ElementUI);
 Vue.config.productionTip = false
 Vue.prototype.$echarts = echarts
 Vue.prototype.$axios = axios
-Vue.prototype.$store = store
+//Vue.prototype.$store = store
 Vue.prototype.$H = request
 
 //根据路由设置title

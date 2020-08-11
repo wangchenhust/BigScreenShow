@@ -6,6 +6,7 @@
 
 <script>
     import echarts from "echarts";
+    import { mapGetters,mapState } from 'vuex'
 
     export default {
         name: "pieChart",
@@ -14,19 +15,40 @@
                 color:['#00ffff', '#00cfff', '#006ced',
                     '#ffe000', '#ffa800', '#ff5b00', '#ff3000'],
                 names:['利息','投资收益','公允价值变动损益','手续费佣金收入','其他业务收入','汇总收益'],
-                values:[5,10,10,10,5,5],
-                list :[]
+                list :[],
+                myCharts:null,
+                option:null
             }
         },
         computed: {
-
+            ...mapGetters({
+                getValues:'pie/getValues'
+                // ...
+            }),
+            ...mapState([
+                'pie/values'
+            ])
+        },
+        watch:{
+            getValues:{
+                handler(newVal,oldVal) {// eslint-disable-line no-unused-vars
+                    this.values=newVal
+                    this.setList()
+                    this.setOption()
+                }
+            }
         },
         mounted() {
+            console.log(this.getValues)
+            this.values=this.getValues;
             this.setList();
             this.getChart();
+            this.setOption();
+            this.timer();
         },
         methods: {
             setList(){
+                this.list.length=0
                 let placeHolderStyle = {
                     normal: {
                         label: {
@@ -61,14 +83,16 @@
                 }
             },
             getChart(){
-                var myChart = echarts.init(document.getElementById('chart_left2'))
+                this.myChart = echarts.init(document.getElementById('chart_left2'))
+            },
+            setOption(){
                 let rich = {
                     white: {
                         align: 'center',
                         padding: [3, 0]
                     }
                 };
-                var option ={
+                this.option ={
                     tooltip: {
                         show: false
                     },
@@ -116,8 +140,14 @@
                             return idx * 50;
                         }
                     }]
+
                 }
-                myChart.setOption(option);
+                this.myChart.setOption(this.option,true);
+            },
+            timer() {
+                return setInterval(() => {
+                    this.$store.commit('pie/setValues',[51,10,10,10,5,5])
+                }, 10000)
             }
         }
     }
