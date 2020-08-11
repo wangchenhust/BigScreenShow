@@ -21,5 +21,7 @@ public interface GetData {
 	public String getCRadaData();
 	
 	public String getMListData();
+	
+	public String getMMapData();
 
 }

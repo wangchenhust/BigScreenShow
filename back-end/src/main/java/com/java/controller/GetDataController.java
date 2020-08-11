@@ -34,6 +34,8 @@ public class GetDataController {
 			return getDataImpl.getCRadaData();
 		case "MList":
 			return getDataImpl.getMListData();
+		case "MMap":
+			return getDataImpl.getMMapData();
 		default:
 			return null;
 		}

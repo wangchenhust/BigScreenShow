@@ -121,6 +121,18 @@
 		banks.id=ev1.bid and banks.id=ev2.bid and banks.id=ev3.bid and banks.tid=bt.id;
 	</select>
 
-
+	<!-- 地图查询语句（已优化） -->
+	<select id="getMMapData" resultType="com.java.pojo.MMap">
+		select bb.NAME province,mv1.VALUE jylr,CAST(mv2.VALUE AS DECIMAL(3,0))
+		jylrtbzzl,mv3.VALUE ckye,CAST(mv4.VALUE AS DECIMAL(3,0)) ckyetbzzl
+		from
+		(select VALUE,bbid from mapvalues where did=26) mv1,
+		(select VALUE,bbid from mapvalues where did=27) mv2,
+		(select VALUE,bbid from mapvalues where did=28) mv3,
+		(select VALUE,bbid from mapvalues where did=29) mv4,
+		branchbanks bb
+		where bb.id=mv1.bbid and bb.id=mv2.bbid and bb.id=mv3.bbid and
+		bb.id=mv4.bbid;
+	</select>
 
 </mapper>

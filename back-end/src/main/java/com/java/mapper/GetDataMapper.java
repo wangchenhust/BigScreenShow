@@ -9,6 +9,7 @@ import com.java.pojo.CLine;
 import com.java.pojo.CRada;
 import com.java.pojo.Line;
 import com.java.pojo.MList;
+import com.java.pojo.MMap;
 import com.java.pojo.Panel;
 import com.java.pojo.Pie;
 import com.java.pojo.Rada;
@@ -31,4 +32,6 @@ public interface GetDataMapper {
 	public List<CRada> getCRadaData();
 	
 	public List<MList> getMListData(); 
+	
+	public List<MMap> getMMapData();
 }
