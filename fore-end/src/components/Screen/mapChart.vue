@@ -3,27 +3,27 @@
         <div class="mapPanel">
             <table>
                 <tr>
-                    <td colspan="2" class="bank_name">工行广东省分行</td>
+                    <td colspan="2" class="bank_name">{{bankName}}</td>
                 </tr>
                 <tr>
                     <td class="title">经营利润</td>
                     <td class="title">同比增长</td>
                 </tr>
                 <tr>
-                    <td>1000万</td>
-                    <td>8.60%</td>
+                    <td class="profit">{{profit}}万</td>
+                    <td class="profitIncre">{{profitIncre}}%</td>
                 </tr>
                 <tr>
                     <td class="title">存款余额</td>
                     <td class="title">同比增长</td>
                 </tr>
                 <tr>
-                    <td>10000万</td>
-                    <td>8.60%</td>
+                    <td class="save">{{save}}万</td>
+                    <td class="saveIncre">{{saveIncre}}%</td>
                 </tr>
             </table>
-
         </div>
+
         <div class="chart" id="chart_middel2"></div>
     </div>
 </template>
@@ -34,9 +34,10 @@
         name: "mapChart",
         data(){
             return{
+                //地图
                 mapName : 'china',
                 data : [
-                    {name:"湖北",value:116,selected:true},
+                    {name:"湖北",value:116},
                     {name:"湖南",value:114},
                     {name:"重庆",value:91},
                     {name:"四川",value:125},
@@ -85,7 +86,13 @@
                     "海南": [110.3893, 19.8516],
                     '上海': [121.4648, 31.2891],
 
-                }
+                },
+                //详情框
+                profit:0,
+                profitIncre:0,
+                save:0,
+                saveIncre:0,
+                bankName:'工行'
             }
         },
         computed: {
@@ -110,17 +117,41 @@
             },
             getChart(){
                 var myChart = echarts.init(document.getElementById('chart_middel2'));
-
+                var data = [
+                    {name:"湖北",value:116},
+                    {name:"湖南",value:114},
+                    {name:"重庆",value:91},
+                    {name:"四川",value:125},
+                    {name:"贵州",value:62},
+                    {name:"云南",value:83},
+                    {name:"西藏",value:9},
+                    {name:"陕西",value:80},
+                    {name:"甘肃",value:56},
+                    {name:"青海",value:10},
+                    {name:"宁夏",value:18},
+                    {name:"新疆",value:180},
+                    {name:"广东",value:123},
+                    {name:"广西",value:59}
+                ];
                 var option = {
                     // backgroundColor: 'rgba(0, 10, 52, 1)',
                     tooltip: {//小浮框
-                        padding: 0,
-                        enterable: true,
-                        transitionDuration: 1,
+                        // show:false,
+                        trigger: "item",
                         textStyle: {
                             color: "#fff",
-                            decoration: 'none',
                         },
+                        formatter: function(params){
+                            var toolTiphtml = '';
+                            for(var i = 0;i<data.length;i++){
+                                if(params.name==data[i].name){
+                                    toolTiphtml+=params.name+'省分行的经营利润:<br>'+
+                                        data[i].value;
+                                    break;
+                                }
+                            }
+                            return toolTiphtml;
+                        }
                     },
                     geo: {//地图
                         map: this.mapName,
@@ -145,7 +176,8 @@
                             }
                         }
                     },
-                    series: [{
+                    series: [
+                        {
                         name: '散点值',
                         type: 'scatter',
                         coordinateSystem: 'geo',
@@ -175,7 +207,7 @@
                             geoIndex: 0,
                             aspectScale: 0.75, //长宽比
                             showLegendSymbol: false, // 存在legend时显示
-                            // selectedMode : 'single',
+                            selectedMode : 'single',
                             label: {
                                 normal: {
                                     show: false
@@ -200,7 +232,7 @@
                                 }
                             },
                             animation: false,
-                            data: this.data
+                            data: this.convertData(this.data)
                         },
                         {
                             name: '黄点',
@@ -231,43 +263,107 @@
                             },
                             zlevel: 1
                         },
-
+                        {
+                            name: '点',
+                            type: 'scatter',
+                            coordinateSystem: 'geo',
+                            symbol: 'pin',
+                            symbolSize: [50,50],
+                            label: {
+                                normal: {
+                                    show: true,
+                                    textStyle: {
+                                        color: '#fff',
+                                        fontSize: 9,
+                                    },
+                                    formatter (value){
+                                        return value.data.value[2]
+                                    }
+                                }
+                            },
+                            itemStyle: {
+                                normal: {
+                                    color: '#F62157', //标志颜色
+                                }
+                            },
+                            showEffectOn: 'render',
+                            rippleEffect: {
+                                brushType: 'stroke'
+                            },
+                            hoverAnimation: true,
+                            zlevel: 6,
+                            data: []//this.convertData([data[0]]),
+                        },
                     ]
                 };
                 myChart.setOption(option);
 
-                myChart.dispatchAction({
-                    type: 'mapSelect',
-                    // 可选，系列 index，可以是一个数组指定多个系列
-                    // seriesIndex: 0,
-                    // 可选，系列名称，可以是一个数组指定多个系列
-                    // seriesName: string|Array,
-                    // 数据的 index，如果不指定也可以通过 name 属性根据名称指定数据
-                    // dataIndex: number,
-                    // 可选，数据名称，在有 dataIndex 的时候忽略
-                    seriesIndex: 0,//这行不能省
-                    data:this.data
-                });
-                // myChart.on('click', function(params) {
-                //     console.log(params);
-                // });
-                //
-                // setInterval(function(){
-                //     var op = myChart.getChart();
-                //     var data = op.series[1].data;
-                //
-                //     var length = data.length;
-                //
-                //     data.some(function(item, index){
-                //         if(item.selected){
-                //             item.selected = false;
-                //             var next = (index + 1)%length;
-                //             data[next].selected = true;
-                //             return true;
-                //         }
+
+                var currentIndex = -1;
+                var timer = setInterval(()=>{   // eslint-disable-line no-unused-vars
+                    var dataLen = option.series[1].data.length;
+                    // 取消之前高亮的图形
+                    myChart.dispatchAction({
+                        type: 'downplay',
+                        seriesIndex: 0
+                    });
+                    currentIndex = (currentIndex + 1) % dataLen;
+
+                    // 显示 tooltip
+                    // myChart.dispatchAction({
+                    //     type: 'showTip',
+                    //     seriesIndex: 0,
+                    //     dataIndex: currentIndex
+                    // });
+
+                    myChart.dispatchAction({
+                        type: 'geoSelect',          //选中指定的地图区域。
+                        seriesIndex: 0,  // 可选，系列 index，可以是一个数组指定多个系列
+                        dataIndex: currentIndex,          // 数据的 index，如果不指定也可以通过 name 属性根据名称指定数据
+                    });
+
+                   //更改红色圈位置
+                    myChart.setOption({
+                        series:[
+                            {},{},{},
+                            {
+                                data:this.convertData([data[currentIndex]])
+                            }
+                        ]
+                    });
+                    this.profit=data[currentIndex].value;
+                    this.profitIncre=data[currentIndex].value/200;
+                    this.save=data[currentIndex].value*10;
+                    this.saveIncre=data[currentIndex].value/200;
+                    this.bankName="工行"+data[currentIndex].name+"省分行"
+                }, 3000);
+
+
+                // // 动态显示tooptip，每隔3秒去提示
+                // var faultByHourIndex = 0; //播放所在下标
+                // var faultByHourTime = setInterval(function() {// eslint-disable-line no-unused-vars
+                //     //使得tootip每隔三秒自动显示
+                //     myChart.dispatchAction({
+                //         type: "downplay",
+                //         seriesIndex: 0,
                 //     });
-                //     myChart.setOption(op);
-                // }, 5000);
+                //     myChart.dispatchAction({
+                //         type: "highlight",
+                //         seriesIndex: 0,
+                //         dataIndex: this.data
+                //     });
+                //     myChart.dispatchAction({
+                //         type: "showTip", // 根据 tooltip 的配置项显示提示框。
+                //         seriesIndex: 0,
+                //         dataIndex: faultByHourIndex
+                //     });
+                //     faultByHourIndex = (faultByHourIndex + 1) % this.getChart();
+                //     // faultRateOption.series[0].data.length 是已报名纵坐标数据的长度
+                //     faultByHourIndex++;
+                //     if (faultByHourIndex > this.data.length) {
+                //         faultByHourIndex = 0;
+                //     }
+                // }, 3000);
             },
 
         }

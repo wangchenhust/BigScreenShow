@@ -48,7 +48,7 @@
                     </div>
 <!--                    饼图模块-->
                     <div class="panel small">
-                        <h2>工行营业收入</h2>
+                        <h2>工行营业收入构成</h2>
 <!--                        饼图组件-->
                         <pieChart />
                         <div class="panel-footer"></div>
@@ -80,6 +80,7 @@
                     <div class="map_part">
 <!--                        地图-->
                         <mapChart />
+<!--                        <model />-->
 <!--                        地图详情-->
 <!--                        <div class="chart" id="chart_map"></div>-->
 <!--                        地图背景图片-->
