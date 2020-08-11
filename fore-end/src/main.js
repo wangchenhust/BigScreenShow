@@ -31,6 +31,7 @@ Vue.prototype.$echarts = echarts
 Vue.prototype.$axios = axios
 //Vue.prototype.$store = store
 Vue.prototype.$H = request
+Vue.prototype.bus = new Vue()
 
 //根据路由设置title
 router.beforeEach((to, from, next) => {

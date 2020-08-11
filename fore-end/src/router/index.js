@@ -5,11 +5,11 @@ Vue.use(Router)
 
 const routes = [
     {
-        path: '/',
-        name: 'HelloWorld',
-        component: () => import('@/components/HelloWorld/index.vue'),
+        path: '/config',
+        name: 'config',
+        component: () => import('@/components/config/index.vue'),
         meta: {
-            title: 'vue首页'
+            title: '配置页'
         }
     },
     {
