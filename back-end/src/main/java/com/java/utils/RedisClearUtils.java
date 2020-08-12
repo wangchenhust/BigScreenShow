@@ -54,8 +54,8 @@ public class RedisClearUtils {
 	/*
 	 * 删除列表缓存
 	 * */
-	@CacheEvict(cacheNames = "List",allEntries = true)
-	public void delListCache() {}
+	@CacheEvict(cacheNames = "MList",allEntries = true)
+	public void delMListCache() {}
 	
 	/*
 	 * 删除地图缓存

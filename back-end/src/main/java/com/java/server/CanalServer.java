@@ -1,6 +1,8 @@
 package com.java.server;
 
 import java.util.Map;
+
+import org.eclipse.jdt.internal.compiler.ast.AND_AND_Expression;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,7 +39,7 @@ public class CanalServer implements EntryHandler<Map<String, String>> {
     	if(!canal.getDatabase().equals("bigscreen"))return;
     	log.info("更新前：{}更新后：{}",before,after);
     	//sse根据类型群发
-    	batchMessage(canal, before);
+    	batchMessage(canal, after);
 
     }
     
@@ -60,20 +62,42 @@ public class CanalServer implements EntryHandler<Map<String, String>> {
 			SseEmitterServer.batchSendMessage(getDataImpl.getPieData(),"pievalues");
 			break;
 		case "barvalues":
+			redisClearUtils.delBarCache();
+			SseEmitterServer.batchSendMessage(getDataImpl.getBarData(), "barvalues");
 			break;
 		case "panelvalues":
+			redisClearUtils.delPanelCache();
+			SseEmitterServer.batchSendMessage(getDataImpl.getPanelData(), "panelvalues");
 			break;
 		case "entryvalues":
+			redisClearUtils.delMListCache();
+			SseEmitterServer.batchSendMessage(getDataImpl.getMListData(), "entryvalues");
 			break;
 		case "mapvalues":
+			redisClearUtils.delMMapCache();
+			SseEmitterServer.batchSendMessage(getDataImpl.getMMapData(), "mapvalues");
 			break;
 		case "linevalues":
+			redisClearUtils.delCLineCache();
+			SseEmitterServer.batchSendMessage(getDataImpl.getCLineData(), "clinevalues");
+			if((map.get("big")=="1")&&(map.get("did")=="18"||map.get("did")=="1")) {
+				redisClearUtils.delLineCache();
+				SseEmitterServer.batchSendMessage(getDataImpl.getLineData(), "linevalues");
+			}
 			break;
 		case "radarvalues":
+			if(map.get("did")=="3")return;
+			if(map.get("did")=="25") {
+				redisClearUtils.delCRadaCache();
+				SseEmitterServer.batchSendMessage(getDataImpl.getCRadaData(), "cradavalues");
+			}
+			else {
+				redisClearUtils.delRadaCache();
+				SseEmitterServer.batchSendMessage(getDataImpl.getRadaData(), "radavalues");
+			}
 			break;
 		default:
-			break;
+			return;
 		}
-    	
     }
 }
