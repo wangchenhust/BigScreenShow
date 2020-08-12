@@ -32,7 +32,6 @@
         watch:{
             getValues:{
                 handler(newVal,oldVal) {// eslint-disable-line no-unused-vars
-                    this.values=newVal
                     this.setList()
                     this.setOption()
                 }
@@ -40,13 +39,17 @@
         },
         mounted() {
             console.log(this.getValues)
-            this.values=this.getValues;
+            this.initData();
             this.setList();
             this.getChart();
             this.setOption();
-            this.timer();
+            //this.timer();
         },
         methods: {
+            async initData(){
+               let data1=await this.$H.get('/GetData/Pie');
+               this.$store.commit('pie/setValues',data1)
+            },
             setList(){
                 this.list.length=0
                 let placeHolderStyle = {
@@ -62,10 +65,10 @@
                         borderWidth: 0
                     }
                 };
-                for (let i in this.values) {
+                for (let i in this.getValues) {
                     this.list.push({
-                        value: this.values[i],
-                        name: this.names[i],
+                        value: this.getValues[i].value,
+                        name: this.getValues[i].name,
                         itemStyle: {
                             normal: {
                                 borderWidth: 6,
@@ -84,6 +87,9 @@
             },
             getChart(){
                 this.myChart = echarts.init(document.getElementById('chart_left2'))
+                window.addEventListener('resize', () => {
+                    this.myChart.resize();
+                });
             },
             setOption(){
                 let rich = {
@@ -111,8 +117,8 @@
                                     position: 'outside',
                                     formatter:(params) => {
                                         let total = 0;
-                                        for (let i in this.values) {
-                                            total += this.values[i]
+                                        for (let i in this.getValues) {
+                                            total += this.getValues[i].value
                                         }
                                         let percent = ((params.value / total) * 100).toFixed(0);
                                         let name = params.name.replace(/\n/g, '')

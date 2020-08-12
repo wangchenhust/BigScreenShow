@@ -1,6 +1,6 @@
 // initial state
 const state = () => ({
-    values: [5,10,10,10,5,5]
+    values: null
 })
 
 // getters

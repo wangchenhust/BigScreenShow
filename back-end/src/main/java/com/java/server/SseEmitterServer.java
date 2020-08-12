@@ -51,10 +51,10 @@ public class SseEmitterServer {
     /**
      * 群发所有人
      */
-    public static void batchSendMessage(String json) {
+    public static void batchSendMessage(String json,String name) {
         sseEmitterMap.forEach((k, v) -> {
             try {
-            	SseEmitter.SseEventBuilder builder =SseEmitter.event().data(json).name("bing");
+            	SseEmitter.SseEventBuilder builder =SseEmitter.event().data(json).name(name);
                 v.send(builder);
             } catch (IOException e) {
                 logger.error("用户[{}]推送异常:{}", k, e.getMessage());

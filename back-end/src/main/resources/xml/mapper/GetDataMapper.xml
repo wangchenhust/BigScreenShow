@@ -29,13 +29,13 @@
 	<!-- 饼图查询语句 -->
 	<select id="getPieData" resultType="com.java.pojo.Pie">
 		select
-		dn.NAME,pv.VALUE,vd.valuedate
+		dn.NAME,pv.VALUE
 		from
 		pievalues pv,banks,datanames
 		dn,valuedates vd
 		where
 		pv.did=dn.id and pv.vid=vd.id and
-		pv.bid=banks.id;
+		pv.bid=banks.id and vd.valuedate REGEXP '^2020';
 	</select>
 
 	<!-- 折线图查询语句（已优化） -->

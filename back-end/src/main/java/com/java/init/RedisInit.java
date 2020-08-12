@@ -21,6 +21,7 @@ public class RedisInit implements CommandLineRunner {
         redisClearUtils.delCLineCache();
         redisClearUtils.delCRadaCache();
         redisClearUtils.delListCache();
+        redisClearUtils.delMMapCache();
     }
     
 }

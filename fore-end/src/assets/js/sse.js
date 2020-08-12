@@ -6,12 +6,12 @@ let source = null;
 export default {
   source:source,
   sourceInit:function () {
-    this.source=new EventSource('http://localhost:8080/subscribe?id=' + new Date().getTime())
+    this.source=new EventSource('http://localhost:8088/subscribe/' + new Date().getTime())
     /**
      * 连接一旦建立，就会触发open事件
      * 另一种写法：source.onopen = function (event) {}
      */
-    this.source.addEventListener('open', function (e) {
+    this.source.addEventListener('open', function (e) {// eslint-disable-line no-unused-vars
       console.log("建立连接。。。");
     }, false);
 

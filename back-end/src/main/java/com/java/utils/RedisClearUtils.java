@@ -57,5 +57,11 @@ public class RedisClearUtils {
 	@CacheEvict(cacheNames = "List",allEntries = true)
 	public void delListCache() {}
 	
+	/*
+	 * 删除地图缓存
+	 * */
+	@CacheEvict(cacheNames = "MMap",allEntries = true)
+	public void delMMapCache() {}
+	
 	
 }

@@ -25,6 +25,11 @@ Vue.use(scroll)
 import VueParticles from 'vue-particles'
 Vue.use(VueParticles)
 
+//初始化sse
+import sse from "./assets/js/sse"
+sse.sourceInit()
+Vue.prototype.$sse=sse
+
 Vue.use(ElementUI);
 Vue.config.productionTip = false
 Vue.prototype.$echarts = echarts

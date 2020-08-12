@@ -7,11 +7,6 @@ public class Pie {
 	private BigDecimal value;
 	
 	private String name;
-	
-	private String valuedate;
-
-
-
 
 	public String getName() {
 		return name;
@@ -19,14 +14,6 @@ public class Pie {
 
 	public void setName(String name) {
 		this.name = name;
-	}
-
-	public String getValuedate() {
-		return valuedate;
-	}
-
-	public void setValuedate(String valuedate) {
-		this.valuedate = valuedate;
 	}
 
 	public BigDecimal getValue() {

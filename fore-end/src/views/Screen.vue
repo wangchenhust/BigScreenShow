@@ -148,6 +148,10 @@
         computed: {
 
         },
+        created() {
+            //在这里写sse数据接收监听器
+            this.$sse.getSource().addEventListener('pievalues', this.pieListener)
+        },
         mounted() {
             //天气
             this.getWeather();
@@ -159,6 +163,11 @@
             this.getTimes();
         },
         methods: {
+            pieListener:function (e) {
+                var data1=JSON.parse(e.data);
+                console.log(data1)
+                this.$store.commit('pie/setValues',data1)
+            },
             //获取天气数据
             getWeather(){
                 axios.get('https://www.tianqiapi.com/api/', {

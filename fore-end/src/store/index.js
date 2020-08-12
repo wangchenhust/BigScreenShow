@@ -14,10 +14,11 @@ export default new Vuex.Store({
             console.log(state.configData)
         }
     },
-    getters:{
-        shareConfig(state){
+    getters: {
+        shareConfig(state) {
             return state.configData
         }
+    },
     modules: {
         pie
     }
