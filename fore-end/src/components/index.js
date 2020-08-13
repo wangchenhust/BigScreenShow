@@ -10,6 +10,7 @@ import dynamicLine1 from './Screen/resume'
 import barChart from './Screen/barChart'
 import lineChart from './Screen/lineChart'
 import pieChart from './Screen/pieChart'
+import pieChart1 from './Screen/pieChart1'
 import dashboard from './Screen/dashboard'
 import radarChart from './Screen/radarChart'
 import list from  './Screen/list'
@@ -33,7 +34,7 @@ const components = {
     dynamicLine1,
     barChart,
     lineChart,
-    pieChart,
+    pieChart,//加了后端
     dashboard,
     radarChart,
     list,
@@ -44,6 +45,7 @@ const components = {
     threeDashboards1,
     threeDashboards2,
     resume,
+    pieChart1,//纯前端
 };
 
 const install = (Vue = {}) => {

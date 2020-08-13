@@ -84,6 +84,7 @@ src
 |  |      configChart.vue    //可配置组件
 │  │      resume.vue			//报警部分组件
 │  │      pieChart.vue		//饼图组件
+|  |      pieChart1.vue     //饼图组件（纯前端）
 │  │      radarChart.vue	//雷达图组件
 │  │      waterSphereChart.vue	 //水球图组件
 │  │      mapChart.vue     //地图组件

@@ -50,7 +50,8 @@
                     <div class="panel small">
                         <h2>工行营业收入构成</h2>
 <!--                        饼图组件-->
-                        <pieChart />
+<!--                        <pieChart />-->
+                        <pieChart1 />
                         <div class="panel-footer"></div>
                     </div>
                 </div>
