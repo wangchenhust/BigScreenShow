@@ -592,3 +592,51 @@ http://localhost:8088/GetData/{type}
 +------------+-------+-----------+--------+-----------+
 ```
 
+
+
+<h4>sse监听器可选的名称</h4>
+
+```vue
+监听器的名称将决定监听器调用的回调函数接收的图表数据类型
+
+例如：
+在Screen.vue中：
+created() {
+            //在这里写sse数据接收监听器
+            this.$sse.getSource().addEventListener('pievalues', this.pieListener)
+			//其他sse数据监听器....
+        },
+mounted() {
+            //天气
+            this.getWeather();
+            //每隔一天调用函数getWeather
+            this.timer = setInterval(() => {
+                this.getWeather();
+            }, 1000 * 60 * 60)
+            //时间日期
+            this.getTimes();
+        },
+methods: {
+            pieListener:function (e) {
+                var data1=JSON.parse(e.data);
+                console.log(data1)
+                this.$store.commit('pie/setValues',data1)
+            }
+            
+在created中创建名字为pievalues（饼图数据）的监听器，回调函数为pieListener（定义在methods中），当后端有饼图的数据推送到前端时会自动传到回调函数中的e中，于是就可以对该数据进行任意处理（一般是把数据传入自己的组件store中）
+            
+```
+
+```
+可选的监听器名称（不可以输入别的，否则会接收不到数据）
+1、pievalues       饼图
+2、barvalues       柱状图
+3、panelvalues     仪表盘
+4、entryvalues     动态列表
+5、mapvalues       地图数据
+6、clinevalues     可配置折线图
+7、linevalues      折线图
+8、cradavalues     可配置雷达图
+9、radavalues      雷达图
+```
+
