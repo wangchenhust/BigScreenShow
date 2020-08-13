@@ -1,4 +1,4 @@
-import HelloWorld from './HelloWorld' // 首页
+import config from './config' // 首页
 import dynamicLine from './dynamicLine/dynamicLine'
 import leida from './leida'
 import ringPie from './ringPie'
@@ -15,7 +15,6 @@ import dashboard from './Screen/dashboard'
 import radarChart from './Screen/radarChart'
 import list from  './Screen/list'
 import waterSphereChart from './Screen/waterSphereChart'
-// <<<<<<< HEAD
 import mapChart from './Screen/mapChart'
 import configChart from './Screen/configChart'
 import threeDashboards from "./Screen/threeDashboards";
@@ -23,14 +22,13 @@ import threeDashboards1 from "./Screen/threeDashboards1";
 import threeDashboards2 from "./Screen/threeDashboards2";
 import resume from "./Screen/resume";
 const components = {
-    HelloWorld,
+    config,
     dynamicLine,
     leida,
     ringPie,
     colorfulRadar,
     gauge,
     seamless,
-//    Screen
     dynamicLine1,
     barChart,
     lineChart,

@@ -4,7 +4,7 @@
 <!--            ref属性定义在一个组件上，那么它返回的是这个组件的实例引用-->
             <div class="top"></div>
 <!--            vue首页组件-->
-<!--            <HelloWorld />-->
+<!--            <config />-->
             <dynamicLine />
 <!--            <hello />-->
             <ringPie />

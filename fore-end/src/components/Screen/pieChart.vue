@@ -6,6 +6,7 @@
 
 <script>
     import echarts from "echarts";
+    import { mapGetters,mapState } from 'vuex'
 
     export default {
         name: "pieChart",
@@ -14,19 +15,43 @@
                 color:['#00ffff', '#00cfff', '#006ced',
                     '#ffe000', '#ffa800', '#ff5b00', '#ff3000'],
                 names:['利息','投资收益','公允价值变动损益','手续费佣金收入','其他业务收入','汇总收益'],
-                values:[5,10,10,10,5,5],
-                list :[]
+                list :[],
+                myCharts:null,
+                option:null
             }
         },
         computed: {
-
+            ...mapGetters({
+                getValues:'pie/getValues'
+                // ...
+            }),
+            ...mapState([
+                'pie/values'
+            ])
+        },
+        watch:{
+            getValues:{
+                handler(newVal,oldVal) {// eslint-disable-line no-unused-vars
+                    this.setList()
+                    this.setOption()
+                }
+            }
         },
         mounted() {
+            console.log(this.getValues)
+            this.initData();
             this.setList();
             this.getChart();
+            this.setOption();
+            //this.timer();
         },
         methods: {
+            async initData(){
+               let data1=await this.$H.get('/GetData/Pie');
+               this.$store.commit('pie/setValues',data1)
+            },
             setList(){
+                this.list.length=0
                 let placeHolderStyle = {
                     normal: {
                         label: {
@@ -40,10 +65,10 @@
                         borderWidth: 0
                     }
                 };
-                for (let i in this.values) {
+                for (let i in this.getValues) {
                     this.list.push({
-                        value: this.values[i],
-                        name: this.names[i],
+                        value: this.getValues[i].value,
+                        name: this.getValues[i].name,
                         itemStyle: {
                             normal: {
                                 borderWidth: 6,
@@ -61,14 +86,19 @@
                 }
             },
             getChart(){
-                var myChart = echarts.init(document.getElementById('chart_left2'))
+                this.myChart = echarts.init(document.getElementById('chart_left2'))
+                window.addEventListener('resize', () => {
+                    this.myChart.resize();
+                });
+            },
+            setOption(){
                 let rich = {
                     white: {
                         align: 'center',
                         padding: [3, 0]
                     }
                 };
-                var option ={
+                this.option ={
                     tooltip: {
                         show: false
                     },
@@ -87,8 +117,8 @@
                                     position: 'outside',
                                     formatter:(params) => {
                                         let total = 0;
-                                        for (let i in this.values) {
-                                            total += this.values[i]
+                                        for (let i in this.getValues) {
+                                            total += this.getValues[i].value
                                         }
                                         let percent = ((params.value / total) * 100).toFixed(0);
                                         let name = params.name.replace(/\n/g, '')
@@ -116,11 +146,21 @@
                             return idx * 50;
                         }
                     }]
+
                 }
-                myChart.setOption(option);
-                window.addEventListener('resize', () => {
-                    myChart.resize();
-                });
+// <<<<<<< HEAD
+//                 myChart.setOption(option);
+//                 window.addEventListener('resize', () => {
+//                     myChart.resize();
+//                 });
+// =======
+                this.myChart.setOption(this.option,true);
+            },
+            timer() {
+                return setInterval(() => {
+                    this.$store.commit('pie/setValues',[51,10,10,10,5,5])
+                }, 10000)
+// >>>>>>> 612aa22f942b75f3a5e97b86ff3d50e49814ab4f
             }
         }
     }

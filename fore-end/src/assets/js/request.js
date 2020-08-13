@@ -8,7 +8,7 @@ export default {
         data:{}
     },
     request(options = {}){
-        options.url = 'http://127.0.0.1:8848'+options.url
+        options.url = 'http://127.0.0.1:8088'+options.url
         options.method = options.method || this.common.method
         options.header = options.header || this.common.header
 

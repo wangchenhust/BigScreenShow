@@ -1,13 +1,34 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
+import pie from './modules/pie'
 
 Vue.use(Vuex)
 
 export default new Vuex.Store({
     state:{
-
+        configData:{
+            chartType:'',
+            bankChart:[],
+            gaugeChart:{}
+        }
     },
     mutations:{
+        changeChart(state,newConfig){
+            state.configData = newConfig
+            console.log(state.configData)
+            localStorage.setItem('config',JSON.stringify(state.configData))
+        }
+    },
 
+    getters: {
+        getConfigInfo(state) {
+            if (localStorage.getItem('config')){
+                state.configData = JSON.parse(localStorage.getItem('config'))
+            }
+            return state.configData
+        }
+     },
+    modules:{
+        pie
     }
 })
