@@ -202,6 +202,10 @@ export default {
         }
       });
       myChart.setOption(option);
+
+      window.addEventListener('resize', () => {
+        myChart.resize();
+      });
     }
   }
 };

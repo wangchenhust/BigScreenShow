@@ -82,10 +82,11 @@ src
 │  │      list.vue			//列表组件
 |  |      threeDashboards.vue //三雷达图组件
 |  |      configChart.vue    //可配置组件
-│  │      model.vue			//组件模型，可以复制内容稍做改动，来创建新组件
+│  │      resume.vue			//报警部分组件
 │  │      pieChart.vue		//饼图组件
 │  │      radarChart.vue	//雷达图组件
 │  │      waterSphereChart.vue	 //水球图组件
+│  │      mapChart.vue     //地图组件
 │  │      
 │  └─seamless				//Home页面的动态信息组件
 │          index.vue
@@ -123,6 +124,8 @@ src
 
 核心资本充足率=核心资本/风险加权资产，不应低于4%
 
+核心一级资本充足率，不低于5%
+
 资产利润率=税后净利润/平均资产总额*100%，不应低于0.6%
 
 资本利润率=税后净利润/平均净资产*100%，不应低于11%
@@ -133,6 +136,8 @@ src
 
 流动性比例=流动性资产余额/流动性负债余额，不应低于25%
 
+<span style="color:red">核心负债依存度=核心负债/总负债，不应低于60%（新增）</span>
+
 <h2>衡量银行的指标</h2>
 
 风险加权资产收益率RORWA=归母净利润 / 期末风险加权资产 
@@ -141,11 +146,23 @@ src
 
 **三仪表盘**
 
-表名：近年工行核心指标
+表名：工行风险指标
 
-值：资本充足率、核心资本充足率、核心一级资本充足率
+值：
 
-轮播：2020年、2019年、2018年（未完成）
+资本充足率、核心资本充足率、核心一级资本充足率
+
+资产利润率、资本利润率、不良贷款率
+
+流动性比例、不良资产率、核心负债依存度
+
+<span style="color:red">风险提示：已经按各个指标的阈值，设置了风险提示<br>即：当低于阈值时指针和百分比变为红色</span>
+
+轮播：
+
+<img src="./README_Image/info0.JPG"></img>
+
+<img src="./README_Image/info1.JPG"></img>
 
 <img src="./README_Image/info2.jpg"></img>
 
@@ -153,7 +170,7 @@ src
 
 表名：工行重要风险指标
 
-X轴：比率
+X轴：比率（默认2020年平均值）
 
 Y轴：各个风险指标
 
@@ -163,13 +180,31 @@ Y轴：各个风险指标
 
 **饼图**
 
-表名：近年3年工行营业收入
+表名：工行营业收入构成
 
 分类：利息、投资收益、公允价值变动损益、汇总收益、手续费及佣金收入、其他业务收入
 
 <img src="./README_Image/pie.jpg"></img>
 
- 
+**报警模块**
+
+水球图：省分行风险比率<span style="color:red">（已与下面两个参数绑定）</span>
+
+​		=存在风险的省分行数/工商银行省分行总数
+
+参数：工商银行省分行总数、存在风险的省分行数
+
+<img src="./README_Image/resume.jpg"></img>
+
+**地图**
+
+数据：全国省分行所在省份名、以及对应的4个指标
+
+<span style="color:red">在组件data域的data为每个省份定义了value，表明当前省分行有多少个指标有风险（共展示的4个），如风险报警不使用，可无视</span>
+
+<img src="./README_Image/mapdata.jpg"></img>
+
+<img src="./README_Image/map.jpg"></img>
 
 **折线图**
 
@@ -183,8 +218,6 @@ Y轴：百分比
 
 <img src="./README_Image/line.jpg"></img>
 
- 
-
 **雷达图**
 
 表名：四大行对比
@@ -194,8 +227,6 @@ Y轴：百分比
 银行：工行、中行、建行、农行
 
 <img src="./README_Image/radar.jpg"></img>
-
- 
 
 **可配置 折线图**
 
@@ -207,8 +238,6 @@ y轴：百分比
 
 <img src="./README_Image/config_line.jpg"></img>
 
-
-
 **可配置 雷达图**
 
  选项：工行、中行、建行、农行
@@ -217,13 +246,11 @@ y轴：百分比
 
 <img src="./README_Image/config_dashboard.jpg"></img>
 
-
-
 **列表**
 
 表名：17家全国性银行总资产规模
 
-表头：公司、2019年资产值（万亿）、2020年资产值（万亿）、增幅、类型
+表头：公司、2019年资产值（万亿）、2020年资产值（万亿）增幅、类型
 
 <img src="./README_Image/info.jpg"></img>
 

@@ -23,7 +23,7 @@ const routes = [
     {
         path: '/line',
         name: 'dynamicLine',
-        component: () => import('@/components/Screen/model.vue'),
+        component: () => import('@/components/Screen/resume.vue'),
         meta: {
             title: '折线图'
         }

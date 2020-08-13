@@ -12,15 +12,15 @@
       return{
         option: null,
         dataMap:{
-          //2018年
-          2:[{ value: 7, name: "资本充足率" },
-            { value: 66, name: "核心资本充足率" },
-            { value: 89, name: "核心一级资本充足率" },],
-          //2019年
-          1:[{ value: 40, name: "资本充足率" },
-            { value: 3, name: "核心资本充足率" },
-            { value: 79, name: "核心一级资本充足率" },],
-          //2020年
+          //第三个
+          2:[{ value: 7, name: "不良资产率" },
+            { value: 66, name: "流动性比例" },
+            { value: 89, name: "核心负债依存度" },],
+          //第二个
+          1:[{ value: 40, name: "资本利润率" },
+            { value: 3, name: "资产利润率" },
+            { value: 79, name: "不良贷款率" },],
+          //第一个
           0:[{ value: 6, name: "资本充足率" },
             { value: 46, name: "核心资本充足率" },
             { value: 4, name: "核心一级资本充足率" },],
@@ -36,32 +36,15 @@
     methods: {
       getChart(){
         let myChart = echarts.init(document.getElementById('chart_xx'))
-        let color1 = new echarts.graphic.LinearGradient(0, 0, 1, 1, [
-          {
-            offset: 0,
-            color: "#6afdb6"
-          },
-          {
-            offset: 1,
-            color: "#006ced"
-          }
-        ]);
-        let color2 = new echarts.graphic.LinearGradient(0, 0, 1, 1, [
-          {
-            offset: 0,
-            color: "#FF0066"
-          },
-          {
-            offset: 1,
-            color: "#990000"
-          }
-        ]);
-        //资本充足率阈值
-        let threshold1 = 8;
-        //核心资本充足率阈值
-        let threshold2 = 4;
-        // //核心一级资本充足率阈值
-        let threshold3 = 5;
+        let colorTemplate1 = [[0.25, "rgba(255,0,0,0.8)"], [0.5, "#ffa800"], [0.75, "#ffe000"], [1, "rgba(0,255,0,0.8)"]];
+        let colorTemplate2 = [[0.6, "rgba(255,0,0,0.8)"], [0.7, "#ffa800"], [0.8, "#ffe000"], [1, "rgba(0,255,0,0.8)"]];
+
+        // //资本充足率阈值
+        // let threshold1 = 8;
+        // //核心资本充足率阈值
+        // let threshold2 = 4;
+        // // //核心一级资本充足率阈值
+        // let threshold3 = 5;
 
         this.option ={
           baseOption:{
@@ -72,18 +55,18 @@
               data: ['2020', '2019', '2018'],
               left: 80,
               right: 80,
-              bottom: 2,
+              bottom: -10,
               lineStyle: {
                 color: '#179bf1',
                 bottom: 10
               },
               label: {
+                show:false,
                 position:15,
                 textStyle: {
                   // fontWeight: "bold",
                   color: "#ade3ff",
                   fontSize: 10,
-
                 },
               },
               checkpointStyle: {
@@ -118,40 +101,87 @@
               {//内圈进度条
                 name:"中 内圈进度条",
                 type: "gauge",
-                radius: '85%',
+                radius: '80%',
                 center: ["50%", "55%"],
-                splitNumber: 0, //刻度数量
-                startAngle: 180,
-                endAngle: 0,
-                axisLine: {
-                  show: true,
-                  lineStyle: {
-                    width: 10,
-                    color: [
-                      [1, this.dataMap['0'][0].value >= threshold1 ? color1 : color2]
-                    ]
+                startAngle: 180,		// 仪表盘起始角度,默认 225。圆心 正右手侧为0度，正上方为90度，正左手侧为180度。
+                endAngle: 0,			// 仪表盘结束角度,默认 -45
+                clockwise: true,		// 仪表盘刻度是否是顺时针增长,默认 true。
+                min: 0,					// 最小的数据值,默认 0 。映射到 minAngle。
+                max: 32,				// 最大的数据值,默认 100 。映射到 maxAngle。
+                splitNumber: 4,		// 仪表盘刻度的分割段数,默认 10。
+
+                axisLine: {				// 仪表盘轴线(轮廓线)相关配置。
+                  show: true,				// 是否显示仪表盘轴线(轮廓线),默认 true。
+                  lineStyle: {			// 仪表盘轴线样式。
+                    color: colorTemplate1, 	//仪表盘的轴线可以被分成不同颜色的多段。每段的  结束位置(范围是[0,1]) 和  颜色  可以通过一个数组来表示。默认取值：[[0.2, '#91c7ae'], [0.8, '#63869e'], [1, '#c23531']]
+                    opacity: 1,					//图形透明度。支持从 0 到 1 的数字，为 0 时不绘制该图形。
+                    width: 12,					//轴线宽度,默认 30。
+                    shadowBlur: 7,				//(发光效果)图形阴影的模糊大小。该属性配合 shadowColor,shadowOffsetX, shadowOffsetY 一起设置图形的阴影效果。
+                    shadowColor: "#fff",		//阴影颜色。支持的格式同color。
                   }
                 },
-                //分隔线样式。
-                splitLine: {
-                  show: false,
+
+                splitLine: {			// 分隔线样式。
+                  show: true,				// 是否显示分隔线,默认 true。
+                  length: 12,				// 分隔线线长。支持相对半径的百分比,默认 30。
+                  lineStyle: {			// 分隔线样式。
+                    color: "#eee",				//线的颜色,默认 #eee。
+                    opacity: 1,					//图形透明度。支持从 0 到 1 的数字，为 0 时不绘制该图形。
+                    width: 2,					//线度,默认 2。
+                    type: "solid",				//线的类型,默认 solid。 此外还有 dashed,dotted
+                    shadowBlur: 5,				//(发光效果)图形阴影的模糊大小。该属性配合 shadowColor,shadowOffsetX, shadowOffsetY 一起设置图形的阴影效果。
+                    shadowColor: "#fff",		//阴影颜色。支持的格式同color。
+                  }
                 },
-                axisLabel: {
-                  show: false,
+
+                axisTick: {				// 刻度(线)样式。
+                  show: true,				// 是否显示刻度(线),默认 true。
+                  splitNumber: 5,			// 分隔线之间分割的刻度数,默认 5。
+                  length: 5,				// 刻度线长。支持相对半径的百分比,默认 8。
+                  lineStyle: {			// 刻度线样式。
+                    color: "#eee",				//线的颜色,默认 #eee。
+                    opacity: 1,					//图形透明度。支持从 0 到 1 的数字，为 0 时不绘制该图形。
+                    width: 1,					//线度,默认 1。
+                    type: "solid",				//线的类型,默认 solid。 此外还有 dashed,dotted
+                    shadowBlur: 5,				//(发光效果)图形阴影的模糊大小。该属性配合 shadowColor,shadowOffsetX, shadowOffsetY 一起设置图形的阴影效果。
+                    shadowColor: "#fff",		//阴影颜色。支持的格式同color。
+                  },
                 },
-                axisTick: {
-                  show: false,
+
+                axisLabel: {			// 刻度标签。
+                  show: true,				// 是否显示标签,默认 true。
+                  distance: 2,			// 标签与刻度线的距离,默认 5。
+                  color: "#fff",			// 文字的颜色,默认 #fff。
+                  fontSize: 10,			// 文字的字体大小,默认 5。
+                  formatter: "{value}",	// 刻度标签的内容格式器，支持字符串模板和回调函数两种形式。 示例:// 使用字符串模板，模板变量为刻度默认标签 {value},如:formatter: '{value} kg'; // 使用函数模板，函数参数分别为刻度数值,如formatter: function (value) {return value + 'km/h';}
                 },
-                pointer: {
-                  show: true,
-                  length: "80%",
-                  width: "2%",
+
+                pointer: {				// 仪表盘指针。
+                  show: true,				// 是否显示指针,默认 true。
+                  length: "80%",			// 指针长度，可以是绝对数值，也可以是相对于半径的百分比,默认 80%。
+                  width: 3,				// 指针宽度,默认 8。
                 },
+
+                itemStyle: {			// 仪表盘指针样式。
+                  color: "auto",			// 指针颜色，默认(auto)取数值所在的区间的颜色
+                  opacity: 1,				// 图形透明度。支持从 0 到 1 的数字，为 0 时不绘制该图形。
+                  borderWidth: 0,			// 描边线宽,默认 0。为 0 时无描边。
+                  borderType: "solid",	// 柱条的描边类型，默认为实线，支持 'solid', 'dashed', 'dotted'。
+                  borderColor: "#000",	// 图形的描边颜色,默认 "#000"。支持的颜色格式同 color，不支持回调函数。
+                  shadowBlur: 5,			// (发光效果)图形阴影的模糊大小。该属性配合 shadowColor,shadowOffsetX, shadowOffsetY 一起设置图形的阴影效果。
+                  shadowColor: "#fff",	// 阴影颜色。支持的格式同color。
+                },
+
+                emphasis: {				// 高亮的 仪表盘指针样式
+                  itemStyle: {
+                    //高亮 和正常  两者具有同样的配置项,只是在不同状态下配置项的值不同。
+                  }
+                },
+
                 title: {
                   show: true,
-                  offsetCenter: [0, "20%"], // x, y，单位px
+                  offsetCenter: [0,"37%"], // x, y，单位px
                   textStyle: {
-                    // fontWeight: "bold",
                     color: "#ade3ff",
                     fontSize: 11,
                   },
@@ -160,104 +190,95 @@
                 detail: {
                   show: true,
                   offsetCenter: [0, "-30%"],
-                  color: "#ffffff",
+                  color: "auto",
                   textStyle: {
-                    fontSize:30,
-                    // color: "#00ffff",
-                    color: this.dataMap['0'][0].value >= threshold1 ? "#00ffff" : "red",
+                    fontSize:25,
                   },
-                  formatter: function(value) {
-                    return value + '{a|}';
-                  },
-                  rich: {
-                    a: {
-                      fontSize: 30,
-                      color: "#00ffff"
-                    }
-                  }
+                  formatter: "{value}%",	// 格式化函数或者字符串
                 },
                 data: [this.dataMap['0'][0]],
               },
               //左边
-              {//外圈刻度
-                name: "左 外刻度",
-                type: "gauge",
-                center: ['20%', '47%'], // 默认全局居中
-                radius: '55%',
-                min: 0, //最小刻度
-                max: 100, //最大刻度
-                splitNumber: 10, //刻度数量
-                startAngle: 200,
-                endAngle: 50,
-                axisLine: {
-                  show: true,
-                  lineStyle: {
-                    width: 0.7,
-                    color: [
-                      [1, "rgba(0,0,0,0)"]
-                    ],
-                  },
-                }, //仪表盘轴线
-                axisLabel: {
-                  show: false,
-                  color: "#4b695e",
-                  fontSize: 7,
-                  distance: -15,
-                  formatter: function(v) {
-                    return v;
-                  },
-                }, //刻度标签。
-                axisTick: {
-                  show: true,
-                  splitNumber: 2,
-                  lineStyle: {
-                    color: "#263b35",
-                    width: 0.7,
-                    // length:10
-                  },
-                  length: -5,
-                }, //刻度样式
-                splitLine: {
-                  show: true,
-                  length: -5,
-                  lineStyle: {
-                    color: "#00ffff",
-                    width: 1
-                  },
-                }, //分隔线样式
-              },
               {//内圈进度条
                 name:"左 内圈进度条",
                 type: "gauge",
-                radius: '50%',
+                radius: '70%',
                 center: ['20%', '47%'], // 默认全局居中
-                splitNumber: 0, //刻度数量
                 startAngle: 200,
                 endAngle: 50,
-                axisLine: {
-                  show: true,
-                  lineStyle: {
-                    width: 10,
-                    color: [
-                      [1, this.dataMap['0'][1].value >= threshold2 ? color1 : color2]
-                    ]
+                clockwise: true,		// 仪表盘刻度是否是顺时针增长,默认 true。
+                min: 0,					// 最小的数据值,默认 0 。映射到 minAngle。
+                max: 16,				// 最大的数据值,默认 100 。映射到 maxAngle。
+                splitNumber: 4,		// 仪表盘刻度的分割段数,默认 10。
+
+                axisLine: {				// 仪表盘轴线(轮廓线)相关配置。
+                  show: true,				// 是否显示仪表盘轴线(轮廓线),默认 true。
+                  lineStyle: {			// 仪表盘轴线样式。
+                    color: colorTemplate1, 	//仪表盘的轴线可以被分成不同颜色的多段。每段的  结束位置(范围是[0,1]) 和  颜色  可以通过一个数组来表示。默认取值：[[0.2, '#91c7ae'], [0.8, '#63869e'], [1, '#c23531']]
+                    opacity: 1,					//图形透明度。支持从 0 到 1 的数字，为 0 时不绘制该图形。
+                    width: 12,					//轴线宽度,默认 30。
+                    shadowBlur: 5,				//(发光效果)图形阴影的模糊大小。该属性配合 shadowColor,shadowOffsetX, shadowOffsetY 一起设置图形的阴影效果。
+                    shadowColor: "#fff",		//阴影颜色。支持的格式同color。
                   }
                 },
-                //分隔线样式。
-                splitLine: {
-                  show: false,
+
+                splitLine: {			// 分隔线样式。
+                  show: true,				// 是否显示分隔线,默认 true。
+                  length:12,				// 分隔线线长。支持相对半径的百分比,默认 30。
+                  lineStyle: {			// 分隔线样式。
+                    color: "#eee",				//线的颜色,默认 #eee。
+                    opacity: 1,					//图形透明度。支持从 0 到 1 的数字，为 0 时不绘制该图形。
+                    width: 1,					//线度,默认 2。
+                    type: "solid",				//线的类型,默认 solid。 此外还有 dashed,dotted
+                    shadowBlur: 5,				//(发光效果)图形阴影的模糊大小。该属性配合 shadowColor,shadowOffsetX, shadowOffsetY 一起设置图形的阴影效果。
+                    shadowColor: "#fff",		//阴影颜色。支持的格式同color。
+                  }
                 },
-                axisLabel: {
-                  show: false,
+
+                axisTick: {				// 刻度(线)样式。
+                  show: true,				// 是否显示刻度(线),默认 true。
+                  splitNumber: 3,			// 分隔线之间分割的刻度数,默认 5。
+                  length: 5,				// 刻度线长。支持相对半径的百分比,默认 8。
+                  lineStyle: {			// 刻度线样式。
+                    color: "#eee",				//线的颜色,默认 #eee。
+                    opacity: 1,					//图形透明度。支持从 0 到 1 的数字，为 0 时不绘制该图形。
+                    width: 0.8,					//线度,默认 1。
+                    type: "solid",				//线的类型,默认 solid。 此外还有 dashed,dotted
+                    shadowBlur: 5,				//(发光效果)图形阴影的模糊大小。该属性配合 shadowColor,shadowOffsetX, shadowOffsetY 一起设置图形的阴影效果。
+                    shadowColor: "#fff",		//阴影颜色。支持的格式同color。
+                  },
                 },
-                axisTick: {
-                  show: false,
+
+                axisLabel: {			// 刻度标签。
+                  show: true,				// 是否显示标签,默认 true。
+                  distance: 2,			// 标签与刻度线的距离,默认 5。
+                  color: "#fff",			// 文字的颜色,默认 #fff。
+                  fontSize: 8,			// 文字的字体大小,默认 5。
+                  formatter: "{value}",	// 刻度标签的内容格式器，支持字符串模板和回调函数两种形式。 示例:// 使用字符串模板，模板变量为刻度默认标签 {value},如:formatter: '{value} kg'; // 使用函数模板，函数参数分别为刻度数值,如formatter: function (value) {return value + 'km/h';}
                 },
-                pointer: {
-                  show: true,
-                  length: "80%",
-                  width: "2%",
+
+                pointer: {				// 仪表盘指针。
+                  show: true,				// 是否显示指针,默认 true。
+                  length: "70%",			// 指针长度，可以是绝对数值，也可以是相对于半径的百分比,默认 80%。
+                  width: 3,				// 指针宽度,默认 8。
                 },
+
+                itemStyle: {			// 仪表盘指针样式。
+                  color: "auto",			// 指针颜色，默认(auto)取数值所在的区间的颜色
+                  opacity: 1,				// 图形透明度。支持从 0 到 1 的数字，为 0 时不绘制该图形。
+                  borderWidth: 0,			// 描边线宽,默认 0。为 0 时无描边。
+                  borderType: "solid",	// 柱条的描边类型，默认为实线，支持 'solid', 'dashed', 'dotted'。
+                  borderColor: "#000",	// 图形的描边颜色,默认 "#000"。支持的颜色格式同 color，不支持回调函数。
+                  shadowBlur: 5,			// (发光效果)图形阴影的模糊大小。该属性配合 shadowColor,shadowOffsetX, shadowOffsetY 一起设置图形的阴影效果。
+                  shadowColor: "#fff",	// 阴影颜色。支持的格式同color。
+                },
+
+                emphasis: {				// 高亮的 仪表盘指针样式
+                  itemStyle: {
+                    //高亮 和正常  两者具有同样的配置项,只是在不同状态下配置项的值不同。
+                  }
+                },
+
                 title: {
                   show: true,
                   offsetCenter: ["-10%", "65%"], // x, y，单位px
@@ -271,105 +292,95 @@
                 detail: {
                   show: true,
                   offsetCenter: ["-10%", "-20%"],
-                  color: "#ffffff",
+                  color: "auto",
                   textStyle: {
-                    fontSize:15,
-                    color: this.dataMap['0'][1].value >= threshold2 ? "#00ffff" : "red"
+                    fontSize:25,
                   },
-                  formatter: function(value) {
-                    return value + '{a|}';
-                  },
-                  rich: {
-                    a: {
-                      fontSize: 25,
-                      color: "#00ffff"
-                    }
-                  }
+                  formatter: "{value}%",	// 格式化函数或者字符串
                 },
                 data: [this.dataMap['0'][1]],
               },
               //右边
-              {//外圈刻度
-                name: "右 外刻度",
-                type: "gauge",
-                center: ['80%', '47%'],
-                radius: '55%',
-                min: 0, //最小刻度
-                max: 100, //最大刻度
-                splitNumber: 10, //刻度数量
-//             startAngle: 255,
-// 			endAngle: 480,
-                startAngle: 130,
-                endAngle: -20,
-                axisLine: {
-                  show: true,
-                  lineStyle: {
-                    width: 0.7,
-                    color: [
-                      [1, "rgba(0,0,0,0)"]
-                    ],
-                  },
-                }, //仪表盘轴线
-                // axisLabel: {
-                //     show: true,
-                //     color: "#4b695e",
-                //     fontSize: 7,
-                //     distance: -15,
-                //     formatter: function(v) {
-                //         return v;
-                //     },
-                // }, //刻度标签。
-                axisTick: {
-                  show: true,
-                  splitNumber: 2,
-                  lineStyle: {
-                    color: "#263b35",
-                    width: 0.7,
-                    // length:10
-                  },
-                  length: -5,
-                }, //刻度样式
-                splitLine: {
-                  show: true,
-                  length: -5,
-                  lineStyle: {
-                    color: "#00ffff",
-                    width: 1
-                  },
-                }, //分隔线样式
-              },
               {//内圈进度条
                 name:"右 内圈进度条",
                 type: "gauge",
-                radius: '50%',
+                radius: '70%',
                 center: ['80%', '47%'],
-                splitNumber: 0, //刻度数量
                 startAngle: 130,
                 endAngle: -20,
-                axisLine: {
-                  show: true,
-                  lineStyle: {
-                    width: 10,
-                    color: [
-                      [1, this.dataMap['0'][2].value >= threshold3 ? color1 : color2]
-                    ]
+                clockwise: true,		// 仪表盘刻度是否是顺时针增长,默认 true。
+                min: 0,					// 最小的数据值,默认 0 。映射到 minAngle。
+                max: 20,				// 最大的数据值,默认 100 。映射到 maxAngle。
+                splitNumber: 4,		// 仪表盘刻度的分割段数,默认 10。
+
+                axisLine: {				// 仪表盘轴线(轮廓线)相关配置。
+                  show: true,				// 是否显示仪表盘轴线(轮廓线),默认 true。
+                  lineStyle: {			// 仪表盘轴线样式。
+                    color: colorTemplate1, 	//仪表盘的轴线可以被分成不同颜色的多段。每段的  结束位置(范围是[0,1]) 和  颜色  可以通过一个数组来表示。默认取值：[[0.2, '#91c7ae'], [0.8, '#63869e'], [1, '#c23531']]
+                    opacity: 1,					//图形透明度。支持从 0 到 1 的数字，为 0 时不绘制该图形。
+                    width: 12,					//轴线宽度,默认 30。
+                    shadowBlur: 5,				//(发光效果)图形阴影的模糊大小。该属性配合 shadowColor,shadowOffsetX, shadowOffsetY 一起设置图形的阴影效果。
+                    shadowColor: "#fff",		//阴影颜色。支持的格式同color。
                   }
                 },
-                //分隔线样式。
-                splitLine: {
-                  show: false,
+
+                splitLine: {			// 分隔线样式。
+                  show: true,				// 是否显示分隔线,默认 true。
+                  length:12,				// 分隔线线长。支持相对半径的百分比,默认 30。
+                  lineStyle: {			// 分隔线样式。
+                    color: "#eee",				//线的颜色,默认 #eee。
+                    opacity: 1,					//图形透明度。支持从 0 到 1 的数字，为 0 时不绘制该图形。
+                    width: 1,					//线度,默认 2。
+                    type: "solid",				//线的类型,默认 solid。 此外还有 dashed,dotted
+                    shadowBlur: 5,				//(发光效果)图形阴影的模糊大小。该属性配合 shadowColor,shadowOffsetX, shadowOffsetY 一起设置图形的阴影效果。
+                    shadowColor: "#fff",		//阴影颜色。支持的格式同color。
+                  }
                 },
-                axisLabel: {
-                  show: false,
+
+                axisTick: {				// 刻度(线)样式。
+                  show: true,				// 是否显示刻度(线),默认 true。
+                  splitNumber: 3,			// 分隔线之间分割的刻度数,默认 5。
+                  length: 5,				// 刻度线长。支持相对半径的百分比,默认 8。
+                  lineStyle: {			// 刻度线样式。
+                    color: "#eee",				//线的颜色,默认 #eee。
+                    opacity: 1,					//图形透明度。支持从 0 到 1 的数字，为 0 时不绘制该图形。
+                    width: 0.8,					//线度,默认 1。
+                    type: "solid",				//线的类型,默认 solid。 此外还有 dashed,dotted
+                    shadowBlur: 5,				//(发光效果)图形阴影的模糊大小。该属性配合 shadowColor,shadowOffsetX, shadowOffsetY 一起设置图形的阴影效果。
+                    shadowColor: "#fff",		//阴影颜色。支持的格式同color。
+                  },
                 },
-                axisTick: {
-                  show: false,
+
+                axisLabel: {			// 刻度标签。
+                  show: true,				// 是否显示标签,默认 true。
+                  distance: 2,			// 标签与刻度线的距离,默认 5。
+                  color: "#fff",			// 文字的颜色,默认 #fff。
+                  fontSize: 8,			// 文字的字体大小,默认 5。
+                  formatter: "{value}",	// 刻度标签的内容格式器，支持字符串模板和回调函数两种形式。 示例:// 使用字符串模板，模板变量为刻度默认标签 {value},如:formatter: '{value} kg'; // 使用函数模板，函数参数分别为刻度数值,如formatter: function (value) {return value + 'km/h';}
                 },
-                pointer: {
-                  show: true,
-                  length: "80%",
-                  width: "2%",
+
+                pointer: {				// 仪表盘指针。
+                  show: true,				// 是否显示指针,默认 true。
+                  length: "70%",			// 指针长度，可以是绝对数值，也可以是相对于半径的百分比,默认 80%。
+                  width: 3,				// 指针宽度,默认 8。
                 },
+
+                itemStyle: {			// 仪表盘指针样式。
+                  color: "auto",			// 指针颜色，默认(auto)取数值所在的区间的颜色
+                  opacity: 1,				// 图形透明度。支持从 0 到 1 的数字，为 0 时不绘制该图形。
+                  borderWidth: 0,			// 描边线宽,默认 0。为 0 时无描边。
+                  borderType: "solid",	// 柱条的描边类型，默认为实线，支持 'solid', 'dashed', 'dotted'。
+                  borderColor: "#000",	// 图形的描边颜色,默认 "#000"。支持的颜色格式同 color，不支持回调函数。
+                  shadowBlur: 5,			// (发光效果)图形阴影的模糊大小。该属性配合 shadowColor,shadowOffsetX, shadowOffsetY 一起设置图形的阴影效果。
+                  shadowColor: "#fff",	// 阴影颜色。支持的格式同color。
+                },
+
+                emphasis: {				// 高亮的 仪表盘指针样式
+                  itemStyle: {
+                    //高亮 和正常  两者具有同样的配置项,只是在不同状态下配置项的值不同。
+                  }
+                },
+
                 title: {
                   show: true,
                   offsetCenter: ["10%", "65%"], // x, y，单位px
@@ -383,198 +394,67 @@
                 detail: {
                   show: true,
                   offsetCenter: ["10%", "-20%"],
-                  color: "#ffffff",
+                  color: "auto",
                   textStyle: {
-                    fontSize:15,
-                    color: this.dataMap['0'][2].value >= threshold3 ? "#00ffff" : "red"
+                    fontSize:25,
                   },
-                  formatter: function(value) {
-                    return value + '{a|}';
-                  },
-                  rich: {
-                    a: {
-                      fontSize: 25,
-                      color: "#00ffff"
-                    }
-                  }
+                  formatter: "{value}%",	// 格式化函数或者字符串
                 },
                 data: [this.dataMap['0'][2]],
               },
             ],
           },
           options: [
-            {//2020
+            {//第一个
               series: [
-                {//中间进度条
-                  axisLine: {
-                    show: true,
-                    lineStyle: {
-                      width: 10,
-                      color: [
-                        [1, this.dataMap['0'][0].value >= threshold1 ? color1 : color2]
-                      ]
-                    }
-                  },
-                  detail:{
-                    textStyle: {
-                      fontSize:30,
-                      // color: "#00ffff",
-                      color: this.dataMap['0'][0].value >= threshold1 ? "#00ffff" : "red",
-                    },
-                  },
+                {//中间进度条 不超过8%
                   data: [this.dataMap['0'][0]],
-                }, {},
-                {//左进度条
-                  axisLine: {
-                    show: true,
-                    lineStyle: {
-                      width: 10,
-                      color: [
-                        [1, this.dataMap['0'][1].value >= threshold2 ? color1 : color2]
-                      ]
-                    }
-                  },
-                  detail:{
-                    textStyle: {
-                      fontSize:30,
-                      // color: "#00ffff",
-                      color: this.dataMap['0'][1].value >= threshold2 ? "#00ffff" : "red",
-                    },
-                  },
+                },
+                {//左进度条 不超过4%
                   data: [this.dataMap['0'][1]],
-                },{},
-                {//右进度条
-                  axisLine: {
-                    show: true,
-                    lineStyle: {
-                      width: 10,
-                      color: [
-                        [1, this.dataMap['0'][2].value >= threshold3 ? color1 : color2]
-                      ]
-                    }
-                  },
-                  detail:{
-                    textStyle: {
-                      fontSize:30,
-                      // color: "#00ffff",
-                      color: this.dataMap['0'][2].value >= threshold3? "#00ffff" : "red",
-                    },
-                  },
+                },
+                {//右进度条 不超过5%
                   data: [this.dataMap['0'][2]],
                 }
               ]
-            },{//2019
+            },{//第二个
               series: [
-                {
-                  axisLine: {
-                    show: true,
-                    lineStyle: {
-                      width: 10,
-                      color: [
-                        [1, this.dataMap['1'][0].value >= threshold1 ? color1 : color2]
-                      ]
-                    }
-                  },
-                  detail:{
-                    textStyle: {
-                      fontSize:30,
-                      // color: "#00ffff",
-                      color: this.dataMap['1'][0].value >= threshold1 ? "#00ffff" : "red",
-                    },
-                  },
+                {//不超过11%
+                  min: 0,					// 最小的数据值,默认 0 。映射到 minAngle。
+                  max: 44,				// 最大的数据值,默认 100 。映射到 maxAngle。
                   data: [this.dataMap['1'][0]],
-                },{},{
-                  axisLine: {
-                    show: true,
-                    lineStyle: {
-                      width: 10,
-                      color: [
-                        [1, this.dataMap['1'][1].value >= threshold2 ? color1 : color2]
-                      ]
-                    }
-                  },
-                  detail:{
-                    textStyle: {
-                      fontSize:30,
-                      // color: "#00ffff",
-                      color: this.dataMap['1'][1].value >= threshold2 ? "#00ffff" : "red",
-                    },
-                  },
+                },
+                {//不超过0.6%
+                  min: 0,					// 最小的数据值,默认 0 。映射到 minAngle。
+                  max: 2.4,
                   data: [this.dataMap['1'][1]],
-                },{},{
-                  axisLine: {
-                    show: true,
-                    lineStyle: {
-                      width: 10,
-                      color: [
-                        [1, this.dataMap['1'][2].value >= threshold3 ? color1 : color2]
-                      ]
-                    }
-                  },
-                  detail:{
-                    textStyle: {
-                      fontSize:30,
-                      // color: "#00ffff",
-                      color: this.dataMap['1'][2].value >= threshold3 ? "#00ffff" : "red",
-                    },
-                  },
+                },
+                {//不超过5%
+                  min: 0,					// 最小的数据值,默认 0 。映射到 minAngle。
+                  max: 20,
                   data: [this.dataMap['1'][2]],
                 }
               ]
-            },{//2018
+            },{//第三个
               series: [
-                {
-                  axisLine: {
-                    show: true,
-                    lineStyle: {
-                      width: 10,
-                      color: [
-                        [1, this.dataMap['2'][0].value >= threshold1 ? color1 : color2]
-                      ]
-                    }
-                  },
-                  detail:{
-                    textStyle: {
-                      fontSize:30,
-                      // color: "#00ffff",
-                      color: this.dataMap['2'][0].value >= threshold1 ? "#00ffff" : "red",
-                    },
-                  },
-                  data: [this.dataMap['2'][0]],
-                },{},{
-                  axisLine: {
-                    show: true,
-                    lineStyle: {
-                      width: 10,
-                      color: [
-                        [1, this.dataMap['2'][1].value >= threshold2 ? color1 : color2]
-                      ]
-                    }
-                  },
-                  detail:{
-                    textStyle: {
-                      fontSize:30,
-                      // color: "#00ffff",
-                      color: this.dataMap['2'][1].value >= threshold2 ? "#00ffff" : "red",
-                    },
-                  },
+                {//4%
+                    min: 0,					// 最小的数据值,默认 0 。映射到 minAngle。
+                    max: 20,
+                    data: [this.dataMap['2'][0]],
+                },
+                {//25%
+                  min: 0,					// 最小的数据值,默认 0 。映射到 minAngle。
+                  max: 100,
                   data: [this.dataMap['2'][1]],
-                },{},{
-                  axisLine: {
-                    show: true,
-                    lineStyle: {
-                      width: 10,
-                      color: [
-                        [1, this.dataMap['2'][2].value >= threshold3 ? color1 : color2]
-                      ]
+                },
+                {//60%
+                  min: 0,					// 最小的数据值,默认 0 。映射到 minAngle。
+                  max: 100,
+                  splitNumber: 4,		// 仪表盘刻度的分割段数,默认 10。
+                  axisLine: {				// 仪表盘轴线(轮廓线)相关配置。
+                    lineStyle: {			// 仪表盘轴线样式。
+                      color: colorTemplate2, 	//仪表盘的轴线可以被分成不同颜色的多段。每段的  结束位置(范围是[0,1]) 和  颜色  可以通过一个数组来表示。默认取值：[[0.2, '#91c7ae'], [0.8, '#63869e'], [1, '#c23531']]
                     }
-                  },
-                  detail:{
-                    textStyle: {
-                      fontSize:30,
-                      // color: "#00ffff",
-                      color: this.dataMap['2'][2].value >= threshold3 ? "#00ffff" : "red",
-                    },
                   },
                   data: [this.dataMap['2'][2]],
                 }
@@ -582,6 +462,9 @@
             }]
         }
         myChart.setOption(this.option,true);
+        window.addEventListener('resize', () => {
+          myChart.resize();
+        });
       }
     }
   }

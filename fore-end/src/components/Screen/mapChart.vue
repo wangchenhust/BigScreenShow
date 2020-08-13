@@ -3,23 +3,25 @@
         <div class="mapPanel">
             <table>
                 <tr>
-                    <td colspan="2" class="bank_name">{{bankName}}</td>
+                    <td colspan="2" class="bank_name">
+                        工行<span>{{bankName}}</span>省分行
+                    </td>
                 </tr>
                 <tr>
-                    <td class="title">经营利润</td>
-                    <td class="title">同比增长</td>
+                    <td class="title">资本充足率</td>
+                    <td class="title">核心资本充足率</td>
                 </tr>
                 <tr>
-                    <td class="profit">{{profit}}万</td>
-                    <td class="profitIncre">{{profitIncre}}%</td>
+                    <td class="index">{{index1}}%</td>
+                    <td class="index">{{index2}}%</td>
                 </tr>
                 <tr>
-                    <td class="title">存款余额</td>
-                    <td class="title">同比增长</td>
+                    <td class="title">资本利润率</td>
+                    <td class="title">流动性比例</td>
                 </tr>
                 <tr>
-                    <td class="save">{{save}}万</td>
-                    <td class="saveIncre">{{saveIncre}}%</td>
+                    <td class="index">{{index3}}%</td>
+                    <td class="index">{{index4}}%</td>
                 </tr>
             </table>
         </div>
@@ -36,22 +38,40 @@
             return{
                 //地图
                 mapName : 'china',
-                data : [
-                    {name:"湖北",value:116},
-                    {name:"湖南",value:114},
-                    {name:"重庆",value:91},
-                    {name:"四川",value:125},
-                    {name:"贵州",value:62},
-                    {name:"云南",value:83},
-                    {name:"西藏",value:9},
-                    {name:"陕西",value:80},
-                    {name:"甘肃",value:56},
-                    {name:"青海",value:10},
-                    {name:"宁夏",value:18},
-                    {name:"新疆",value:180},
-                    {name:"广东",value:123},
-                    {name:"广西",value:59}
+                data : [//name:省份 value:出现风险的指标数
+                    {name:"湖北",value:0},
+                    {name:"湖南",value:1},
+                    {name:"重庆",value:2},
+                    {name:"四川",value:3},
+                    {name:"贵州",value:4},
+                    {name:"云南",value:3},
+                    {name:"西藏",value:2},
+                    {name:"陕西",value:1},
+                    {name:"甘肃",value:2},
+                    {name:"青海",value:0},
+                    {name:"宁夏",value:0},
+                    {name:"新疆",value:2},
+                    {name:"广东",value:4},
+                    {name:"广西",value:0}
                 ],
+                //对应的4个指标
+                indexData:[
+                    {index1:10,index2:11,index3:12,index4:13},
+                    {index1:15,index2:16,index3:17,index4:18},
+                    {index1:20,index2:21,index3:22,index4:23},
+                    {index1:25,index2:26,index3:27,index4:28},
+                    {index1:30,index2:31,index3:32,index4:33},
+                    {index1:35,index2:36,index3:37,index4:38},
+                    {index1:40,index2:41,index3:42,index4:43},
+                    {index1:45,index2:46,index3:47,index4:48},
+                    {index1:50,index2:51,index3:52,index4:53},
+                    {index1:55,index2:56,index3:57,index4:58},
+                    {index1:60,index2:61,index3:62,index4:63},
+                    {index1:65,index2:66,index3:67,index4:68},
+                    {index1:70,index2:71,index3:72,index4:73},
+                    {index1:75,index2:76,index3:77,index4:78},
+                ],
+                //地图坐标
                 geoCoordMap : {
                     '台湾': [121.5135,25.0308],
                     '黑龙江': [127.9688, 45.368],
@@ -88,18 +108,18 @@
 
                 },
                 //详情框
-                profit:0,
-                profitIncre:0,
-                save:0,
-                saveIncre:0,
-                bankName:'工行'
+                index1:0,
+                index2:0,
+                index3:0,
+                index4:0,
+                bankName:' '
             }
         },
         computed: {
 
         },
         mounted() {
-            this.getChart();
+            this.getChart(this.data);
         },
         methods: {
             convertData(data) {
@@ -115,26 +135,27 @@
                 }
                 return res;
             },
-            getChart(){
+            getDefaultP(data){
+                var defaultP=[];
+                for (var i = 0; i < data.length; i++){
+                    if(i==0){
+                        defaultP.push(
+                            {name:data[i].name,selected: true}
+                        );
+                    }
+                    else {
+                        defaultP.push(
+                            {name:data[i].name,selected: false}
+                        );
+                    }
+                }
+                return defaultP;
+            },
+            getChart(data){
                 var myChart = echarts.init(document.getElementById('chart_middel2'));
-                var data = [
-                    {name:"湖北",value:116},
-                    {name:"湖南",value:114},
-                    {name:"重庆",value:91},
-                    {name:"四川",value:125},
-                    {name:"贵州",value:62},
-                    {name:"云南",value:83},
-                    {name:"西藏",value:9},
-                    {name:"陕西",value:80},
-                    {name:"甘肃",value:56},
-                    {name:"青海",value:10},
-                    {name:"宁夏",value:18},
-                    {name:"新疆",value:180},
-                    {name:"广东",value:123},
-                    {name:"广西",value:59}
-                ];
+                var defaultP =this.getDefaultP(data);//用于得到默认省份高亮的配置，defaultP设置了当前高亮的省份
+
                 var option = {
-                    // backgroundColor: 'rgba(0, 10, 52, 1)',
                     tooltip: {//小浮框
                         // show:false,
                         trigger: "item",
@@ -145,18 +166,19 @@
                             var toolTiphtml = '';
                             for(var i = 0;i<data.length;i++){
                                 if(params.name==data[i].name){
-                                    toolTiphtml+=params.name+'省分行的经营利润:<br>'+
-                                        data[i].value;
+                                    toolTiphtml+='<span>'+params.name+'</span>'+'省分行<br>'+
+                                        '<span style="color:'+'rgba(23, 240, 204)'+'">风险指标数 ：'+data[i].value+'</span>';
                                     break;
                                 }
                             }
                             return toolTiphtml;
-                        }
+                        },
                     },
                     geo: {//地图
                         map: this.mapName,
                         show: true,
                         roam: true,//可拖拽、放大
+                        left:40,
                         label: {
                             emphasis: {
                                 show: false,
@@ -164,7 +186,7 @@
                             }
                         },
                         //   放大我们的地图
-                        zoom: 1.6,
+                        zoom: 1,
                         itemStyle: {
                             normal: {
                                 areaColor: "rgba(43, 196, 243, 0.42)",
@@ -172,16 +194,49 @@
                                 borderWidth: 0.7
                             },
                             emphasis: {
-                                areaColor: "#2B91B7"
-                            }
-                        }
+                                areaColor: "rgba(229, 46, 92, 0.6)"//"rgba(35, 194, 252, 0.8)"//"rgba(229, 46, 92, 0.8)"
+                            }//
+                        },
                     },
+                    // visualMap: {
+                    //     min: 0,
+                    //     max: 4.5,
+                    //     left: 26,
+                    //     bottom: 40,
+                    //     showLabel: true,
+                    //     text: ["高", "低"],
+                    //     pieces: [{
+                    //         gt: 3.5,
+                    //         label: "> 100 人",
+                    //         color: "#7f1100"
+                    //     }, {
+                    //         gte: 3,
+                    //         lte: 3.5,
+                    //         label: "10 - 100 人",
+                    //         color: "#ff5428"
+                    //     }, {
+                    //         gte: 2,
+                    //         lt: 2.5,
+                    //         label: "1 - 9 人",
+                    //         color: "#ff8c71"
+                    //     }, {
+                    //         gte: 1,
+                    //         lt: 1.5,
+                    //         label: "疑似",
+                    //         color: "#ffd768"
+                    //     }, {
+                    //         value: 0,
+                    //         color: "#ffffff"
+                    //     }],
+                    //     show: false,
+                    //     zlevel:0,
+                    // },
                     series: [
                         {
                         name: '散点值',
                         type: 'scatter',
                         coordinateSystem: 'geo',
-                        data: this.convertData(this.data),
+                        data: this.convertData(data),
                         symbolSize: 5,
                         label:
                             {
@@ -232,15 +287,15 @@
                                 }
                             },
                             animation: false,
-                            data: this.convertData(this.data)
+                            data: this.convertData(data)
                         },
                         {
                             name: '黄点',
                             type: 'effectScatter',
                             coordinateSystem: 'geo',
-                            data: this.convertData(this.data),
+                            data: this.convertData(data),
                             symbolSize: function(val) {
-                                return val[2] / 10;
+                                return val[2]*3.5;
                             },
                             showEffectOn: 'render',
                             rippleEffect: {
@@ -264,20 +319,21 @@
                             zlevel: 1
                         },
                         {
-                            name: '点',
+                            name: '红色指标',
                             type: 'scatter',
                             coordinateSystem: 'geo',
                             symbol: 'pin',
-                            symbolSize: [50,50],
+                            symbolSize: [100,100],
                             label: {
                                 normal: {
                                     show: true,
                                     textStyle: {
                                         color: '#fff',
-                                        fontSize: 9,
+                                        fontSize: 12,
+                                        fontWeight: "bold",
                                     },
                                     formatter (value){
-                                        return value.data.value[2]
+                                        return value.data.name+'省分行'
                                     }
                                 }
                             },
@@ -302,11 +358,23 @@
                 var currentIndex = -1;
                 var timer = setInterval(()=>{   // eslint-disable-line no-unused-vars
                     var dataLen = option.series[1].data.length;
+
+                    function f() {//变化要高亮的省份
+                        var before=currentIndex-1;
+                        if(before<0){
+                            before=dataLen-1;
+                        }
+                        defaultP[before].selected=false;
+                        defaultP[currentIndex].selected=true;
+                        return defaultP;
+                    }
+
                     // 取消之前高亮的图形
                     myChart.dispatchAction({
                         type: 'downplay',
                         seriesIndex: 0
                     });
+                    console.log("当前："+currentIndex);
                     currentIndex = (currentIndex + 1) % dataLen;
 
                     // 显示 tooltip
@@ -316,7 +384,7 @@
                     //     dataIndex: currentIndex
                     // });
 
-                    myChart.dispatchAction({
+                     myChart.dispatchAction({
                         type: 'geoSelect',          //选中指定的地图区域。
                         seriesIndex: 0,  // 可选，系列 index，可以是一个数组指定多个系列
                         dataIndex: currentIndex,          // 数据的 index，如果不指定也可以通过 name 属性根据名称指定数据
@@ -324,46 +392,27 @@
 
                    //更改红色圈位置
                     myChart.setOption({
+                        geo: {
+                            regions: f(),//设置省份高亮
+                        },
                         series:[
                             {},{},{},
                             {
                                 data:this.convertData([data[currentIndex]])
-                            }
-                        ]
+                            },
+                        ],
                     });
-                    this.profit=data[currentIndex].value;
-                    this.profitIncre=data[currentIndex].value/200;
-                    this.save=data[currentIndex].value*10;
-                    this.saveIncre=data[currentIndex].value/200;
-                    this.bankName="工行"+data[currentIndex].name+"省分行"
+                    this.index1=this.indexData[currentIndex].index1;
+                    this.index2=this.indexData[currentIndex].index2;
+                    this.index3=this.indexData[currentIndex].index3;
+                    this.index4=this.indexData[currentIndex].index4;
+                    this.bankName=data[currentIndex].name
+
                 }, 3000);
 
-
-                // // 动态显示tooptip，每隔3秒去提示
-                // var faultByHourIndex = 0; //播放所在下标
-                // var faultByHourTime = setInterval(function() {// eslint-disable-line no-unused-vars
-                //     //使得tootip每隔三秒自动显示
-                //     myChart.dispatchAction({
-                //         type: "downplay",
-                //         seriesIndex: 0,
-                //     });
-                //     myChart.dispatchAction({
-                //         type: "highlight",
-                //         seriesIndex: 0,
-                //         dataIndex: this.data
-                //     });
-                //     myChart.dispatchAction({
-                //         type: "showTip", // 根据 tooltip 的配置项显示提示框。
-                //         seriesIndex: 0,
-                //         dataIndex: faultByHourIndex
-                //     });
-                //     faultByHourIndex = (faultByHourIndex + 1) % this.getChart();
-                //     // faultRateOption.series[0].data.length 是已报名纵坐标数据的长度
-                //     faultByHourIndex++;
-                //     if (faultByHourIndex > this.data.length) {
-                //         faultByHourIndex = 0;
-                //     }
-                // }, 3000);
+                window.addEventListener("resize", function() {
+                    myChart.resize();
+                });
             },
 
         }
@@ -372,16 +421,16 @@
 
 <style lang="scss" scoped>
     .chart {
-        height: 20.125rem;
+        height: 100%;
         width: 100%;
     }
     .map-container {
         position: absolute;
-        z-index: 8;
         left: 0px;
         top: 0px;
         width: 100%;
         height: 100%;
+        z-index: 2;
     }
     .mapPanel{
         color:#ade3ff;
@@ -392,18 +441,24 @@
         background-color: rgba(0, 20, 91, 0.8);
 
         top:310px;
-        left:790px;
+        left:770px;
         td{
-            /*border: 0.7px solid #FFC956;*/
+            text-align:center;
         }
         .bank_name{
             font-size: 18px;
             padding: 8px;
+            span{
+                color: #ffeb7b;
+            }
         }
         .title{
-            padding:5px 30px 0px 0px;
-            /*border: 0.7px solid #FFC956;*/
+            padding:5px 8px 0px 8px;
             background-color: rgba(15, 79, 153, 0.8);
+        }
+        .index{
+            color: #ffeb7b;
+            font-family: 'DIGITALDREAMFAT';
         }
     }
 

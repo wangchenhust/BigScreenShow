@@ -277,6 +277,9 @@ export default {
       myChart.setOption(option, true);
       option.series.pop(effectScatter1);
       option.series.pop(effectScatter2);
+      window.addEventListener('resize', () => {
+        myChart.resize();
+      });
     }
   },
   watch: {

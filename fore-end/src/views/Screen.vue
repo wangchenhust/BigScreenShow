@@ -32,7 +32,7 @@
                 <div class="left part">
 <!--                    仪表盘模块-->
                     <div class="panel">
-                        <h2>近年工行核心指标</h2>
+                        <h2>工行风险指标</h2>
 <!--                        柱状图组件-->
 <!--                        <dashboard />-->
                         <threeDashboards />
@@ -57,32 +57,11 @@
 <!--                中间-->
                 <div class="middel part">
 <!--                    报警提示-->
-                    <div class="resume">
-                        <div class="resume-hd">
-                            <ul>
-                                <li>
-<!--                                    水球图-->
-                                    <waterSphereChart />
-                                </li>
-                                <li>10</li>
-                                <li>5</li>
-                            </ul>
-                        </div>
-                        <div class="resume-bd">
-                            <ul>
-                                <li>安全比率</li>
-                                <li>全部指标项数</li>
-                                <li>当前风险指标项数</li>
-                            </ul>
-                        </div>
-                    </div>
+                    <resume/>
 <!--                    地图-->
                     <div class="map_part">
 <!--                        地图-->
                         <mapChart />
-<!--                        <model />-->
-<!--                        地图详情-->
-<!--                        <div class="chart" id="chart_map"></div>-->
 <!--                        地图背景图片-->
                         <div class="map1"></div>
                         <div class="map2"></div>
@@ -98,25 +77,25 @@
                 </div>
 <!--                右侧-->
                 <div class="right part">
-<!--                    雷达图模块-->
-                    <div class="panel">
-                        <h2>四大行对比</h2>
-<!--                        雷达图组件-->
-                        <radarChart />
-                        <div class="panel-footer"></div>
-                    </div>
 <!--                    可配置模块-->
                     <div class="panel small">
                         <h2>四大行指标</h2>
-<!--                        可配置组件-->
+                        <!--                        可配置组件-->
                         <configChart />
                         <div class="panel-footer"></div>
                     </div>
 <!--                    列表模块-->
                     <div class="panel small">
                         <h2>17家全国性银行总资产规模</h2>
-<!--                        列表组件-->
+                        <!--                        列表组件-->
                         <list />
+                        <div class="panel-footer"></div>
+                    </div>
+<!--                    雷达图模块-->
+                    <div class="panel">
+                        <h2>四大行对比</h2>
+<!--                        雷达图组件-->
+                        <radarChart />
                         <div class="panel-footer"></div>
                     </div>
                 </div>
@@ -301,91 +280,14 @@ header h2{
         flex: 6;
         margin: 0px 0.125rem 0.1rem;
         overflow: hidden;
-        .resume {
-            /*border: 1px solid #ffe400;*/
-            /*visibility:hidden;*/
-            background: rgba(101, 132, 226, 0.1);
-            padding: 0.2rem 0.7rem;
-            margin:0.2rem 0.5rem;
-            height: 4.5rem;
-            .resume-hd{
-                position: relative;
-                border: 1px solid rgba(25, 186, 139, 0.17);
-                height: 3rem;
-                ul{
-                    display: flex;
-                    %li-line {
-                        content: "";
-                        position: absolute;
-                        height: 50%;
-                        width: 1px;
-                        background: rgba(255, 255, 255, 0.2);
-                        top: 25%;
-                    }
-                    li{
-                        position: relative;
-                        flex: 1;
-                        text-align: center;
-                        height: 3.2rem;
-                        line-height: 3.2rem;
-                        font-size: 1.65rem;
-                        color: #ffeb7b;
-                        padding: 0.05rem 0;
-                        font-family: 'DIGITALDREAMFAT';
-                        font-weight: bold;
-                        &:nth-child(2){
-                            &:after {
-                                @extend %li-line;
-                                right: 0;
-                            }
-                            &:before {
-                                @extend %li-line;
-                                left: 0;
-                            }
-                        }
-                    }
-                }
-                &:before {
-                    content: "";
-                    position: absolute;
-                    width: 30px;
-                    height: 10px;
-                    border-top: 2px solid #02a6b5;
-                    border-left: 2px solid #02a6b5;
-                    top: 0;
-                    left: 0;
-                }
-                &:after {
-                    content: "";
-                    position: absolute;
-                    width: 30px;
-                    height: 10px;
-                    border-bottom: 2px solid #02a6b5;
-                    border-right: 2px solid #02a6b5;
-                    right: 0;
-                    bottom: 0;
-                }
-            }
-            .resume-bd {
-                ul {
-                    display: flex;
-                    li {
-                        flex: 1;
-                        height: 0.5rem;
-                        line-height: 0.5rem;
-                        text-align: center;
-                        font-size: 0.75rem;
-                        color: rgba(255, 255, 255, 0.7);
-                        padding-top: 0.5rem;
-                    }
-                }
-            }
-        }
 
         .below{
+            position: fixed;
             height: 6.5rem;
             width: 38rem;
             margin-left: 6px;
+            bottom: 7px;
+            z-index: 10;
             /*margin:0px 5px 0px 5px;*/
         }
     }
@@ -399,11 +301,16 @@ header h2{
         background: url(../assets/img/screen_img/map.png) no-repeat;
         background-size: 100% 100%;
         opacity: 0.5;
+        /*border: 1px solid #ffe400;*/
     }
     .map_part{
-        position: relative;
-        height: 19.45rem;
+        position: fixed;
+        height: 30.45rem;
+        width: 610px;
         /*border: 1px solid #ffe400;*/
+        z-index: 1;
+        top:60px;
+        margin: 0px 10px;
         .map1 {
             @extend %map-style;
         }
@@ -415,7 +322,7 @@ header h2{
             opacity: 0.7;
             -webkit-animation: rotate 15s linear infinite;
             animation: rotate 15s linear infinite;
-            z-index: -1;
+            z-index: -2;
         }
         .map3 {
             @extend %map-style;
@@ -428,12 +335,14 @@ header h2{
     }
 }
 .panel{
+    position: fixed;
     border: 1px solid rgba(25, 186, 139, 0.17);
     background: rgba(255, 255, 255, 0.04) url(../assets/img/screen_img/line.png);
     position: relative;
     height: 10rem;
     padding: 0.25rem;
     margin-top: 8px;
+    z-index: 10;
     &:before {
         position: absolute;
         top: 0;
@@ -490,31 +399,6 @@ header h2{
         margin-top: 3px;
     }
 }
-
-/*.mapPanel{*/
-/*    color:#f7ffb4;*/
-/*    z-index:10;*/
-/*    position: fixed;*/
-/*    border: 2px solid rgba(15, 79, 153, 0.8);*/
-/*    !*background: rgba(255, 255, 255, 0.04) url(../assets/img/screen_img/line.png);*!*/
-/*    background-color: rgba(0, 20, 91, 0.8);*/
-
-/*    top:310px;*/
-/*    left:790px;*/
-/*    td{*/
-/*        !*border: 0.7px solid #FFC956;*!*/
-/*    }*/
-/*    .bank_name{*/
-/*        font-size: 18px;*/
-/*        text-align:center;*/
-/*        padding: 8px;*/
-/*    }*/
-/*    .title{*/
-/*        padding:5px 30px 0px 0px;*/
-/*        !*border: 0.7px solid #FFC956;*!*/
-/*        background-color: rgba(15, 79, 153, 0.8);*/
-/*    }*/
-/*}*/
 
 .small{
     height: 9.5rem;

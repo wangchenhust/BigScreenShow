@@ -6,7 +6,7 @@ import colorfulRadar from './colorfulRadar'
 import gauge from './gauge'
 import seamless from './seamless'
 //    Screen
-import dynamicLine1 from './Screen/model'
+import dynamicLine1 from './Screen/resume'
 import barChart from './Screen/barChart'
 import lineChart from './Screen/lineChart'
 import pieChart from './Screen/pieChart'
@@ -20,7 +20,7 @@ import configChart from './Screen/configChart'
 import threeDashboards from "./Screen/threeDashboards";
 import threeDashboards1 from "./Screen/threeDashboards1";
 import threeDashboards2 from "./Screen/threeDashboards2";
-import model from "./Screen/model";
+import resume from "./Screen/resume";
 const components = {
     HelloWorld,
     dynamicLine,
@@ -43,7 +43,7 @@ const components = {
     threeDashboards,
     threeDashboards1,
     threeDashboards2,
-    model,
+    resume,
 };
 
 const install = (Vue = {}) => {

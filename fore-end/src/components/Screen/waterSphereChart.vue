@@ -11,7 +11,13 @@ export default {
   name: "waterSphereChart",
   data(){
     return{
-      value: 0.5
+
+    }
+  },
+  props:{
+    value:{
+      type:Number,
+      default:100
     }
   },
   computed: {
