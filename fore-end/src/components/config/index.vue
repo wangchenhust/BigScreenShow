@@ -81,7 +81,7 @@ export default {
     },
     toConfig(){
       this.$store.commit('changeChart',this.configData)
-      this.bus.$emit("change-config",this.configData)
+      // this.bus.$emit("change-config",this.configData)
     }
   }
 }

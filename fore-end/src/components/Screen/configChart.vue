@@ -10,11 +10,12 @@
 
 <script>
     import echarts from "echarts";
-    import {mapState} from 'vuex'
+    import {mapState,mapGetters} from 'vuex'
     export default {
         name: "configChart",
         data () {
             return {
+                option:{},
                 // options:[{
                 //     value:'line',
                 //     label:'折线图',
@@ -72,427 +73,412 @@
         },
         computed:{
             ...mapState({chartData:state=>state.configData}),
+            ...mapGetters(['getConfigInfo'])
 
         },
         mounted(){
-            this.option = {//折线图
-                calculable: true,
-                xAxis: [{
-                    type: 'category',
-                    boundaryGap: false,
-                    data:this.xAxis_data,
-                    axisLabel: {
-                        show: true,
-                        textStyle: {
-                            color: "#ade3ff", //X轴文字颜色
-                            fontSize: 10
-                        }
-                    },
-                    axisTick:{//坐标轴刻度相关设置。
-                        show: false,
-                    },
-                    axisLine:{//坐标轴轴线相关设置
-                        lineStyle:{
-                            color:'#E5E9ED',
-                            opacity:0.5//x轴
-                        }
-                    },
-                    splitLine: { //坐标轴在 grid 区域中的分隔线。
-                        show: true,
-                        lineStyle: {
-                            color: '#E5E9ED',
-                            opacity:0.1
-                        }
-                    }
-
-                }],
-                yAxis: [{
-                    type: 'value',
-                    splitNumber: 3,
-                    axisLabel: {
-                        // formatter: '{value} ',
-                        color: '#ade3ff',
-                        textStyle: {
-                            fontSize: 10
-                        },
-                        formatter:function(params) {
-                            var newParamsName = "";
-                            newParamsName = params*100+" %";
-                            return newParamsName
-                        }
-                    },
-                    axisLine:{
-                        lineStyle:{
-                            color:'#E5E9ED',
-                            opacity:0.5//y轴
-                        }
-                    },
-                    axisTick:{
-                        show: false
-                    },
-                    splitLine: {
-                        show: true,
-                        lineStyle: {
-                            color: '#E5E9ED',
-                            opacity:0.1
-                        }
-                    }
-                }],
-                series: [{
-                    name: '指标',
-                    type: 'line',
-                    data: [0.1,0.2,0.3],
-                    lineStyle: {
-                        normal: {
-                            width: 2,
-                            color: {
-                                type: 'linear',
-
-                                colorStops: [{
-                                    offset: 0,
-                                    color: '#57BD9F' // 0% 处的颜色
-                                }, {
-                                    offset: 1,
-                                    color: '#19BC8C' // 100% 处的颜色
-                                }],
-                                globalCoord: false // 缺省为 false
-                            },
-                            shadowColor: 'rgba(72,216,191, 0.3)',
-                            shadowBlur: 6,
-                            shadowOffsetY: 10
-                        }
-                    },
-                    itemStyle: {
-                        normal: {
-                            color: '#57BD9F',
-                            borderWidth: 8,
-                            borderColor: "#57BD9F"
-                        }
-                    },
-                    markPoint: {
-                        data: [{
-                            type: 'max',
-                            name: '最大值'
-                        },
-                            {
-                                type: 'min',
-                                name: '最小值'
-                            }
-                        ]
-                    },
-
-                }]
-            }
+            this.testChart = JSON.parse(localStorage.getItem('config'))
+            this.initOption(this.testChart)
             this.drawCharts(this.option)
         },
-        created() {
-            this.bus.$on('change-config',msg=>{this.testChart = msg})
-            console.log(this.testChart)
-        },
         watch:{
-            testChart:{
-              handler(newVal){
-                  console.log(newVal)
-              }
-            },
-            chartData:{
-                handler(newVal) {
-                    //console.log(newVal)
-                    let newConfigCharts = this.$echarts.init(document.getElementById('newConfigChart'))
-                    newConfigCharts.clear()
-                    if (newVal.chartType == 'line') {
-                        let newOption = this.option
-                        newOption.series[0].data = newVal.bankData
-                        newConfigCharts.setOption(newOption)
-                    } else if (newVal.chartType == 'gauge') {
-                        let newOption = {//仪表盘
-                            title: {
-                                show: true,
+            getConfigInfo:function(newVal){
+                this.initOption(newVal)
+                this.drawCharts(this.option)
+            }
+        },
+        methods: {
+            initOption(chartOption){
+                if (chartOption.chartType =='line'){
+                    this.option = {//折线图
+                        calculable: true,
+                            xAxis: [{
+                        type: 'category',
+                        boundaryGap: false,
+                        data:chartOption.bankChart,
+                        axisLabel: {
+                            show: true,
+                            textStyle: {
+                                color: "#ade3ff", //X轴文字颜色
+                                fontSize: 10
+                            }
+                        },
+                        axisTick:{//坐标轴刻度相关设置。
+                            show: false,
+                        },
+                        axisLine:{//坐标轴轴线相关设置
+                            lineStyle:{
+                                color:'#E5E9ED',
+                                opacity:0.5//x轴
+                            }
+                        },
+                        splitLine: { //坐标轴在 grid 区域中的分隔线。
+                            show: true,
+                            lineStyle: {
+                                color: '#E5E9ED',
+                                opacity:0.1
+                            }
+                        }
+
+                    }],
+                        yAxis: [{
+                        type: 'value',
+                        splitNumber: 3,
+                        axisLabel: {
+                            // formatter: '{value} ',
+                            color: '#ade3ff',
+                            textStyle: {
+                                fontSize: 10
+                            },
+                            formatter:function(params) {
+                                var newParamsName = "";
+                                newParamsName = params*100+" %";
+                                return newParamsName
+                            }
+                        },
+                        axisLine:{
+                            lineStyle:{
+                                color:'#E5E9ED',
+                                opacity:0.5//y轴
+                            }
+                        },
+                        axisTick:{
+                            show: false
+                        },
+                        splitLine: {
+                            show: true,
+                            lineStyle: {
+                                color: '#E5E9ED',
+                                opacity:0.1
+                            }
+                        }
+                    }],
+                        series: [{
+                        name: '指标',
+                        type: 'line',
+                        data: [0.1,0.2,0.3],
+                        lineStyle: {
+                            normal: {
+                                width: 2,
+                                color: {
+                                    type: 'linear',
+
+                                    colorStops: [{
+                                        offset: 0,
+                                        color: '#57BD9F' // 0% 处的颜色
+                                    }, {
+                                        offset: 1,
+                                        color: '#19BC8C' // 100% 处的颜色
+                                    }],
+                                    globalCoord: false // 缺省为 false
+                                },
+                                shadowColor: 'rgba(72,216,191, 0.3)',
+                                shadowBlur: 6,
+                                shadowOffsetY: 10
+                            }
+                        },
+                        itemStyle: {
+                            normal: {
+                                color: '#57BD9F',
+                                borderWidth: 8,
+                                borderColor: "#57BD9F"
+                            }
+                        },
+                        markPoint: {
+                            data: [{
+                                type: 'max',
+                                name: '最大值'
+                            },
+                                {
+                                    type: 'min',
+                                    name: '最小值'
+                                }
+                            ]
+                        },
+
+                    }]
+                    }
+                }
+                else if (chartOption.chartType == 'gauge'){
+                    this.option = {//仪表盘
+                        title: {
+                            show: true,
                                 text: 'RORWA',
                                 x: '49%',
                                 y: '55%',
                                 z: 8,//优先级
                                 textAlign: 'center',
                                 textStyle: {
-                                    color: '#006ced',
+                                color: '#006ced',
                                     fontStyle: 'normal',
                                     fontFamily: '微软雅黑',
                                     fontSize: 10,
+                            },
+                        },
+                        series: [
+                            {
+                                name: "内部进度条",
+                                type: "gauge",
+                                // center: ['20%', '50%'],
+                                radius: '68%',//大小
+                                z: 0,
+                                splitNumber: 10,//大刻度单位数量
+                                axisLine: {
+                                    lineStyle: {
+                                        color: [
+                                            [chartOption.gaugeChart.value / 100, this.colorSet.color],
+                                            [1, "#0f274f"]
+                                        ],
+                                        width: 2//进度条宽度
+                                    }
+                                },
+                                axisLabel: {
+                                    show: false,
+                                },
+                                axisTick: {
+                                    show: false,
+
+                                },
+                                splitLine: {
+                                    show: false,
+                                },
+                                pointer: {
+                                    show: false,
                                 },
                             },
-                            series: [
-                                {
-                                    name: "内部进度条",
-                                    type: "gauge",
-                                    // center: ['20%', '50%'],
-                                    radius: '68%',//大小
-                                    z: 0,
-                                    splitNumber: 10,//大刻度单位数量
-                                    axisLine: {
-                                        lineStyle: {
-                                            color: [
-                                                [newVal.gaugeChart.value / 100, this.colorSet.color],
-                                                [1, "#0f274f"]
-                                            ],
-                                            width: 2//进度条宽度
-                                        }
-                                    },
-                                    axisLabel: {
-                                        show: false,
-                                    },
-                                    axisTick: {
-                                        show: false,
-
-                                    },
-                                    splitLine: {
-                                        show: false,
-                                    },
-                                    pointer: {
-                                        show: false,
-                                    },
-                                },
-                                {
-                                    name: '外部刻度',
-                                    type: 'gauge',
-                                    // center: ['20%', '50%'],
-                                    radius: '80%',
-                                    min: 0, //最小刻度
-                                    max: 100, //最大刻度
-                                    splitNumber: 10, //刻度数量
-                                    startAngle: 225,
-                                    endAngle: -45,
-                                    axisLine: {
-                                        show: true,
-                                        lineStyle: {
-                                            width: 1,
-                                            color: [
-                                                [1, 'rgba(0,0,0,0)']
-                                            ]
-                                        }
-                                    },
-                                    //仪表盘轴线
-                                    axisLabel: {
-                                        show: true,
-                                        color: '#4d5bd1',
-                                        distance: 9,//刻线值与刻线距离
-                                        fontSize: 6,//刻线值大小
-                                        formatter: function (v) {
-                                            switch (v + '') {
-                                                case '0':
-                                                    return '0';
-                                                case '10':
-                                                    return '10';
-                                                case '20':
-                                                    return '20';
-                                                case '30':
-                                                    return '30';
-                                                case '40':
-                                                    return '40';
-                                                case '50':
-                                                    return '50';
-                                                case '60':
-                                                    return '60';
-                                                case '70':
-                                                    return '70';
-                                                case '80':
-                                                    return '80';
-                                                case '90':
-                                                    return '90';
-                                                case '100':
-                                                    return '100';
-                                            }
-                                        }
-                                    }, //刻度标签。
-                                    axisTick: {
-                                        show: true,
-                                        splitNumber: 6,//小刻线单位数量
-                                        lineStyle: {
-                                            color: this.colorSet.color, //用颜色渐变函数不起作用
-                                            width: 0.7,
-                                        },
-                                        length: -4//小刻线长度
-                                    }, //刻度样式
-                                    splitLine: {
-                                        show: true,
-                                        length: -8,//大刻线长度
-                                        lineStyle: {
-                                            color: this.colorSet.color, //用颜色渐变函数不起作用
-                                            width: 1,
-                                        }
-                                    }, //分隔线样式
-                                    detail: {
-                                        show: false
-                                    },
-                                    pointer: {
-                                        show: false
+                            {
+                                name: '外部刻度',
+                                type: 'gauge',
+                                // center: ['20%', '50%'],
+                                radius: '80%',
+                                min: 0, //最小刻度
+                                max: 100, //最大刻度
+                                splitNumber: 10, //刻度数量
+                                startAngle: 225,
+                                endAngle: -45,
+                                axisLine: {
+                                    show: true,
+                                    lineStyle: {
+                                        width: 1,
+                                        color: [
+                                            [1, 'rgba(0,0,0,0)']
+                                        ]
                                     }
                                 },
-                                /*内部圈*/
-                                {
-                                    type: 'pie',
-                                    radius: ['0', '40%'],
-                                    center: ['50%', '50%'],
-                                    z: 8,
-                                    hoverAnimation: false,
-                                    data: [{
-                                        name: '资本充足率',
-                                        value: newVal.gaugeChart.value,
-                                        itemStyle: {
-                                            normal: {
-                                                color: new echarts.graphic.LinearGradient(0, 1, 0, 0, [{
-                                                    offset: 0,
-                                                    color: '#4FADFD'
-                                                }, {
-                                                    offset: 1,
-                                                    color: '#fff'//#28E8FA
-                                                }])
-                                            }
-                                        },
-                                        label: {
-                                            normal: {
-                                                rich: {
-                                                    a: {
-                                                        color: '#468EFD',
-                                                        align: 'center',
-                                                        fontSize: 18,
-                                                        fontWeight: "bold"
-                                                    },
-                                                },
-                                                formatter: function (params) {
-                                                    return "{a|" + params.value + "}";
-                                                },
-                                                position: 'center',
-                                                show: true
-                                            }
-                                        },
-                                        labelLine: {
-                                            show: false
+                                //仪表盘轴线
+                                axisLabel: {
+                                    show: true,
+                                    color: '#4d5bd1',
+                                    distance: 9,//刻线值与刻线距离
+                                    fontSize:6,//刻线值大小
+                                    formatter: function (v) {
+                                        switch (v + '') {
+                                            case '0':
+                                                return '0';
+                                            case '10':
+                                                return '10';
+                                            case '20':
+                                                return '20';
+                                            case '30':
+                                                return '30';
+                                            case '40':
+                                                return '40';
+                                            case '50':
+                                                return '50';
+                                            case '60':
+                                                return '60';
+                                            case '70':
+                                                return '70';
+                                            case '80':
+                                                return '80';
+                                            case '90':
+                                                return '90';
+                                            case '100':
+                                                return '100';
                                         }
-                                    }],
+                                    }
+                                }, //刻度标签。
+                                axisTick: {
+                                    show: true,
+                                    splitNumber: 6,//小刻线单位数量
+                                    lineStyle: {
+                                        color: this.colorSet.color, //用颜色渐变函数不起作用
+                                        width: 0.7,
+                                    },
+                                    length: -4//小刻线长度
+                                }, //刻度样式
+                                splitLine: {
+                                    show: true,
+                                    length: -8,//大刻线长度
+                                    lineStyle: {
+                                        color: this.colorSet.color, //用颜色渐变函数不起作用
+                                        width: 1,
+                                    }
+                                }, //分隔线样式
+                                detail: {
+                                    show: false
                                 },
-                                /*外一层*/
-                                {
-                                    type: "pie",
-                                    radius: "45%",
-                                    startAngle: 220,
-                                    endAngle: -40,
-                                    hoverAnimation: false,
-                                    center: ["50%", "50%"],
-                                    avoidLabelOverlap: false,
+                                pointer: {
+                                    show: false
+                                }
+                            },
+                            /*内部圈*/
+                            {
+                                type: 'pie',
+                                radius: ['0', '40%'],
+                                center: ['50%', '50%'],
+                                z: 8,
+                                hoverAnimation: false,
+                                data: [{
+                                    name: '资本充足率',
+                                    value: chartOption.gaugeChart.value,
+                                    itemStyle: {
+                                        normal: {
+                                            color: new echarts.graphic.LinearGradient(0, 1, 0, 0, [{
+                                                offset: 0,
+                                                color: '#4FADFD'
+                                            }, {
+                                                offset: 1,
+                                                color: '#fff'//#28E8FA
+                                            }])
+                                        }
+                                    },
                                     label: {
-                                        show: false
+                                        normal: {
+                                            rich: {
+                                                a: {
+                                                    color: '#468EFD',
+                                                    align: 'center',
+                                                    fontSize: 18,
+                                                    fontWeight: "bold"
+                                                },
+                                            },
+                                            formatter: function (params) {
+                                                return "{a|" + params.value + "}";
+                                            },
+                                            position: 'center',
+                                            show: true
+                                        }
                                     },
                                     labelLine: {
                                         show: false
-                                    },
-                                    data: [{
-                                        value: 1
-                                    }],
-                                    itemStyle: {
-                                        normal: {
-                                            color: {
-                                                type: "linear",
-                                                x: 0,
-                                                y: 0,
-                                                x2: 0,
-                                                y2: 1,
-                                                colorStops: [{
-                                                    offset: 0,
-                                                    color: "rgba(69, 161, 255,0.8)"
-                                                }, {
-                                                    offset: 1,
-                                                    color: "rgba(69, 161, 255,0.5)"
-                                                }]
-                                            }
-                                        }
                                     }
+                                }],
+                            },
+                            /*外一层*/
+                            {
+                                type: "pie",
+                                radius: "45%",
+                                startAngle: 220,
+                                endAngle: -40,
+                                hoverAnimation: false,
+                                center: ["50%", "50%"],
+                                avoidLabelOverlap: false,
+                                label: {
+                                    show: false
                                 },
-                                //外二层圈
-                                {
-                                    type: "pie",
-                                    radius: "50%",
-                                    center: ["50%", "50%"],
-                                    avoidLabelOverlap: false,
-                                    z: 1,
-                                    hoverAnimation: false,
-                                    label: {
-                                        show: false
-                                    },
-                                    labelLine: {
-                                        show: false
-                                    },
-                                    data: [{
-                                        "value": 1
-                                    }],
-                                    itemStyle: {
-                                        normal: {
-                                            color: {
-                                                type: "linear",
-                                                x: 0,
-                                                y: 0,
-                                                x2: 0,
-                                                y2: 1,
-                                                colorStops: [{
-                                                    offset: 0,
-                                                    color: "rgba(69, 161, 255,0.5)"
-                                                }, {
-                                                    offset: 1,
-                                                    color: "rgba(69, 161, 255,0.3)"
-                                                }]
-                                            }
-                                        }
-                                    }
+                                labelLine: {
+                                    show: false
                                 },
-                                //最外层圈
-                                {
-                                    type: "pie",
-                                    radius: "55%",
-                                    center: ["50%", "50%"],
-                                    avoidLabelOverlap: false,
-                                    z: 1,
-                                    hoverAnimation: false,
-                                    label: {
-                                        show: false,
-                                    },
-                                    labelLine: {
-                                        show: false
-                                    },
-                                    data: [{
-                                        value: 1
-                                    }],
-                                    itemStyle: {
-                                        normal: {
-                                            color: {
-                                                type: "linear",
-                                                x: 0,
-                                                y: 0,
-                                                x2: 0,
-                                                y2: 1,
-                                                colorStops: [{
-                                                    offset: 0,
-                                                    color: "rgba(69, 161, 255,0.3)"
-                                                },
-                                                    {
-                                                        offset: 1,
-                                                        color: "rgba(69, 161, 255,0)"
-                                                    }
-                                                ]
-                                            }
+                                data: [{
+                                    value: 1
+                                }],
+                                itemStyle: {
+                                    normal: {
+                                        color: {
+                                            type: "linear",
+                                            x: 0,
+                                            y: 0,
+                                            x2: 0,
+                                            y2: 1,
+                                            colorStops: [{
+                                                offset: 0,
+                                                color: "rgba(69, 161, 255,0.8)"
+                                            }, {
+                                                offset: 1,
+                                                color: "rgba(69, 161, 255,0.5)"
+                                            }]
                                         }
                                     }
                                 }
-                            ]
-                        }
-                        newConfigCharts.setOption(newOption)
+                            },
+                            //外二层圈
+                            {
+                                type: "pie",
+                                radius: "50%",
+                                center: ["50%", "50%"],
+                                avoidLabelOverlap: false,
+                                z: 1,
+                                hoverAnimation: false,
+                                label: {
+                                    show: false
+                                },
+                                labelLine: {
+                                    show: false
+                                },
+                                data: [{
+                                    "value": 1
+                                }],
+                                itemStyle: {
+                                    normal: {
+                                        color: {
+                                            type: "linear",
+                                            x: 0,
+                                            y: 0,
+                                            x2: 0,
+                                            y2: 1,
+                                            colorStops: [{
+                                                offset: 0,
+                                                color: "rgba(69, 161, 255,0.5)"
+                                            }, {
+                                                offset: 1,
+                                                color: "rgba(69, 161, 255,0.3)"
+                                            }]
+                                        }
+                                    }
+                                }
+                            },
+                            //最外层圈
+                            {
+                                type: "pie",
+                                radius: "55%",
+                                center: ["50%", "50%"],
+                                avoidLabelOverlap: false,
+                                z: 1,
+                                hoverAnimation: false,
+                                label: {
+                                    show: false,
+                                },
+                                labelLine: {
+                                    show: false
+                                },
+                                data: [{
+                                    value: 1
+                                }],
+                                itemStyle: {
+                                    normal: {
+                                        color: {
+                                            type: "linear",
+                                            x: 0,
+                                            y: 0,
+                                            x2: 0,
+                                            y2: 1,
+                                            colorStops: [{
+                                                offset: 0,
+                                                color: "rgba(69, 161, 255,0.3)"
+                                            },
+                                                {
+                                                    offset: 1,
+                                                    color: "rgba(69, 161, 255,0)"
+                                                }
+                                            ]
+                                        }
+                                    }
+                                }
+                            }
+                        ]
                     }
-                },
-                immediate:true
-            }
-        },
-        methods: {
-            getData(){
-                this.bus.$on("change-config",msg=>{this.chartData = msg})
-                console.log(this.chartData)
+                }
             },
             drawCharts(option){
                 let newConfigCharts = this.$echarts.init(document.getElementById('newConfigChart'))

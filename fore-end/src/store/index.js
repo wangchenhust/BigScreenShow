@@ -6,20 +6,29 @@ Vue.use(Vuex)
 
 export default new Vuex.Store({
     state:{
-        configData:{}
+        configData:{
+            chartType:'',
+            bankChart:[],
+            gaugeChart:{}
+        }
     },
     mutations:{
         changeChart(state,newConfig){
             state.configData = newConfig
             console.log(state.configData)
+            localStorage.setItem('config',JSON.stringify(state.configData))
         }
     },
+
     getters: {
-        shareConfig(state) {
+        getConfigInfo(state) {
+            if (localStorage.getItem('config')){
+                state.configData = JSON.parse(localStorage.getItem('config'))
+            }
             return state.configData
         }
-    },
-    modules: {
+     },
+    modules:{
         pie
     }
 })
