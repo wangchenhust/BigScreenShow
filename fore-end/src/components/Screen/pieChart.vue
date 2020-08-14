@@ -14,7 +14,6 @@
             return{
                 color:['#00ffff', '#00cfff', '#006ced',
                     '#ffe000', '#ffa800', '#ff5b00', '#ff3000'],
-                names:['利息','投资收益','公允价值变动损益','手续费佣金收入','其他业务收入','汇总收益'],
                 list :[],
                 myCharts:null,
                 option:null
@@ -38,12 +37,12 @@
             }
         },
         mounted() {
-            console.log(this.getValues)
+            //console.log(this.getValues)
             this.initData();
             this.setList();
             this.getChart();
             this.setOption();
-            //this.timer();
+            if (typeof (EventSource) == "undefined") this.timer();
         },
         methods: {
             async initData(){
@@ -158,10 +157,10 @@
             },
             timer() {
                 return setInterval(() => {
-                    this.$store.commit('pie/setValues',[51,10,10,10,5,5])
-                }, 10000)
-// >>>>>>> 612aa22f942b75f3a5e97b86ff3d50e49814ab4f
+                    this.initData()
+                }, 5000)
             }
+
         }
     }
 </script>
