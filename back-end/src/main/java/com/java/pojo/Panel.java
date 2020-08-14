@@ -6,8 +6,6 @@ public class Panel {
 	private String name;
 	
 	private Integer value;
-	
-	private String valuedate;
 
 	public String getName() {
 		return name;
@@ -23,14 +21,6 @@ public class Panel {
 
 	public void setValue(Integer value) {
 		this.value = value;
-	}
-
-	public String getValuedate() {
-		return valuedate;
-	}
-
-	public void setValuedate(String valuedate) {
-		this.valuedate = valuedate;
 	}
 
 }

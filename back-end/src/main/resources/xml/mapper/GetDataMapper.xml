@@ -3,12 +3,14 @@
     PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.java.mapper.GetDataMapper">
-	<!-- 仪表盘查询语句 -->
+	<!-- 仪表盘查询语句（已优化） -->
 	<select id="getPanelData" resultType="com.java.pojo.Panel">
 		select
-		dn.NAME,cast(pv.VALUE as DECIMAL(3.0)) VALUE,vd.valuedate
+		dn.NAME,cast(pv.VALUE as DECIMAL(3.0)) VALUE
 		from
-		panelvalues pv,banks,datanames dn,valuedates vd
+		panelvalues pv,
+		(select * from banks where NAME='工商银行') banks,
+		datanames dn,valuedates vd
 		where
 		pv.did=dn.id and
 		pv.vid=vd.id and pv.bid=banks.id;
@@ -123,13 +125,13 @@
 
 	<!-- 地图查询语句（已优化） -->
 	<select id="getMMapData" resultType="com.java.pojo.MMap">
-		select bb.NAME province,mv1.VALUE jylr,CAST(mv2.VALUE AS DECIMAL(3,0))
-		jylrtbzzl,mv3.VALUE ckye,CAST(mv4.VALUE AS DECIMAL(3,0)) ckyetbzzl
+		select REPLACE(bb.NAME,'分行','') province,CAST(mv1.VALUE AS DECIMAL(3,0)) zbczl,CAST(mv2.VALUE AS DECIMAL(3,0))
+		hxzbczl,CAST(mv3.VALUE AS DECIMAL(3,0)) zblrl,CAST(mv4.VALUE AS DECIMAL(3,0)) ldxbl
 		from
-		(select VALUE,bbid from mapvalues where did=26) mv1,
-		(select VALUE,bbid from mapvalues where did=27) mv2,
-		(select VALUE,bbid from mapvalues where did=28) mv3,
-		(select VALUE,bbid from mapvalues where did=29) mv4,
+		(select VALUE,bbid from mapvalues where did=1) mv1,
+		(select VALUE,bbid from mapvalues where did=18) mv2,
+		(select VALUE,bbid from mapvalues where did=21) mv3,
+		(select VALUE,bbid from mapvalues where did=23) mv4,
 		branchbanks bb
 		where bb.id=mv1.bbid and bb.id=mv2.bbid and bb.id=mv3.bbid and
 		bb.id=mv4.bbid;

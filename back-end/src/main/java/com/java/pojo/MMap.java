@@ -1,17 +1,16 @@
 package com.java.pojo;
 
-import java.math.BigDecimal;
 
 public class MMap {
 	private String province;
 	
-	private BigDecimal jylr;
+	private Integer zbczl;
 	
-	private Integer jylrtbzzl;
+	private Integer hxzbczl;
 	
-	private BigDecimal ckye;
+	private Integer zblrl;
 	
-	private Integer ckyetbzzl;
+	private Integer ldxbl;
 
 	public String getProvince() {
 		return province;
@@ -21,36 +20,38 @@ public class MMap {
 		this.province = province;
 	}
 
-	public BigDecimal getJylr() {
-		return jylr;
+	public Integer getZbczl() {
+		return zbczl;
 	}
 
-	public void setJylr(BigDecimal jylr) {
-		this.jylr = jylr;
+	public void setZbczl(Integer zbczl) {
+		this.zbczl = zbczl;
 	}
 
-	public Integer getJylrtbzzl() {
-		return jylrtbzzl;
+	public Integer getHxzbczl() {
+		return hxzbczl;
 	}
 
-	public void setJylrtbzzl(Integer jylrtbzzl) {
-		this.jylrtbzzl = jylrtbzzl;
+	public void setHxzbczl(Integer hxzbczl) {
+		this.hxzbczl = hxzbczl;
 	}
 
-	public BigDecimal getCkye() {
-		return ckye;
+	public Integer getZblrl() {
+		return zblrl;
 	}
 
-	public void setCkye(BigDecimal ckye) {
-		this.ckye = ckye;
+	public void setZblrl(Integer zblrl) {
+		this.zblrl = zblrl;
 	}
 
-	public Integer getCkyetbzzl() {
-		return ckyetbzzl;
+	public Integer getLdxbl() {
+		return ldxbl;
 	}
 
-	public void setCkyetbzzl(Integer ckyetbzzl) {
-		this.ckyetbzzl = ckyetbzzl;
+	public void setLdxbl(Integer ldxbl) {
+		this.ldxbl = ldxbl;
 	}
+
+
 
 }
