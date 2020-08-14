@@ -38,38 +38,26 @@
             return{
                 //地图
                 mapName : 'china',
-                data : [//name:省份 value:出现风险的指标数
-                    {name:"湖北",value:0},
-                    {name:"湖南",value:1},
-                    {name:"重庆",value:2},
-                    {name:"四川",value:3},
-                    {name:"贵州",value:4},
-                    {name:"云南",value:3},
-                    {name:"西藏",value:2},
-                    {name:"陕西",value:1},
-                    {name:"甘肃",value:2},
-                    {name:"青海",value:0},
-                    {name:"宁夏",value:0},
-                    {name:"新疆",value:2},
-                    {name:"广东",value:4},
-                    {name:"广西",value:0}
+                //地图所需数据
+                mapdata : [
+                    //name:省份 value:出现风险的指标数
                 ],
-                //对应的4个指标
+                //省份及对应的4个指标,从后端传来
                 indexData:[
-                    {index1:10,index2:11,index3:12,index4:13},
-                    {index1:15,index2:16,index3:17,index4:18},
-                    {index1:20,index2:21,index3:22,index4:23},
-                    {index1:25,index2:26,index3:27,index4:28},
-                    {index1:30,index2:31,index3:32,index4:33},
-                    {index1:35,index2:36,index3:37,index4:38},
-                    {index1:40,index2:41,index3:42,index4:43},
-                    {index1:45,index2:46,index3:47,index4:48},
-                    {index1:50,index2:51,index3:52,index4:53},
-                    {index1:55,index2:56,index3:57,index4:58},
-                    {index1:60,index2:61,index3:62,index4:63},
-                    {index1:65,index2:66,index3:67,index4:68},
-                    {index1:70,index2:71,index3:72,index4:73},
-                    {index1:75,index2:76,index3:77,index4:78},
+                    {name:"湖北",index1:10,index2:11,index3:12,index4:13},
+                    {name:"湖南",index1:15,index2:16,index3:17,index4:18},
+                    {name:"重庆",index1:20,index2:21,index3:22,index4:23},
+                    {name:"四川",index1:25,index2:26,index3:27,index4:28},
+                    {name:"贵州",index1:30,index2:31,index3:32,index4:33},
+                    {name:"云南",index1:35,index2:36,index3:37,index4:38},
+                    {name:"西藏",index1:40,index2:41,index3:42,index4:43},
+                    {name:"陕西",index1:45,index2:46,index3:47,index4:48},
+                    {name:"甘肃",index1:50,index2:51,index3:52,index4:53},
+                    {name:"青海",index1:55,index2:56,index3:57,index4:58},
+                    {name:"宁夏",index1:60,index2:61,index3:62,index4:63},
+                    {name:"新疆",index1:65,index2:66,index3:67,index4:68},
+                    {name:"广东",index1:70,index2:71,index3:72,index4:73},
+                    {name:"广西",index1:75,index2:76,index3:77,index4:78},
                 ],
                 //地图坐标
                 geoCoordMap : {
@@ -119,55 +107,69 @@
 
         },
         mounted() {
-            this.getChart(this.data);
+            this.getChart(this.mapdata);
         },
         methods: {
-            convertData(data) {
+            //地图所需要的mapdata
+            convertData(mapdata) {
                 var res = [];
-                for (var i = 0; i < data.length; i++) {
-                    var geoCoord = this.geoCoordMap[data[i].name];
+                for (var i = 0; i < mapdata.length; i++) {
+                    var geoCoord = this.geoCoordMap[mapdata[i].name];
                     if (geoCoord) {
                         res.push({
-                            name: data[i].name,
-                            value: geoCoord.concat(data[i].value),
+                            name: mapdata[i].name,
+                            value: geoCoord.concat(mapdata[i].value),
                         });
                     }
                 }
                 return res;
             },
-            getDefaultP(data){
+            //高亮轮播所需要的defaultP
+            getDefaultP(mapdata){
                 var defaultP=[];
-                for (var i = 0; i < data.length; i++){
+                for (var i = 0; i < mapdata.length; i++){
                     if(i==0){
                         defaultP.push(
-                            {name:data[i].name,selected: true}
+                            {name:mapdata[i].name,selected: true}
                         );
                     }
                     else {
                         defaultP.push(
-                            {name:data[i].name,selected: false}
+                            {name:mapdata[i].name,selected: false}
                         );
                     }
                 }
                 return defaultP;
             },
-            getChart(data){
+            // 根据indexData初始化mapdata
+            getMapdata(indexData){
+                var mapdata=[];
+                for(var i=0;i<indexData.length;i++){
+                    mapdata.push({
+                        name:indexData[i].name,value:0
+                    })
+                }
+                return mapdata;
+            },
+
+            getChart(mapdata){
+                mapdata=this.getMapdata(this.indexData);//初始化地图所需数据
+
                 var myChart = echarts.init(document.getElementById('chart_middel2'));
-                var defaultP =this.getDefaultP(data);//用于得到默认省份高亮的配置，defaultP设置了当前高亮的省份
+                var defaultP =this.getDefaultP(mapdata);//用于得到默认省份高亮的配置，defaultP设置了当前高亮的省份
 
                 var option = {
-                    tooltip: {//小浮框
-                        // show:false,
+                    tooltip:{//小浮框
                         trigger: "item",
                         textStyle: {
                             color: "#fff",
                         },
                         formatter: function(params){
                             var toolTiphtml = '';
-                            for(var i = 0;i<data.length;i++){
-                                if(params.name==data[i].name){
+                            for(var i = 0;i<mapdata.length;i++){
+                                if(params.name==mapdata[i].name){
                                     toolTiphtml+='<span>'+params.name+'</span>'+'省分行<br>'+
-                                        '<span style="color:'+'rgba(23, 240, 204)'+'">风险指标数 ：'+data[i].value+'</span>';
+                                        '<span style="color:'+'rgba(23, 240, 204)'+'">风险指标数 ：'+mapdata[i].value+'</span>';
                                     break;
                                 }
                             }
@@ -233,28 +235,28 @@
                     // },
                     series: [
                         {
-                        name: '散点值',
-                        type: 'scatter',
-                        coordinateSystem: 'geo',
-                        data: this.convertData(data),
-                        symbolSize: 5,
-                        label:
-                            {
-                                normal: {
-                                    formatter: '{b}',
-                                    position: 'right',
-                                    show: true
+                            name: '散点值',
+                            type: 'scatter',
+                            coordinateSystem: 'geo',
+                            data: this.convertData(mapdata),
+                            symbolSize: 5,
+                            label:
+                                {
+                                    normal: {
+                                        formatter: '{b}',
+                                        position: 'right',
+                                        show: true
+                                    },
+                                    emphasis: {
+                                        show: true
+                                    }
                                 },
-                                emphasis: {
-                                    show: true
+                            itemStyle: {
+                                normal: {
+                                    color: '#fff'
                                 }
-                            },
-                        itemStyle: {
-                            normal: {
-                                color: '#fff'
                             }
-                        }
-                    },
+                        },
                         {
                             name:'省份',
                             type: 'map',
@@ -287,15 +289,15 @@
                                 }
                             },
                             animation: false,
-                            data: this.convertData(data)
+                            data: this.convertData(mapdata)
                         },
                         {
                             name: '黄点',
                             type: 'effectScatter',
                             coordinateSystem: 'geo',
-                            data: this.convertData(data),
+                            data: this.convertData(mapdata),
                             symbolSize: function(val) {
-                                return val[2]*3.5;
+                                return (val[2]+2)*3.5;
                             },
                             showEffectOn: 'render',
                             rippleEffect: {
@@ -384,13 +386,13 @@
                     //     dataIndex: currentIndex
                     // });
 
-                     myChart.dispatchAction({
+                    myChart.dispatchAction({
                         type: 'geoSelect',          //选中指定的地图区域。
                         seriesIndex: 0,  // 可选，系列 index，可以是一个数组指定多个系列
                         dataIndex: currentIndex,          // 数据的 index，如果不指定也可以通过 name 属性根据名称指定数据
                     });
 
-                   //更改红色圈位置
+                    //更改红色圈位置
                     myChart.setOption({
                         geo: {
                             regions: f(),//设置省份高亮
@@ -398,7 +400,7 @@
                         series:[
                             {},{},{},
                             {
-                                data:this.convertData([data[currentIndex]])
+                                data:this.convertData([mapdata[currentIndex]])
                             },
                         ],
                     });
@@ -406,7 +408,7 @@
                     this.index2=this.indexData[currentIndex].index2;
                     this.index3=this.indexData[currentIndex].index3;
                     this.index4=this.indexData[currentIndex].index4;
-                    this.bankName=data[currentIndex].name
+                    this.bankName=this.indexData[currentIndex].name;
 
                 }, 3000);
 
