@@ -6,10 +6,9 @@
 
 <script>
 import echarts from "echarts";
-import { mapGetters,mapState } from 'vuex'
 
 export default {
-  name: "barChart",
+  name: "barChart1",
   data() {
     return {
       //柱状图
@@ -24,47 +23,27 @@ export default {
               // 0.9, 0.8, 0.6, 0.4, 0.2
       ],
       datax_max: [100, 100, 100, 100, 100],
-      data: [{name:"资产利润率",value:2}, {name:"资本利润率",value:13},
+      data: [{name:"资产利润率",value:5}, {name:"资本利润率",value:13},
         {name:"不良贷款率",value:1}, {name:"不良资产率",value:2},
         {name:"流动性比例",value:35}]
     };
   },
   computed: {
-    ...mapGetters({
-      getValues:'bar/getValues'
-    }),
-    ...mapState([
-      'bar/values'
-    ])
   },
   mounted() {
-    this.initData();
     this.setDatax_y();
     this.getChart();
-    if (typeof (EventSource) == "undefined") this.timer();
   },
   watch: {
     datax: function() {
       this.getChart();
     },
-    getValues:{
-      handler(newVal,oldVal) {// eslint-disable-line no-unused-vars
-        this.setDatax_y();
-        this.getChart();
-
-      }
-    }
   },
   methods: {
-    async initData(){
-      let data1=await this.$H.get('/GetData/Bar');
-      this.$store.commit('bar/setValues',data1);
-    },
-    setDatax_y(){
-      for (let i in this.getValues){
-        console.log("getValues: "+this.getValues[i].value);
-        this.datax.push(this.getValues[i].value);
-        this.datay.push(this.getValues[i].name);
+    async setDatax_y(){
+      for (var i =0;i<this.data.length;i++){
+        this.datax.push(this.data[i].value);
+        this.datay.push(this.data[i].name);
       }
     },
     getChart() {
@@ -241,11 +220,6 @@ export default {
       window.addEventListener('resize', () => {
         myChart.resize();
       });
-    },
-    timer() {
-      return setInterval(() => {
-        this.initData()
-      }, 5000)
     }
   }
 };

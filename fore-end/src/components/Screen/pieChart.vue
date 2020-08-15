@@ -14,6 +14,8 @@
             return{
                 color:['#00ffff', '#00cfff', '#006ced',
                     '#ffe000', '#ffa800', '#ff5b00', '#ff3000'],
+                // color: ['rgb(255, 153, 153)', 'rgb(255, 176, 63)', 'rgb(61, 186, 45)',
+                //     'rgb(43, 166, 254)','rgb(255,222,0)','rgb(255,0,0)'],
                 list :[],
                 myCharts:null,
                 option:null
@@ -28,7 +30,7 @@
                 'pie/values'
             ])
         },
-        watch:{
+        watch:{//监听store的value变化
             getValues:{
                 handler(newVal,oldVal) {// eslint-disable-line no-unused-vars
                     this.setList()
@@ -91,12 +93,12 @@
                 });
             },
             setOption(){
-                let rich = {
-                    white: {
-                        align: 'center',
-                        padding: [3, 0]
-                    }
-                };
+                // let rich = {
+                //     white: {
+                //         align: 'center',
+                //         padding: [3, 0]
+                //     }
+                // };
                 this.option ={
                     tooltip: {
                         show: false
@@ -122,19 +124,24 @@
                                         let percent = ((params.value / total) * 100).toFixed(0);
                                         let name = params.name.replace(/\n/g, '')
                                         if (params.name !== '') {
-                                            return name + '\n{white|' + percent + '%}'
+                                            if(params.name.length<=7)
+                                                return name + ' ' + percent + '%'
+                                            else{
+                                                var halflen=params.name.length/2;
+                                                return name.toString().substr(0,halflen) +'\n'+name.toString().substring(halflen)+' '+ percent + '%'
+                                            }
                                         } else {
                                             return ''
                                         }
                                     },
-                                    rich: rich
+                                    // rich: rich
                                 },
-                                labelLine: {//标签
-                                    length: 6,
-                                    length2: 25,
-                                    show: true,
-                                    color: '#00ffff'
-                                }
+                                // labelLine: {//标签
+                                //     length: 3,
+                                //     length2: 25,
+                                //     show: true,
+                                //     color: '#00ffff'
+                                // }
                             }
                         },
                         data: this.list,
@@ -177,7 +184,7 @@
         cursor: default;
         z-index: 0;
         left: 0px;
-        top: 5px;
+        top: 10px;
         width: 100%;
         height: 100%;
     }

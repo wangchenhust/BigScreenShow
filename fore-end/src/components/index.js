@@ -21,6 +21,7 @@ import threeDashboards from "./Screen/threeDashboards";
 import threeDashboards1 from "./Screen/threeDashboards1";
 import threeDashboards2 from "./Screen/threeDashboards2";
 import resume from "./Screen/resume";
+import barChart1 from "./Screen/barChart1";
 const components = {
     config,
     dynamicLine,
@@ -44,6 +45,7 @@ const components = {
     threeDashboards2,
     resume,
     pieChart1,//纯前端
+    barChart1,//纯前端
 };
 
 const install = (Vue = {}) => {

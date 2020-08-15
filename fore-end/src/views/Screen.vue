@@ -51,7 +51,7 @@
                         <h2>工行营业收入构成</h2>
 <!--                        饼图组件-->
 <!--                        <pieChart />-->
-                        <pieChart1 />
+                        <pieChart />
                         <div class="panel-footer"></div>
                     </div>
                 </div>
@@ -131,6 +131,8 @@
         created() {
             //在这里写sse数据接收监听器
             this.$sse.getSource().addEventListener('pievalues', this.pieListener)
+            this.$sse.getSource().addEventListener('barvalues', this.barListener)
+
         },
         mounted() {
             //天气
@@ -147,6 +149,11 @@
                 var data1=JSON.parse(e.data);
                 console.log(data1)
                 this.$store.commit('pie/setValues',data1)
+            },
+            barListener:function (e) {
+                var data1=JSON.parse(e.data);
+                console.log(data1)
+                this.$store.commit('bar/setValues',data1)
             },
             //获取天气数据
             getWeather(){
