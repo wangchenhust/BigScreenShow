@@ -8,7 +8,7 @@
     import echarts from "echarts";
 
     export default {
-        name: "radarChart",
+        name: "radarChart1",
         data(){
             return{
                 color: ['#e92b77', '#f9cf67', '#00c2ff','#62fff6'],

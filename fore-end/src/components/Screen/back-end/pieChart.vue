@@ -44,7 +44,7 @@
             this.setList();
             this.getChart();
             this.setOption();
-            if (typeof (EventSource) == "undefined") this.timer();
+            // if (typeof (EventSource) == "undefined") this.timer();
         },
         methods: {
             async initData(){
@@ -162,11 +162,11 @@
 // =======
                 this.myChart.setOption(this.option,true);
             },
-            timer() {
-                return setInterval(() => {
-                    this.initData()
-                }, 5000)
-            }
+            // timer() {
+            //     return setInterval(() => {
+            //         this.initData()
+            //     }, 5000)
+            // }
 
         }
     }

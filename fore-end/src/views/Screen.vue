@@ -35,8 +35,9 @@
                         <h2>工行风险指标</h2>
 <!--                        柱状图组件-->
 <!--                        <dashboard />-->
-                        <threeDashboards />
+<!--                        <threeDashboards />-->
 <!--                        <three-dashboards1 />-->
+                        <threePanels />
                         <div class="panel-footer"></div>
                     </div>
 <!--                    柱状图模块-->
@@ -89,7 +90,8 @@
                     <div class="panel small">
                         <h2>17家全国性银行总资产规模</h2>
                         <!--                        列表组件-->
-                        <list />
+<!--                        <list />-->
+                        <entryChart />
                         <div class="panel-footer"></div>
                     </div>
 <!--                    雷达图模块-->
@@ -132,7 +134,13 @@
             //在这里写sse数据接收监听器
             this.$sse.getSource().addEventListener('pievalues', this.pieListener)
             this.$sse.getSource().addEventListener('barvalues', this.barListener)
-
+            this.$sse.getSource().addEventListener('panelvalues', this.panelListener)
+            this.$sse.getSource().addEventListener('entryvalues', this.entryListener)
+            this.$sse.getSource().addEventListener('mapvalues', this.mapListener)
+            this.$sse.getSource().addEventListener('clinevalues', this.clineListener)
+            this.$sse.getSource().addEventListener('linevalues', this.lineListener)
+            this.$sse.getSource().addEventListener('cradavalues', this.cradaListener)
+            this.$sse.getSource().addEventListener('radavalues', this.radaListener)
         },
         mounted() {
             //天气
@@ -155,6 +163,42 @@
                 console.log(data1)
                 this.$store.commit('bar/setValues',data1)
             },
+            panelListener:function (e) {
+                var data1=JSON.parse(e.data);
+                console.log(data1)
+                this.$store.commit('panel/setValues',data1)
+            },
+            entryListener:function (e) {
+                var data1=JSON.parse(e.data);
+                console.log(data1)
+                this.$store.commit('entry/setValues',data1)
+            },
+            mapListener:function (e) {
+                var data1=JSON.parse(e.data);
+                console.log(data1)
+                this.$store.commit('map/setValues',data1)
+            },
+            clineListener:function (e) {
+                var data1=JSON.parse(e.data);
+                console.log(data1)
+                this.$store.commit('cline/setValues',data1)
+            },
+            lineListener:function (e) {
+                var data1=JSON.parse(e.data);
+                console.log(data1)
+                this.$store.commit('line/setValues',data1)
+            },
+            cradaListener:function (e) {
+                var data1=JSON.parse(e.data);
+                console.log(data1)
+                this.$store.commit('crada/setValues',data1)
+            },
+            radaListener:function (e) {
+                var data1=JSON.parse(e.data);
+                console.log(data1)
+                this.$store.commit('rada/setValues',data1)
+            },
+
             //获取天气数据
             getWeather(){
                 axios.get('https://www.tianqiapi.com/api/', {

@@ -7,12 +7,10 @@ import gauge from './gauge'
 import seamless from './seamless'
 //    Screen
 import dynamicLine1 from './Screen/resume'
-import barChart from './Screen/barChart'
-import lineChart from './Screen/lineChart'
-import pieChart from './Screen/pieChart'
+import lineChart1 from './Screen/lineChart1'
 import pieChart1 from './Screen/pieChart1'
 import dashboard from './Screen/dashboard'
-import radarChart from './Screen/radarChart'
+import radarChart1 from './Screen/radarChart1'
 import list from  './Screen/list'
 import waterSphereChart from './Screen/waterSphereChart'
 import mapChart from './Screen/mapChart'
@@ -22,6 +20,14 @@ import threeDashboards1 from "./Screen/threeDashboards1";
 import threeDashboards2 from "./Screen/threeDashboards2";
 import resume from "./Screen/resume";
 import barChart1 from "./Screen/barChart1";
+//与后端连通的组件
+import barChart from './Screen/back-end/barChart'
+import pieChart from './Screen/back-end/pieChart'
+import threePanels from "./Screen/back-end/threePanels";
+import entryChart from "./Screen/back-end/entryChart";
+import lineChart from "./Screen/back-end/lineChart";
+import radarChart from "./Screen/back-end/radarChart";
+
 const components = {
     config,
     dynamicLine,
@@ -31,11 +37,9 @@ const components = {
     gauge,
     seamless,
     dynamicLine1,
-    barChart,
-    lineChart,
-    pieChart,//加了后端
+    lineChart1,//纯前端
     dashboard,
-    radarChart,
+    radarChart1,
     list,
     waterSphereChart,
     mapChart,
@@ -46,6 +50,13 @@ const components = {
     resume,
     pieChart1,//纯前端
     barChart1,//纯前端
+    //与后端连通的组件
+    threePanels,
+    barChart,
+    pieChart,
+    entryChart,
+    lineChart,
+    radarChart
 };
 
 const install = (Vue = {}) => {

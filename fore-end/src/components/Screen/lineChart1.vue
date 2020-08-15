@@ -7,7 +7,7 @@
 <script>
 import echarts from "echarts";
 export default {
-  name: "lineChart",
+  name: "lineChart1",
   data() {
     return {
       values: [

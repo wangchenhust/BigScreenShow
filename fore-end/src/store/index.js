@@ -2,6 +2,13 @@ import Vue from 'vue'
 import Vuex from 'vuex'
 import pie from './modules/pie'
 import bar from './modules/bar'
+import panel from './modules/panel'
+import entry from "./modules/entry";
+import map from "./modules/map";
+import cline from "./modules/cline";
+import line from "./modules/line";
+import crada from "./modules/crada";
+import rada from "./modules/rada";
 
 Vue.use(Vuex)
 
@@ -32,5 +39,12 @@ export default new Vuex.Store({
     modules:{
         pie,
         bar,
+        panel,
+        entry,
+        map,
+        cline,
+        line,
+        crada,
+        rada,
     }
 })

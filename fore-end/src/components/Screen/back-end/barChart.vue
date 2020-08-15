@@ -24,9 +24,7 @@ export default {
               // 0.9, 0.8, 0.6, 0.4, 0.2
       ],
       datax_max: [100, 100, 100, 100, 100],
-      data: [{name:"资产利润率",value:2}, {name:"资本利润率",value:13},
-        {name:"不良贷款率",value:1}, {name:"不良资产率",value:2},
-        {name:"流动性比例",value:35}]
+      option:null,
     };
   },
   computed: {
@@ -40,18 +38,17 @@ export default {
   mounted() {
     this.initData();
     this.setDatax_y();
-    this.getChart();
-    if (typeof (EventSource) == "undefined") this.timer();
+    this.setOption();
+    // if (typeof (EventSource) == "undefined") this.timer();
   },
   watch: {
-    datax: function() {
-      this.getChart();
+    datax: function() {//高亮
+      this.setOption();
     },
     getValues:{
       handler(newVal,oldVal) {// eslint-disable-line no-unused-vars
         this.setDatax_y();
-        this.getChart();
-
+        this.setOption();
       }
     }
   },
@@ -61,20 +58,21 @@ export default {
       this.$store.commit('bar/setValues',data1);
     },
     setDatax_y(){
+      this.datax.length=0;//清空原数据
+      this.datay.length=0//清空原数据
       for (let i in this.getValues){
-        console.log("getValues: "+this.getValues[i].value);
         this.datax.push(this.getValues[i].value);
         this.datay.push(this.getValues[i].name);
       }
     },
-    getChart() {
-      var myChart = echarts.init(document.getElementById("chart_left1"));
+    setOption() {
+      let myChart = this.$echarts.init(document.getElementById('chart_left1'));
       let gradientColor = new this.$echarts.graphic.LinearGradient(0, 0, 1, 1, [
         { offset: 0, color: "rgb(186,39,38)" },
         { offset: 0.5, color: "rgb(238,64,61)" },
         { offset: 1, color: "rgba(221,107,102,0.7)" }
       ]);
-      var option = {
+      this.option = {
         grid: {
           //整个图表
           left: "2%",
@@ -204,6 +202,7 @@ export default {
           }
         ]
       };
+      //高亮
       this.datax.forEach((item, curidx) => {
         //取消之前的高亮
         myChart.dispatchAction({
@@ -236,17 +235,13 @@ export default {
           });
         }
       });
-      myChart.setOption(option);
+
+      myChart.setOption(this.option,true);
 
       window.addEventListener('resize', () => {
         myChart.resize();
       });
     },
-    timer() {
-      return setInterval(() => {
-        this.initData()
-      }, 5000)
-    }
   }
 };
 </script>
