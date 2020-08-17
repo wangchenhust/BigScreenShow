@@ -51,6 +51,7 @@
       },
       getValues:{
         handler(newVal,oldVal) {// eslint-disable-line no-unused-vars
+          console.log("watch: line store更改！！")
           this.setData();
           this.getChart();
         }
@@ -82,10 +83,11 @@
             name=this.getValues[i].name;
           }
           if(index==0){
-            this.datax.push(this.getValues[i].valuedate.substring(6,7)+"月");
+            this.datax.push(this.getValues[i].valuedate.split("-")[1]+"月");
           }
           this.values[index].push(this.getValues[i].value);
         }
+        console.log(this.values);
       },
       getChart() {
         var myChart = echarts.init(document.getElementById("chart_middel3"));

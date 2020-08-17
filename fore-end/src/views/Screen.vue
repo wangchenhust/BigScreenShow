@@ -161,6 +161,7 @@
             barListener:function (e) {
                 var data1=JSON.parse(e.data);
                 console.log(data1)
+                console.log("!!bar store更改！！")
                 this.$store.commit('bar/setValues',data1)
             },
             panelListener:function (e) {
@@ -185,7 +186,7 @@
             },
             lineListener:function (e) {
                 var data1=JSON.parse(e.data);
-                console.log(data1)
+                console.log("监听器：line store更改！！")
                 this.$store.commit('line/setValues',data1)
             },
             cradaListener:function (e) {
