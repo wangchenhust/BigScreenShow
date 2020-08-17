@@ -2,11 +2,14 @@
 * 创建sse会话
 * */
 let source = null;
+let id=null;
 
 export default {
   source:source,
+  id:id,
   sourceInit:function () {
-    this.source=new EventSource('http://localhost:8088/subscribe/' + new Date().getTime())
+    this.id=new Date().getTime()
+    this.source=new EventSource('http://localhost:8088/subscribe/' + this.id)
     /**
      * 连接一旦建立，就会触发open事件
      * 另一种写法：source.onopen = function (event) {}
@@ -38,5 +41,8 @@ export default {
 
   getSource:function () {
     return this.source
+  },
+  getID:function () {
+    return this.id;
   }
 }
