@@ -10,7 +10,7 @@
 
 <script>
     import echarts from "echarts";
-    import {mapState,mapGetters} from 'vuex'
+    import {mapGetters} from 'vuex'
     export default {
         name: "configChart",
         data () {
@@ -72,7 +72,6 @@
             }
         },
         computed:{
-            ...mapState({chartData:state=>state.configData}),
             ...mapGetters(['getConfigInfo'])
 
         },
@@ -95,7 +94,7 @@
                             xAxis: [{
                         type: 'category',
                         boundaryGap: false,
-                        data:chartOption.bankChart,
+                        data:['资本充足率','核心一级资本充足率','资产利润率'],
                         axisLabel: {
                             show: true,
                             textStyle: {
@@ -156,7 +155,7 @@
                         series: [{
                         name: '指标',
                         type: 'line',
-                        data: [0.1,0.2,0.3],
+                        data: chartOption.bankChart,
                         lineStyle: {
                             normal: {
                                 width: 2,
