@@ -78,18 +78,21 @@ public class CanalServer implements EntryHandler<Map<String, String>> {
 			SseEmitterServer.batchSendMessage(getDataImpl.getMMapData(), "mapvalues");
 			break;
 		case "linevalues":
-			redisClearUtils.delCLineCache();
-			SseEmitterServer.batchSendMessage(getDataImpl.getCLineData(), "clinevalues");
-			if((map.get("big")=="1")&&(map.get("did")=="18"||map.get("did")=="1")) {
+			String bankId=map.get("bid");
+			redisClearUtils.delCLineCache(bankId);
+			String meg=getDataImpl.getCLineData(bankId);
+			if(meg!=null)SseEmitterServer.batchSendMessage(meg, "clinevalues"+bankId);
+			if((map.get("bid")=="1")&&(map.get("did")=="18"||map.get("did")=="1")) {
 				redisClearUtils.delLineCache();
-				SseEmitterServer.batchSendMessage(getDataImpl.getLineData(), "linevalues");
+				SseEmitterServer.batchSendMessage(getDataImpl.getLineData(), "linevalues"+bankId);
 			}
 			break;
 		case "radarvalues":
 			if(map.get("did")=="3")return;
 			if(map.get("did")=="25") {
-				redisClearUtils.delCRadaCache();
-				SseEmitterServer.batchSendMessage(getDataImpl.getCRadaData(), "cradavalues");
+				String bankId1=map.get("bid");
+				redisClearUtils.delCRadaCache(bankId1);
+				SseEmitterServer.batchSendMessage(getDataImpl.getCRadaData(bankId1), "cradavalues");
 			}
 			else {
 				redisClearUtils.delRadaCache();

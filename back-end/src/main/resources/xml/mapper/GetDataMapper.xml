@@ -86,8 +86,7 @@
 		from
 		linevalues
 		lv,
-		(select id,NAME from banks where NAME in
-		("工商银行","中国银行","建设银行","农业银行")) b,
+		(select id,NAME from banks where NAME=#{bank}) b,
 		(select * from datanames where id in
 		(1,18,20)) dn,
 		valuedates vd
@@ -108,7 +107,7 @@
 		b,valuedates vd
 		where
 		rv.did=dn.id and
-		rv.bid=b.id and rv.vid=vd.id;
+		rv.bid=b.id and rv.vid=vd.id and b.NAME=#{bank};
 	</select>
 
 	<!-- 列表查询语句（已优化） -->

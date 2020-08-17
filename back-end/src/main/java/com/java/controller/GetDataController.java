@@ -15,8 +15,8 @@ import com.java.service.impl.GetDataImpl;
 public class GetDataController {
 	@Autowired GetDataImpl getDataImpl;
 	
-	@GetMapping("GetData/{type}")
-	public String getData(@PathVariable(name = "type") String type) {
+	@GetMapping(value={"GetData/{type}/{bank}","GetData/{type}"})
+	public String getData(@PathVariable(name = "type") String type,@PathVariable(name = "bank",required = false) String bank) {
 		switch (type) {
 		case "Panel":
 			return getDataImpl.getPanelData();
@@ -29,9 +29,15 @@ public class GetDataController {
 		case "Rada":
 			return getDataImpl.getRadaData();
 		case "CLine":
-			return getDataImpl.getCLineData();
+			if(bank==null) return null;
+			else {
+				return getDataImpl.getCLineData(bank);
+			}
 		case "CRada":
-			return getDataImpl.getCRadaData();
+			if(bank==null) return null;
+			else {
+				return getDataImpl.getCRadaData(bank);
+			}
 		case "MList":
 			return getDataImpl.getMListData();
 		case "MMap":

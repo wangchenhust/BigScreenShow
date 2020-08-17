@@ -3,6 +3,7 @@ package com.java.mapper;
 import java.util.List;
 
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 
 import com.java.pojo.Bar;
 import com.java.pojo.CLine;
@@ -27,9 +28,9 @@ public interface GetDataMapper {
 	
 	public List<Rada> getRadaData();
 	
-	public List<CLine> getCLineData();
+	public List<CLine> getCLineData(@Param("bank") String bank);
 	
-	public List<CRada> getCRadaData();
+	public List<CRada> getCRadaData(@Param("bank") String bank);
 	
 	public List<MList> getMListData(); 
 	

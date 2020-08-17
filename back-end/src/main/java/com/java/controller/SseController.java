@@ -8,7 +8,9 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.mvc.method.annotation.SseEmitter;
 import com.java.server.SseEmitterServer;
 
-
+/**
+ * for:sse控制器
+ * */
 
 @RestController
 public class SseController {

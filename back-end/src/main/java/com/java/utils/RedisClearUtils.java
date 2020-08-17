@@ -40,16 +40,28 @@ public class RedisClearUtils {
 	public void delRadaCache() {}
 	
 	/*
-	 * 删除折线图（可配置）缓存
+	 * 删除所有折线图（可配置）缓存
 	 * */
 	@CacheEvict(cacheNames = "CLine",allEntries = true)
 	public void delCLineCache() {}
 	
 	/*
-	 * 删除雷达图（可配置）缓存
+	 * 删除所有雷达图（可配置）缓存
 	 * */
 	@CacheEvict(cacheNames = "CRada",allEntries = true)
 	public void delCRadaCache() {}
+	
+	/*
+	 * 删除指定折线图（可配置）缓存
+	 * */
+	@CacheEvict(cacheNames = "CLine",key="#p0")
+	public void delCLineCache(String bank) {}
+	
+	/*
+	 * 删除指定雷达图（可配置）缓存
+	 * */
+	@CacheEvict(cacheNames = "CRada",key="#p0")
+	public void delCRadaCache(String bank) {}
 	
 	/*
 	 * 删除列表缓存

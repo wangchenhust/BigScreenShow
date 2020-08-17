@@ -16,9 +16,9 @@ public interface GetData {
 	
 	public String getRadaData();
 	
-	public String getCLineData();
+	public String getCLineData(String bank);
 	
-	public String getCRadaData();
+	public String getCRadaData(String bank);
 	
 	public String getMListData();
 	

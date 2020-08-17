@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import com.alibaba.fastjson.JSON;
 import com.java.mapper.GetDataMapper;
 import com.java.service.GetData;
+import com.java.utils.UrlNameChangeUtils;
 
 /**
  * for：服务层实现，从mapper获取数据，返回json字符串
@@ -53,17 +54,27 @@ public class GetDataImpl implements GetData{
 		return jsonString;
 	}
 
+	/**
+	 * @param bank 银行名称的id
+	 * */
 	@Override
-	@Cacheable(cacheNames = "CLine")
-	public String getCLineData() {
-		String jsonString=JSON.toJSONString(mapper.getCLineData());
+	@Cacheable(cacheNames = "CLine",key = "#p0")
+	public String getCLineData(String bank) {
+		bank=UrlNameChangeUtils.bankNameChange(bank);
+		if(bank==null)return null;
+		String jsonString=JSON.toJSONString(mapper.getCLineData(bank));
 		return jsonString;
 	}
 
+	/**
+	 * @param bank 银行名称的id
+	 * */
 	@Override
-	@Cacheable(cacheNames = "CRada")
-	public String getCRadaData() {
-		String jsonString=JSON.toJSONString(mapper.getCRadaData());
+	@Cacheable(cacheNames = "CRada",key = "#p0")
+	public String getCRadaData(String bank) {
+		bank=UrlNameChangeUtils.bankNameChange(bank);
+		if(bank==null)return null;
+		String jsonString=JSON.toJSONString(mapper.getCRadaData(bank));
 		return jsonString;
 	}
 
