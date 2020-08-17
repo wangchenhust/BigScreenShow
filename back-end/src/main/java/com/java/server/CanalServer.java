@@ -55,7 +55,7 @@ public class CanalServer implements EntryHandler<Map<String, String>> {
     
     //根据改动的表群发消息
     public void batchMessage(CanalModel canal,Map<String,String> map) {
-    	log.info("改动的表:{}"+canal.getTable());
+    	log.info("改动的表{}",canal.getTable());
     	switch (canal.getTable()) {
 		case "pievalues":
 			redisClearUtils.delPieCache();
@@ -82,9 +82,9 @@ public class CanalServer implements EntryHandler<Map<String, String>> {
 			redisClearUtils.delCLineCache(bankId);
 			String meg=getDataImpl.getCLineData(bankId);
 			if(meg!=null)SseEmitterServer.batchSendMessage(meg, "clinevalues"+bankId);
-			if((map.get("bid")=="1")&&(map.get("did")=="18"||map.get("did")=="1")) {
+			if((map.get("bid").equals("1"))&&(map.get("did").equals("18")||map.get("did").equals("1"))) {
 				redisClearUtils.delLineCache();
-				SseEmitterServer.batchSendMessage(getDataImpl.getLineData(), "linevalues"+bankId);
+				SseEmitterServer.batchSendMessage(getDataImpl.getLineData(), "linevalues");
 			}
 			break;
 		case "radarvalues":
@@ -92,7 +92,8 @@ public class CanalServer implements EntryHandler<Map<String, String>> {
 			if(map.get("did")=="25") {
 				String bankId1=map.get("bid");
 				redisClearUtils.delCRadaCache(bankId1);
-				SseEmitterServer.batchSendMessage(getDataImpl.getCRadaData(bankId1), "cradavalues");
+				String meg1=getDataImpl.getCRadaData(bankId1);
+				SseEmitterServer.batchSendMessage(meg1, "cradavalues");
 			}
 			else {
 				redisClearUtils.delRadaCache();
