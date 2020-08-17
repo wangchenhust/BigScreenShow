@@ -6,7 +6,7 @@
 	<!-- 仪表盘查询语句（已优化） -->
 	<select id="getPanelData" resultType="com.java.pojo.Panel">
 		select
-		dn.NAME,cast(pv.VALUE as DECIMAL(3.0)) VALUE
+		dn.NAME,cast(pv.VALUE as DECIMAL(5,2)) VALUE
 		from
 		panelvalues pv,
 		(select * from banks where NAME='工商银行') banks,
@@ -20,7 +20,7 @@
 	<select id="getBarData" resultType="com.java.pojo.Bar">
 		select
 		dn.NAME,CAST(bv.VALUE
-		AS DECIMAL(3,0)) VALUE
+		AS DECIMAL(5,2)) VALUE
 		from
 		barvalues bv,banks,datanames dn,valuedates
 		vd
@@ -44,7 +44,7 @@
 	<select id="getLineData" resultType="com.java.pojo.Line">
 		select
 		dn.NAME,CAST(lv.VALUE
-		AS DECIMAL(3.0)) VALUE,vd.valuedate
+		AS DECIMAL(4,1)) VALUE,vd.valuedate
 		from
 		linevalues lv,
 		(select * from
@@ -82,7 +82,7 @@
 	<select id="getCLineData" resultType="com.java.pojo.CLine">
 		select
 		b.NAME
-		bank,dn.NAME,cast(AVG(lv.VALUE) as DECIMAL(3,0)) value
+		bank,dn.NAME,cast(AVG(lv.VALUE) as DECIMAL(4,1)) value
 		from
 		linevalues
 		lv,
@@ -124,8 +124,8 @@
 
 	<!-- 地图查询语句（已优化） -->
 	<select id="getMMapData" resultType="com.java.pojo.MMap">
-		select REPLACE(bb.NAME,'分行','') province,CAST(mv1.VALUE AS DECIMAL(3,0)) zbczl,CAST(mv2.VALUE AS DECIMAL(3,0))
-		hxzbczl,CAST(mv3.VALUE AS DECIMAL(3,0)) zblrl,CAST(mv4.VALUE AS DECIMAL(3,0)) ldxbl
+		select REPLACE(bb.NAME,'分行','') province,CAST(mv1.VALUE AS DECIMAL(4,1)) zbczl,CAST(mv2.VALUE AS DECIMAL(4,1))
+		hxzbczl,CAST(mv3.VALUE AS DECIMAL(4,1)) zblrl,CAST(mv4.VALUE AS DECIMAL(4,1)) ldxbl
 		from
 		(select VALUE,bbid from mapvalues where did=1) mv1,
 		(select VALUE,bbid from mapvalues where did=18) mv2,
