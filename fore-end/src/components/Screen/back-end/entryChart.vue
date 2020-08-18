@@ -191,13 +191,14 @@
         watch:{
             getValues:{
                 handler(newVal,oldVal) {// eslint-disable-line no-unused-vars
+                    console.log("watch: list store更改！！")
                     this.setlistData()
                 }
             }
         },
         mounted() {
             this.initData();
-            this.setlistData();
+            // this.setlistData();
         },
         methods: {
             async initData(){

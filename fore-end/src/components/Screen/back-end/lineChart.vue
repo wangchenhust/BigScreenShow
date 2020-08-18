@@ -59,8 +59,8 @@
     },
     mounted() {
       this.initData();
-      this.setData();
-      this.getChart();
+      // this.setData();
+      // this.getChart();
     },
     methods: {
       async initData(){
@@ -73,6 +73,7 @@
         this.legendData=[];
         let name="xx";
         let index=0;
+        console.log("折线图的值："+this.getValues[2].value)
         for(let i in this.getValues){
           if(name.toString().localeCompare(this.getValues[i].name)!=0){
             this.legendData.push(this.getValues[i].name);
@@ -87,7 +88,7 @@
           }
           this.values[index].push(this.getValues[i].value);
         }
-        console.log(this.values);
+        // console.log(this.values);
       },
       getChart() {
         var myChart = echarts.init(document.getElementById("chart_middel3"));

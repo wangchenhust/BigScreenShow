@@ -37,8 +37,8 @@ export default {
   },
   mounted() {
     this.initData();
-    this.setDatax_y();
-    this.setOption();
+    // this.setDatax_y();
+    // this.setOption();
     // if (typeof (EventSource) == "undefined") this.timer();
   },
   watch: {
@@ -47,6 +47,7 @@ export default {
     },
     getValues:{
       handler(newVal,oldVal) {// eslint-disable-line no-unused-vars
+        console.log("watch: bar store更改！！")
         this.setDatax_y();
         this.setOption();
       }
@@ -60,6 +61,7 @@ export default {
     setDatax_y(){
       this.datax.length=0;//清空原数据
       this.datay.length=0//清空原数据
+      console.log("柱状图的值："+this.getValues[0].value)
       for (let i in this.getValues){
         this.datax.push(this.getValues[i].value);
         this.datay.push(this.getValues[i].name);

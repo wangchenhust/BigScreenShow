@@ -33,6 +33,7 @@
         watch:{//监听store的value变化
             getValues:{
                 handler(newVal,oldVal) {// eslint-disable-line no-unused-vars
+                    console.log("watch: pie store更改！！")
                     this.setList()
                     this.setOption()
                 }

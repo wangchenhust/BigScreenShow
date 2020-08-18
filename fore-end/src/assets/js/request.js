@@ -16,7 +16,7 @@ export default {
             axios({
                 ...options
             }).then(function (response) {
-                console.log(response)
+                // console.log(response)
                 if(options.native) return res(response)
                 if (response.status !==200){
                     alert("请求失败")

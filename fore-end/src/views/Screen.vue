@@ -155,33 +155,38 @@
         methods: {
             pieListener:function (e) {
                 var data1=JSON.parse(e.data);
-                console.log(data1)
+                // console.log(data1)
+                console.log("监听器：pie store更改！！")
                 this.$store.commit('pie/setValues',data1)
             },
             barListener:function (e) {
                 var data1=JSON.parse(e.data);
-                console.log(data1)
-                console.log("!!bar store更改！！")
+                // console.log(data1)
+                console.log("监听器：bar store更改！！")
                 this.$store.commit('bar/setValues',data1)
             },
             panelListener:function (e) {
                 var data1=JSON.parse(e.data);
-                console.log(data1)
+                // console.log(data1)
+                console.log("监听器：bar store更改！！")
                 this.$store.commit('panel/setValues',data1)
             },
             entryListener:function (e) {
                 var data1=JSON.parse(e.data);
-                console.log(data1)
+                // console.log(data1)
+                console.log("监听器：entry store更改！！")
                 this.$store.commit('entry/setValues',data1)
             },
             mapListener:function (e) {
                 var data1=JSON.parse(e.data);
-                console.log(data1)
+                // console.log(data1)
+                console.log("监听器：map store更改！！")
                 this.$store.commit('map/setValues',data1)
             },
             clineListener:function (e) {
                 var data1=JSON.parse(e.data);
-                console.log(data1)
+                // console.log(data1)
+                console.log("监听器：clin store更改！！")
                 this.$store.commit('cline/setValues',data1)
             },
             lineListener:function (e) {
@@ -191,12 +196,14 @@
             },
             cradaListener:function (e) {
                 var data1=JSON.parse(e.data);
-                console.log(data1)
+                // console.log(data1)
+                console.log("监听器：crada store更改！！")
                 this.$store.commit('crada/setValues',data1)
             },
             radaListener:function (e) {
                 var data1=JSON.parse(e.data);
-                console.log(data1)
+                // console.log(data1)
+                console.log("监听器：rada store更改！！")
                 this.$store.commit('rada/setValues',data1)
             },
 

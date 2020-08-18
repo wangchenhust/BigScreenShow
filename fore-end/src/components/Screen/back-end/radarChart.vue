@@ -6,52 +6,79 @@
 
 <script>
     import echarts from "echarts";
+    import {mapGetters, mapState} from "vuex";
 
     export default {
         name: "radarChart",
         data(){
             return{
-            // [{"bank":"工商银行","name":"资本充足率","value":17},
-            // {"bank":"农业银行","name":"资本充足率","value":16},
-            // {"bank":"建设银行","name":"资本充足率","value":18},
-            // {"bank":"中国银行","name":"资本充足率","value":16},
                 color: ['#e92b77', '#f9cf67', '#00c2ff','#62fff6'],
                 //银行表
-                legendData:['工行', '中行', '建行','农行'],
+                legendData:[],
                 //指标表
-                indicatorData:[{//指标
-                        text: '资本充足率',
-                        max: 100
-                    }, {
-                        text: '核心一级资本充足率',
-                        max: 100
-                    }, {
-                        text: '资产利润率',
-                        max: 100
-                    }, {
-                        text: '不良贷款率',
-                        max: 100
-                    }, {
-                        text: '净息差',
-                        max: 100
-                    }
-                ],
+                indicatorData:[],
                 //指标值表
-                seriesData_values:[[37, 100, 12, 50, 25],
-                    [85, 65, 55, 100, 82],[50, 20, 45, 30, 100],[10, 50, 90, 80, 80]]
+                seriesData_values:[],
             }
         },
         computed: {
-
+            ...mapGetters({
+                getValues:'rada/getValues'
+            }),
+            ...mapState([
+                'rada/values'
+            ])
+        },
+        watch:{//监听store的value变化
+            getValues:{
+                handler(newVal,oldVal) {// eslint-disable-line no-unused-vars
+                    console.log("watch: radar store更改！！")
+                    this.setData()
+                    this.getChart()
+                }
+            }
         },
         mounted() {
-            this.getChart();
+            this.initData();
+            // this.setData();
+            // this.getChart();
         },
         methods: {
+            async initData(){
+                let data1=await this.$H.get('/GetData/Rada');
+                this.$store.commit('rada/setValues',data1);
+            },
+            setData(){
+                this.legendData=[];
+                this.indicatorData=[];
+                this.seriesData_values=[];
+                let name="xx";
+                let index=-1;
+                let x=0;
+                for (let i in this.getValues){
+                    if(name.toString().localeCompare(this.getValues[i].name)!=0){//当dataa.name变化时
+                        this.indicatorData.push({
+                            text: this.getValues[i].name,
+                            max: 20
+                        });
+                        index++;
+                        x=0;
+                        name=this.getValues[i].name;
+                    }
+                    if(index==0){
+                        this.legendData.push(this.getValues[i].bank);
+                        this.seriesData_values.push([]);
+                    }
+                    this.seriesData_values[x++][index]=this.getValues[i].value;
+                }
+            },
             getChart(){
                 var myChart = echarts.init(document.getElementById('chart_right1'))
                 var option ={
                     color:this.color,//图例的颜色
+                    tooltip:{
+                        fontSize:3,
+                    },
                     legend: {
                         show: true,
                         icon: 'circle',//图例形状
@@ -262,7 +289,7 @@
                         }]
                     }, ]
                 }
-                myChart.setOption(option);
+                myChart.setOption(option,true);
                 window.addEventListener('resize', () => {
                     myChart.resize();
                 });

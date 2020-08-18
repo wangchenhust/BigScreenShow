@@ -51,6 +51,7 @@
     watch:{
       getValues:{
         handler(newVal,oldVal) {// eslint-disable-line no-unused-vars
+          console.log("watch: 3panel store更改！！")
           this.setDataMap()
           this.getChart()
         }
@@ -58,8 +59,8 @@
     },
     mounted() {
       this.initData();
-      this.setDataMap();
-      this.getChart();
+      // this.setDataMap();
+      // this.getChart();
     },
     methods: {
       //初始化时向后端取数据放到store中
@@ -78,6 +79,7 @@
         };//清空
         var label=['0','1','2'];
         var count=label.length-1;
+        console.log("3仪表盘的值："+this.getValues[0].value)
         for (let i in this.getValues){
           var index=label[count];
           this.dataMap[index].push(
@@ -85,7 +87,6 @@
           );
           count-=((i+1)%3==0)?1:0;
         }
-        console.log(this.dataMap);
       },
       getChart(){
         let myChart = echarts.init(document.getElementById('chart_xx'))

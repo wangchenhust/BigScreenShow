@@ -33,7 +33,7 @@
 <script>
     import echarts from "echarts";
     export default {
-        name: "mapChart",
+        name: "mapChart1",
         data(){
             return{
                 //地图

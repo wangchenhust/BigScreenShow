@@ -13,7 +13,7 @@ import dashboard from './Screen/dashboard'
 import radarChart1 from './Screen/radarChart1'
 import list from  './Screen/list'
 import waterSphereChart from './Screen/waterSphereChart'
-import mapChart from './Screen/mapChart'
+import mapChart1 from './Screen/mapChart1'
 import configChart from './Screen/configChart'
 import threeDashboards from "./Screen/threeDashboards";
 import threeDashboards1 from "./Screen/threeDashboards1";
@@ -27,6 +27,7 @@ import threePanels from "./Screen/back-end/threePanels";
 import entryChart from "./Screen/back-end/entryChart";
 import lineChart from "./Screen/back-end/lineChart";
 import radarChart from "./Screen/back-end/radarChart";
+import mapChart from "./Screen/back-end/mapChart";
 
 const components = {
     config,
@@ -42,7 +43,7 @@ const components = {
     radarChart1,
     list,
     waterSphereChart,
-    mapChart,
+    mapChart1,
     configChart,
     threeDashboards,
     threeDashboards1,
@@ -56,7 +57,8 @@ const components = {
     pieChart,
     entryChart,
     lineChart,
-    radarChart
+    radarChart,
+    mapChart
 };
 
 const install = (Vue = {}) => {
