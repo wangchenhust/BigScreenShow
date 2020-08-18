@@ -190,31 +190,31 @@ export default {
           seriesIndex: 0,
           dataIndex: curidx
         });
-        if ((item < 0.006) & (curidx == 0)) {
+        if ((item < 0.6) & (curidx == 0)) {
           myChart.dispatchAction({
             type: "highlight",
             dataIndex: curidx
           });
         }
-        if ((item < 0.11) & (curidx == 1)) {
+        if ((item < 11) & (curidx == 1)) {
           myChart.dispatchAction({
             type: "highlight",
             dataIndex: curidx
           });
         }
-        if ((item > 0.05) & (curidx == 2)) {
+        if ((item > 5) & (curidx == 2)) {
           myChart.dispatchAction({
             type: "highlight",
             dataIndex: curidx
           });
         }
-        if ((item > 0.04) & (curidx == 3)) {
+        if ((item > 4) & (curidx == 3)) {
           myChart.dispatchAction({
             type: "highlight",
             dataIndex: curidx
           });
         }
-        if ((item < 0.25) & (curidx == 4)) {
+        if ((item < 25) & (curidx == 4)) {
           myChart.dispatchAction({
             type: "highlight",
             dataIndex: curidx

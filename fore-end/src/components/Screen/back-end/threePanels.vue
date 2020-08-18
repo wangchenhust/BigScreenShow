@@ -239,7 +239,7 @@
                   offsetCenter: [0, "-30%"],
                   color: "auto",
                   textStyle: {
-                    fontSize:25,
+                    fontSize:20,
                   },
                   formatter: "{value}%",	// 格式化函数或者字符串
                 },
@@ -341,7 +341,7 @@
                   offsetCenter: ["-10%", "-20%"],
                   color: "auto",
                   textStyle: {
-                    fontSize:25,
+                    fontSize:20,
                   },
                   formatter: "{value}%",	// 格式化函数或者字符串
                 },
@@ -443,7 +443,7 @@
                   offsetCenter: ["10%", "-20%"],
                   color: "auto",
                   textStyle: {
-                    fontSize:25,
+                    fontSize:20,
                   },
                   formatter: "{value}%",	// 格式化函数或者字符串
                 },
