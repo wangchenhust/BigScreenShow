@@ -258,10 +258,10 @@
         let data1 = this.values[0];
         let data2 = this.values[1];
         for (let i in data1) {
-          if (data1[i] < 0.08) {
+          if (data1[i] < 8) {
             effectScatterData1.push([this.datax[i], data1[i]]);
           }
-          if (data2[i] < 0.04) {
+          if (data2[i] < 4) {
             effectScatterData2.push([this.datax[i], data2[i]]);
           }
         }
