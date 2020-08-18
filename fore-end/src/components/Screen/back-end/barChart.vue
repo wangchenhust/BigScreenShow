@@ -210,6 +210,12 @@ export default {
           seriesIndex: 0,
           dataIndex: curidx
         });
+        if ((item < 0.006) & (curidx == 0)) {
+          myChart.dispatchAction({
+            type: "highlight",
+            dataIndex: curidx
+          });
+        }
         if ((item < 0.11) & (curidx == 1)) {
           myChart.dispatchAction({
             type: "highlight",
