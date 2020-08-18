@@ -79,6 +79,7 @@
         };//清空
         var label=['0','1','2'];
         var count=label.length-1;
+        // var count =0;
         console.log("3仪表盘的值："+this.getValues[0].value)
         for (let i in this.getValues){
           var index=label[count];
@@ -86,12 +87,16 @@
             this.getValues[i]
           );
           count-=((i+1)%3==0)?1:0;
+          // count+=((i+1)%3==0)?1:0;
         }
       },
       getChart(){
         let myChart = echarts.init(document.getElementById('chart_xx'))
         let colorTemplate1 = [[0.25, "rgba(255,0,0,0.8)"], [0.5, "#ffa800"], [0.75, "#ffe000"], [1, "rgba(0,255,0,0.8)"]];
         let colorTemplate2 = [[0.6, "rgba(255,0,0,0.8)"], [0.7, "#ffa800"], [0.8, "#ffe000"], [1, "rgba(0,255,0,0.8)"]];
+        // let colorTemplate3 = [[0.6, "rgba(255,0,0,0.8)"], [0.7, "#ffa800"], [0.8, "#ffe000"], [1, "rgba(0,255,0,0.8)"]];
+
+        let index=[4,8,5,25,4,25,0.6,11,5]
 
         this.option ={
           baseOption:{
@@ -454,49 +459,55 @@
           options: [
             {//第一个
               series: [
-                {//中间进度条 不超过8%
+                {//核心资本充足率
+                  min: 0,
+                  max:index[0]*4,
                   data: [this.dataMap['0'][0]],
                 },
-                {//左进度条 不超过4%
+                {//资本充足率
+                  min: 0,
+                  max:index[1]*4,
                   data: [this.dataMap['0'][1]],
                 },
-                {//右进度条 不超过5%
+                {//核心一级资本充足率
+                  min: 0,
+                  max:index[2]*4,
                   data: [this.dataMap['0'][2]],
                 }
               ]
             },{//第二个
               series: [
-                {//不超过11%
+                {//流动性比率
                   min: 0,					// 最小的数据值,默认 0 。映射到 minAngle。
-                  max: 44,				// 最大的数据值,默认 100 。映射到 maxAngle。
+                  max:index[3]*4,				// 最大的数据值,默认 100 。映射到 maxAngle。
                   data: [this.dataMap['1'][0]],
                 },
-                {//不超过0.6%
+                {//不良资产率
                   min: 0,					// 最小的数据值,默认 0 。映射到 minAngle。
-                  max: 2.4,
+                  max:index[4]*4,
                   data: [this.dataMap['1'][1]],
                 },
-                {//不超过5%
+                {//核心负债依存度
                   min: 0,					// 最小的数据值,默认 0 。映射到 minAngle。
-                  max: 20,
+                  max:index[5]*4,
                   data: [this.dataMap['1'][2]],
                 }
               ]
             },{//第三个
               series: [
-                {//4%
+                {//资产利润率
                     min: 0,					// 最小的数据值,默认 0 。映射到 minAngle。
-                    max: 20,
-                    data: [this.dataMap['2'][0]],
+                    max:index[6]*4,
+                  data: [this.dataMap['2'][0]],
                 },
-                {//25%
+                {//资本利润率
                   min: 0,					// 最小的数据值,默认 0 。映射到 minAngle。
-                  max: 100,
+                  max:index[7]*4,
                   data: [this.dataMap['2'][1]],
                 },
-                {//60%
+                {//不良贷款率
                   min: 0,					// 最小的数据值,默认 0 。映射到 minAngle。
-                  max: 100,
+                  max:index[8]*4,
                   splitNumber: 4,		// 仪表盘刻度的分割段数,默认 10。
                   axisLine: {				// 仪表盘轴线(轮廓线)相关配置。
                     lineStyle: {			// 仪表盘轴线样式。

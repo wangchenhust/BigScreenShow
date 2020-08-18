@@ -4,20 +4,20 @@
             <table border="0" cellpadding="0" cellspacing="0" class="table-header">
                 <tbody>
                 <tr>
-                    <td width="16%">
+                    <td width="10%">
                         <span>公司</span>
                     </td>
-                    <td width="30%">
-                        <span>2019年资产值（万亿）</span>
+                    <td width="17%">
+                        <span>资本充足率</span>
                     </td>
-                    <td width="40%">
-                        <span>2020年资产值（万亿）</span>
+                    <td width="17%">
+                        <span>核心资本充足率</span>
                     </td>
-<!--                    <td width="12%">-->
-<!--                        <span>增幅%</span>-->
-<!--                    </td>-->
-                    <td width="14%">
-                        <span>类型</span>
+                    <td width="17%">
+                        <span>流动性比例</span>
+                    </td>
+                    <td width="17%">
+                        <span>资产利润率</span>
                     </td>
                 </tr>
                 </tbody>
@@ -208,7 +208,7 @@
             table-layout: fixed;
             tr {
                 td {
-                    padding: 10px 5px;
+                    padding: 10px 0px;
                     text-align: center;
                     background-color: transparent;
                     white-space: nowrap;

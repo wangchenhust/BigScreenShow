@@ -44,7 +44,7 @@
                     <div class="panel small">
                         <h2>工行重要风险指标</h2>
 <!--                        仪表盘组件-->
-                        <barChart />
+                        <barChart1 />
                         <div class="panel-footer"></div>
                     </div>
 <!--                    饼图模块-->
@@ -90,15 +90,15 @@
                     <div class="panel small">
                         <h2>17家全国性银行总资产规模</h2>
                         <!--                        列表组件-->
-<!--                        <list />-->
-                        <entryChart />
+                        <list />
+<!--                        <entryChart />-->
                         <div class="panel-footer"></div>
                     </div>
 <!--                    雷达图模块-->
                     <div class="panel">
                         <h2>四大行对比</h2>
 <!--                        雷达图组件-->
-                        <radarChart />
+                        <radarChart1 />
                         <div class="panel-footer"></div>
                     </div>
                 </div>
