@@ -28,6 +28,8 @@ import entryChart from "./Screen/back-end/entryChart";
 import lineChart from "./Screen/back-end/lineChart";
 import radarChart from "./Screen/back-end/radarChart";
 import mapChart from "./Screen/back-end/mapChart";
+//与地图连通
+// import resume from "./Screen/back-end/resume";
 
 const components = {
     config,
@@ -58,7 +60,9 @@ const components = {
     entryChart,
     lineChart,
     radarChart,
-    mapChart
+    mapChart,
+    //与地图连通
+    // resume
 };
 
 const install = (Vue = {}) => {

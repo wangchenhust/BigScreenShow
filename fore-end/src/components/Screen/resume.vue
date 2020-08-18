@@ -21,23 +21,44 @@
 </template>
 
 <script>
+    import {mapGetters, mapState} from "vuex";
+
     export default {
         name: "resume",
         data(){
             return{
-                total:14,//工商银行省分行数
+                total:0,//工商银行省分行数
                 riskNum:0,//存在风险的省分行数
+                safeRate:0,
             }
         },
         computed: {
-            safeRate: function () {
-                return (this.riskNum)/this.total;
-            }
+            // safeRate: function () {
+            //     return (this.riskNum)/this.total;
+            // },
+            ...mapGetters({
+                getValues:'map/getValues'
+                // ...
+            }),
+            ...mapState([
+                'map/values'
+            ])
+        },
+        watch:{//监听store的value变化
+            getValues:{
+                handler(newVal,oldVal) {// eslint-disable-line no-unused-vars
+                    console.log("watch: map store更改！！")
+                    this.setData();
+                }
+            },
         },
         mounted() {
-
         },
         methods: {
+            setData(){
+                this.total=this.getValues.length;
+                this.safeRate=(this.riskNum)/this.total;
+            }
         }
     }
 </script>

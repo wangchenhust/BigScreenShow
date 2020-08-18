@@ -52,11 +52,13 @@
                 this.legendData=[];
                 this.indicatorData=[];
                 this.seriesData_values=[];
-                let name="xx";
+                let name="";
                 let index=-1;
                 let x=0;
                 for (let i in this.getValues){
                     if(name.toString().localeCompare(this.getValues[i].name)!=0){//当dataa.name变化时
+                        console.log("第"+(index+2)+"次")
+                        console.log("name:"+name+" valueName:"+this.getValues[i].name)
                         this.indicatorData.push({
                             text: this.getValues[i].name,
                             max: 20
@@ -67,8 +69,9 @@
                     }
                     if(index==0){
                         this.legendData.push(this.getValues[i].bank);
-                        this.seriesData_values.push([]);
+                        this.seriesData_values[x]=[];
                     }
+                    console.log("x:"+x+" index:"+index+" i:"+i);
                     this.seriesData_values[x++][index]=this.getValues[i].value;
                 }
             },

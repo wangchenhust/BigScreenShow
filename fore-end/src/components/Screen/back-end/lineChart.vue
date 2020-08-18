@@ -103,12 +103,12 @@
                       "<span style='display:inline-block;margin-right:5px;border-radius:10px;width:9px;height:9px;background-color:rgba(36,207,233,0.9)'></span>" +
                       params[0].seriesName +
                       " : " +
-                      Number(params[0].value.toFixed(2)).toLocaleString() +
+                      Number(params[0].value).toLocaleString() +
                       "%<br/>" +
                       "<span style='display:inline-block;margin-right:5px;border-radius:10px;width:9px;height:9px;background-color:rgba(255,80,124,1)'></span>" +
                       params[1].seriesName +
                       " : " +
-                      Number(params[1].value.toFixed(2)).toLocaleString() +
+                      Number(params[1].value).toLocaleString() +
                       "%<br/>"
               );
             }

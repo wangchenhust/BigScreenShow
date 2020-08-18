@@ -8,10 +8,10 @@
                         <span>公司</span>
                     </td>
                     <td width="30%">
-                        <span>2019年资产值（万亿）</span>
+                        <span>2019年资产值（百万）</span>
                     </td>
                     <td width="40%">
-                        <span>2020年资产值（万亿）</span>
+                        <span>2020年资产值（百万）</span>
                     </td>
                     <td width="14%">
                         <span>类型</span>

@@ -102,7 +102,9 @@
                 index2:0,
                 index3:0,
                 index4:0,
-                bankName:' '
+                bankName:' ',
+                //定时器
+                timer:null,
             }
         },
         computed: {
@@ -118,6 +120,7 @@
             getValues:{
                 handler(newVal,oldVal) {// eslint-disable-line no-unused-vars
                     console.log("watch: map store更改！！")
+                    clearInterval(this.timer);
                     this.setIndexData()
                     this.getChart(this.mapdata);
 
@@ -396,7 +399,7 @@
 
 
                 var currentIndex = -1;
-                var timer = setInterval(()=>{   // eslint-disable-line no-unused-vars
+                this.timer = setInterval(()=>{   // eslint-disable-line no-unused-vars
                     var dataLen = option.series[1].data.length;
 
                     function f() {//变化要高亮的省份
