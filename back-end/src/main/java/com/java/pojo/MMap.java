@@ -4,13 +4,13 @@ package com.java.pojo;
 public class MMap {
 	private String province;
 	
-	private Integer zbczl;
+	private Float zbczl;
 	
-	private Integer hxzbczl;
+	private Float hxzbczl;
 	
-	private Integer zblrl;
+	private Float zblrl;
 	
-	private Integer ldxbl;
+	private Float ldxbl;
 
 	public String getProvince() {
 		return province;
@@ -20,38 +20,35 @@ public class MMap {
 		this.province = province;
 	}
 
-	public Integer getZbczl() {
+	public Float getZbczl() {
 		return zbczl;
 	}
 
-	public void setZbczl(Integer zbczl) {
+	public void setZbczl(Float zbczl) {
 		this.zbczl = zbczl;
 	}
 
-	public Integer getHxzbczl() {
+	public Float getHxzbczl() {
 		return hxzbczl;
 	}
 
-	public void setHxzbczl(Integer hxzbczl) {
+	public void setHxzbczl(Float hxzbczl) {
 		this.hxzbczl = hxzbczl;
 	}
 
-	public Integer getZblrl() {
+	public Float getZblrl() {
 		return zblrl;
 	}
 
-	public void setZblrl(Integer zblrl) {
+	public void setZblrl(Float zblrl) {
 		this.zblrl = zblrl;
 	}
 
-	public Integer getLdxbl() {
+	public Float getLdxbl() {
 		return ldxbl;
 	}
 
-	public void setLdxbl(Integer ldxbl) {
+	public void setLdxbl(Float ldxbl) {
 		this.ldxbl = ldxbl;
 	}
-
-
-
 }

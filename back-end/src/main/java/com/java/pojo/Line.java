@@ -1,17 +1,17 @@
 package com.java.pojo;
 
 public class Line {
-	private Integer value;
+	private Float value;
 	
 	private String name;
 	
 	private String valuedate;
 
-	public Integer getValue() {
+	public Float getValue() {
 		return value;
 	}
 
-	public void setValue(Integer value) {
+	public void setValue(Float value) {
 		this.value = value;
 	}
 

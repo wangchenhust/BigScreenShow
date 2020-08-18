@@ -4,13 +4,13 @@ public class Bar {
 	
 	private String name;
 	
-	private Integer value;
+	private Float value;
 
-	public Integer getValue() {
+	public Float getValue() {
 		return value;
 	}
 
-	public void setValue(Integer value) {
+	public void setValue(Float value) {
 		this.value = value;
 	}
 
