@@ -56,10 +56,8 @@ export default {
               }],
               globalCoord: false
             },
-            borderColor: "rgb(199,84,80)",//边框颜色
+            borderColor: "rgba(243,43,45,0.8)",
             borderWidth: 2,//边框粗细
-            shadowColor: "rgba(247,117,103, 0.4)",
-            shadowBlur: 20
           },
           //波浪样式
           itemStyle: {
@@ -72,19 +70,22 @@ export default {
               colorStops: [
                 {
                   offset: 1,
-                  color: "rgba(237,55,55, 0)"
+                  // color: "rgba(237,55,55, 0.2)"
+                  color:"rgba(243,43,45,0.4)"
                 },
                 {
                   offset: 0.5,
-                  color: "rgba(247,117,103, 0.3)"
+                  // color: "rgba(247,117,103, 0.6)"
+                  color:"rgba(243,43,45,0.7)"
                 },
                 {
                   offset: 0,
-                  color: "rgba(199,84,80,1)"
+                  // color: "rgba(199,84,80,1)"
+                  color:"rgba(243,43,45,1)"
                 }
               ],
               globalCoord: false
-            }
+            },
           },
           label: {
             normal: {
@@ -96,7 +97,13 @@ export default {
             }
           },
           outline: {
-            show:false
+            // show:false,
+            borderDistance: 0,
+            itemStyle: {
+              borderWidth:2,
+              shadowBlur: 4,
+              shadowColor:"#fff"
+            }
           },
         }]
       };
@@ -178,7 +185,7 @@ export default {
         ]
       };
       myChart.clear();
-      if (this.value > 0.3) {
+      if (this.value > 0) {
         myChart.setOption(option);
       } else {
         myChart.setOption(option2);
