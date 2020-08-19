@@ -1,7 +1,11 @@
 <template>
-    <div class="configChart-container">
-        <div class="chart" id="newConfigChart"></div>
+    <div>
+        <h2>可配置图的表名（建议动态变化）</h2>
+        <div class="configChart-container">
+            <div class="chart" id="newConfigChart"></div>
+        </div>
     </div>
+
 </template>
 
 <script>
@@ -22,7 +26,6 @@
         },
         computed:{
             ...mapGetters(['getConfigInfo'])
-
         },
         mounted(){
             this.testChart = JSON.parse(localStorage.getItem('config'))
@@ -40,35 +43,32 @@
                 if (chartOption.chartType =='line'){
                     this.option = {//折线图
                         calculable: true,
-                            xAxis: [{
-                        type: 'category',
-                        boundaryGap: false,
-                        data:['第一季度','第二季度'],
-                        axisLabel: {
-                            show: true,
-                            textStyle: {
-                                color: "#ade3ff", //X轴文字颜色
-                                fontSize: 10
-                            }
+                        grid: {
+                            left: "3%",
+                            right: "8%",
+                            bottom: "7%",
+                            height:"70%",
+                            containLabel: true
                         },
-                        axisTick:{//坐标轴刻度相关设置。
-                            show: false,
-                        },
-                        axisLine:{//坐标轴轴线相关设置
-                            lineStyle:{
-                                color:'#E5E9ED',
-                                opacity:0.5//x轴
-                            }
-                        },
-                        splitLine: { //坐标轴在 grid 区域中的分隔线。
-                            show: true,
-                            lineStyle: {
-                                color: '#E5E9ED',
-                                opacity:0.1
-                            }
-                        }
-
-                    }],
+                        xAxis: [{
+                            type: 'category',
+                            boundaryGap: false,
+                            data:['第一季度','第二季度'],
+                            axisLabel: {
+                                show: true,
+                                textStyle: {
+                                    color: "#ade3ff", //X轴文字颜色
+                                    fontSize: 10
+                                }
+                            },
+                            axisLine: {
+                                show: false,
+                                color:'#A582EA'
+                            },
+                            splitLine: {
+                                show: false
+                            },
+                        }],
                         yAxis: [{
                         type: 'value',
                         splitNumber: 3,
@@ -84,66 +84,59 @@
                                 return newParamsName
                             }
                         },
-                        axisLine:{
-                            lineStyle:{
-                                color:'#E5E9ED',
-                                opacity:0.5//y轴
-                            }
-                        },
-                        axisTick:{
-                            show: false
-                        },
-                        splitLine: {
-                            show: true,
-                            lineStyle: {
-                                color: '#E5E9ED',
-                                opacity:0.1
-                            }
-                        }
+                            splitLine: {
+                                show: true,
+                                lineStyle: {
+                                    color: '#00BFF3',
+                                    opacity:0.25
+                                }
+                            },
+                            axisLine: {
+                                show: false,
+                            },
+                            axisTick: {
+                                show: false,
+                            },
                     }],
                         series: [{
                         name: '指标',
                         type: 'line',
                         data: chartOption.bankChart,
-                        lineStyle: {
-                            normal: {
-                                width: 2,
-                                color: {
-                                    type: 'linear',
-
-                                    colorStops: [{
-                                        offset: 0,
-                                        color: '#57BD9F' // 0% 处的颜色
-                                    }, {
-                                        offset: 1,
-                                        color: '#19BC8C' // 100% 处的颜色
-                                    }],
-                                    globalCoord: false // 缺省为 false
+                            showAllSymbol: true,
+                            symbol: 'circle',
+                            symbolSize: 7,
+                            lineStyle: {
+                                normal: {
+                                    width:1.5,
+                                    color: 'rgba(255,80,124,1)',//'#2CABE3',
                                 },
-                                shadowColor: 'rgba(72,216,191, 0.3)',
-                                shadowBlur: 6,
-                                shadowOffsetY: 10
-                            }
-                        },
-                        itemStyle: {
-                            normal: {
-                                color: '#57BD9F',
-                                borderWidth: 8,
-                                borderColor: "#57BD9F"
-                            }
-                        },
-                        markPoint: {
-                            data: [{
-                                type: 'max',
-                                name: '最大值'
                             },
-                                {
-                                    type: 'min',
-                                    name: '最小值'
+                            label: {
+                                show: true,
+                                position: 'top',
+                                textStyle: {
+                                    color: 'rgba(255,80,124,1)',//'#2CABE3',
+                                },
+                            },
+                            itemStyle: {
+                                color: "#fff",
+                                borderColor: 'rgba(255,80,124,1)',//'#2CABE3',
+                                borderWidth: 2,
+                            },
+                            areaStyle: {
+                                normal: {
+                                    color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
+                                        {
+                                            offset: 0,
+                                            color: 'rgba(255,80,124,0.5)',//'rgba(81,150,164,0.3)'
+                                        },
+                                        {
+                                            offset: 1,
+                                            color: 'rgba(255,80,124,0)'
+                                        }
+                                    ], false),
                                 }
-                            ]
-                        },
-
+                            },
                     }]
                     }
                 }
@@ -151,13 +144,13 @@
                     this.option = {//仪表盘
                         title: {
                             show: true,
-                                text: '指标',
+                                text: 'xx指标',
                                 x: '49%',
-                                y: '55%',
+                                y: '87%',
                                 z: 8,//优先级
                                 textAlign: 'center',
                                 textStyle: {
-                                color: '#006ced',
+                                color: '#ade3ff',
                                     fontStyle: 'normal',
                                     fontFamily: '微软雅黑',
                                     fontSize: 10,
@@ -167,7 +160,7 @@
                             {
                                 name: "内部进度条",
                                 type: "gauge",
-                                // center: ['20%', '50%'],
+                                center: ['50%', '60%'],
                                 radius: '68%',//大小
                                 z: 0,
                                 splitNumber: 10,//大刻度单位数量
@@ -197,7 +190,7 @@
                             {
                                 name: '外部刻度',
                                 type: 'gauge',
-                                // center: ['20%', '50%'],
+                                center: ['50%', '60%'],
                                 radius: '80%',
                                 min: 0, //最小刻度
                                 max: 100, //最大刻度
@@ -274,7 +267,7 @@
                             {
                                 type: 'pie',
                                 radius: ['0', '40%'],
-                                center: ['50%', '50%'],
+                                center: ['50%', '60%'],
                                 z: 8,
                                 hoverAnimation: false,
                                 data: [{
@@ -297,12 +290,12 @@
                                                 a: {
                                                     color: '#468EFD',
                                                     align: 'center',
-                                                    fontSize: 18,
+                                                    fontSize: 20,
                                                     fontWeight: "bold"
                                                 },
                                             },
                                             formatter: function (params) {
-                                                return "{a|" + params.value + "}";
+                                                return "{a|" + params.value*100 + "%}";
                                             },
                                             position: 'center',
                                             show: true
@@ -320,7 +313,7 @@
                                 startAngle: 220,
                                 endAngle: -40,
                                 hoverAnimation: false,
-                                center: ["50%", "50%"],
+                                center: ["50%", "60%"],
                                 avoidLabelOverlap: false,
                                 label: {
                                     show: false
@@ -354,7 +347,7 @@
                             {
                                 type: "pie",
                                 radius: "50%",
-                                center: ["50%", "50%"],
+                                center: ["50%", "60%"],
                                 avoidLabelOverlap: false,
                                 z: 1,
                                 hoverAnimation: false,
@@ -390,7 +383,7 @@
                             {
                                 type: "pie",
                                 radius: "55%",
-                                center: ["50%", "50%"],
+                                center: ["50%", "60%"],
                                 avoidLabelOverlap: false,
                                 z: 1,
                                 hoverAnimation: false,
@@ -453,5 +446,14 @@
         top: 0px;
         width: 100%;
         height: 100%;
+    }
+    h2 {
+        height: 0.6rem;
+        line-height: 0.6rem;
+        text-align: center;
+        color: #fff;
+        font-size: 0.7rem;
+        font-weight: 400;
+        margin-top: -9px;
     }
 </style>

@@ -4,17 +4,16 @@
             <table border="0" cellpadding="0" cellspacing="0" class="table-header">
                 <tbody>
                 <tr>
-                    <td width="16%">
+                    <td width="10%">
                         <span>公司</span>
                     </td>
-                    <td width="30%">
-                        <span>2019年资产值（百万）</span>
+                    <td width="17%">
+                        <span>资本充足率</span>
                     </td>
-                    <td width="40%">
-                        <span>2020年资产值（百万）</span>
-                    </td>
-                    <td width="14%">
-                        <span>类型</span>
+                    <td width="17%">
+                        <span>核心资本充足率</span>
+                    <td width="17%">
+                        <span>核心负债依存度</span>
                     </td>
                 </tr>
                 </tbody>
@@ -27,23 +26,23 @@
                         <td width="100%" class="title">
                             <span>{{ item.title }}</span>
                         </td>
-                        <td width="25%">
-                            <span>{{ item.data2019 }}</span>
+                        <td width="27%">
+                            <span>{{ item.index1 }}</span>
                         </td>
-                        <td width="42%" class="data2020">
-                            <span>{{ item.data2020 }}</span>
+                        <td width="28%" class="data2020">
+                            <span>{{ item.index2 }}</span>
                             <span class="incre" v-if="item.data2020>item.data2019" style="color: #FF4669"> {{ item.incre }}%</span>
-<!--                            <span class="incre" v-if="item.data2020==item.data2019" style="color: #FFC956"> {{ item.incre }}%</span>-->
-                            <span class="incre" v-if="item.data2020<item.data2019" style="color: #3acf3a"> {{ item.incre }}%</span>
-                            <img v-if="item.data2020>item.data2019" src="../../../assets/img/screen_img/up.png" class="incrImg">
-                            <img v-if="item.data2020<item.data2019" src="../../../assets/img/screen_img/down.png" class="downImg">
-                            <img v-if="item.data2020==item.data2019" src="../../../assets/img/screen_img/noChange.png">
+                            <!--                            <span class="incre" v-if="item.data2020==item.data2019" style="color: #FFC956"> {{ item.incre }}%</span>-->
+<!--                            <span class="incre" v-if="item.data2020<item.data2019" style="color: #3acf3a"> {{ item.incre }}%</span>-->
+<!--                            <img v-if="item.data2020>item.data2019" src="../../../assets/img/screen_img/up.png" class="incrImg">-->
+<!--                            <img v-if="item.data2020<item.data2019" src="../../../assets/img/screen_img/down.png" class="downImg">-->
+<!--                            <img v-if="item.data2020==item.data2019" src="../../../assets/img/screen_img/noChange.png">-->
                         </td>
-<!--                        <td width="12%" class="incre">-->
-<!--                            <span>{{ item.incre }}</span>-->
-<!--                        </td>-->
-                        <td width="14%">
-                            <span>{{ item.type }}</span>
+                        <!--                        <td width="12%" class="incre">-->
+                        <!--                            <span>{{ item.incre }}</span>-->
+                        <!--                        </td>-->
+                        <td width="28%">
+                            <span>{{ item.index3 }}</span>
                         </td>
                     </tr>
                     </tbody>
@@ -60,110 +59,7 @@
         name: "entryChart",
         data() {
             return {
-                listData: [// {
-                //     title: '工商银行',
-                //     data2019:26.09,
-                //     data2020:27.70,
-                //      incre:6.18,
-                //     type: '国有行'
-                // }, {
-                //     title: '建设银行',
-                //     data2019:22.12,
-                //     data2020:23.22,
-                //     incre:4.96,
-                //     type: '国有行'
-                // }, {
-                //     title: '农业银行',
-                //     data2019:21.05,
-                //     data2020:21.05,
-                //     incre:0,
-                //     type: '国有行'
-                // }, {
-                //     title: '中国银行',
-                //     data2019:26.09,
-                //     data2020:27.70,
-                //     incre:6.18,
-                //     type: '国有行'
-                // }, {
-                //     title: '交通银行',
-                //     data2019:26.09,
-                //     data2020:25.70,
-                //     incre:6.18,
-                //     type: '国有行'
-                // }, {
-                //     title: '邮储银行',
-                //     data2019:26.09,
-                //     data2020:27.70,
-                //     incre:6.18,
-                //     type: '国有行'
-                // }, {
-                //     title: '招商银行',
-                //     data2019:26.09,
-                //     data2020:27.70,
-                //     incre:6.18,
-                //     type: '股份行'
-                // }, {
-                //     title: '兴业银行',
-                //     data2019:26.09,
-                //     data2020:27.70,
-                //     incre:6.18,
-                //     type: '股份行'
-                // }, {
-                //     title: '浦发银行',
-                //     data2019:26.09,
-                //     data2020:27.70,
-                //     incre:6.18,
-                //     type: '股份行'
-                // }, {
-                //     title: '中信银行',
-                //     data2019:26.09,
-                //     data2020:27.70,
-                //     incre:6.18,
-                //     type: '股份行'
-                // }, {
-                //     title: '民生银行',
-                //     data2019:26.09,
-                //     data2020:27.70,
-                //     incre:6.18,
-                //     type: '股份行'
-                // }, {
-                //     title: '光大银行',
-                //     data2019:26.09,
-                //     data2020:27.70,
-                //     incre:6.18,
-                //     type: '股份行'
-                // }, {
-                //     title: '平安银行',
-                //     data2019:26.09,
-                //     data2020:27.70,
-                //     incre:6.18,
-                //     type: '股份行'
-                // }, {
-                //     title: '华夏银行',
-                //     data2019:26.09,
-                //     data2020:27.70,
-                //     incre:6.18,
-                //     type: '股份行'
-                // },{
-                //     title: '广发银行',
-                //     data2019:26.09,
-                //     data2020:27.70,
-                //     incre:6.18,
-                //     type: '股份行'
-                // },{
-                //     title: '浙商银行',
-                //     data2019:26.09,
-                //     data2020:27.70,
-                //     incre:6.18,
-                //     type: '股份行'
-                // },{
-                //     title: '渤海银行',
-                //     data2019:26.09,
-                //     data2020:27.70,
-                //     incre:6.18,
-                //     type: '股份行'
-                // }
-                ]
+                listData: []
             }
         },
         computed: {
@@ -189,16 +85,16 @@
             }
         },
         watch:{
-            getValues:{
-                handler(newVal,oldVal) {// eslint-disable-line no-unused-vars
-                    console.log("watch: list store更改！！")
-                    this.setlistData()
-                }
-            }
+            // getValues:{
+            //     handler(newVal,oldVal) {// eslint-disable-line no-unused-vars
+            //         console.log("watch: list store更改！！")
+            //         this.setlistData()
+            //     }
+            // }
         },
         mounted() {
-            this.initData();
-            // this.setlistData();
+            // this.initData();
+            this.setlistData();
         },
         methods: {
             async initData(){
@@ -209,11 +105,14 @@
                 this.listData=[];//清空数据
                 for (let i in this.getValues){
                     this.listData.push({
-                            title: this.getValues[i].bank,
-                            data2019:this.getValues[i].total_assets_2019,
-                            data2020:this.getValues[i].total_assets_2020,
-                             incre:this.getValues[i].growth_rate,
-                            type: this.getValues[i].type
+                            // title: this.getValues[i].bank,
+                            // index1:Math.floor(this.getValues[i].total_assets_2019/1000000)+"%",
+                            // index2:Math.floor(this.getValues[i].total_assets_2019/1000000)+"%",
+                            // index3:this.getValues[i].growth_rate+"%",
+                        title: "xx银行"+i,
+                        index1: i*10+"%",
+                        index2: i*10+"%",
+                        index3: i*10+"%",
                     })
                 }
             },
@@ -238,13 +137,14 @@
             table-layout: fixed;
             tr {
                 td {
-                    padding: 10px 5px;
+                    padding: 10px 0px;
                     text-align: center;
                     background-color: transparent;
                     white-space: nowrap;
                     overflow: hidden;
                     color: #ade3ff;
                     font-size: 10px;
+                    /*border:1px solid #FFC956;*/
                 }
                 .incre{
                     color: #FF4669

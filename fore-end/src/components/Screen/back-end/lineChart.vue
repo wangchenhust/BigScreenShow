@@ -34,7 +34,9 @@
           // "10月",
           // "11月",
           // "12月"
-        ]
+        ],
+        //各个指标的阈值,负值为大于就报警，正值为小于就报警
+        limit:[8,4],//"资本充足率"阈值, "核心资本充足率"阈值
       };
     },
     computed: {
@@ -258,10 +260,10 @@
         let data1 = this.values[0];
         let data2 = this.values[1];
         for (let i in data1) {
-          if (data1[i] < 8) {
+          if (data1[i] < this.limit[0]) {
             effectScatterData1.push([this.datax[i], data1[i]]);
           }
-          if (data2[i] < 4) {
+          if (data2[i] < this.limit[1]) {
             effectScatterData2.push([this.datax[i], data2[i]]);
           }
         }

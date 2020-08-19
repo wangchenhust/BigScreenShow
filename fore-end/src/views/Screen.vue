@@ -81,7 +81,7 @@
                 <div class="right part">
 <!--                    可配置模块-->
                     <div class="panel small">
-                        <h2>四大行指标</h2>
+                        <h2></h2>
                         <!--                        可配置组件-->
                         <configChart />
                         <div class="panel-footer"></div>
@@ -90,8 +90,8 @@
                     <div class="panel small">
                         <h2>17家全国性银行总资产规模</h2>
                         <!--                        列表组件-->
-                        <list />
-<!--                        <entryChart />-->
+<!--                        <list />-->
+                        <entryChart />
                         <div class="panel-footer"></div>
                     </div>
 <!--                    雷达图模块-->

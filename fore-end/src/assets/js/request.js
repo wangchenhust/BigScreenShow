@@ -25,7 +25,7 @@ export default {
                 res(response.data)
             }).catch(function (e) {
                 console.log(e);
-                alert("请求失败")
+                console.log("请求失败")
                 return rej()
             })
         })

@@ -25,14 +25,14 @@ export default {
       ],
       datax_max: [100, 100, 100, 100,100],
       dataa:[
-              {name:"资产利润率",value:2},
-              {name:"资本利润率",value:1},
-              {name:"不良资产率",value:2},
+              {name:"资产利润率",value:0.5},
+              {name:"资本利润率",value:5},
+              {name:"不良资产率",value:5},
               {name:"不良贷款率",value:69},
-              {name:"流动性比例",value:2},],
+              {name:"流动性比例",value:20},],
       option:null,
-      //各个指标的阈值
-      limit:[0.6,11,-5,-4,25],
+      //各个指标的阈值,负值为大于就报警，正值为小于就报警
+      limit:[0.6,11,-4,-5,25],
     };
   },
   computed: {
@@ -123,11 +123,6 @@ export default {
                 color: "#b3ccf8"
               },
               formatter: function(params) {
-                  if(params.length>7)
-                    return  "\n"+params.toString().substr(0,params.length/2)
-                            +"\n"+
-                            params.toString().substr(params.length/2)
-                  else
                     return params;
               }
             },
@@ -216,10 +211,21 @@ export default {
                 barBorderRadius: 30
               }
             }
-          }
+          },
         ]
       };
       //高亮
+      let that = this;
+      //设置高亮判断条件
+      function setP(item,curidx,index){
+        if(that.limit[index]>0){
+          return ((item < that.limit[index]) & (curidx == index))
+        }
+        else{
+          return ((item > Math.abs(that.limit[index])) & (curidx == index))
+        }
+      }
+
       this.datax.forEach((item, curidx) => {
         //取消之前的高亮
         myChart.dispatchAction({
@@ -227,31 +233,31 @@ export default {
           seriesIndex: 0,
           dataIndex: curidx
         });
-        if ((item < this.limit[0]) & (curidx == 0)) {
+        if (setP(item,curidx,0)) {
           myChart.dispatchAction({
             type: "highlight",
             dataIndex: curidx
           });
         }
-        if ((item < this.limit[1]) & (curidx == 1)) {
+        if (setP(item,curidx,1)) {
           myChart.dispatchAction({
             type: "highlight",
             dataIndex: curidx
           });
         }
-        if ((item < this.limit[2]) & (curidx == 2)) {
+        if (setP(item,curidx,2)) {
           myChart.dispatchAction({
             type: "highlight",
             dataIndex: curidx
           });
         }
-        if ((item < this.limit[3]) & (curidx == 3)) {
+        if (setP(item,curidx,3)) {
           myChart.dispatchAction({
             type: "highlight",
             dataIndex: curidx
           });
         }
-        if ((item < this.limit[4]) & (curidx == 4)) {
+        if (setP(item,curidx,4)) {
           myChart.dispatchAction({
             type: "highlight",
             dataIndex: curidx
