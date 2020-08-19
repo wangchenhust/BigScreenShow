@@ -42,6 +42,8 @@ public class GetDataController {
 			return getDataImpl.getMListData();
 		case "MMap":
 			return getDataImpl.getMMapData();
+		case "Risk":
+			return getDataImpl.getRiskData();
 		default:
 			return null;
 		}

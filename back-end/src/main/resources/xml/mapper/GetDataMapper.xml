@@ -10,7 +10,7 @@
 		from
 		panelvalues pv,
 		(select * from banks where NAME='工商银行') banks,
-		datanames dn,valuedates vd
+		(select * from datanames where id in (20,4,22,30)) dn,valuedates vd
 		where
 		pv.did=dn.id and
 		pv.vid=vd.id and pv.bid=banks.id;
@@ -66,8 +66,7 @@
 		rv.VALUE,rv.did,rv.vid,rv.bid
 		from radarvalues rv
 		where
-		rv.did in
-		(1,2,4,5,20)) rv,
+		(1,2,18,21,23)) rv,
 		(select
 		*
 		from banks
@@ -112,28 +111,35 @@
 
 	<!-- 列表查询语句（已优化） -->
 	<select id="getMListData" resultType="com.java.pojo.MList">
-		select 
-		banks.NAME bank,ev1.VALUE growth_rate,ev3.VALUE total_assets_2019,ev2.VALUE total_assets_2020,bt.NAME type 
-		from (select CAST(VALUE AS DECIMAL(3,0)) VALUE,bid from entryvalues where did=24) ev1,
-		(select ev.VALUE,ev.bid from entryvalues ev,valuedates vd where ev.did=19 and ev.vid=1 and vd.id=ev.vid) ev2,
-		(select ev.VALUE,ev.bid from entryvalues ev,valuedates vd where ev.did=19 and ev.vid=13 and vd.id=ev.vid) ev3,
-		banks,banktypes bt 
-		where 
-		banks.id=ev1.bid and banks.id=ev2.bid and banks.id=ev3.bid and banks.tid=bt.id;
+		select bb.NAME company,CAST(mv1.VALUE AS DECIMAL(4,1)) zbczl,CAST(mv2.VALUE AS DECIMAL(4,1)) hxzbczl,CAST(mv3.VALUE AS DECIMAL(4,1)) zblrl,CAST(mv4.VALUE AS DECIMAL(4,1)) ldxbl
+		from
+		(select VALUE,bid from entryvalues where did=1) mv1,
+		(select VALUE,bid from entryvalues where did=18) mv2,
+		(select VALUE,bid from entryvalues where did=21) mv3,
+		(select VALUE,bid from entryvalues where did=23) mv4,
+		banks bb
+		where bb.id=mv1.bid and bb.id=mv2.bid and bb.id=mv3.bid and
+		bb.id=mv4.bid;
 	</select>
 
 	<!-- 地图查询语句（已优化） -->
 	<select id="getMMapData" resultType="com.java.pojo.MMap">
 		select REPLACE(bb.NAME,'分行','') province,CAST(mv1.VALUE AS DECIMAL(4,1)) zbczl,CAST(mv2.VALUE AS DECIMAL(4,1))
-		hxzbczl,CAST(mv3.VALUE AS DECIMAL(4,1)) zblrl,CAST(mv4.VALUE AS DECIMAL(4,1)) ldxbl
+		hxzbczl,CAST(mv3.VALUE AS DECIMAL(4,1)) zblrl,CAST(mv4.VALUE AS DECIMAL(4,1)) ldxbl,CAST(mv5.VALUE AS DECIMAL(4,1)) hxyjzbczl 
 		from
 		(select VALUE,bbid from mapvalues where did=1) mv1,
 		(select VALUE,bbid from mapvalues where did=18) mv2,
 		(select VALUE,bbid from mapvalues where did=21) mv3,
 		(select VALUE,bbid from mapvalues where did=23) mv4,
+		(select VALUE,bbid from mapvalues where did=2) mv5,
 		branchbanks bb
 		where bb.id=mv1.bbid and bb.id=mv2.bbid and bb.id=mv3.bbid and
-		bb.id=mv4.bbid;
+		bb.id=mv4.bbid and bb.id=mv5.bbid;
+	</select>
+	
+	<!-- 风险阈值语句 -->
+	<select id="getRiskData" resultType="com.java.pojo.Risk">
+		select dn.NAME,rv.VALUE value from riskvalues rv,datanames dn where rv.did=dn.id;
 	</select>
 
 </mapper>

@@ -23,5 +23,7 @@ public interface GetData {
 	public String getMListData();
 	
 	public String getMMapData();
+	
+	public String getRiskData();
 
 }

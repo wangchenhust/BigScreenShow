@@ -91,6 +91,13 @@ public class GetDataImpl implements GetData{
 		String jsonString=JSON.toJSONString(mapper.getMMapData());
 		return jsonString;
 	}
+
+	@Override
+	@Cacheable(cacheNames = "Risk")
+	public String getRiskData() {
+		String jsonString=JSON.toJSONString(mapper.getRiskData());
+		return jsonString;
+	}
 	
 	
 

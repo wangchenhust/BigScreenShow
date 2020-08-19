@@ -14,6 +14,7 @@ import com.java.pojo.MMap;
 import com.java.pojo.Panel;
 import com.java.pojo.Pie;
 import com.java.pojo.Rada;
+import com.java.pojo.Risk;
 
 @Mapper
 public interface GetDataMapper {
@@ -35,4 +36,6 @@ public interface GetDataMapper {
 	public List<MList> getMListData(); 
 	
 	public List<MMap> getMMapData();
+	
+	public List<Risk> getRiskData();
 }
