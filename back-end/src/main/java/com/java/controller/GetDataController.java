@@ -28,16 +28,8 @@ public class GetDataController {
 			return getDataImpl.getLineData();
 		case "Rada":
 			return getDataImpl.getRadaData();
-		case "CLine":
-			if(bank==null) return null;
-			else {
-				return getDataImpl.getCLineData(bank);
-			}
-		case "CRada":
-			if(bank==null) return null;
-			else {
-				return getDataImpl.getCRadaData(bank);
-			}
+		case "ConfigData":
+			return getDataImpl.getConfigData();
 		case "MList":
 			return getDataImpl.getMListData();
 		case "MMap":
