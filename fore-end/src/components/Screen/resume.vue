@@ -4,7 +4,7 @@
             <ul>
                 <li>
                     <!--水球图-->
-                    <waterSphereChart :value="safeRate" />
+                    <waterSphereChart :risk="safeRate" />
                 </li>
                 <li>{{total}}</li>
                 <li>{{riskNum}}</li>
@@ -30,6 +30,7 @@
                 total:0,//工商银行省分行数
                 riskNum:0,//存在风险的省分行数
                 safeRate:0,
+                limit:[8,4,5,25,11]
             }
         },
         computed: {
@@ -53,11 +54,27 @@
             },
         },
         mounted() {
+          this.initData();
         },
         methods: {
+            async initData(){
+              let data1=await this.$H.get('/GetData/MMap');
+              this.$store.commit('map/setValues',data1)
+            },
             setData(){
                 this.total=this.getValues.length;
-                this.safeRate=(this.riskNum)/this.total;
+                this.riskNum=this.countRisk(this.getValues);
+                this.safeRate=(this.riskNum)/(this.total);
+            },
+            countRisk(datas){
+                this.data=datas
+                let count=0;
+                this.data.forEach(item=>{
+                  if (item.zbczl<this.limit[0]||item.hxzbczl<this.limit[1]||item.hxyjzbczl<this.limit[2]||item.ldxbl<this.limit[3]||item.zblrl<this.limit[4]){
+                    count+=1;
+                  }
+                });
+                return count
             }
         }
     }
