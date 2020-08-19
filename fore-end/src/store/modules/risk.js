@@ -1,7 +1,6 @@
 // 阈值store
 const state = () => ({
-    values: null
-
+    values: null//阈值列表
 })
 
 // getters

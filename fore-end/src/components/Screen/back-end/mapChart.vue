@@ -50,20 +50,20 @@
                 ],
                 //省份及对应的4个指标,从后端传来
                 indexData:[
-                    {name:"湖北",index1:10,index2:11,index3:12,index4:13},
-                    {name:"湖南",index1:15,index2:16,index3:17,index4:18},
-                    {name:"重庆",index1:20,index2:21,index3:22,index4:23},
-                    {name:"四川",index1:25,index2:26,index3:27,index4:28},
-                    {name:"贵州",index1:30,index2:31,index3:32,index4:33},
-                    {name:"云南",index1:35,index2:36,index3:37,index4:38},
-                    {name:"西藏",index1:40,index2:41,index3:42,index4:43},
-                    {name:"陕西",index1:45,index2:46,index3:47,index4:48},
-                    {name:"甘肃",index1:50,index2:51,index3:52,index4:53},
-                    {name:"青海",index1:55,index2:56,index3:57,index4:58},
-                    {name:"宁夏",index1:60,index2:61,index3:62,index4:63},
-                    {name:"新疆",index1:65,index2:66,index3:67,index4:68},
-                    {name:"广东",index1:70,index2:71,index3:72,index4:73},
-                    {name:"广西",index1:75,index2:76,index3:77,index4:78},
+                    // {name:"湖北",index1:10,index2:11,index3:12,index4:13},
+                    // {name:"湖南",index1:15,index2:16,index3:17,index4:18},
+                    // {name:"重庆",index1:20,index2:21,index3:22,index4:23},
+                    // {name:"四川",index1:25,index2:26,index3:27,index4:28},
+                    // {name:"贵州",index1:30,index2:31,index3:32,index4:33},
+                    // {name:"云南",index1:35,index2:36,index3:37,index4:38},
+                    // {name:"西藏",index1:40,index2:41,index3:42,index4:43},
+                    // {name:"陕西",index1:45,index2:46,index3:47,index4:48},
+                    // {name:"甘肃",index1:50,index2:51,index3:52,index4:53},
+                    // {name:"青海",index1:55,index2:56,index3:57,index4:58},
+                    // {name:"宁夏",index1:60,index2:61,index3:62,index4:63},
+                    // {name:"新疆",index1:65,index2:66,index3:67,index4:68},
+                    // {name:"广东",index1:70,index2:71,index3:72,index4:73},
+                    // {name:"广西",index1:75,index2:76,index3:77,index4:78},
                 ],
                 //地图坐标
                 geoCoordMap : {
@@ -121,20 +121,20 @@
             ])
         },
         watch:{//监听store的value变化
-            // getValues:{
-            //     handler(newVal,oldVal) {// eslint-disable-line no-unused-vars
-            //         console.log("watch: map store更改！！")
-            //         clearInterval(this.timer);
-            //         this.setIndexData()
-            //         this.getChart(this.mapdata);
-            //
-            //     }
-            // }
+            getValues:{
+                handler(newVal,oldVal) {// eslint-disable-line no-unused-vars
+                    console.log("watch: map store更改！！")
+                    clearInterval(this.timer);
+                    this.setIndexData()
+                    this.getChart(this.mapdata);
+
+                }
+            }
         },
         mounted() {
-            // this.initData();
+            this.initData();
             // this.setIndexData();
-            this.getChart(this.mapdata);
+            // this.getChart(this.mapdata);
         },
         methods: {
             async initData(){
@@ -143,14 +143,13 @@
             },
             setIndexData(){
                 this.indexData.length=0;
-                console.log("地图的值："+this.getValues[0].zbczl)
                 for (let i in this.getValues){
                     this.indexData.push({
                         name:this.getValues[i].province,
                         index1:this.getValues[i].zbczl,
                         index2:this.getValues[i].hxzbczl,
-                        index3:this.getValues[i].zblrl,
-                        index4:this.getValues[i].ldxbl
+                        index3:this.getValues[i].hxfzycd,
+                        index4:this.getValues[i].hxyjzbczl
                     });
                 }
             },
@@ -455,7 +454,7 @@
                     this.index4=this.indexData[currentIndex].index4;
                     this.bankName=this.indexData[currentIndex].name;
 
-                }, 3000);
+                }, 5000);
 
                 window.addEventListener("resize", function() {
                     myChart.resize();

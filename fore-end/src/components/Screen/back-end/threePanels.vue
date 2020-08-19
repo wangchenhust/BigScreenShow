@@ -15,7 +15,7 @@
         //颜色
         color:["rgba(255,0,0,0.8)","#ffa800","#ffe000","rgba(0,255,0,0.8)"],
         //各个指标的阈值
-        limit:[8,4,5,60],
+        limit:[],//[8,4,5,60],
         //默认数据
         dataMap:{
           // //第五个
@@ -35,14 +35,6 @@
         colorTemplate:null,
         //每个指标的最大值
         max:[],
-        //后端传来的数据
-        dataa:[{name:"资本充足率",value:2},
-
-          {name:"核心资本充足率",value:1},
-
-          {name:"核心一级资本充足率",value:2},
-
-          {name:"核心负债依存度",value:69},],
         //图例
         legendData:['风险报警','高风险','中风险','安全'],
         //时间轴的label
@@ -50,28 +42,29 @@
       }
     },
     computed: {
-      ...mapGetters({
-        getValues:'panel/getValues'
-      }),
-      ...mapState([
-        'panel/values'
-      ])
+      ...mapGetters(
+        {getValues:'panel/getValues',getRisk:'risk/getValues'}),
+      ...mapState(
+         ['panel/values','risk/values'])
     },
     //监听store的value变化, 当数据库变化时，监听器监听到，并把监听到的数据放store,组件监听store的变化即可
-    // watch:{
-    //   getValues:{
-    //     handler(newVal,oldVal) {// eslint-disable-line no-unused-vars
-    //       console.log("watch: 3panel store更改！！")
-    //       this.setDataMap()
-    //       this.getChart()
-    //     }
-    //   }
-    // },
+    watch:{
+      getValues:{
+        handler(newVal,oldVal) {// eslint-disable-line no-unused-vars
+          console.log("watch: panel store更改！！")
+          this.setLimit();//设置阈值列表，跟着getValues的name变化而变化
+          this.setColorTemplate(this.splitNumber);
+          this.setDataMap()
+          this.getChart()
+        }
+      }
+    },
     mounted() {
-      // this.initData();
-      this.setColorTemplate(this.splitNumber);
-      this.setDataMap();
-      this.getChart();
+      this.initData();
+      // this.setLimit();//设置阈值列表，跟着getValues的name变化而变化
+      // this.setColorTemplate(this.splitNumber);
+      // this.setDataMap();
+      // this.getChart();
     },
     methods: {
       //初始化时向后端取数据放到store中
@@ -79,6 +72,7 @@
         let data1=await this.$H.get('/GetData/Panel');
         this.$store.commit('panel/setValues',data1);
       },
+      //根据limit数组设置颜色分布
       setColorTemplate(){
         let x=0;
         let y=0;
@@ -129,7 +123,27 @@
 
         }
       },
+      //初始化limit数组
+      setLimit(){
+        this.limit=[];
+        for(let j in this.getValues){
+          for(let i in this.getRisk){
+            // console.log(this.getRisk[i].name+" 与 "+this.getValues[j].name);
+            if(this.getRisk[i].name.toString().localeCompare(this.getValues[j].name)==0){
+              // console.log("相等push: "+this.getRisk[i].value);
+              this.limit.push(this.getRisk[i].value);
+              break;
+            }
+            else{
+              // console.log("不等");
+            }
+          }
+        }
+        console.log("仪表盘阈值列表："+this.limit);
+      },
       setDataMap(){
+        // console.log("阈值2：");
+        // console.log(this.getRisk);
         this.dataMap={
           //第1个
           0:[],
@@ -143,10 +157,10 @@
           // 4:[]
         };//清空
         var count =0;
-        for (let i in this.dataa){
+        for (let i in this.getValues){
           var index=this.label[count];
             this.dataMap[index].push(
-                    this.dataa[i]
+                    this.getValues[i]
             );
           count++;
         }

@@ -88,7 +88,7 @@
                     </div>
 <!--                    列表模块-->
                     <div class="panel small">
-                        <h2>17家全国性银行总资产规模</h2>
+                        <h2>17家全国性银行风险指标</h2>
                         <!--                        列表组件-->
 <!--                        <list />-->
                         <entryChart />
@@ -109,6 +109,7 @@
 
 <script>
     import axios from 'axios';
+    import {mapGetters, mapState} from "vuex";
     export default {
         name: "Screen",
         data(){
@@ -128,7 +129,12 @@
             }
         },
         computed: {
-
+            ...mapGetters({
+                getValues:'risk/getValues'
+            }),
+            ...mapState([
+                'risk/values'
+            ])
         },
         created() {
             //在这里写sse数据接收监听器
@@ -141,6 +147,8 @@
             this.$sse.getSource().addEventListener('linevalues', this.lineListener)
             this.$sse.getSource().addEventListener('cradavalues', this.cradaListener)
             this.$sse.getSource().addEventListener('radavalues', this.radaListener)
+            //获取阈值并放store里
+            this.initRiskData();
         },
         mounted() {
             //天气
@@ -206,7 +214,13 @@
                 console.log("监听器：rada store更改！！")
                 this.$store.commit('rada/setValues',data1)
             },
-
+            //获取阈值
+            async initRiskData(){
+                let data1=await this.$H.get('/GetData/Risk');
+                // console.log("阈值1：");
+                // console.log(data1);
+                this.$store.commit('risk/setValues',data1);
+            },
             //获取天气数据
             getWeather(){
                 axios.get('https://www.tianqiapi.com/api/', {

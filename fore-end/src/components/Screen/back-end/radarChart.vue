@@ -19,6 +19,8 @@
                 indicatorData:[],
                 //指标值表
                 seriesData_values:[],
+                //每个指标的最值,动态为各个指标找最优最值
+                max:[],
             }
         },
         computed: {
@@ -55,13 +57,28 @@
                 let name="";
                 let index=-1;
                 let x=0;
+                let nowMax=-1;
+                //寻找最优最大值
+                for (let i in this.getValues){
+                    if(name.toString().localeCompare(this.getValues[i].name)!=0){
+                        if(nowMax!=-1){
+                            this.max.push(nowMax);
+                        }
+                        nowMax=-1;
+                        name=this.getValues[i].name;
+                    }
+                    nowMax=(nowMax>=this.getValues[i].value)?nowMax:this.getValues[i].value;
+                }
+                this.max.push(nowMax);
+                console.log("雷达图各个指标的最大值: "+this.max);
+                //设置data
+                name="";
+                let z=0;
                 for (let i in this.getValues){
                     if(name.toString().localeCompare(this.getValues[i].name)!=0){//当dataa.name变化时
-                        console.log("第"+(index+2)+"次")
-                        console.log("name:"+name+" valueName:"+this.getValues[i].name)
                         this.indicatorData.push({
                             text: this.getValues[i].name,
-                            max: 20
+                            max: this.max[z++]
                         });
                         index++;
                         x=0;
@@ -71,7 +88,6 @@
                         this.legendData.push(this.getValues[i].bank);
                         this.seriesData_values[x]=[];
                     }
-                    console.log("x:"+x+" index:"+index+" i:"+i);
                     this.seriesData_values[x++][index]=this.getValues[i].value;
                 }
             },

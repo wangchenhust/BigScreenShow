@@ -23,56 +23,70 @@ export default {
       datax: [
               // 0.9, 0.8, 0.6, 0.4, 0.2
       ],
-      datax_max: [100, 100, 100, 100,100],
-      dataa:[
-              {name:"资产利润率",value:0.5},
-              {name:"资本利润率",value:5},
-              {name:"不良资产率",value:5},
-              {name:"不良贷款率",value:69},
-              {name:"流动性比例",value:20},],
+      datax_max: [],
       option:null,
       //各个指标的阈值,负值为大于就报警，正值为小于就报警
-      limit:[0.6,11,-4,-5,25],
+      limit:[],//[0.6,11,-5,25,-4],
     };
   },
   computed: {
     ...mapGetters({
-      getValues:'bar/getValues'
-    }),
+      getValues:'bar/getValues',getRisk:'risk/getValues'}),
     ...mapState([
-      'bar/values'
-    ])
+      'bar/values','risk/values']),
   },
   mounted() {
-    // this.initData();
-    this.setDatax_y();
-    this.setOption();
+    this.initData();
+    // this.setDatax_y();
+    // this.setOption();
   },
   watch: {
     datax: function() {//高亮
       this.setOption();
     },
-    // getValues:{
-    //   handler(newVal,oldVal) {// eslint-disable-line no-unused-vars
-    //     console.log("watch: bar store更改！！")
-    //     this.setDatax_y();
-    //     this.setOption();
-    //   }
-    // }
+    getValues:{
+      handler(newVal,oldVal) {// eslint-disable-line no-unused-vars
+        console.log("watch: bar store更改！！")
+        this.setLimit();//设置阈值列表，跟着getValues的name变化而变化
+        this.setDatax_y();
+        this.setOption();
+      }
+    }
   },
   methods: {
     async initData(){
       let data1=await this.$H.get('/GetData/Bar');
       this.$store.commit('bar/setValues',data1);
     },
+    //初始化limit数组
+    setLimit(){
+      this.limit=[];
+      for(let j in this.getValues){
+        for(let i in this.getRisk){
+          // console.log(this.getRisk[i].name+" 与 "+this.getValues[j].name);
+          if(this.getRisk[i].name.toString().localeCompare(this.getValues[j].name)==0){
+            // console.log("相等push: "+this.getRisk[i].value);
+            this.limit.push(this.getRisk[i].value);
+            break;
+          }
+          else{
+            // console.log("不等");
+          }
+        }
+      }
+      console.log("柱状图阈值列表："+this.limit);
+    },
     setDatax_y(){
       this.datax.length=0;//清空原数据
-      this.datay.length=0//清空原数据
+      this.datay.length=0;//清空原数据
+      this.datax_max=[];//清空原数据
       // console.log("柱状图的值："+this.dataa[0].value)
-      for (let i in this.dataa){
-        this.datax.push(this.dataa[i].value);
-        this.datay.push(this.dataa[i].name);
+      for (let i in this.getValues){
+        this.datax.push(this.getValues[i].value);
+        this.datay.push(this.getValues[i].name);
+        this.datax_max.push(100);
       }
+      // console.log("柱状图max:"+this.datax_max)
     },
     setOption() {
       let myChart = this.$echarts.init(document.getElementById('chart_left1'));

@@ -9,6 +9,7 @@ import cline from "./modules/cline";
 import line from "./modules/line";
 import crada from "./modules/crada";
 import rada from "./modules/rada";
+import risk from "./modules/risk";
 
 Vue.use(Vuex)
 
@@ -46,5 +47,6 @@ export default new Vuex.Store({
         line,
         crada,
         rada,
+        risk
     }
 })

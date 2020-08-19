@@ -31,16 +31,13 @@
                         </td>
                         <td width="28%" class="data2020">
                             <span>{{ item.index2 }}</span>
-                            <span class="incre" v-if="item.data2020>item.data2019" style="color: #FF4669"> {{ item.incre }}%</span>
+<!--                            <span class="incre" v-if="item.data2020>item.data2019" style="color: #ff4669"> {{ item.incre }}%</span>-->
                             <!--                            <span class="incre" v-if="item.data2020==item.data2019" style="color: #FFC956"> {{ item.incre }}%</span>-->
 <!--                            <span class="incre" v-if="item.data2020<item.data2019" style="color: #3acf3a"> {{ item.incre }}%</span>-->
 <!--                            <img v-if="item.data2020>item.data2019" src="../../../assets/img/screen_img/up.png" class="incrImg">-->
 <!--                            <img v-if="item.data2020<item.data2019" src="../../../assets/img/screen_img/down.png" class="downImg">-->
 <!--                            <img v-if="item.data2020==item.data2019" src="../../../assets/img/screen_img/noChange.png">-->
                         </td>
-                        <!--                        <td width="12%" class="incre">-->
-                        <!--                            <span>{{ item.incre }}</span>-->
-                        <!--                        </td>-->
                         <td width="28%">
                             <span>{{ item.index3 }}</span>
                         </td>
@@ -85,16 +82,16 @@
             }
         },
         watch:{
-            // getValues:{
-            //     handler(newVal,oldVal) {// eslint-disable-line no-unused-vars
-            //         console.log("watch: list store更改！！")
-            //         this.setlistData()
-            //     }
-            // }
+            getValues:{
+                handler(newVal,oldVal) {// eslint-disable-line no-unused-vars
+                    console.log("watch: list store更改！！")
+                    this.setlistData()
+                }
+            }
         },
         mounted() {
-            // this.initData();
-            this.setlistData();
+            this.initData();
+            // this.setlistData();
         },
         methods: {
             async initData(){
@@ -105,14 +102,10 @@
                 this.listData=[];//清空数据
                 for (let i in this.getValues){
                     this.listData.push({
-                            // title: this.getValues[i].bank,
-                            // index1:Math.floor(this.getValues[i].total_assets_2019/1000000)+"%",
-                            // index2:Math.floor(this.getValues[i].total_assets_2019/1000000)+"%",
-                            // index3:this.getValues[i].growth_rate+"%",
-                        title: "xx银行"+i,
-                        index1: i*10+"%",
-                        index2: i*10+"%",
-                        index3: i*10+"%",
+                            title: this.getValues[i].company,
+                            index1:this.getValues[i].zbczl+"%",
+                            index2:this.getValues[i].hxzbczl+"%",
+                            index3:this.getValues[i].hxfzycd+"%",
                     })
                 }
             },

@@ -1,5 +1,56 @@
 <h1>前端项目结构说明</h1>
 
+<h2>部分图表说明：</h2>
+
+1. 9个风险指标的阈值列表储存在 store/modules/risk.js，可以在组件访问;
+
+   仪表盘、柱状图、折线图都可以从后端传输的数据和risk.js的阈值列表中，得到它们所需的阈值列表，并作告警;
+
+   阈值列表中负值表示指标不能大于该值，正值表示指标不能小于该值;
+
+2. 仪表盘可替换数据，但是必须要4个，每个只展示一个指标数据，指标阈值可正可负
+
+   所需数据格式为:
+
+   [{name:"xx",value:xx},...,]
+
+3. 柱状图可替换数据，长度不限，指标阈值可正可负
+
+   所需数据格式为:
+
+   [{name:"xx",value:xx},...,]
+
+4. 折线图可替换数据，但只能是两个指标（两条线），指标阈值只能为正
+
+   所需数据格式为:
+
+   [{name:"x1",value:xx,valuedate:"xx"},...,{name:"x2",value:xx,valuedate:"xx"},...]
+
+5. 地图不可替换数据，指标名写死，长度不限
+
+   所需数据格式为:[{hxfzycd:xx,hxyjzbczl:xx,hxzbczl:xx,province:xx,zbczl:xx}]
+
+6. 报警部分共享地图的store，分行总数为store数据的长度
+
+7. 列表可替换数据，不限长度
+
+   所需数据格式为:
+
+   [{company:"xx",hxfzycd:xx,hxzbczl:xx,zbczl:xx},..]
+
+8. 雷达图可替换数据，但只能是5个指标和4个银行；每个指标的最大值设置为所有银行在这一指标上的最大值；
+
+   所需数据格式为:
+
+   [{bank:"x1行",name:"y1率",value:xx},
+
+   {bank:"x2行",name:"y1率",value:xx},
+
+   {bank:"x1行",name:"y2率",value:xx},
+
+   {bank:"x2行",name:"y2率",value:xx},]
+
+
 <h2>目录结构</h2>
 
 ```javascript
@@ -111,7 +162,7 @@ src
 
 <h2>界面展示</h2>
 
-<img src="./README_Image/screen2.0.jpg"></img>
+<img src="./README_Image/image.jpg"></img>
 
 <h2>Screen页面html结构说明</h2>
 

@@ -11,9 +11,6 @@
     name: "lineChart",
     data() {
       return {
-        // dataa:[{"name":"资本充足率","value":0,"valuedate":"2020-01-01"},
-        //   {"name":"核心资本充足率","value":12,"valuedate":"2020-01-01"},
-        //],
         values: [
           // [0, 0.2, 0.3, 0.3, 0.5, 0.6, 0.5, 0.3, 0.6, 0.5, 0.5, 0.8],
           // [0.9, 0.5, 0.7, 0.8, 0.6, 0.7, 0.8, 0.7, 0, 0.6, 0.8, 0.3]
@@ -36,16 +33,14 @@
           // "12月"
         ],
         //各个指标的阈值,负值为大于就报警，正值为小于就报警
-        limit:[8,4],//"资本充足率"阈值, "核心资本充足率"阈值
+        limit:[],//[8,4],//"资本充足率"阈值, "核心资本充足率"阈值
       };
     },
     computed: {
       ...mapGetters({
-        getValues:'line/getValues'
-      }),
+        getValues:'line/getValues',getRisk:'risk/getValues'}),
       ...mapState([
-        'line/values'
-      ])
+        'line/values','risk/values'])
     },
     watch: {
       values: function() {
@@ -54,6 +49,7 @@
       getValues:{
         handler(newVal,oldVal) {// eslint-disable-line no-unused-vars
           console.log("watch: line store更改！！")
+          this.setLimit();//设置阈值列表，跟着getValues的name变化而变化
           this.setData();
           this.getChart();
         }
@@ -69,13 +65,34 @@
         let data1=await this.$H.get('/GetData/Line');
         this.$store.commit('line/setValues',data1);
       },
+      //初始化limit数组
+      setLimit(){
+        this.limit=[];
+        let name="xx";
+        for(let j in this.getValues){
+          if(name.toString().localeCompare(this.getValues[j].name)!=0){//设置当前指标
+            for(let i in this.getRisk){
+              // console.log(this.getRisk[i].name+" 与 "+this.getValues[j].name);
+              if(this.getRisk[i].name.toString().localeCompare(this.getValues[j].name)==0){
+                // console.log("相等push: "+this.getRisk[i].value);
+                this.limit.push(this.getRisk[i].value);
+                break;
+              }
+              else{
+                // console.log("不等");
+              }
+            }
+            name=this.getValues[j].name;
+          }
+        }
+        console.log("折线图阈值列表："+this.limit);
+      },
       setData(){
         this.values=[];
         this.datax=[];
         this.legendData=[];
         let name="xx";
         let index=0;
-        console.log("折线图的值："+this.getValues[2].value)
         for(let i in this.getValues){
           if(name.toString().localeCompare(this.getValues[i].name)!=0){
             this.legendData.push(this.getValues[i].name);
