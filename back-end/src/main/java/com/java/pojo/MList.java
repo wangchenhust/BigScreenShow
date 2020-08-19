@@ -1,58 +1,48 @@
 package com.java.pojo;
 
-import java.math.BigDecimal;
+/**
+ * for:列表pojo
+ * */
 
 public class MList {
-	private String bank;
+	private String company;
 	
-	private Integer growth_rate;
+	private Float zbczl;
 	
-	private BigDecimal total_assets_2019;
+	private Float hxzbczl;
 	
-	private BigDecimal total_assets_2020;
-	
-	private String type;
+	private Float hxfzycd;
 
-	public Integer getGrowth_rate() {
-		return growth_rate;
+	public String getCompany() {
+		return company;
 	}
 
-	public void setGrowth_rate(Integer growth_rate) {
-		this.growth_rate = growth_rate;
+	public void setCompany(String company) {
+		this.company = company;
 	}
 
-	public BigDecimal getTotal_assets_2019() {
-		return total_assets_2019;
+	public Float getZbczl() {
+		return zbczl;
 	}
 
-	public void setTotal_assets_2019(BigDecimal total_assets_2019) {
-		this.total_assets_2019 = total_assets_2019;
+	public void setZbczl(Float zbczl) {
+		this.zbczl = zbczl;
 	}
 
-	public BigDecimal getTotal_assets_2020() {
-		return total_assets_2020;
+	public Float getHxzbczl() {
+		return hxzbczl;
 	}
 
-	public void setTotal_assets_2020(BigDecimal total_assets_2020) {
-		this.total_assets_2020 = total_assets_2020;
+	public void setHxzbczl(Float hxzbczl) {
+		this.hxzbczl = hxzbczl;
 	}
 
-	public String getBank() {
-		return bank;
+	public Float getHxfzycd() {
+		return hxfzycd;
 	}
 
-	public void setBank(String bank) {
-		this.bank = bank;
-	}
-
-	
-
-	public String getType() {
-		return type;
-	}
-
-	public void setType(String type) {
-		this.type = type;
+	public void setHxfzycd(Float hxfzycd) {
+		this.hxfzycd = hxfzycd;
 	}
 
 }

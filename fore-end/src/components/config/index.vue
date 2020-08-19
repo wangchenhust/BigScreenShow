@@ -198,7 +198,7 @@ export default {
             this.setData("zbchongzu",data1[i].time,data1[i].value);
             break;
           case "核心资本充足率":
-            this.setData("corezbchongzu",data1[i].time,data1[i],value);
+            this.setData("corezbchongzu",data1[i].time,data1[i].value);
           //........
         }
       }

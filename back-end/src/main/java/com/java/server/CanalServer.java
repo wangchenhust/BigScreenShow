@@ -76,17 +76,12 @@ public class CanalServer implements EntryHandler<Map<String, String>> {
 			SseEmitterServer.batchSendMessage(getDataImpl.getMMapData(), "mapvalues");
 			break;
 		case "linevalues":
-			if((map.get("bid").equals("1"))&&(map.get("did").equals("18")||map.get("did").equals("1"))) {
-				redisClearUtils.delLineCache();
-				SseEmitterServer.batchSendMessage(getDataImpl.getLineData(), "linevalues");
-			}
+			redisClearUtils.delLineCache();
+			SseEmitterServer.batchSendMessage(getDataImpl.getLineData(), "linevalues");
 			break;
 		case "radarvalues":
-			if(map.get("did").equals("3")||map.get("did").equals("25"))return;
-			else {
-				redisClearUtils.delRadaCache();
-				SseEmitterServer.batchSendMessage(getDataImpl.getRadaData(), "radavalues");
-			}
+			redisClearUtils.delRadaCache();
+			SseEmitterServer.batchSendMessage(getDataImpl.getRadaData(), "radavalues");
 			break;
 		case "peizhivalues":
 			redisClearUtils.delConfigDataCache();

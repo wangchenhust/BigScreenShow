@@ -6,11 +6,11 @@
 	<!-- 仪表盘查询语句（已优化） -->
 	<select id="getPanelData" resultType="com.java.pojo.Panel">
 		select
-		dn.NAME,cast(pv.VALUE as DECIMAL(5,2)) VALUE
+		dn.NAME,pv.VALUE VALUE
 		from
 		panelvalues pv,
-		(select * from banks where NAME='工商银行') banks,
-		(select * from datanames where id in (20,4,22,30)) dn,valuedates vd
+		banks,
+		datanames dn,valuedates vd
 		where
 		pv.did=dn.id and
 		pv.vid=vd.id and pv.bid=banks.id;
@@ -62,11 +62,7 @@
 		dn.NAME,CAST(rv.VALUE
 		AS DECIMAL(3,0))VALUE,b.NAME bank
 		from
-		(select
-		rv.VALUE,rv.did,rv.vid,rv.bid
-		from radarvalues rv
-		where
-		(1,2,18,21,23)) rv,
+		radarvalues rv,
 		(select
 		*
 		from banks
@@ -77,36 +73,34 @@
 		rv.did=dn.id and rv.vid=vd.id and rv.bid=b.id;
 	</select>
 	
+	<!-- 可配置图表语句 -->
 	<select id="getConfigData" resultType="com.java.pojo.ConfigData">
 		select dn.NAME NAME,pv.VALUE value,jd.NAME time from peizhivalues pv,jidu jd,banks,datanames dn where jd.id in (1,2) and pv.jid=jd.id and pv.bid=banks.id and pv.did=dn.id;
 	</select>
 
 	<!-- 列表查询语句（已优化） -->
 	<select id="getMListData" resultType="com.java.pojo.MList">
-		select bb.NAME company,CAST(mv1.VALUE AS DECIMAL(4,1)) zbczl,CAST(mv2.VALUE AS DECIMAL(4,1)) hxzbczl,CAST(mv3.VALUE AS DECIMAL(4,1)) zblrl,CAST(mv4.VALUE AS DECIMAL(4,1)) ldxbl
+		select bb.NAME company,CAST(mv1.VALUE AS DECIMAL(4,1)) zbczl,CAST(mv2.VALUE AS DECIMAL(4,1)) hxzbczl,CAST(mv3.VALUE AS DECIMAL(4,1)) hxfzycd
 		from
 		(select VALUE,bid from entryvalues where did=1) mv1,
 		(select VALUE,bid from entryvalues where did=18) mv2,
-		(select VALUE,bid from entryvalues where did=21) mv3,
-		(select VALUE,bid from entryvalues where did=23) mv4,
+		(select VALUE,bid from entryvalues where did=30) mv3,
 		banks bb
-		where bb.id=mv1.bid and bb.id=mv2.bid and bb.id=mv3.bid and
-		bb.id=mv4.bid;
+		where bb.id=mv1.bid and bb.id=mv2.bid and bb.id=mv3.bid;
 	</select>
 
 	<!-- 地图查询语句（已优化） -->
 	<select id="getMMapData" resultType="com.java.pojo.MMap">
 		select REPLACE(bb.NAME,'分行','') province,CAST(mv1.VALUE AS DECIMAL(4,1)) zbczl,CAST(mv2.VALUE AS DECIMAL(4,1))
-		hxzbczl,CAST(mv3.VALUE AS DECIMAL(4,1)) zblrl,CAST(mv4.VALUE AS DECIMAL(4,1)) ldxbl,CAST(mv5.VALUE AS DECIMAL(4,1)) hxyjzbczl 
+		hxzbczl,CAST(mv3.VALUE AS DECIMAL(4,1)) hxfzycd,CAST(mv4.VALUE AS DECIMAL(4,1)) hxyjzbczl 
 		from
 		(select VALUE,bbid from mapvalues where did=1) mv1,
 		(select VALUE,bbid from mapvalues where did=18) mv2,
-		(select VALUE,bbid from mapvalues where did=21) mv3,
-		(select VALUE,bbid from mapvalues where did=23) mv4,
-		(select VALUE,bbid from mapvalues where did=2) mv5,
+		(select VALUE,bbid from mapvalues where did=30) mv3,
+		(select VALUE,bbid from mapvalues where did=2) mv4,
 		branchbanks bb
 		where bb.id=mv1.bbid and bb.id=mv2.bbid and bb.id=mv3.bbid and
-		bb.id=mv4.bbid and bb.id=mv5.bbid;
+		bb.id=mv4.bbid;
 	</select>
 	
 	<!-- 风险阈值语句 -->

@@ -1,6 +1,10 @@
 package com.java.pojo;
 
 
+/**
+ * for：地图数据pojo
+ * */
+
 public class MMap {
 	private String province;
 	
@@ -8,9 +12,9 @@ public class MMap {
 	
 	private Float hxzbczl;
 	
-	private Float zblrl;
+	private Float hxfzycd;
 	
-	private Float ldxbl;
+	private Float hxyjzbczl;
 
 	public String getProvince() {
 		return province;
@@ -36,19 +40,20 @@ public class MMap {
 		this.hxzbczl = hxzbczl;
 	}
 
-	public Float getZblrl() {
-		return zblrl;
+	public Float getHxfzycd() {
+		return hxfzycd;
 	}
 
-	public void setZblrl(Float zblrl) {
-		this.zblrl = zblrl;
+	public void setHxfzycd(Float hxfzycd) {
+		this.hxfzycd = hxfzycd;
 	}
 
-	public Float getLdxbl() {
-		return ldxbl;
+	public Float getHxyjzbczl() {
+		return hxyjzbczl;
 	}
 
-	public void setLdxbl(Float ldxbl) {
-		this.ldxbl = ldxbl;
+	public void setHxyjzbczl(Float hxyjzbczl) {
+		this.hxyjzbczl = hxyjzbczl;
 	}
+
 }
