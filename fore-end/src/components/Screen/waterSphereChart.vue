@@ -11,20 +11,29 @@ export default {
   name: "waterSphereChart",
   data(){
     return{
-
+      value:this.risk
     }
   },
   props:{
-    value:{
+    risk:{
       type:Number,
-      default:100
+      default:0.1
     }
   },
   computed: {
   },
-  mounted() {
-    this.getChart();
+  watch:{//监听value变化
+    risk:{
+      handler(newVal,oldVal) {// eslint-disable-line no-unused-vars
+        console.log("watch: map store更改！！")
+        this.value=newVal;
+        this.getChart();
+      }
+    }
   },
+  // mounted() {
+  //   this.getChart();
+  // },
   methods: {
     getChart(){
       var myChart = echarts.init(document.getElementById('chart_middel1'))
