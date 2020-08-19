@@ -190,6 +190,27 @@ export default {
     }
   },
   methods:{
+    async getData(){
+      let data1=await this.$H.get('/GetData/ConfigData');
+      for(var i=0;i<data1.length;i++){
+        switch (data1[i].name) {
+          case "资本充足率":
+            this.setData("zbchongzu",data1[i].time,data1[i].value);
+            break;
+          case "核心资本充足率":
+            this.setData("corezbchongzu",data1[i].time,data1[i],value);
+          //........
+        }
+      }
+    },
+    setData(name,season,value){
+      if(season=="第一季度"){
+        this.bankData[name]["season1"]=value;
+      }
+      else{
+        this.bankData[name]["season2"]=value;
+      }
+    },
     handleChange(){
       if (this.selectChart[0] == 'line'){
         this.configData.chartType = this.selectChart[0]

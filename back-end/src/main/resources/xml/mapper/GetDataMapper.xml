@@ -78,7 +78,7 @@
 	</select>
 	
 	<select id="getConfigData" resultType="com.java.pojo.ConfigData">
-		select dn.NAME NAME,pv.VALUE value,jd.NAME time from peizhivalues pv,jidu jd,banks,datanames dn where pv.jid=jd.id and pv.bid=banks.id and pv.did=dn.id;
+		select dn.NAME NAME,pv.VALUE value,jd.NAME time from peizhivalues pv,jidu jd,banks,datanames dn where jd.id in (1,2) and pv.jid=jd.id and pv.bid=banks.id and pv.did=dn.id;
 	</select>
 
 	<!-- 列表查询语句（已优化） -->
