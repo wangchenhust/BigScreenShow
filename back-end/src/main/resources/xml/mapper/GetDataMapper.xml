@@ -70,7 +70,7 @@
 		("中国银行","工商银行","建设银行","农业银行")) b,
 		valuedates vd,datanames dn
 		where
-		rv.did=dn.id and rv.vid=vd.id and rv.bid=b.id order by b.NAME,dn.NAME;
+		rv.did=dn.id and rv.vid=vd.id and rv.bid=b.id order by dn.NAME,FIELD(b.NAME,'工商银行') DESC;
 	</select>
 	
 	<!-- 可配置图表语句 -->
