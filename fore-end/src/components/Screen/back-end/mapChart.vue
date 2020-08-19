@@ -16,13 +16,29 @@
                     <td class="index">{{index2}}%</td>
                 </tr>
                 <tr>
-                    <td class="title">资本利润率</td>
-                    <td class="title">流动性比例</td>
+                    <td class="long title">核心负债</td>
+                    <td class="long title">核心一级</td>
+                </tr>
+                <tr>
+                    <td class="long title">依存度</td>
+                    <td class="long title">资本充足率</td>
                 </tr>
                 <tr>
                     <td class="index">{{index3}}%</td>
                     <td class="index">{{index4}}%</td>
                 </tr>
+<!--                <tr>-->
+<!--                    <td class="title" colspan="2">核心负债依存度</td>-->
+<!--                </tr>-->
+<!--                <tr>-->
+<!--                    <td class="index" colspan="2">{{index3}}%</td>-->
+<!--                </tr>-->
+<!--                <tr>-->
+<!--                    <td class="title" colspan="2">核心一级资本充足率</td>-->
+<!--                </tr>-->
+<!--                <tr>-->
+<!--                    <td class="index" colspan="2">{{index4}}%</td>-->
+<!--                </tr>-->
             </table>
         </div>
 
@@ -483,7 +499,7 @@
         /*background: rgba(255, 255, 255, 0.04) url(../assets/img/screen_img/line.png);*/
         background-color: rgba(0, 20, 91, 0.8);
 
-        top:310px;
+        top:260px;
         left:770px;
         td{
             text-align:center;
@@ -502,6 +518,9 @@
         .index{
             color: #ffeb7b;
             font-family: 'DIGITALDREAMFAT';
+        }
+        .long{
+            padding: 0px;
         }
     }
 

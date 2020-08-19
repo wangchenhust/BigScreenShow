@@ -32,7 +32,7 @@
                 <div class="left part">
 <!--                    仪表盘模块-->
                     <div class="panel">
-                        <h2>工行风险指标</h2>
+                        <h2>工行重要风险指标</h2>
 <!--                        柱状图组件-->
 <!--                        <dashboard />-->
 <!--                        <threeDashboards />-->
@@ -42,9 +42,9 @@
                     </div>
 <!--                    柱状图模块-->
                     <div class="panel small">
-                        <h2>工行重要风险指标</h2>
+                        <h2>工行一般风险指标</h2>
 <!--                        仪表盘组件-->
-                        <barChart1 />
+                        <barChart />
                         <div class="panel-footer"></div>
                     </div>
 <!--                    饼图模块-->
@@ -98,7 +98,7 @@
                     <div class="panel">
                         <h2>四大行对比</h2>
 <!--                        雷达图组件-->
-                        <radarChart1 />
+                        <radarChart />
                         <div class="panel-footer"></div>
                     </div>
                 </div>

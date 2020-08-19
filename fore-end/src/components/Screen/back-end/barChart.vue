@@ -23,8 +23,16 @@ export default {
       datax: [
               // 0.9, 0.8, 0.6, 0.4, 0.2
       ],
-      datax_max: [100, 100, 100, 100, 100],
+      datax_max: [100, 100, 100, 100,100],
+      dataa:[
+              {name:"资产利润率",value:2},
+              {name:"资本利润率",value:1},
+              {name:"不良资产率",value:2},
+              {name:"不良贷款率",value:69},
+              {name:"流动性比例",value:2},],
       option:null,
+      //各个指标的阈值
+      limit:[0.6,11,-5,-4,25],
     };
   },
   computed: {
@@ -36,22 +44,21 @@ export default {
     ])
   },
   mounted() {
-    this.initData();
-    // this.setDatax_y();
-    // this.setOption();
-    // if (typeof (EventSource) == "undefined") this.timer();
+    // this.initData();
+    this.setDatax_y();
+    this.setOption();
   },
   watch: {
     datax: function() {//高亮
       this.setOption();
     },
-    getValues:{
-      handler(newVal,oldVal) {// eslint-disable-line no-unused-vars
-        console.log("watch: bar store更改！！")
-        this.setDatax_y();
-        this.setOption();
-      }
-    }
+    // getValues:{
+    //   handler(newVal,oldVal) {// eslint-disable-line no-unused-vars
+    //     console.log("watch: bar store更改！！")
+    //     this.setDatax_y();
+    //     this.setOption();
+    //   }
+    // }
   },
   methods: {
     async initData(){
@@ -61,10 +68,10 @@ export default {
     setDatax_y(){
       this.datax.length=0;//清空原数据
       this.datay.length=0//清空原数据
-      console.log("柱状图的值："+this.getValues[0].value)
-      for (let i in this.getValues){
-        this.datax.push(this.getValues[i].value);
-        this.datay.push(this.getValues[i].name);
+      // console.log("柱状图的值："+this.dataa[0].value)
+      for (let i in this.dataa){
+        this.datax.push(this.dataa[i].value);
+        this.datay.push(this.dataa[i].name);
       }
     },
     setOption() {
@@ -114,6 +121,14 @@ export default {
               show: true,
               textStyle: {
                 color: "#b3ccf8"
+              },
+              formatter: function(params) {
+                  if(params.length>7)
+                    return  "\n"+params.toString().substr(0,params.length/2)
+                            +"\n"+
+                            params.toString().substr(params.length/2)
+                  else
+                    return params;
               }
             },
             splitLine: {
@@ -212,31 +227,31 @@ export default {
           seriesIndex: 0,
           dataIndex: curidx
         });
-        if ((item < 0.6) & (curidx == 0)) {
+        if ((item < this.limit[0]) & (curidx == 0)) {
           myChart.dispatchAction({
             type: "highlight",
             dataIndex: curidx
           });
         }
-        if ((item < 11) & (curidx == 1)) {
+        if ((item < this.limit[1]) & (curidx == 1)) {
           myChart.dispatchAction({
             type: "highlight",
             dataIndex: curidx
           });
         }
-        if ((item > 5) & (curidx == 2)) {
+        if ((item < this.limit[2]) & (curidx == 2)) {
           myChart.dispatchAction({
             type: "highlight",
             dataIndex: curidx
           });
         }
-        if ((item > 4) & (curidx == 3)) {
+        if ((item < this.limit[3]) & (curidx == 3)) {
           myChart.dispatchAction({
             type: "highlight",
             dataIndex: curidx
           });
         }
-        if ((item < 25) & (curidx == 4)) {
+        if ((item < this.limit[4]) & (curidx == 4)) {
           myChart.dispatchAction({
             type: "highlight",
             dataIndex: curidx

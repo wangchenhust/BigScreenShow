@@ -13,11 +13,11 @@
                     <td width="17%">
                         <span>核心资本充足率</span>
                     </td>
+<!--                    <td width="17%">-->
+<!--                        <span>核心一级资本充足率</span>-->
+<!--                    </td>-->
                     <td width="17%">
-                        <span>流动性比例</span>
-                    </td>
-                    <td width="17%">
-                        <span>资产利润率</span>
+                        <span>核心负债依存度</span>
                     </td>
                 </tr>
                 </tbody>
@@ -30,10 +30,10 @@
                         <td width="100%" class="title">
                             <span>{{ item.title }}</span>
                         </td>
-                        <td width="25%">
+                        <td width="27%">
                             <span>{{ item.data2019 }}</span>
                         </td>
-                        <td width="42%" class="data2020">
+                        <td width="28%" class="data2020">
                             <span>{{ item.data2020 }}</span>
                             <span class="incre" v-if="item.data2020>item.data2019" style="color: #FF4669"> {{ item.incre }}%</span>
 <!--                            <span class="incre" v-if="item.data2020==item.data2019" style="color: #FFC956"> {{ item.incre }}%</span>-->
@@ -45,7 +45,7 @@
 <!--                        <td width="12%" class="incre">-->
 <!--                            <span>{{ item.incre }}</span>-->
 <!--                        </td>-->
-                        <td width="14%">
+                        <td width="28%">
                             <span>{{ item.type }}</span>
                         </td>
                     </tr>
@@ -215,6 +215,7 @@
                     overflow: hidden;
                     color: #ade3ff;
                     font-size: 10px;
+                    /*border:1px solid #FFC956;*/
                 }
                 .incre{
                     color: #FF4669
