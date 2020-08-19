@@ -76,37 +76,9 @@
 		where
 		rv.did=dn.id and rv.vid=vd.id and rv.bid=b.id;
 	</select>
-
-	<!-- 可配置折线图查询语句(已优化) -->
-	<select id="getCLineData" resultType="com.java.pojo.CLine">
-		select
-		b.NAME
-		bank,dn.NAME,cast(AVG(lv.VALUE) as DECIMAL(4,1)) value
-		from
-		linevalues
-		lv,
-		(select id,NAME from banks where NAME=#{bank}) b,
-		(select * from datanames where id in
-		(1,18,20)) dn,
-		valuedates vd
-		where
-		lv.did=dn.id and lv.vid=vd.id and
-		lv.bid=b.id group by b.NAME,dn.NAME;
-	</select>
-
-	<!-- 可配置雷达图查询语句 -->
-	<select id="getCRadaData" resultType="com.java.pojo.CRada">
-		select
-		b.NAME,cast(rv.VALUE
-		as decimal(3,0)) value
-		from
-		(select VALUE,did,bid,vid from radarvalues
-		where did=25) rv,datanames
-		dn,banks
-		b,valuedates vd
-		where
-		rv.did=dn.id and
-		rv.bid=b.id and rv.vid=vd.id and b.NAME=#{bank};
+	
+	<select id="getConfigData" resultType="com.java.pojo.ConfigData">
+		select dn.NAME NAME,pv.VALUE value,jd.NAME time from peizhivalues pv,jidu jd,banks,datanames dn where jd.id in (1,2) and pv.jid=jd.id and pv.bid=banks.id and pv.did=dn.id;
 	</select>
 
 	<!-- 列表查询语句（已优化） -->

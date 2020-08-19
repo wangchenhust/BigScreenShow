@@ -40,28 +40,10 @@ public class RedisClearUtils {
 	public void delRadaCache() {}
 	
 	/*
-	 * 删除所有折线图（可配置）缓存
+	 * 删除可配置图表缓存
 	 * */
-	@CacheEvict(cacheNames = "CLine",allEntries = true)
-	public void delCLineCache() {}
-	
-	/*
-	 * 删除所有雷达图（可配置）缓存
-	 * */
-	@CacheEvict(cacheNames = "CRada",allEntries = true)
-	public void delCRadaCache() {}
-	
-	/*
-	 * 删除指定折线图（可配置）缓存
-	 * */
-	@CacheEvict(cacheNames = "CLine",key="#p0")
-	public void delCLineCache(String bank) {}
-	
-	/*
-	 * 删除指定雷达图（可配置）缓存
-	 * */
-	@CacheEvict(cacheNames = "CRada",key="#p0")
-	public void delCRadaCache(String bank) {}
+	@CacheEvict(cacheNames = "ConfigData",allEntries = true)
+	public void delConfigDataCache() {}
 	
 	/*
 	 * 删除列表缓存
@@ -75,5 +57,10 @@ public class RedisClearUtils {
 	@CacheEvict(cacheNames = "MMap",allEntries = true)
 	public void delMMapCache() {}
 	
+	/*
+	 * 删除风险阈值缓存
+	 * */
+	@CacheEvict(cacheNames = "Risk",allEntries = true)
+	public void delRiskCache() {}
 	
 }

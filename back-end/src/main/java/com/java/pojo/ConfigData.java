@@ -1,20 +1,15 @@
 package com.java.pojo;
 
-public class CLine {
+/**
+ * for:可配置图表数据pojo
+ * */
 
-	private String bank;
-	
+public class ConfigData {
 	private String name;
 	
 	private Float value;
-
-	public String getBank() {
-		return bank;
-	}
-
-	public void setBank(String bank) {
-		this.bank = bank;
-	}
+	
+	private String time;
 
 	public String getName() {
 		return name;
@@ -31,5 +26,14 @@ public class CLine {
 	public void setValue(Float value) {
 		this.value = value;
 	}
+
+	public String getTime() {
+		return time;
+	}
+
+	public void setTime(String time) {
+		this.time = time;
+	}
+	
 	
 }

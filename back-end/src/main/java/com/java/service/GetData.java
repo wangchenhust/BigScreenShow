@@ -16,14 +16,12 @@ public interface GetData {
 	
 	public String getRadaData();
 	
-	public String getCLineData(String bank);
-	
-	public String getCRadaData(String bank);
-	
 	public String getMListData();
 	
 	public String getMMapData();
 	
 	public String getRiskData();
+	
+	public String getConfigData();
 
 }

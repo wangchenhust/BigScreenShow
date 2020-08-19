@@ -2,12 +2,10 @@ package com.java.server;
 
 import java.util.Map;
 
-import org.eclipse.jdt.internal.compiler.ast.AND_AND_Expression;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-import com.alibaba.fastjson.JSON;
 import com.java.service.impl.GetDataImpl;
 import com.java.utils.RedisClearUtils;
 import top.javatool.canal.client.annotation.CanalTable;
@@ -78,28 +76,21 @@ public class CanalServer implements EntryHandler<Map<String, String>> {
 			SseEmitterServer.batchSendMessage(getDataImpl.getMMapData(), "mapvalues");
 			break;
 		case "linevalues":
-			String bankId=map.get("bid");
-			redisClearUtils.delCLineCache(bankId);
-			String meg=getDataImpl.getCLineData(bankId);
-			if(meg!=null)SseEmitterServer.batchSendMessage(meg, "clinevalues"+bankId);
 			if((map.get("bid").equals("1"))&&(map.get("did").equals("18")||map.get("did").equals("1"))) {
 				redisClearUtils.delLineCache();
 				SseEmitterServer.batchSendMessage(getDataImpl.getLineData(), "linevalues");
 			}
 			break;
 		case "radarvalues":
-			if(map.get("did")=="3")return;
-			if(map.get("did")=="25") {
-				String bankId1=map.get("bid");
-				redisClearUtils.delCRadaCache(bankId1);
-				String meg1=getDataImpl.getCRadaData(bankId1);
-				SseEmitterServer.batchSendMessage(meg1, "cradavalues");
-			}
+			if(map.get("did").equals("3")||map.get("did").equals("25"))return;
 			else {
 				redisClearUtils.delRadaCache();
 				SseEmitterServer.batchSendMessage(getDataImpl.getRadaData(), "radavalues");
 			}
 			break;
+		case "peizhivalues":
+			redisClearUtils.delConfigDataCache();
+			SseEmitterServer.batchSendMessage(getDataImpl.getConfigData(), "peizhivalues");
 		default:
 			return;
 		}
