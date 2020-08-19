@@ -18,52 +18,173 @@ export default {
         value:'line',
         label:'折线图',
         children:[{
-          value:'gh_data',
-          label:'工商银行'
+          value:'zbchongzu',
+          label:'资本充足率'
         }, {
-          value:'zh_data',
-          label:'中国银行'
+          value:'corezbchongzu',
+          label:'核心资本充足率'
         },{
-          value:'jh_data',
-          label:'建设银行'
+          value:'corefirstzbchongzu',
+          label:'核心一级资本充足率'
         },{
-          value:'nh_data',
-          label:'农业银行'
+          value:'zichanprofit',
+          label:'资产利润率'
+        },{
+          value:'baddaikuan',
+          label:'不良贷款率'
+        },{
+          value:'badzichan',
+          label:'不良资产率'
+        },{
+          value:'liudongbili',
+          label:'流动性比例'
+        },{
+          value:'corefuzhai',
+          label:'核心负债依存度'
+        },{
+          value:'rorwa',
+          label:'风险加权资产收益率'
         }
         ]
-      }, {//仪表盘
+        },
+        {//仪表盘
         value:'gauge',
         label:'仪表盘',
         children:[{
-          value:'gh_data',
-          label:'工商银行'
+          value:'zbchongzu',
+          label:'资本充足率',
+          children:[{
+            value:'season1',
+            label:'第一季度'
+          },{
+            value:'season2',
+            label:'第二季度'
+          }]
         }, {
-          value:'zh_data',
-          label:'中国银行'
+          value:'corezbchongzu',
+          label:'核心资本充足率',
+          children:[{
+            value:'season1',
+            label:'第一季度'
+          },{
+            value:'season2',
+            label:'第二季度'
+          }]
         },{
-          value:'jh_data',
-          label:'建设银行'
+          value:'corefirstzbchongzu',
+          label:'核心一级资本充足率',
+          children:[{
+            value:'season1',
+            label:'第一季度'
+          },{
+            value:'season2',
+            label:'第二季度'
+          }]
         },{
-          value:'nh_data',
-          label:'农业银行'
-        }]
+          value:'zichanprofit',
+          label:'资产利润率',
+          children:[{
+            value:'season1',
+            label:'第一季度'
+          },{
+            value:'season2',
+            label:'第二季度'
+          }]
+        },{
+          value:'baddaikuan',
+          label:'不良贷款率',
+          children:[{
+            value:'season1',
+            label:'第一季度'
+          },{
+            value:'season2',
+            label:'第二季度'
+          }]
+        },{
+          value:'badzichan',
+          label:'不良资产率',
+          children:[{
+            value:'season1',
+            label:'第一季度'
+          },{
+            value:'season2',
+            label:'第二季度'
+          }]
+        },{
+          value:'liudongbili',
+          label:'流动性比例',
+          children:[{
+            value:'season1',
+            label:'第一季度'
+          },{
+            value:'season2',
+            label:'第二季度'
+          }]
+        },{
+          value:'corefuzhai',
+          label:'核心负债依存度',
+          children:[{
+            value:'season1',
+            label:'第一季度'
+          },{
+            value:'season2',
+            label:'第二季度'
+          }]
+        },{
+          value:'rorwa',
+          label:'风险加权资产收益率',
+          children:[{
+            value:'season1',
+            label:'第一季度'
+          },{
+            value:'season2',
+            label:'第二季度'
+          }]
+        }
+        ]
       }],
-      bankData: {//折线图的y坐标
-        gh_data:[0.1,0.2,0.3],
-        zh_data:[0.13,0.5,0.6],
-        jh_data:[0.5,0.34,0.58],
-        nh_data:[0.59,0.21,0.14]
-      },
-      dashboard_data: {//仪表盘数据
-        gh_data:{value: 50, name: 'RORWA'},
-        zh_data:{value: 40, name: 'RORWA'},
-        jh_data:{value: 30, name: 'RORWA'},
-        nh_data:{value: 20, name: 'RORWA'},
+      bankData:{
+        zbchongzu:{
+          season1:0.1,
+          season2:0.2
+        },
+        corezbchongzu:{
+          season1:0.3,
+          season2:0.25
+        },
+        corefirstzbchongzu:{
+          season1:0.4,
+          season2:0.3
+        },
+        zichanprofit:{
+          season1:0.22,
+          season2:0.44
+        },
+        baddaikuan:{
+          season1:0.5,
+          season2:0.15
+        },
+        badzichan:{
+          season1:0.44,
+          season2:0.33
+        },
+        liudongbili:{
+          season1:0.35,
+          season2:0.45
+        },
+        corefuzhai:{
+          season1:0.1,
+          season2:0.2
+        },
+        rorwa:{
+          season1:0.5,
+          season2:0.8
+        }
       },
       configData:{
         chartType:'',
         bankChart:[],
-        gaugeChart:{}
+        gaugeChart:50,
       }
 
     }
@@ -72,11 +193,13 @@ export default {
     handleChange(){
       if (this.selectChart[0] == 'line'){
         this.configData.chartType = this.selectChart[0]
-        this.configData.bankChart = this.bankData[this.selectChart[1]]
+        for (let i in this.bankData[this.selectChart[1]]){
+          this.configData.bankChart.push(this.bankData[this.selectChart[1]][i])
+        }
       }
       else if (this.selectChart[0] == 'gauge') {
         this.configData.chartType = this.selectChart[0]
-        this.configData.gaugeChart = this.dashboard_data[this.selectChart[1]]
+        this.configData.gaugeChart = this.bankData[this.selectChart[1]][this.selectChart[2]]
       }
     },
     toConfig(){
