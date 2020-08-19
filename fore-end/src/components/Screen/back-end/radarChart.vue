@@ -54,6 +54,7 @@
                 this.legendData=[];
                 this.indicatorData=[];
                 this.seriesData_values=[];
+                this.max=[];
                 let name="";
                 let index=-1;
                 let x=0;
