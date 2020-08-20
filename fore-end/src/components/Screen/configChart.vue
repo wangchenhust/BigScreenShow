@@ -438,7 +438,7 @@
             drawCharts(option){
                 let newConfigCharts = this.$echarts.init(document.getElementById('newConfigChart'))
                 newConfigCharts.clear()
-                newConfigCharts.setOption(option)
+                newConfigCharts.setOption(option,true)
             },
         }
     }
