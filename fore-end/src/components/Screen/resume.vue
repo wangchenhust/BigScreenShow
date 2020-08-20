@@ -30,7 +30,7 @@
                 total:0,//工商银行省分行数
                 riskNum:0,//存在风险的省分行数
                 safeRate:0,
-                limit:[8,4,5,25,11]
+                limit:[],//[8,4,5,60]"资本充足率","核心资本充足率","核心一级资本充足率","核心负债依存度"
             }
         },
         computed: {
@@ -38,11 +38,13 @@
             //     return (this.riskNum)/this.total;
             // },
             ...mapGetters({
-                getValues:'map/getValues'
+                getValues:'map/getValues',
+                getRisk:'risk/getValues'
                 // ...
             }),
             ...mapState([
-                'map/values'
+                'map/values',
+                'risk/values'
             ])
         },
         watch:{//监听store的value变化
@@ -50,6 +52,7 @@
                 handler(newVal,oldVal) {// eslint-disable-line no-unused-vars
                     console.log("watch: map store更改！！")
                     this.setData();
+                    this.setLimit();
                 }
             },
         },
@@ -61,6 +64,23 @@
               let data1=await this.$H.get('/GetData/MMap');
               this.$store.commit('map/setValues',data1)
             },
+            //初始化limit数组
+            setLimit(){
+                this.limit=[];
+                let name=["资本充足率","核心资本充足率","核心一级资本充足率","核心负债依存度"];
+                for(let j in name){
+                  for(let i in this.getRisk){
+                    if(this.getRisk[i].name.toString().localeCompare(name[j])==0){
+                      this.limit.push(this.getRisk[i].value);
+                      break;
+                    }
+                    else{
+                      // console.log("不等");
+                    }
+                  }
+                }
+              console.log("地图阈值列表："+this.limit);
+            },
             setData(){
                 this.total=this.getValues.length;
                 this.riskNum=this.countRisk(this.getValues);
@@ -70,7 +90,7 @@
                 this.data=datas
                 let count=0;
                 this.data.forEach(item=>{
-                  if (item.zbczl<this.limit[0]||item.hxzbczl<this.limit[1]||item.hxyjzbczl<this.limit[2]||item.ldxbl<this.limit[3]||item.zblrl<this.limit[4]){
+                  if (item.zbczl<this.limit[0]||item.hxzbczl<this.limit[1]||item.hxyjzbczl<this.limit[2]||item.hxfzycd<this.limit[3]){
                     count+=1;
                   }
                 });
