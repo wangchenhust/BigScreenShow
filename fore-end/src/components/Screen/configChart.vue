@@ -1,6 +1,6 @@
 <template>
     <div>
-        <h2>可配置图的表名（建议动态变化）</h2>
+        <h2>{{chartName}}</h2>
         <div class="configChart-container">
             <div class="chart" id="newConfigChart"></div>
         </div>
@@ -21,7 +21,19 @@
                 colorSet : {//仪表盘所用颜色
                     color: '#468EFD'
                 },
-                testChart:{}
+                testChart:{},
+                chartNameData: {
+                    zbchongzu:'资本充足率',
+                    corezbchongzu:'核心资本充足率',
+                    corefirstzbchongzu:'核心一级资本充足率',
+                    zichanprofit:'资产利润率',
+                    baddaikuan:'不良贷款率',
+                    badzichan:'不良资产率',
+                    liudongbili:'流动性比例',
+                    corefuzhai:'核心负债依存度',
+                    rorwa:'风险加权资产收益率',
+                },
+                chartName:''
             }
         },
         computed:{
@@ -29,6 +41,7 @@
         },
         mounted(){
             this.testChart = JSON.parse(localStorage.getItem('config'))
+            this.chartName = this.chartNameData[this.testChart.chartName]
             this.initOption(this.testChart)
             this.drawCharts(this.option)
         },
