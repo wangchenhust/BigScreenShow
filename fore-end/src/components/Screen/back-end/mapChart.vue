@@ -401,28 +401,49 @@
                 myChart.setOption(option,true);
 
 
-                var currentIndex = -1;
+                //预设空白段
+                var currentIndex =  0;//option.series[1].data.length-1;
+                console.log("空白段 当前："+currentIndex);
+                this.index1=this.indexData[currentIndex].index1;
+                this.index2=this.indexData[currentIndex].index2;
+                this.index3=this.indexData[currentIndex].index3;
+                this.index4=this.indexData[currentIndex].index4;
+                this.bankName=this.indexData[currentIndex].name;
+                defaultP[currentIndex].selected=true;
+                // defaultP[0].selected=false;
+                myChart.setOption({
+                    geo: {
+                        regions: defaultP,//设置省份高亮
+                    },
+                    series:[
+                        {},{},{},
+                        {
+                            data:this.convertData([mapdata[currentIndex]])
+                        },
+                    ],
+                });
+                //定时器
                 this.timer = setInterval(()=>{   // eslint-disable-line no-unused-vars
                     var dataLen = option.series[1].data.length;
 
+                    var before=currentIndex;
+                    if(before<0){
+                        before=dataLen-1;
+                    }
+
                     function f() {//变化要高亮的省份
-                        var before=currentIndex-1;
-                        if(before<0){
-                            before=dataLen-1;
-                        }
                         defaultP[before].selected=false;
                         defaultP[currentIndex].selected=true;
                         return defaultP;
                     }
 
                     // 取消之前高亮的图形
-                    myChart.dispatchAction({
-                        type: 'downplay',
-                        seriesIndex: 0
-                    });
-                    console.log("当前："+currentIndex);
+                    // myChart.dispatchAction({
+                    //     type: 'downplay',
+                    //     seriesIndex: 0
+                    // });
                     currentIndex = (currentIndex + 1) % dataLen;
-
+                    console.log("当前："+currentIndex);
                     // 显示 tooltip
                     // myChart.dispatchAction({
                     //     type: 'showTip',
@@ -430,11 +451,11 @@
                     //     dataIndex: currentIndex
                     // });
 
-                    myChart.dispatchAction({
-                        type: 'geoSelect',          //选中指定的地图区域。
-                        seriesIndex: 0,  // 可选，系列 index，可以是一个数组指定多个系列
-                        dataIndex: currentIndex,          // 数据的 index，如果不指定也可以通过 name 属性根据名称指定数据
-                    });
+                    // myChart.dispatchAction({
+                    //     type: 'geoSelect',          //选中指定的地图区域。
+                    //     seriesIndex: 0,  // 可选，系列 index，可以是一个数组指定多个系列
+                    //     dataIndex: currentIndex,          // 数据的 index，如果不指定也可以通过 name 属性根据名称指定数据
+                    // });
 
                     //更改红色圈位置
                     myChart.setOption({
@@ -454,7 +475,11 @@
                     this.index4=this.indexData[currentIndex].index4;
                     this.bankName=this.indexData[currentIndex].name;
 
-                }, 5000);
+                }, 2000);
+                // 通过$once来监听定时器，在beforeDestroy钩子可以被清除
+                this.$once('hook:beforeDestroy', () => {
+                    clearInterval(this.timer);
+                })
 
                 window.addEventListener("resize", function() {
                     myChart.resize();
