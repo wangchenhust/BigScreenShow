@@ -462,11 +462,11 @@
         height: 100%;
     }
     h2 {
-        height: 0.6rem;
-        line-height: 0.6rem;
+        height: 9px/*0.6rem*/;
+        line-height: 9px/*0.6rem*/;
         text-align: center;
         color: #fff;
-        font-size: 0.7rem;
+        font-size: 12px/*0.7rem*/;
         font-weight: 400;
         margin-top: -9px;
     }

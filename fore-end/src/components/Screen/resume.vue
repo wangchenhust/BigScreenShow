@@ -6,13 +6,13 @@
                     <!--水球图-->
                     <waterSphereChart :risk="safeRate" />
                 </li>
-                <li>{{total}}</li>
+                <li>0</li>
                 <li>{{riskNum}}</li>
             </ul>
         </div>
         <div class="resume-bd">
             <ul>
-                <li>省分行风险比率</li>
+                <li>分行风险比率</li>
                 <li>工商银行分行总数 (个)</li>
                 <li>存在风险的分行数 (个)</li>
             </ul>
@@ -104,17 +104,20 @@
     .resume {
         /*border: 1px solid #ffe400;*/
         /*visibility:hidden;*/
-        background: rgba(101, 132, 226, 0.1);
-        padding: 0.2rem 0.7rem;
-        margin:0.2rem 0.5rem;
-        height: 4.5rem;
-        width: 37rem;
+        /*position: absolute;*/
+        overflow: hidden;
+        /*display: block;*/
+        cursor: default;
         z-index: 10;
-        position: fixed;
+        /*left: 0px;*/
+        /*top: 10px;*/
+        width: 99%;
+        height: 100%;
+        padding-left: 4px;
         .resume-hd{
             position: relative;
-            border: 1px solid rgba(25, 186, 139, 0.17);
-            height: 3rem;
+            border: 1px solid rgba(25, 186, 139, 0.2);
+            height: 50px/*3rem*/;
             ul{
                 display: flex;
                 %li-line {
@@ -129,11 +132,11 @@
                     position: relative;
                     flex: 1;
                     text-align: center;
-                    height: 3.2rem;
-                    line-height: 3.2rem;
-                    font-size: 1.65rem;
+                    height: 50px/*3.2rem*/;
+                    line-height: 50px/*3.2rem*/;
+                    font-size: 30px/*1.65rem*/;
                     color: #ffeb7b;
-                    padding: 0.05rem 0;
+                    padding: 1px 0/*0.05rem 0*/;
                     font-family: 'DIGITALDREAMFAT';
                     font-weight: bold;
                     &:nth-child(2){
@@ -174,12 +177,12 @@
                 display: flex;
                 li {
                     flex: 1;
-                    height: 0.5rem;
-                    line-height: 0.5rem;
+                    height: 10px/*0.5rem*/;
+                    line-height: 7.2px/*0.5rem*/;
                     text-align: center;
-                    font-size: 0.75rem;
+                    font-size: 12px/*0.75rem*/;
                     color: rgba(255, 255, 255, 0.7);
-                    padding-top: 0.5rem;
+                    padding-top: 7.2px/*0.5rem*/;
                 }
             }
         }

@@ -330,7 +330,7 @@
         cursor: default;
         z-index: 0;
         left: 0px;
-        top: 10px;
+        top: 14px;
         width: 100%;
         height: 100%;
     }

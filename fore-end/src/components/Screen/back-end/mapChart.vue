@@ -224,7 +224,8 @@
                         map: this.mapName,
                         show: true,
                         roam: true,//可拖拽、放大
-                        left:40,
+                        left:20,
+                        top:30,
                         label: {
                             emphasis: {
                                 show: false,
@@ -511,8 +512,8 @@
         /*background: rgba(255, 255, 255, 0.04) url(../assets/img/screen_img/line.png);*/
         background-color: rgba(0, 20, 91, 0.8);
 
-        top:290px;
-        left:770px;
+        top:300px;
+        left:766px;
         td{
             text-align:center;
         }

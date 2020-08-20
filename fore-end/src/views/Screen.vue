@@ -355,21 +355,23 @@ header h2{
     position: relative;
     padding: 0px 3.6px 3.6px 3.6px/*0rem 0.25rem 0.25rem 0.25rem*/;
     /*border: 1px solid #fe3e12;*/
+    height: 100%;
     display: flex;
 }
 .part{
     flex: 3;
     /*border: 1px solid #ffe400;*/
-    margin: 0px 1.8px 1.44px/*0rem 0.125rem 0.1rem*/;
+    margin: 0px 1px 1.44px/*0rem 0.125rem 0.1rem*/;
     &.middel{
         flex: 6;
-        margin: 0px 1.8px 1.44px /*0px 0.125rem 0.1rem*/;
+        /*margin: 0px 0px 1.44px !*0px 0.125rem 0.1rem*!;*/
         overflow: hidden;
-        border: 1px solid #ffe400;
+        /*width: 100%;*/
+        /*border: 1px solid #ffe400;*/
         .below{
             position: fixed;
             height: 93.6px/*6.5rem*/;
-            width: 581px/*38rem*/;
+            width: 605px/*38rem*/;
             margin-left: 10px;
             bottom: 7px;
             z-index: 10;
@@ -378,42 +380,21 @@ header h2{
     }
     .resume_part{
         background: rgba(101, 132, 226, 0.1);
-        padding: 3.7px 13px/*0.2rem 0.7rem*/;
-        margin:3.7px 11px/*0.2rem 0.5rem*/;
-        height: 83.25px/*4.5rem*/;
-        /*width:100%;*/
-        width: 581px/*37rem*/;
+        padding: 3.7px 20px/*0.2rem 0.7rem*/;
+        margin:3.7px 11px 0px 11px/*0.2rem 0.5rem*/;
+        height: 75px/*4.5rem*/;
+        width: 44.7%/* 587px37rem*/;
         /*border: 1px solid #ffe400;*/
         z-index: 10;
         position: fixed;
-        &:before {
-            content: "";
-            position: absolute;
-            width: 30px;
-            height: 10px;
-            border-top: 2px solid #02a6b5;
-            border-left: 2px solid #02a6b5;
-            top: 0;
-            left: 0;
-        }
-        &:after {
-            content: "";
-            position: absolute;
-            width: 30px;
-            height: 10px;
-            border-bottom: 2px solid #02a6b5;
-            border-right: 2px solid #02a6b5;
-            right: 0;
-            bottom: 0;
-        }
     }
     %map-style {
         position: absolute;
         top: 50%;
         left: 50%;
         transform: translate(-50%, -50%);
-        width: 290px/*19.475rem*/;
-        height: 290px/*19.475rem*/;
+        width: 325px/*19.475rem*/;
+        height: 325px/*19.475rem*/;
         background: url(../assets/img/screen_img/map.png) no-repeat;
         background-size: 100% 100%;
         opacity: 0.5;
@@ -421,29 +402,29 @@ header h2{
     }
     .map_part{
         position: fixed;
-        height: 472px/*30.45rem*/;
+        height: 465px/*30.45rem*/;
         width: 610px;
         /*border: 1px solid #ffe400;*/
         z-index: 1;
-        top:60px;
+        top:70px;
         margin: 0px 10px;
         .map1 {
             @extend %map-style;
         }
         .map2 {
             @extend %map-style;
-            width: 407px/*22.0375rem*/;
-            height: 407px/*22.0375rem*/;
+            width: 360px/*22.0375rem*/;
+            height: 360px/*22.0375rem*/;
             background-image: url(../assets/img/screen_img/lbx.png);
-            opacity: 0.7;
+            opacity: 0.8;
             -webkit-animation: rotate 15s linear infinite;
             animation: rotate 15s linear infinite;
             z-index: -2;
         }
         .map3 {
             @extend %map-style;
-            width: 21.075rem;
-            height: 21.075rem;
+            width: 350px/*21.075rem*/;
+            height: 350px/*21.075rem*/;
             background-image: url(../assets/img/screen_img/jt.png);
             -webkit-animation: rotate1 10s linear infinite;
             animation: rotate1 10s linear infinite;
@@ -455,8 +436,8 @@ header h2{
     border: 1px solid rgba(25, 186, 139, 0.17);
     background: rgba(255, 255, 255, 0.04) url(../assets/img/screen_img/line.png);
     position: relative;
-    height: 10rem;
-    padding: 0.25rem;
+    height: 156px/*10rem*/;
+    padding: 3.8px/*0.25rem*/;
     margin-top: 8px;
     z-index: 10;
     &:before {
@@ -476,6 +457,7 @@ header h2{
         content: "";
         width: 10px;
         height: 10px;
+        /*height: 20%;*/
         border-top: 2px solid #02a6b5;
         border-right: 2px solid #02a6b5;
     }
@@ -506,19 +488,20 @@ header h2{
         }
     }
     h2 {
-        height: 0.6rem;
-        line-height: 0.6rem;
+        height: 9px/*0.6rem*/;
+        line-height: 9px/*0.6rem*/;
         text-align: center;
         color: #fff;
-        font-size: 0.7rem;
+        font-size: 12px/*0.7rem*/;
         font-weight: 400;
         margin-top: 3px;
     }
 }
 
-.small{
-    height: 9.5rem;
-}
+/*.small{*/
+/*    !*height: 145.4px!*9.5rem*!;*!*/
+/*    !*height: 160px!*10rem*!;*!*/
+/*}*/
 
 @-webkit-keyframes rotate {
     from {
