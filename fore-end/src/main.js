@@ -10,6 +10,8 @@ import request from './assets/js/request.js'
 //引入中国地图
 import china from 'echarts/map/json/china.json'
 echarts.registerMap('china', china)
+//引入自适应
+import 'lib-flexible'
 
 import Vcomp from './components/index'
 Vue.use(Vcomp)

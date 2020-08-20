@@ -59,7 +59,9 @@
 <!--                中间-->
                 <div class="middel part">
 <!--                    报警提示-->
-                    <resume/>
+                    <div class="resume_part">
+                        <resume/>
+                    </div>
 <!--                    地图-->
                     <div class="map_part">
 <!--                        地图-->
@@ -306,7 +308,7 @@
 }
 header{
     position: relative;
-    height: 3.3rem;
+    height: 50px/*3.3rem*/;
     /*width:1000px;*/
     /*border: 1px solid #ffe400;*/
     background: url(../assets/img/screen_img/head_bg.png) no-repeat top center;
@@ -314,29 +316,29 @@ header{
 }
 header h2{
     color: #7ef0ff;
-    font-size: 1.5rem;
+    font-size: 23px/*1.5rem*/;
     text-align: center;
-    line-height: 2.55rem;
+    line-height: 42px/*2.55rem*/;
     letter-spacing: 1px;
     /*border: 1px solid #ffe400;*/
 }
 .showTime{
     color: #ffffff;
     position: absolute;
-    right: 1.7rem;
-    top: 1.25rem;
+    right: 31.45px/*1.7rem*/;
+    top: 18px/*1.25rem*/;
     color: rgba(126, 240, 255, .7);
     /*display: flex;*/
     /*border: 1px solid #ffe400;*/
     .getTime{
         font-size: 20px;
-        margin-right: 0.025rem;
+        margin-right: 0.5px/*0.025rem*/;
     }
 }
 .weather{
     position: absolute;
-    left: 7rem;
-    top: 1rem;
+    left: 129.5px/*7rem*/;
+    top: 18px/*1rem*/;
     color: rgba(126, 240, 255, .7);
     .temperature{
         font-size: 20px;
@@ -345,33 +347,64 @@ header h2{
         /*border: 1px solid #ffe400;*/
     }
     img {
-        width: 1.3rem;
+        width: 23px/*1.3rem*/;
         /*border: 1px solid #ffe400;*/
     }
 }
 .major{
     position: relative;
-    padding: 0rem 0.25rem 0.25rem 0.25rem;
+    padding: 0px 3.6px 3.6px 3.6px/*0rem 0.25rem 0.25rem 0.25rem*/;
     /*border: 1px solid #fe3e12;*/
     display: flex;
 }
 .part{
     flex: 3;
     /*border: 1px solid #ffe400;*/
-    margin: 0rem 0.125rem 0.1rem;
+    margin: 0px 1.8px 1.44px/*0rem 0.125rem 0.1rem*/;
     &.middel{
         flex: 6;
-        margin: 0px 0.125rem 0.1rem;
+        margin: 0px 1.8px 1.44px /*0px 0.125rem 0.1rem*/;
         overflow: hidden;
-
+        border: 1px solid #ffe400;
         .below{
             position: fixed;
-            height: 6.5rem;
-            width: 38rem;
-            margin-left: 6px;
+            height: 93.6px/*6.5rem*/;
+            width: 581px/*38rem*/;
+            margin-left: 10px;
             bottom: 7px;
             z-index: 10;
             /*margin:0px 5px 0px 5px;*/
+        }
+    }
+    .resume_part{
+        background: rgba(101, 132, 226, 0.1);
+        padding: 3.7px 13px/*0.2rem 0.7rem*/;
+        margin:3.7px 11px/*0.2rem 0.5rem*/;
+        height: 83.25px/*4.5rem*/;
+        /*width:100%;*/
+        width: 581px/*37rem*/;
+        /*border: 1px solid #ffe400;*/
+        z-index: 10;
+        position: fixed;
+        &:before {
+            content: "";
+            position: absolute;
+            width: 30px;
+            height: 10px;
+            border-top: 2px solid #02a6b5;
+            border-left: 2px solid #02a6b5;
+            top: 0;
+            left: 0;
+        }
+        &:after {
+            content: "";
+            position: absolute;
+            width: 30px;
+            height: 10px;
+            border-bottom: 2px solid #02a6b5;
+            border-right: 2px solid #02a6b5;
+            right: 0;
+            bottom: 0;
         }
     }
     %map-style {
@@ -379,8 +412,8 @@ header h2{
         top: 50%;
         left: 50%;
         transform: translate(-50%, -50%);
-        width: 19.475rem;
-        height: 19.475rem;
+        width: 290px/*19.475rem*/;
+        height: 290px/*19.475rem*/;
         background: url(../assets/img/screen_img/map.png) no-repeat;
         background-size: 100% 100%;
         opacity: 0.5;
@@ -388,7 +421,7 @@ header h2{
     }
     .map_part{
         position: fixed;
-        height: 30.45rem;
+        height: 472px/*30.45rem*/;
         width: 610px;
         /*border: 1px solid #ffe400;*/
         z-index: 1;
@@ -399,8 +432,8 @@ header h2{
         }
         .map2 {
             @extend %map-style;
-            width: 22.0375rem;
-            height: 22.0375rem;
+            width: 407px/*22.0375rem*/;
+            height: 407px/*22.0375rem*/;
             background-image: url(../assets/img/screen_img/lbx.png);
             opacity: 0.7;
             -webkit-animation: rotate 15s linear infinite;
