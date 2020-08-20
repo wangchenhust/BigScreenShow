@@ -30,6 +30,9 @@ export default {
           value:'zichanprofit',
           label:'资产利润率'
         },{
+          value:'zibenprofit',
+          label:'资本利润率'
+        },{
           value:'baddaikuan',
           label:'不良贷款率'
         },{
@@ -91,6 +94,17 @@ export default {
             label:'第二季度'
           }]
         },{
+          value:'zibenprofit',
+          label:'资本利润率',
+          children:[{
+            value:'season1',
+            label:'第一季度'
+          },{
+            value:'season2',
+            label:'第二季度'
+          }]
+        },
+          {
           value:'baddaikuan',
           label:'不良贷款率',
           children:[{
@@ -160,6 +174,10 @@ export default {
           season1:0.22,
           season2:0.44
         },
+        zibenprofit:{
+          season1:0.33,
+          season2:0.55
+        },
         baddaikuan:{
           season1:0.5,
           season2:0.15
@@ -190,34 +208,43 @@ export default {
 
     }
   },
+  created() {
+    this.getData();
+  },
   methods:{
     async getData(){
       let data1=await this.$H.get('/GetData/ConfigData');
       for(let i=0;i<data1.length;i++){
         switch (data1[i].name) {
           case "资本充足率":
-            this.setData("zbchongzu",data1[i].time,data1[i].value);
+            this.setData("zbchongzu",data1[i].time,Math.floor(data1[i].value/100 * 100) / 100);
             break;
           case "核心资本充足率":
-            this.setData("corezbchongzu",data1[i].time,data1[i].value);
+            this.setData("corezbchongzu",data1[i].time,Math.floor(data1[i].value/100 * 100) / 100);
             break;
           case "核心一级资本充足率":
-            this.setData("corefirstzbchongzu",data1[i].time,data1[i].value);
+            this.setData("corefirstzbchongzu",data1[i].time,Math.floor(data1[i].value/100 * 100) / 100);
             break;
           case "资产利润率":
-            this.setData("zichanprofit",data1[i].time,data1[i].value);
+            this.setData("zichanprofit",data1[i].time,Math.floor(data1[i].value/100 * 100) / 100);
+            break;
+          case "资本利润率":
+            this.setData("zibenprofit",data1[i].time,Math.floor(data1[i].value/100 * 100) / 100);
             break;
           case "不良贷款率":
-            this.setData("corezbchongzu",data1[i].time,data1[i].value);
+            this.setData("baddaikuan",data1[i].time,Math.floor(data1[i].value/100 * 100) / 100);
+            break;
+          case "不良资产率":
+            this.setData("badzichan",data1[i].time,Math.floor(data1[i].value/100 * 100) / 100);
             break;
           case "流动性比例":
-            this.setData("corezbchongzu",data1[i].time,data1[i].value);
+            this.setData("liudongbili",data1[i].time,Math.floor(data1[i].value/100 * 100) / 100);
             break;
           case "核心负债依存度":
-            this.setData("corezbchongzu",data1[i].time,data1[i].value);
+            this.setData("corefuzhai",data1[i].time,Math.floor(data1[i].value/100 * 100) / 100);
             break;
-          case "风险加权资产收益率":
-            this.setData("corezbchongzu",data1[i].time,data1[i].value);
+          case "RORWA":
+            this.setData("rorwa",data1[i].time,Math.floor(data1[i].value/100 * 100) / 100);
             break;
           //........
         }

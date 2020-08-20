@@ -27,6 +27,7 @@
                     corezbchongzu:'核心资本充足率',
                     corefirstzbchongzu:'核心一级资本充足率',
                     zichanprofit:'资产利润率',
+                    zibenprofit:'资本利润率',
                     baddaikuan:'不良贷款率',
                     badzichan:'不良资产率',
                     liudongbili:'流动性比例',
@@ -157,7 +158,7 @@
                     this.option = {//仪表盘
                         title: {
                             show: true,
-                                text: 'xx指标',
+                                text: this.chartName,
                                 x: '49%',
                                 y: '87%',
                                 z: 8,//优先级
@@ -437,7 +438,7 @@
             drawCharts(option){
                 let newConfigCharts = this.$echarts.init(document.getElementById('newConfigChart'))
                 newConfigCharts.clear()
-                newConfigCharts.setOption(option)
+                newConfigCharts.setOption(option,true)
             },
         }
     }
