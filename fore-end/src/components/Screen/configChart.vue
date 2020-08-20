@@ -158,7 +158,7 @@
                     this.option = {//仪表盘
                         title: {
                             show: true,
-                                text: 'xx指标',
+                                text: this.chartName,
                                 x: '49%',
                                 y: '87%',
                                 z: 8,//优先级
