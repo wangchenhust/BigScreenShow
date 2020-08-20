@@ -13,7 +13,7 @@ export default {
   name: 'config',
   data(){
     return {
-      selectChart:['line','gh_data'],
+      selectChart:[],
       options:[{
         value:'line',
         label:'折线图',
@@ -185,6 +185,7 @@ export default {
         chartType:'',
         bankChart:[],
         gaugeChart:50,
+        chartName:''
       }
 
     }
@@ -192,13 +193,32 @@ export default {
   methods:{
     async getData(){
       let data1=await this.$H.get('/GetData/ConfigData');
-      for(var i=0;i<data1.length;i++){
+      for(let i=0;i<data1.length;i++){
         switch (data1[i].name) {
           case "资本充足率":
             this.setData("zbchongzu",data1[i].time,data1[i].value);
             break;
           case "核心资本充足率":
             this.setData("corezbchongzu",data1[i].time,data1[i].value);
+            break;
+          case "核心一级资本充足率":
+            this.setData("corefirstzbchongzu",data1[i].time,data1[i].value);
+            break;
+          case "资产利润率":
+            this.setData("zichanprofit",data1[i].time,data1[i].value);
+            break;
+          case "不良贷款率":
+            this.setData("corezbchongzu",data1[i].time,data1[i].value);
+            break;
+          case "流动性比例":
+            this.setData("corezbchongzu",data1[i].time,data1[i].value);
+            break;
+          case "核心负债依存度":
+            this.setData("corezbchongzu",data1[i].time,data1[i].value);
+            break;
+          case "风险加权资产收益率":
+            this.setData("corezbchongzu",data1[i].time,data1[i].value);
+            break;
           //........
         }
       }
@@ -217,10 +237,12 @@ export default {
         for (let i in this.bankData[this.selectChart[1]]){
           this.configData.bankChart.push(this.bankData[this.selectChart[1]][i])
         }
+        this.configData.chartName = this.selectChart[1]
       }
       else if (this.selectChart[0] == 'gauge') {
         this.configData.chartType = this.selectChart[0]
         this.configData.gaugeChart = this.bankData[this.selectChart[1]][this.selectChart[2]]
+        this.configData.chartName = this.selectChart[1]
       }
     },
     toConfig(){

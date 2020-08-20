@@ -18,7 +18,8 @@ export default new Vuex.Store({
         configData:{
             chartType:'',
             bankChart:[],
-            gaugeChart:{}
+            gaugeChart:{},
+            chartName:''
         }
     },
     mutations:{
