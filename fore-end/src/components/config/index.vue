@@ -261,6 +261,7 @@ export default {
     handleChange(){
       if (this.selectChart[0] == 'line'){
         this.configData.chartType = this.selectChart[0]
+        this.configData.bankChart.length=0
         for (let i in this.bankData[this.selectChart[1]]){
           this.configData.bankChart.push(this.bankData[this.selectChart[1]][i])
         }

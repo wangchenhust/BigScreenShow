@@ -34,6 +34,7 @@ export default new Vuex.Store({
         getConfigInfo(state) {
             if (localStorage.getItem('config')){
                 state.configData = JSON.parse(localStorage.getItem('config'))
+                //console.log(state.configData)
             }
             return state.configData
         }
