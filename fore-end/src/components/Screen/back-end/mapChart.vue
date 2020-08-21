@@ -1,5 +1,10 @@
 <template>
     <div class="map-container">
+
+        <div class="chart_box">
+            <div class="chart" id="chart_middel2"></div>
+        </div>
+
         <div class="mapPanel">
             <table>
                 <tr>
@@ -30,7 +35,6 @@
             </table>
         </div>
 
-        <div class="chart" id="chart_middel2"></div>
     </div>
 </template>
 
@@ -485,6 +489,7 @@
                 window.addEventListener("resize", function() {
                     myChart.resize();
                 });
+
             },
 
         }
@@ -495,26 +500,47 @@
     .chart {
         height: 100%;
         width: 100%;
+        /*margin-top:10%!*10px*!;*/
+        display: inline-block;
+        /*border: 2px solid yellow;*/
     }
     .map-container {
         position: absolute;
         left: 0px;
-        top: 0px;
+        bottom: 0%;
         width: 100%;
         height: 100%;
         z-index: 2;
+        /*border: 1px solid yellow;*/
+    }
+    .chart_box{
+        width: 100%;
+        height: 100%;  //注意，我这里举例子高度用的300px,如果想要高度也自适应这里可以用百分比
+        /*display: inline-block;*/
+        /*line-height: 500px;*/
+        /*border: 1px solid red;*/
     }
     .mapPanel{
         color:#ade3ff;
         z-index:10;
+        display: inline-block;
         position: fixed;
         border: 2px solid rgba(15, 79, 153, 0.8);
         /*background: rgba(255, 255, 255, 0.04) url(../assets/img/screen_img/line.png);*/
         background-color: rgba(0, 20, 91, 0.8);
 
-        top:300px;
-        left:766px;
+        top:52%;
+        left:59%;
+        /*top:300px;*/
+        /*left:766px;*/
+        /*height: 26.5%;*/
+        width: 13.75%;
+        table{
+            width: 100%;
+            height: 100%;
+        }
         td{
+            /*width: 45%;*/
             text-align:center;
         }
         .bank_name{

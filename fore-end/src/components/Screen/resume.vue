@@ -6,7 +6,7 @@
                     <!--水球图-->
                     <waterSphereChart :risk="safeRate" />
                 </li>
-                <li>0</li>
+                <li>{{total}}</li>
                 <li>{{riskNum}}</li>
             </ul>
         </div>

@@ -53,7 +53,7 @@
             window.addEventListener('storage', this.reDrawCharts)
             this.testChart = JSON.parse(localStorage.getItem('config'))
             this.chartName = this.chartNameData[this.testChart.chartName]
-            this.chartSeasonName = this.chartSeasonName[this.testChart.chartSeason]
+            this.chartSeasonName = this.chartSeasonData[this.testChart.chartSeason]
             this.initOption(this.testChart)
             this.drawCharts(this.option)
         },
@@ -67,6 +67,7 @@
             reDrawCharts(e){
                 this.testChart=JSON.parse(e.newValue);
                 this.chartName = this.chartNameData[this.testChart.chartName]
+                this.chartSeasonName = this.chartSeasonData[this.testChart.chartSeason]
                 this.initOption(this.testChart)
                 this.drawCharts(this.option)
             },

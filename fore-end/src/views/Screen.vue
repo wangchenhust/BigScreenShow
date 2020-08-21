@@ -65,8 +65,10 @@
 <!--                    地图-->
                     <div class="map_part">
 <!--                        地图-->
-                        <mapChart />
-<!--                        地图背景图片-->
+                        <div class="mapBox">
+                            <mapChart />
+    <!--                        地图背景图片-->
+                        </div>
                         <div class="map1"></div>
                         <div class="map2"></div>
                         <div class="map3"></div>
@@ -360,20 +362,20 @@ header h2{
 }
 .part{
     flex: 3;
-    /*border: 1px solid #ffe400;*/
+    border: 1px solid #ffe400;
     margin: 0px 1px 1.44px/*0rem 0.125rem 0.1rem*/;
     &.middel{
         flex: 6;
         /*margin: 0px 0px 1.44px !*0px 0.125rem 0.1rem*!;*/
         overflow: hidden;
-        /*width: 100%;*/
+        /*width: 120%;*/
         /*border: 1px solid #ffe400;*/
         .below{
             position: fixed;
             height: 16.2%/*93.6px6.5rem*/;
             width: 46.8%/*605px38rem*/;
             margin-left: 10px;
-            bottom: 7px;
+            bottom: 1.25%/*7px*/;
             z-index: 10;
             /*margin:0px 5px 0px 5px;*/
         }
@@ -403,11 +405,14 @@ header h2{
     .map_part{
         position: fixed;
         height: 80%/*465px30.45rem*/;
-        width: 610px;
-        border: 1px solid #ffe400;
+        width: 47.5%/*610px*/;
+        border: 1px solid blue;
         z-index: 1;
-        top:70px;
+        top:10.5%/*70px*/;
         margin: 0px 10px;
+        .mapBox{
+
+        }
         .map1 {
             @extend %map-style;
         }
@@ -437,7 +442,7 @@ header h2{
     background: rgba(255, 255, 255, 0.04) url(../assets/img/screen_img/line.png);
     position: relative;
     height: 28%/*156px10rem*/;
-    padding: 4.5px/*0.25rem*/;
+    padding: 0.79%/*4.5px0.25rem*/;
     margin-top: 8px;
     z-index: 10;
     &:before {
