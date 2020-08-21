@@ -132,6 +132,7 @@
                     position: relative;
                     flex: 1;
                     text-align: center;
+
                     height: 50px/*3.2rem*/;
                     line-height: 50px/*3.2rem*/;
                     font-size: 30px/*1.65rem*/;

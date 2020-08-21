@@ -10,7 +10,10 @@
                     <span class="city">{{ weatherData.city }}</span>
                 </div>
 <!--                标题-->
-                <h2>银行数据统计和风险报警大屏</h2>
+<!--                <div class="title">-->
+                    <h2>银行数据统计和风险报警大屏</h2>
+<!--                </div>-->
+
 <!--                时间日期-->
                 <div class="showTime">
 <!--                    北京时间-->
@@ -310,25 +313,35 @@
 }
 header{
     position: relative;
-    height: 50px/*3.3rem*/;
+    height: 9%/*50px3.3rem*/;
     /*width:1000px;*/
-    /*border: 1px solid #ffe400;*/
+    /*border: 1px solid red;*/
     background: url(../assets/img/screen_img/head_bg.png) no-repeat top center;
     background-size: 100% 100%;
+    /*padding-top:10px;*/
 }
+/*header .title{*/
+/*    border: 1px solid #ffe400;*/
+/*    position:center;*/
+/*    height: 70%;*/
+/*}*/
 header h2{
+    position: fixed;
     color: #7ef0ff;
-    font-size: 23px/*1.5rem*/;
+    font-size: 23px/*23px1.5rem*/;
     text-align: center;
-    line-height: 42px/*2.55rem*/;
+    /*line-height: 180%!*42px2.55rem*!;*/
     letter-spacing: 1px;
     /*border: 1px solid #ffe400;*/
+    top:4%;
+    left: 50%;
+    transform: translate(-50%, -50%);
 }
 .showTime{
     color: #ffffff;
     position: absolute;
-    right: 31.45px/*1.7rem*/;
-    top: 18px/*1.25rem*/;
+    right: 4%/*31.45px1.7rem*/;
+    top: 35.63%/*21px1.25rem*/;
     color: rgba(126, 240, 255, .7);
     /*display: flex;*/
     /*border: 1px solid #ffe400;*/
@@ -339,8 +352,10 @@ header h2{
 }
 .weather{
     position: absolute;
-    left: 129.5px/*7rem*/;
-    top: 18px/*1rem*/;
+    left: 10%/*31.45px1.7rem*/;
+    top: 30.63%/*21px1.25rem*/;
+    /*left: 129.5px!*7rem*!;*/
+    /*top: 25%!*15px1rem*!;*/
     color: rgba(126, 240, 255, .7);
     .temperature{
         font-size: 20px;
@@ -371,10 +386,10 @@ header h2{
         /*width: 120%;*/
         .below{
             position: fixed;
-            height: 16%/*93.6px6.5rem*/;
+            height: 17%/*93.6px6.5rem*/;
             width: 46.2%/*605px38rem*/;
             margin-left: 10px;
-            top:77%;
+            top:78%;
             /*margin-top: 10%;*/
             /*bottom: 0.4%!*7px*!;*/
             z-index: 10;
@@ -387,8 +402,11 @@ header h2{
     .resume_part{
         background: rgba(101, 132, 226, 0.1);
         padding: 3.7px 20px/*0.2rem 0.7rem*/;
-        margin:3.7px 11px 0px 11px/*0.2rem 0.5rem*/;
-        height: 75px/*4.5rem*/;
+        margin:2px 0.6% 0px 0.6%/*11px0.2rem 0.5rem*/;
+        /* top: 16%;
+        left: 50%;
+        transform: translate(-50%, -50%);*/
+        height: 70px/*12%4.5rem*/;
         width: 44.7%/* 587px37rem*/;
         /*border: 1px solid #ffe400;*/
         z-index: 10;
@@ -455,7 +473,7 @@ header h2{
     position: relative;
     height: 28%/*156px10rem*/;
     padding: 0.7%/*4.5px0.25rem*/;
-    margin-top: 8px;
+    margin-bottom: 8px;
     z-index: 10;
     &:before {
         position: absolute;

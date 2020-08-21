@@ -228,7 +228,7 @@
                         map: this.mapName,
                         show: true,
                         roam: true,//可拖拽、放大
-                        left:11,
+                        // left:11,
                         top:50,
                         label: {
                             emphasis: {
@@ -530,7 +530,8 @@
         background-color: rgba(0, 20, 91, 0.8);
 
         top:52%;
-        left:69.5%;
+        /*left:69.5%;*/
+        left: 0%;
         /*top:300px;*/
         /*left:766px;*/
         /*height: 26.5%;*/
