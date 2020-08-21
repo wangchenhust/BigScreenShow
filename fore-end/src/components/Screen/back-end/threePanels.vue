@@ -265,8 +265,8 @@
               show: true,
               icon: 'circle',//图例形状
               orient: 'vertical',  //垂直显示
-              bottom: 60,
-              left:5,
+              bottom: 10,
+              left:0,
               itemWidth: 9, // 图例标记的图形宽度。[ default: 25 ]
               itemHeight: 9, // 图例标记的图形高度。[ default: 14 ]
               itemGap: 8, // 图例每项之间的间隔。[ default: 10 ]横向布局时为水平间隔，纵向布局时为纵向间隔。
@@ -297,8 +297,8 @@
               {//内圈进度条
                 name:"中 内圈进度条",
                 type: "gauge",
-                radius: '105%',
-                center: ["50%", "63%"],
+                radius: '100%',
+                center: ["50%", "60%"],
                 startAngle: 180,		// 仪表盘起始角度,默认 225。圆心 正右手侧为0度，正上方为90度，正左手侧为180度。
                 endAngle: 0,			// 仪表盘结束角度,默认 -45
                 clockwise: true,		// 仪表盘刻度是否是顺时针增长,默认 true。
