@@ -5,9 +5,7 @@ import bar from './modules/bar'
 import panel from './modules/panel'
 import entry from "./modules/entry";
 import map from "./modules/map";
-import cline from "./modules/cline";
 import line from "./modules/line";
-import crada from "./modules/crada";
 import rada from "./modules/rada";
 import risk from "./modules/risk";
 
@@ -19,7 +17,8 @@ export default new Vuex.Store({
             chartType:'',
             bankChart:[],
             gaugeChart:{},
-            chartName:''
+            chartName:'',
+            chartSeason:''
         }
     },
     mutations:{
@@ -34,6 +33,7 @@ export default new Vuex.Store({
         getConfigInfo(state) {
             if (localStorage.getItem('config')){
                 state.configData = JSON.parse(localStorage.getItem('config'))
+                //console.log(state.configData)
             }
             return state.configData
         }
@@ -44,9 +44,7 @@ export default new Vuex.Store({
         panel,
         entry,
         map,
-        cline,
         line,
-        crada,
         rada,
         risk
     }

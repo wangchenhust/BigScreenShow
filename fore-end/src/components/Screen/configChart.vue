@@ -34,15 +34,26 @@
                     corefuzhai:'核心负债依存度',
                     rorwa:'风险加权资产收益率',
                 },
-                chartName:''
+                chartSeasonData:{
+                    season1:'第一季度',
+                    season2:'第二季度'
+                },
+                chartName:'',
+                chartSeasonName:''
             }
         },
         computed:{
             ...mapGetters(['getConfigInfo'])
         },
+        created() {
+
+        },
         mounted(){
+            //localStorage监听器
+            window.addEventListener('storage', this.reDrawCharts)
             this.testChart = JSON.parse(localStorage.getItem('config'))
             this.chartName = this.chartNameData[this.testChart.chartName]
+            this.chartSeasonName = this.chartSeasonName[this.testChart.chartSeason]
             this.initOption(this.testChart)
             this.drawCharts(this.option)
         },
@@ -53,6 +64,12 @@
             }
         },
         methods: {
+            reDrawCharts(e){
+                this.testChart=JSON.parse(e.newValue);
+                this.chartName = this.chartNameData[this.testChart.chartName]
+                this.initOption(this.testChart)
+                this.drawCharts(this.option)
+            },
             initOption(chartOption){
                 if (chartOption.chartType =='line'){
                     this.option = {//折线图
@@ -158,7 +175,7 @@
                     this.option = {//仪表盘
                         title: {
                             show: true,
-                                text: this.chartName,
+                                text: this.chartSeasonName,
                                 x: '49%',
                                 y: '87%',
                                 z: 8,//优先级
