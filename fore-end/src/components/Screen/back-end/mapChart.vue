@@ -331,7 +331,13 @@
                                 },
                             itemStyle: {
                                 normal: {
-                                    color: '#fff'
+                                    color:params=>{
+                                      if(this.riskCity.includes(params.data.name,0)){
+                                        return "red"
+                                      }
+                                      else{return "#fff"}
+                                    },
+                                    // color: '#fff'
                                 }
                             }
                         },
