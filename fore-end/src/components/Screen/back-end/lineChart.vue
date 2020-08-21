@@ -121,7 +121,7 @@
           },
           legend: {
             data: this.legendData,
-            top: 25,
+            top: 18,
             textStyle: {
               fontSize: 10,
               color: "#ade3ff"
@@ -130,7 +130,7 @@
           grid: {
             left: "3%",
             right: "4%",
-            bottom: "0%",
+            top:40,
             height:"60%",
             containLabel: true
           },
@@ -359,7 +359,7 @@
     cursor: default;
     z-index: 0;
     left: -5px;
-    top: -5px;
+    top: -2px;
     width: 100%;
     height: 100%;
   }

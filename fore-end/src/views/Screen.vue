@@ -369,14 +369,18 @@ header h2{
         /*margin: 0px 0px 1.44px !*0px 0.125rem 0.1rem*!;*/
         overflow: hidden;
         /*width: 120%;*/
-        /*border: 1px solid #ffe400;*/
         .below{
             position: fixed;
-            height: 16.2%/*93.6px6.5rem*/;
-            width: 46.8%/*605px38rem*/;
+            height: 16%/*93.6px6.5rem*/;
+            width: 46.2%/*605px38rem*/;
             margin-left: 10px;
-            bottom: 1.25%/*7px*/;
+            top:77%;
+            /*margin-top: 10%;*/
+            /*bottom: 0.4%!*7px*!;*/
             z-index: 10;
+            h2{
+                margin-top: -5px;
+            }
             /*margin:0px 5px 0px 5px;*/
         }
     }
@@ -408,10 +412,18 @@ header h2{
         width: 47.5%/*610px*/;
         border: 1px solid blue;
         z-index: 1;
-        top:10.5%/*70px*/;
+        /*top:10.5%!*70px*!;*/
         margin: 0px 10px;
         .mapBox{
-
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 100%/*19.475rem*/;
+            height: 500px/*19.475rem*/;
+            z-index: 2;
+            /*width: 500px!*19.475rem*!;*/
+            /*height: 500px!*19.475rem*!;*/
         }
         .map1 {
             @extend %map-style;
@@ -442,7 +454,7 @@ header h2{
     background: rgba(255, 255, 255, 0.04) url(../assets/img/screen_img/line.png);
     position: relative;
     height: 28%/*156px10rem*/;
-    padding: 0.79%/*4.5px0.25rem*/;
+    padding: 0.7%/*4.5px0.25rem*/;
     margin-top: 8px;
     z-index: 10;
     &:before {

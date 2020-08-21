@@ -228,8 +228,8 @@
                         map: this.mapName,
                         show: true,
                         roam: true,//可拖拽、放大
-                        left:20,
-                        top:30,
+                        left:11,
+                        top:50,
                         label: {
                             emphasis: {
                                 show: false,
@@ -502,7 +502,7 @@
         width: 100%;
         /*margin-top:10%!*10px*!;*/
         display: inline-block;
-        /*border: 2px solid yellow;*/
+        border: 1px solid yellow;
     }
     .map-container {
         position: absolute;
@@ -530,11 +530,11 @@
         background-color: rgba(0, 20, 91, 0.8);
 
         top:52%;
-        left:59%;
+        left:69.5%;
         /*top:300px;*/
         /*left:766px;*/
         /*height: 26.5%;*/
-        width: 13.75%;
+        width: 30%;
         table{
             width: 100%;
             height: 100%;
