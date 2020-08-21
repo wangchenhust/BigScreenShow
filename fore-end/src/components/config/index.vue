@@ -213,6 +213,7 @@ export default {
   },
   methods:{
     async getData(){
+
       let data1=await this.$H.get('/GetData/ConfigData');
       for(let i=0;i<data1.length;i++){
         switch (data1[i].name) {

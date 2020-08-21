@@ -40,7 +40,12 @@
         computed:{
             ...mapGetters(['getConfigInfo'])
         },
+        created() {
+
+        },
         mounted(){
+            //localStorage监听器
+            window.addEventListener('storage', this.reDrawCharts)
             this.testChart = JSON.parse(localStorage.getItem('config'))
             this.chartName = this.chartNameData[this.testChart.chartName]
             this.initOption(this.testChart)
@@ -53,6 +58,11 @@
             }
         },
         methods: {
+            reDrawCharts(e){
+                this.testChart=JSON.parse(e.newValue);
+                this.initOption(this.testChart)
+                this.drawCharts(this.option)
+            },
             initOption(chartOption){
                 if (chartOption.chartType =='line'){
                     this.option = {//折线图
