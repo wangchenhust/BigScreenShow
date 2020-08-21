@@ -354,7 +354,7 @@ header h2{
 .major{
     position: relative;
     padding: 0px 3.6px 3.6px 3.6px/*0rem 0.25rem 0.25rem 0.25rem*/;
-    /*border: 1px solid #fe3e12;*/
+    border: 1px solid #fe3e12;
     height: 100%;
     display: flex;
 }
@@ -370,8 +370,8 @@ header h2{
         /*border: 1px solid #ffe400;*/
         .below{
             position: fixed;
-            height: 93.6px/*6.5rem*/;
-            width: 605px/*38rem*/;
+            height: 16.2%/*93.6px6.5rem*/;
+            width: 46.8%/*605px38rem*/;
             margin-left: 10px;
             bottom: 7px;
             z-index: 10;
@@ -402,9 +402,9 @@ header h2{
     }
     .map_part{
         position: fixed;
-        height: 465px/*30.45rem*/;
+        height: 80%/*465px30.45rem*/;
         width: 610px;
-        /*border: 1px solid #ffe400;*/
+        border: 1px solid #ffe400;
         z-index: 1;
         top:70px;
         margin: 0px 10px;
@@ -436,8 +436,8 @@ header h2{
     border: 1px solid rgba(25, 186, 139, 0.17);
     background: rgba(255, 255, 255, 0.04) url(../assets/img/screen_img/line.png);
     position: relative;
-    height: 156px/*10rem*/;
-    padding: 3.8px/*0.25rem*/;
+    height: 28%/*156px10rem*/;
+    padding: 4.5px/*0.25rem*/;
     margin-top: 8px;
     z-index: 10;
     &:before {

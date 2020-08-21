@@ -121,7 +121,7 @@
           },
           legend: {
             data: this.legendData,
-            top: 20,
+            top: 25,
             textStyle: {
               fontSize: 10,
               color: "#ade3ff"

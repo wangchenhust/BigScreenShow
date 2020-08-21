@@ -265,7 +265,7 @@
               show: true,
               icon: 'circle',//图例形状
               orient: 'vertical',  //垂直显示
-              bottom: 40,
+              bottom: 60,
               left:5,
               itemWidth: 9, // 图例标记的图形宽度。[ default: 25 ]
               itemHeight: 9, // 图例标记的图形高度。[ default: 14 ]
