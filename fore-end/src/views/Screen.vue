@@ -356,13 +356,13 @@ header h2{
 .major{
     position: relative;
     padding: 0px 3.6px 3.6px 3.6px/*0rem 0.25rem 0.25rem 0.25rem*/;
-    border: 1px solid #fe3e12;
+    /*border: 1px solid #fe3e12;*/
     height: 100%;
     display: flex;
 }
 .part{
     flex: 3;
-    border: 1px solid #ffe400;
+    /*border: 1px solid #ffe400;*/
     margin: 0px 1px 1.44px/*0rem 0.125rem 0.1rem*/;
     &.middel{
         flex: 6;
@@ -410,7 +410,7 @@ header h2{
         position: fixed;
         height: 80%/*465px30.45rem*/;
         width: 47.5%/*610px*/;
-        border: 1px solid blue;
+        /*border: 1px solid blue;*/
         z-index: 1;
         /*top:10.5%!*70px*!;*/
         margin: 0px 10px;

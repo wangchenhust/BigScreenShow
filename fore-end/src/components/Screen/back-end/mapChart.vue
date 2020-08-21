@@ -502,7 +502,7 @@
         width: 100%;
         /*margin-top:10%!*10px*!;*/
         display: inline-block;
-        border: 1px solid yellow;
+        /*border: 1px solid yellow;*/
     }
     .map-container {
         position: absolute;

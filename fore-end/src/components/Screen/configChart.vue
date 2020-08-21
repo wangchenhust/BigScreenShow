@@ -567,10 +567,17 @@
             if (option.series[0].type =='line'){
               option.series.push(this.effectScatter);
               newConfigCharts.setOption(option,true);
+                window.addEventListener('resize', () => {
+                    newConfigCharts.resize();
+                });
               option.series.pop(this.effectScatter);
             }
             if (option.series[0].type =='gauge') {
               newConfigCharts.setOption(option)
+                window.addEventListener('resize', () => {
+                    newConfigCharts.resize();
+                });
+
             }
                 //newConfigCharts.setOption(option,true)
             },
