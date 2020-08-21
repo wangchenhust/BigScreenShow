@@ -10,7 +10,7 @@
 
 <script>
     import echarts from "echarts";
-    import {mapGetters} from 'vuex'
+    import {mapGetters, mapState} from 'vuex'
     export default {
         name: "configChart",
         data () {
