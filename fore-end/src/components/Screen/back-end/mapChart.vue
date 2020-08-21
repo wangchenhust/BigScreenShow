@@ -17,8 +17,8 @@
                     <td class="title">核心资本充足率</td>
                 </tr>
                 <tr>
-                    <td class="index">{{index1}}%</td>
-                    <td class="index">{{index2}}%</td>
+                    <td class="index" id="index1">{{index1}}%</td>
+                    <td class="index" id="index2">{{index2}}%</td>
                 </tr>
                 <tr>
                     <td class="long title">核心负债</td>
@@ -29,8 +29,8 @@
                     <td class="long title">资本充足率</td>
                 </tr>
                 <tr>
-                    <td class="index">{{index3}}%</td>
-                    <td class="index">{{index4}}%</td>
+                    <td class="index" id="index3">{{index3}}%</td>
+                    <td class="index" id="index4">{{index4}}%</td>
                 </tr>
             </table>
         </div>
@@ -113,25 +113,28 @@
                 bankName:' ',
                 //定时器
                 timer:null,
+                limit:[],
+                riskCity:[]
             }
         },
         computed: {
             ...mapGetters({
-                getValues:'map/getValues'
+                getValues:'map/getValues',getRisk:'risk/getValues'
                 // ...
             }),
             ...mapState([
-                'map/values'
+                'map/values','risk/values'
             ])
         },
         watch:{//监听store的value变化
             getValues:{
                 handler(newVal,oldVal) {// eslint-disable-line no-unused-vars
+                    this.setLimit();
                     console.log("watch: map store更改！！")
                     clearInterval(this.timer);
                     this.setIndexData()
                     this.getChart(this.mapdata);
-
+                    this.getRiskCity();
                 }
             }
         },
@@ -145,6 +148,23 @@
                 let data1=await this.$H.get('/GetData/MMap');
                 this.$store.commit('map/setValues',data1)
             },
+            //初始化limit数组
+            setLimit(){
+              this.limit=[];
+              let name=["资本充足率","核心资本充足率","核心负债依存度","核心一级资本充足率"];
+              for(let j in this.getValues){
+                for(let i in this.getRisk){
+                  if(this.getRisk[i].name.toString().localeCompare(name[j])==0){
+                    // console.log("相等push: "+this.getRisk[i].value);
+                    this.limit.push(this.getRisk[i].value);
+                    break;
+                  }
+                  else{
+                    // console.log("不等");
+                  }
+                }
+              }
+            },
             setIndexData(){
                 this.indexData.length=0;
                 for (let i in this.getValues){
@@ -156,6 +176,15 @@
                         index4:this.getValues[i].hxyjzbczl
                     });
                 }
+            },
+            //风险城市名单riskCity
+            getRiskCity(){
+              this.riskCity.length=0;
+              for (let i in this.getValues){
+                if(this.indexData[i].index1<this.limit[0]||this.indexData[i].index2<this.limit[1]||this.indexData[i].index3<this.limit[2]||this.indexData[i].index4<this.limit[3])
+                  this.riskCity.push(this.indexData[i].name);
+              }
+              // console.log("风险城市名单"+this.riskCity)
             },
             //地图所需要的mapdata
             convertData(mapdata) {
@@ -362,9 +391,15 @@
                             },
                             itemStyle: {
                                 normal: {
-                                    color: 'yellow',
-                                    shadowBlur: 10,
-                                    shadowColor: 'yellow'
+                                  color:params=>{
+                                    if(this.riskCity.includes(params.data.name,0)){
+                                      return "red"
+                                    }
+                                    else{return "yellow"}
+                                  },
+                                  // color: 'yellow',
+                                  shadowBlur: 10,
+                                  shadowColor: 'yellow'
                                 }
                             },
                             zlevel: 1
@@ -479,6 +514,17 @@
                     this.index3=this.indexData[currentIndex].index3;
                     this.index4=this.indexData[currentIndex].index4;
                     this.bankName=this.indexData[currentIndex].name;
+
+                    //小浮框中数值预警
+                    let indexData=["index1","index2","index3","index4",]
+                    let curData=[this.index1,this.index2,this.index3,this.index4]
+                    for (let i in indexData){
+                      let curTd = document.getElementById(indexData[i])
+                      curTd.style.color='#ffeb7b';
+                      if(curData[i]<this.limit[i]){
+                        curTd.style.color='rgb(222,49,59)';
+                      }
+                    }
 
                 }, 2000);
                 // 通过$once来监听定时器，在beforeDestroy钩子可以被清除
