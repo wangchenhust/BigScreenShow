@@ -10,7 +10,7 @@
 
 <script>
     import echarts from "echarts";
-    import {mapGetters} from 'vuex'
+    import {mapGetters, mapState} from 'vuex'
     export default {
         name: "configChart",
         data () {
@@ -224,7 +224,7 @@
                   this.option = {//仪表盘
                     title: {
                       show: true,
-                      text: this.chartName,
+                      text: this.chartSeasonData[chartOption.chartSeason],
                       x: '49%',
                       y: '87%',
                       z: 8,//优先级
@@ -393,7 +393,7 @@
                                 },
                               },
                               formatter: function (params) {
-                                return "{a|" + params.value*100 + "%}";
+                                return "{a|" + (params.value*100).toFixed(1) + "%}";
                               },
                               position: 'center',
                               show: true
