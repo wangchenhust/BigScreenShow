@@ -145,9 +145,9 @@
             this.$sse.getSource().addEventListener('panelvalues', this.panelListener)
             this.$sse.getSource().addEventListener('entryvalues', this.entryListener)
             this.$sse.getSource().addEventListener('mapvalues', this.mapListener)
-            this.$sse.getSource().addEventListener('clinevalues', this.clineListener)
+            //this.$sse.getSource().addEventListener('clinevalues', this.clineListener)
             this.$sse.getSource().addEventListener('linevalues', this.lineListener)
-            this.$sse.getSource().addEventListener('cradavalues', this.cradaListener)
+            //this.$sse.getSource().addEventListener('cradavalues', this.cradaListener)
             this.$sse.getSource().addEventListener('radavalues', this.radaListener)
             //获取阈值并放store里
             this.initRiskData();
@@ -193,23 +193,23 @@
                 console.log("监听器：map store更改！！")
                 this.$store.commit('map/setValues',data1)
             },
-            clineListener:function (e) {
-                var data1=JSON.parse(e.data);
-                // console.log(data1)
-                console.log("监听器：clin store更改！！")
-                this.$store.commit('cline/setValues',data1)
-            },
+            // clineListener:function (e) {
+            //     var data1=JSON.parse(e.data);
+            //     // console.log(data1)
+            //     console.log("监听器：clin store更改！！")
+            //     this.$store.commit('cline/setValues',data1)
+            // },
             lineListener:function (e) {
                 var data1=JSON.parse(e.data);
                 console.log("监听器：line store更改！！")
                 this.$store.commit('line/setValues',data1)
             },
-            cradaListener:function (e) {
-                var data1=JSON.parse(e.data);
-                // console.log(data1)
-                console.log("监听器：crada store更改！！")
-                this.$store.commit('crada/setValues',data1)
-            },
+            // cradaListener:function (e) {
+            //     var data1=JSON.parse(e.data);
+            //     // console.log(data1)
+            //     console.log("监听器：crada store更改！！")
+            //     this.$store.commit('crada/setValues',data1)
+            // },
             radaListener:function (e) {
                 var data1=JSON.parse(e.data);
                 // console.log(data1)

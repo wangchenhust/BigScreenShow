@@ -210,11 +210,26 @@ export default {
   },
   created() {
     this.getData();
+    //设置sse监听器
+    this.$sse.getSource().addEventListener('peizhivalues', this.peizhiListener)
   },
   methods:{
-    async getData(){
-
-      let data1=await this.$H.get('/GetData/ConfigData');
+    peizhiListener(e){
+      var data1=JSON.parse(e.data);
+      // console.log(data1)
+      console.log("监听器：peizhi store更改！！")
+      this.getData(data1)
+      this.handleChange();
+      this.toConfig();
+    },
+    async getData(data){
+      let data1=null;
+      if(data==undefined) {
+        data1 = await this.$H.get('/GetData/ConfigData');
+      }
+      else{
+        data1=data;
+      }
       for(let i=0;i<data1.length;i++){
         switch (data1[i].name) {
           case "资本充足率":

@@ -60,6 +60,7 @@
         methods: {
             reDrawCharts(e){
                 this.testChart=JSON.parse(e.newValue);
+                this.chartName = this.chartNameData[this.testChart.chartName]
                 this.initOption(this.testChart)
                 this.drawCharts(this.option)
             },
