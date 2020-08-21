@@ -203,7 +203,8 @@ export default {
         chartType:'',
         bankChart:[],
         gaugeChart:50,
-        chartName:''
+        chartName:'',
+        chartSeason:''
       }
 
     }
@@ -287,6 +288,7 @@ export default {
         this.configData.chartType = this.selectChart[0]
         this.configData.gaugeChart = this.bankData[this.selectChart[1]][this.selectChart[2]]
         this.configData.chartName = this.selectChart[1]
+        this.configData.chartSeason = this.selectChart[2]
       }
     },
     toConfig(){

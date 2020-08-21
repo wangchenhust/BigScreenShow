@@ -34,7 +34,12 @@
                     corefuzhai:'核心负债依存度',
                     rorwa:'风险加权资产收益率',
                 },
-                chartName:''
+                chartSeasonData:{
+                    season1:'第一季度',
+                    season2:'第二季度'
+                },
+                chartName:'',
+                chartSeasonName:''
             }
         },
         computed:{
@@ -48,6 +53,7 @@
             window.addEventListener('storage', this.reDrawCharts)
             this.testChart = JSON.parse(localStorage.getItem('config'))
             this.chartName = this.chartNameData[this.testChart.chartName]
+            this.chartSeasonName = this.chartSeasonName[this.testChart.chartSeason]
             this.initOption(this.testChart)
             this.drawCharts(this.option)
         },
@@ -169,7 +175,7 @@
                     this.option = {//仪表盘
                         title: {
                             show: true,
-                                text: this.chartName,
+                                text: this.chartSeasonName,
                                 x: '49%',
                                 y: '87%',
                                 z: 8,//优先级
