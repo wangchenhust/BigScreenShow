@@ -300,8 +300,93 @@ y轴：百分比
 
 <img src="./README_Image/config_dashboard.jpg"></img>
 
+<h1>后端说明</h1>
 
-<h1>后端项目提供的API</h1>
+**所用到的技术**
+
+**Springboot**、SpringMVC、Mybatis、Redis、SSE/WebSocket、Restful、Canal、Mysql
+
+
+
+**项目目录结构**
+
+```javascript
+├─.idea
+
+│ └─libraries                   //各种类库
+
+├─.settings
+
+├─src
+
+│ └─main
+
+│   ├─java
+
+│   │ └─com
+
+│   │   └─java           //启动类
+
+│   │     ├─config      //配置类，各种配置以及Bean
+
+│   │     ├─controller   //控制层，提供对外接口api
+
+│   │     ├─init  //初始化类，用于后端启动时要进行的一系列初始化操作
+
+│   │     ├─mapper        //DAO层，用于数据库访问
+
+│   │     ├─pojo           //实体类，用于装配查询结果
+
+│   │     ├─server          //站点类，用于配置canal服务与sse站点
+
+│   │     ├─service         //服务接口，服务层
+
+│   │     │ └─impl       //实现类，实现服务接口
+
+│   │     └─utils           //工具类
+
+│   └─resources              //存放各种资源文件
+
+│     └─xml               //存放xml配置文件
+
+│       └─mapper        //存放mapper的xml文件，用于sql语句编写
+
+└─target
+
+  ├─classes
+
+  │ ├─com
+
+  │ │ └─java           //启动类
+
+  │ │   ├─config      //配置类，各种配置以及Bean
+
+  │ │   ├─controller   //控制层，提供对外接口api
+
+  │ │   ├─init     //初始化类，用于后端启动时要进行的一系列初始化操作
+
+  │ │    ├─mapper        //DAO层，用于数据库访问
+
+  │ │   ├─pojo           //实体类，用于装配查询结果
+
+  │ │   ├─server          //站点类，用于配置canal服务与sse站点
+
+  │ │   ├─service         //服务接口，服务层
+
+  │ │   │ └─impl       //实现类，实现服务接口
+
+  │ │   └─utils           //工具类
+
+  │ └─xml               //存放xml配置文件
+
+  │   └─mapper        //存放mapper的xml文件，用于sql语句编写
+
+└─test-classes            //测试类
+```
+
+
+
+**api接口**
 
 http://localhost:8088/GetData/{type}
 示例：http://localhost:8088/GetData/Plane
