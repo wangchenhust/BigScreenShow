@@ -10,6 +10,9 @@ import request from './assets/js/request.js'
 //引入中国地图
 import china from 'echarts/map/json/china.json'
 echarts.registerMap('china', china)
+//引入轮播插件
+import VueAwesomeSwiper from 'vue-awesome-swiper'
+Vue.use(VueAwesomeSwiper)
 //引入自适应
 import 'lib-flexible'
 
